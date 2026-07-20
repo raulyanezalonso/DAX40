@@ -1,1 +1,23 @@
-
+name: dax-snapshot
+on:
+  schedule:
+    - cron: '*/15 * * * 1-5'
+    - cron: '0 */4 * * 6,0'
+  workflow_dispatch:
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node worker/snapshot.mjs
+      - run: |
+          git config user.name "dax-bot"
+          git config user.email "dax-bot@users.noreply.github.com"
+          git add data/yahoo.json
+          git commit -m "snapshot $(date -u +%F_%H%M)" || echo "sin cambios"
+          git push
