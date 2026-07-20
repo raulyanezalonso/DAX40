@@ -1,0 +1,29 @@
+{
+  "comment": "Configuración del auto-trading. enabled=false por defecto: nada opera hasta que TÚ lo actives. Empieza SIEMPRE en demo.",
+  "enabled": false,
+  "demo": true,
+  "capitalEur": 10000,
+  "riskPctPorOperacion": 1.0,
+  "umbralProbabilidad": 58,
+  "objetivoMaxPct": 1.0,
+  "spreadPts": 2,
+  "maxSpreadPts": 4,
+  "gapMaxPct": 1.5,
+  "maxEurPerPoint": 5,
+  "maxDailyLossEur": 100,
+  "maxWeeklyLossEur": 250,
+  "maxConsecLosses": 3,
+  "oneTradePerDay": true,
+  "blackoutDates": ["2026-12-24", "2026-12-25", "2026-12-31", "2027-01-01"],
+  "ig": {
+    "epic": "IX.D.DAX.IFMM.IP",
+    "minSize": 0.5
+  },
+  "ibkr": {
+    "gateway": "https://localhost:5000",
+    "conid": 0,
+    "eurPerPoint": 1,
+    "maxContracts": 1,
+    "comment_conid": "Ejecuta: node ibkr-trader.mjs find — y pega aquí el conid del Micro-DAX (FDXS, 1 €/pt) del vencimiento más cercano."
+  }
+}

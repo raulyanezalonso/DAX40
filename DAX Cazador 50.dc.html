@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #020617; color: #e2e8f0; font-family: 'Archivo', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #38bdf8; text-decoration: none; }
+  a:hover { color: #7dd3fc; text-decoration: underline; }
+  @keyframes c50-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+</style>
+</helmet>
+<div style="min-height:100vh;background:#020617">
+  <header data-screen-label="Cabecera 24h" style="position:sticky;top:0;z-index:40;background:rgba(2,6,23,0.94);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b">
+    <div style="max-width:1560px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <div style="width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#f59e0b 0%,#0f172a 130%);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:11px;color:#f8fafc;flex-shrink:0">±50</div>
+        <div style="min-width:0">
+          <h1 style="margin:0;font-size:16px;font-weight:800;color:#f8fafc;white-space:nowrap">Cazador 50 · DAX 24 horas</h1>
+          <p style="margin:1px 0 0;font-size:11px;color:#64748b">{{ srcCount }} fuentes en vivo · <a href="DAX Opening Trader Live.dc.html">← Dashboard principal (apertura 9:00–10:30)</a></p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;margin-left:auto;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:9px;padding:5px 12px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:700;color:#f8fafc">{{ clockStr }}</span>
+          <span style="font-size:9.5px;color:#64748b;font-weight:700">CET<br>BERLÍN</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b">
+          <span style="width:7px;height:7px;border-radius:50%;background:{{ phCol }};animation:c50-pulse 2.2s ease-in-out infinite"></span>
+          <div>
+            <div style="font-size:10.5px;font-weight:800;letter-spacing:0.05em;color:{{ phCol }}">{{ phName }}</div>
+            <div style="font-size:9px;color:#94a3b8;font-family:'IBM Plex Mono',monospace">fuente: {{ phSrc }}</div>
+          </div>
+        </div>
+        <div style="padding:5px 11px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b">
+          <div style="font-size:8.5px;color:#64748b;font-weight:700;letter-spacing:0.05em">VIX · RÉGIMEN</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:{{ vixCol }}">{{ vixStr }} · {{ vixReg }}</div>
+        </div>
+        <div style="padding:5px 12px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b;font-family:'IBM Plex Mono',monospace;font-size:10px">
+          <span style="color:#94a3b8">OPS HOY </span><span style="font-weight:700;color:{{ opsCol }}">{{ opsToday }}/{{ opsMax }}</span>
+          <span style="color:#334155"> | </span><span style="color:{{ dayPtsCol }};font-weight:700">{{ dayPtsStr }}</span>
+        </div>
+        <button onClick="{{ onPause }}" style="padding:7px 12px;border-radius:8px;border:1px solid {{ pauseBord }};background:{{ pauseBg }};color:{{ pauseCol }};font-size:11px;font-weight:700;cursor:pointer">{{ pauseLabel }}</button>
+        <button onClick="{{ onRefresh }}" style="padding:7px 13px;border-radius:8px;border:1px solid rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);color:#7dd3fc;font-size:11.5px;font-weight:700;cursor:pointer">{{ refreshLabel }}</button>
+      </div>
+    </div>
+  </header>
+
+  <div style="max-width:1560px;margin:0 auto;padding:14px 18px 40px;display:grid;gap:14px">
+
+    <section data-screen-label="Aviso de método" style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:11px 16px">
+      <p style="margin:0;font-size:11px;color:#fbbf24;line-height:1.6"><strong>Cómo leer esta pestaña:</strong> motor rodante 24 h para tramos de <strong>+{{ tgtPts }} antes que −{{ stpPts }}</strong>. La probabilidad de cada señal mezcla 3 medidas independientes: (1) modelo de barrera con σ realizada EWMA + VIX y deriva multi-fuente, (2) la tasa de acierto EMPÍRICA de esta misma jugada en tu fase actual sobre ~60 sesiones reales y (3) la calibración con tu propio registro papel. Fuera de Xetra el DAX se sigue vía futuros ES (β 0,85) y el umbral sube +{{ nightBump }} pp por el spread nocturno. Datos gratuitos ~15 min de retardo: esto es <strong>papel de validación</strong>; la ejecución real necesita feed en vivo (IG/IBKR).</p>
+    </section>
+
+    <div data-screen-label="Señal ahora" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px">
+      <section style="background:{{ sigBg }};border:1px solid {{ sigBord }};border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Señal ahora · próximo tramo de {{ tgtPts }}</h2>
+          <span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(2,6,23,0.55);color:#7dd3fc;font-family:'IBM Plex Mono',monospace">{{ sigAt }}</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+          <span style="font-size:34px;font-weight:800;color:{{ sigCol }}">{{ sigArrow }} {{ sigLabel }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#e2e8f0">p final <strong style="color:{{ sigCol }}">{{ sigP }} %</strong></span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#94a3b8">
+          <span>modelo {{ pModelStr }} %</span><span>·</span><span>empírica fase {{ pEmpStr }}</span><span>·</span><span>calibración ×{{ calStr }}</span>
+        </div>
+        <p style="margin:0;font-size:11.5px;color:#cbd5e1;line-height:1.6">{{ sigWhy }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px">
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:7px 10px"><div style="font-size:8.5px;color:#64748b;font-weight:700">REFERENCIA DAX</div><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#e2e8f0">{{ pxStr }}</div><div style="font-size:8.5px;color:#64748b">{{ pxSrc }}</div></div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:7px 10px"><div style="font-size:8.5px;color:#64748b;font-weight:700">σ 1 HORA</div><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#e2e8f0">±{{ sig1h }} pts</div><div style="font-size:8.5px;color:#64748b">EWMA {{ sigRealW }} % + VIX {{ sigVixW }} % · ×{{ phMult }}</div></div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:7px 10px"><div style="font-size:8.5px;color:#64748b;font-weight:700">DERIVA μ (pts/h)</div><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:{{ momCol }}">{{ momStr }}</div><div style="font-size:8.5px;color:#64748b">multi-fuente, desglose abajo</div></div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:7px 10px"><div style="font-size:8.5px;color:#64748b;font-weight:700">EV TRAS SPREAD</div><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:{{ evCol }}">{{ evStr }}</div><div style="font-size:8.5px;color:#64748b">+{{ tgtPts }} / −{{ stpPts }} / spread {{ spreadStr }}</div></div>
+        </div>
+        <div style="border-top:1px dashed #1e293b;padding-top:7px">
+          <div style="font-size:8.5px;font-weight:800;letter-spacing:0.08em;color:#64748b;margin-bottom:4px">DESGLOSE DE LA DERIVA μ · QUIÉN EMPUJA AHORA</div>
+          <div style="display:grid;gap:3px">
+            <sc-for list="{{ muRows }}" as="m" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:minmax(120px,1.5fr) 70px 1fr;gap:8px;align-items:center">
+                <span style="font-size:10px;color:#cbd5e1">{{ m.name }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:{{ m.col }};text-align:right">{{ m.val }}</span>
+                <span style="position:relative;height:4px;background:rgba(2,6,23,0.6);border-radius:2px;overflow:hidden"><span style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#1e293b"></span><span style="position:absolute;top:0;bottom:0;border-radius:2px;background:{{ m.col }};left:{{ m.bL }}%;width:{{ m.bW }}%"></span></span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="border-top:1px dashed #1e293b;padding-top:8px;display:grid;gap:5px">
+          <sc-for list="{{ gates }}" as="g" hint-placeholder-count="8">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:17px;height:17px;border-radius:5px;background:{{ g.bg }};color:{{ g.col }};font-size:11px;font-weight:800;text-align:center;line-height:17px;flex-shrink:0">{{ g.mark }}</span>
+              <span style="font-size:10.5px;color:#cbd5e1;flex:1;min-width:0">{{ g.label }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:{{ g.col }}">{{ g.note }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:9px 12px;border-radius:9px;background:rgba(2,6,23,0.55);border:1px solid {{ execBord }}">
+          <span style="font-size:12px;font-weight:800;color:{{ execCol }}">{{ execLabel }}</span>
+        </div>
+      </section>
+
+      <section data-screen-label="Plan del tramo" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:18px">
+        <h2 style="margin:0 0 10px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Plan del tramo · +{{ tgtPts }} / −{{ stpPts }}</h2>
+        <div style="display:grid;gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 12px"><span style="font-size:11px;color:#94a3b8">Entrada (referencia)</span><span style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:#e2e8f0">{{ planEntry }}</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.3);border-radius:9px;padding:9px 12px"><span style="font-size:11px;color:#6ee7b7">Objetivo (+{{ tgtPts }} pts)</span><span style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:#34d399">{{ planTp }}</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(244,63,94,0.07);border:1px solid rgba(244,63,94,0.3);border-radius:9px;padding:9px 12px"><span style="font-size:11px;color:#fda4af">Stop (−{{ stpPts }} pts · no se mueve)</span><span style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:#f43f5e">{{ planSl }}</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 12px"><span style="font-size:11px;color:#94a3b8">Salida por tiempo</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:#fbbf24">{{ timeExitStr }}</span></div>
+        </div>
+        <p style="margin:10px 0 0;font-size:10px;color:#64748b;line-height:1.55">Ratio {{ tgtPts }}/{{ stpPts }} — rentable a largo plazo desde ~{{ beRate }} % de acierto tras spread. Umbral efectivo ahora: {{ umbralEffStr }} % ({{ umbralNote }}). Ajusta objetivo, stop, umbral, tope y cooldown en los Tweaks.</p>
+        <div style="margin-top:10px;border-top:1px dashed #1e293b;padding-top:9px">
+          <div style="font-size:9px;font-weight:800;letter-spacing:0.08em;color:#64748b;margin-bottom:5px">OPERACIÓN PAPEL EN CURSO</div>
+          <sc-if value="{{ curOn }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px">
+              <span style="font-weight:800;color:{{ curCol }}">{{ curDir }}</span>
+              <span style="color:#e2e8f0">entrada {{ curEntry }}</span>
+              <span style="color:#94a3b8">{{ curAgo }}</span>
+              <span style="font-weight:800;color:{{ curPnlCol }}">{{ curPnl }}</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ curOff }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;font-size:10.5px;color:#475569">Sin operación abierta: el motor dispara solo con todas las puertas en verde (cooldown {{ cooldownStr }} min).</p>
+          </sc-if>
+        </div>
+        <div style="margin-top:10px;border-top:1px dashed #1e293b;padding-top:9px">
+          <div style="font-size:9px;font-weight:800;letter-spacing:0.08em;color:#64748b;margin-bottom:5px">CONTRASTE MULTI-FUENTE</div>
+          <div style="display:grid;gap:4px">
+            <sc-for list="{{ xRows }}" as="x" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:8px;font-size:10px">
+                <span style="font-weight:800;color:{{ x.col }};font-family:'IBM Plex Mono',monospace;width:14px">{{ x.mark }}</span>
+                <span style="color:#cbd5e1;flex:1;min-width:0">{{ x.name }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;color:#94a3b8">{{ x.val }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section data-screen-label="Mapa 24 horas" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:16px 18px">
+      <h2 style="margin:0 0 3px;font-size:13px;font-weight:800;color:#f8fafc">Mapa de las 24 horas · dónde viven los tramos de {{ tgtPts }}</h2>
+      <p style="margin:0 0 10px;font-size:10.5px;color:#64748b">×N = volatilidad relativa MEDIDA de cada fase (60 sesiones reales, no supuesta) · p▲/p▼ = probabilidad de ±{{ tgtPts }} dentro de la fase con la σ de ahora · WR = tasa de acierto histórica de la jugada exacta +{{ tgtPts }}/−{{ stpPts }} entrando en esa fase (▲largo/▼corto, n operaciones simuladas). La fila azul es tu fase.</p>
+      <div style="display:grid;gap:5px">
+        <sc-for list="{{ phRows }}" as="p" hint-placeholder-count="9">
+          <div style="display:grid;grid-template-columns:88px minmax(110px,1.3fr) 62px 84px 84px minmax(120px,1fr) minmax(90px,0.8fr);gap:8px;align-items:center;padding:7px 10px;border-radius:9px;background:{{ p.bg }};border:1px solid {{ p.bord }}">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:#7dd3fc">{{ p.span }}</span>
+            <span style="font-size:11px;font-weight:700;color:#e2e8f0;min-width:0">{{ p.name }} <span style="color:#475569;font-size:9px">{{ p.now }}</span></span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ p.multCol }}">×{{ p.mult }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:{{ p.puCol }}">▲ {{ p.pu }} %</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:{{ p.pdCol }}">▼ {{ p.pd }} %</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#94a3b8">WR {{ p.wr }}</span>
+            <span style="font-size:9px;color:#64748b">{{ p.src }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px">
+      <section data-screen-label="Estadística 50" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:16px 18px">
+        <h2 style="margin:0 0 3px;font-size:13px;font-weight:800;color:#f8fafc">Cuántos tramos de {{ tgtPts }} da el DAX · medido, no supuesto</h2>
+        <p style="margin:0 0 10px;font-size:10px;color:#64748b">Zigzag de ±{{ tgtPts }} pts sobre ~60 sesiones reales de Xetra (velas 15 min con máximos/mínimos) y las noches vía futuros ES (β 0,85). {{ empAt }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:10px">
+          <sc-for list="{{ empKpis }}" as="k" hint-placeholder-count="4">
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+              <div style="font-size:8.5px;color:#64748b;font-weight:700;letter-spacing:0.05em">{{ k.label }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:{{ k.col }}">{{ k.val }}</div>
+              <div style="font-size:9px;color:#64748b;line-height:1.4;margin-top:1px">{{ k.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:grid;gap:4px">
+          <sc-for list="{{ empSlots }}" as="s" hint-placeholder-count="10">
+            <div style="display:grid;grid-template-columns:52px 1fr 1fr 60px;gap:8px;align-items:center;padding:4px 8px;border-radius:7px;background:{{ s.bg }};border:1px solid {{ s.bord }}">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:#7dd3fc">{{ s.t }}</span>
+              <span style="position:relative;height:5px;background:rgba(2,6,23,0.6);border-radius:3px;overflow:hidden"><span style="position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:#34d399;width:{{ s.puW }}%"></span></span>
+              <span style="position:relative;height:5px;background:rgba(2,6,23,0.6);border-radius:3px;overflow:hidden"><span style="position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:#f43f5e;width:{{ s.pdW }}%"></span></span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#94a3b8;text-align:right">{{ s.pu }}/{{ s.pd }} %</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:8px 0 0;font-size:9px;color:#475569">Barras: % de sesiones con ≥{{ tgtPts }} pts al alza (verde) / a la baja (rojo) desde esa hora hasta el cierre de Xetra.</p>
+      </section>
+
+      <section data-screen-label="Registro de operaciones" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:16px 18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:3px">
+          <h2 style="margin:0;font-size:13px;font-weight:800;color:#f8fafc">Registro papel · el aval de esta pestaña</h2>
+          <div style="display:flex;gap:6px;align-items:center">
+            <span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(192,132,252,0.12);color:#c084fc;font-family:'IBM Plex Mono',monospace">{{ calChip }}</span>
+            <button onClick="{{ onClearLog }}" style="padding:4px 10px;border-radius:7px;border:1px solid #334155;background:transparent;color:#64748b;font-size:9.5px;font-weight:700;cursor:pointer">vaciar registro</button>
+          </div>
+        </div>
+        <p style="margin:0 0 9px;font-size:10px;color:#64748b">Cada señal se anota y se resuelve sola con las velas siguientes (+{{ tgtPts }} gana · −{{ stpPts }} pierde · ambas en la misma vela = pérdida · cambio de fuente Xetra↔futuros = cierre al precio del cambio · salida por tiempo a los {{ timeoutStr }} min). Con ≥25 resueltas, el acierto real re-calibra la probabilidad mostrada.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:10px">
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px"><div style="font-size:8.5px;color:#64748b;font-weight:700">OPERACIONES</div><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:#e2e8f0">{{ lgN }}</div></div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px"><div style="font-size:8.5px;color:#64748b;font-weight:700">ACIERTO (obj. ≥ {{ beRate }} %)</div><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:{{ lgHitCol }}">{{ lgHit }}</div></div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px"><div style="font-size:8.5px;color:#64748b;font-weight:700">PUNTOS NETOS</div><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:{{ lgPtsCol }}">{{ lgPts }}</div></div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px"><div style="font-size:8.5px;color:#64748b;font-weight:700">HOY</div><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:{{ dayPtsCol }}">{{ dayPtsStr }}</div></div>
+        </div>
+        <div style="display:grid;gap:4px;max-height:340px;overflow-y:auto">
+          <sc-for list="{{ lgRows }}" as="r" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:78px 46px 66px 66px 1fr 64px;gap:7px;align-items:center;padding:5px 8px;border-radius:7px;background:rgba(2,6,23,0.5);border:1px solid #0f172a;font-family:'IBM Plex Mono',monospace;font-size:9.5px">
+              <span style="color:#7dd3fc">{{ r.when }}</span>
+              <span style="font-weight:800;color:{{ r.dirCol }}">{{ r.dir }}</span>
+              <span style="color:#e2e8f0">{{ r.entry }}</span>
+              <span style="color:#94a3b8">p {{ r.p }} %</span>
+              <span style="color:#64748b;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.phase }}</span>
+              <span style="font-weight:800;text-align:right;color:{{ r.outCol }}">{{ r.out }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ lgEmpty }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:10.5px;color:#475569">Aún sin operaciones: deja la pestaña abierta y el motor irá disparando cuando las puertas lo permitan. El registro sobrevive a recargas.</p>
+        </sc-if>
+      </section>
+    </div>
+
+    <section data-screen-label="Fuentes en vivo 24h" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:16px 18px">
+      <h2 style="margin:0 0 3px;font-size:13px;font-weight:800;color:#f8fafc">Fuentes en vivo · las mismas del dashboard principal, al servicio del tramo de {{ tgtPts }}</h2>
+      <p style="margin:0 0 9px;font-size:10px;color:#64748b">Si guardaste credenciales IG en la pestaña Conexiones del dashboard principal, esta página las reutiliza automáticamente (mismo navegador) para leer el futuro DAX real las 24 h.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px">
+        <sc-for list="{{ srcRows }}" as="s" hint-placeholder-count="9">
+          <div style="display:flex;align-items:flex-start;gap:9px;padding:7px 10px;border-radius:9px;background:rgba(2,6,23,0.5);border:1px solid #0f172a">
+            <span style="font-size:8.5px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:{{ s.col }};white-space:nowrap;margin-top:1px">{{ s.state }}</span>
+            <div style="min-width:0">
+              <div style="font-size:10.5px;font-weight:700;color:#e2e8f0">{{ s.name }}</div>
+              <div style="font-size:9.5px;color:#94a3b8;line-height:1.45">{{ s.detail }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Metodología 24h" style="background:rgba(15,23,42,0.5);border:1px solid #1e293b;border-radius:14px;padding:14px 18px">
+      <h2 style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;font-weight:700">Metodología y límites honestos</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;font-size:10.5px;color:#94a3b8;line-height:1.6">
+        <p style="margin:0"><strong style="color:#cbd5e1">Probabilidad en 3 capas:</strong> (1) barrera con deriva multi-fuente (momentum DAX + futuros ES/NQ en pts + freno VIX) y σ EWMA λ=0,94 mezclada con la implícita del VIX, escalada por el multiplicador REAL de tu fase; (2) mezcla 65/35 con la tasa de acierto empírica de la jugada exacta en esa fase (simulada barra a barra sobre 60 sesiones, con la regla conservadora de misma-vela = pérdida); (3) recalibración con tu registro papel desde n≥25, igual que el dashboard principal.</p>
+        <p style="margin:0"><strong style="color:#cbd5e1">Fuera de Xetra:</strong> proxy ES β 0,85 (o futuro DAX real de IG si hay credenciales). El umbral sube +{{ nightBump }} pp de 22:00 a 9:00 porque el spread real nocturno (4–8 pts) se come parte del tramo. Fin de semana: sin mercado, solo estudio (Binance vigila el riesgo cripto de fondo).</p>
+        <p style="margin:0"><strong style="color:#cbd5e1">Límite estructural:</strong> el zigzag medido dice cuántos tramos de {{ tgtPts }} da el día de verdad — el tope y el cooldown existen para cazar los buenos y no pagar spread por ruido. Papel de validación con ~15 min de retardo: la ejecución real exige feed en vivo — pídeme el bot 50 cuando el registro acumule 2–3 semanas positivas por encima del {{ beRate }} % de acierto.</p>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {},
+  &quot;umbralProbabilidad&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 55, &quot;min&quot;: 45, &quot;max&quot;: 75, &quot;step&quot;: 1, &quot;unit&quot;: &quot;%&quot;, &quot;section&quot;: &quot;Motor 50&quot; },
+  &quot;objetivoPts&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 50, &quot;min&quot;: 20, &quot;max&quot;: 150, &quot;step&quot;: 5, &quot;unit&quot;: &quot;pts&quot;, &quot;section&quot;: &quot;Motor 50&quot; },
+  &quot;stopPts&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 30, &quot;min&quot;: 10, &quot;max&quot;: 100, &quot;step&quot;: 5, &quot;unit&quot;: &quot;pts&quot;, &quot;section&quot;: &quot;Motor 50&quot; },
+  &quot;maxOpsDia&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 6, &quot;min&quot;: 1, &quot;max&quot;: 20, &quot;section&quot;: &quot;Riesgo&quot; },
+  &quot;cooldownMin&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 15, &quot;min&quot;: 0, &quot;max&quot;: 120, &quot;unit&quot;: &quot;min&quot;, &quot;section&quot;: &quot;Riesgo&quot; },
+  &quot;spreadPts&quot;: { &quot;editor&quot;: &quot;float&quot;, &quot;default&quot;: 2, &quot;min&quot;: 0.5, &quot;max&quot;: 10, &quot;unit&quot;: &quot;pts&quot;, &quot;section&quot;: &quot;Riesgo&quot; }
+}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const P = props || {};
+    this.UMBRAL = this.cl(parseFloat(P.umbralProbabilidad) || 55, 45, 75);
+    this.TGT = this.cl(parseFloat(P.objetivoPts) || 50, 20, 150);
+    this.STP = this.cl(parseFloat(P.stopPts) || 30, 10, 100);
+    this.SPREAD = this.cl(parseFloat(P.spreadPts) || 2, 0.5, 10);
+    this.MAXOPS = Math.round(this.cl(parseFloat(P.maxOpsDia) || 6, 1, 20));
+    this.COOLDOWN = Math.round(this.cl(parseFloat(P.cooldownMin) || 15, 0, 120));
+    this.TIMEOUT = 120;
+    this.NIGHTBUMP = 8;
+    this.CACHEK = 'dax-c50-cache-v2'; this.LOGK = 'dax-c50-log-v1'; this.SETK = 'dax-c50-set-v1';
+    this.SYMS = ['ES=F', 'NQ=F', 'YM=F', '^VIX', 'EURUSD=X', 'GC=F', 'BZ=F', 'JPY=X', '^TNX', 'DX-Y.NYB', '^N225', '^HSI', '^STOXX50E', 'BTC-USD'];
+    this.TGTOP = [['SAP.DE', 'DE0007164600', 14.0], ['SIE.DE', 'DE0007236101', 9.8], ['ALV.DE', 'DE0008404005', 7.4], ['AIR.DE', 'NL0000235190', 7.0], ['DTE.DE', 'DE0005557508', 6.4], ['MUV2.DE', 'DE0008430026', 4.1], ['RHM.DE', 'DE0007030009', 3.8], ['IFX.DE', 'DE0006231004', 3.3], ['MBG.DE', 'DE0007100000', 3.0], ['BMW.DE', 'DE0005190003', 2.8], ['DB1.DE', 'DE0005810055', 2.7], ['DBK.DE', 'DE0005140008', 2.6], ['DHL.DE', 'DE0005552004', 2.5], ['ENR.DE', 'DE000ENER6Y0', 2.5], ['BAS.DE', 'DE000BASF111', 2.4], ['ADS.DE', 'DE000A1EWWW0', 2.2]];
+    this.PHASES = [
+      { a: 0, b: 485, name: 'Noche · futuros', mult: 0.7, src: 'ES proxy', night: true },
+      { a: 485, b: 540, name: 'Pre-mercado', mult: 1.1, src: 'ES + Tradegate', night: false },
+      { a: 540, b: 570, name: 'Apertura Xetra', mult: 1.6, src: 'Xetra real', night: false },
+      { a: 570, b: 630, name: 'Ventana 9:30–10:30', mult: 1.3, src: 'Xetra real', night: false },
+      { a: 630, b: 870, name: 'Mediodía', mult: 0.8, src: 'Xetra real', night: false },
+      { a: 870, b: 930, name: 'Pre-Wall Street', mult: 1.05, src: 'Xetra real', night: false },
+      { a: 930, b: 1050, name: 'Tarde americana', mult: 1.45, src: 'Xetra real', night: false },
+      { a: 1050, b: 1320, name: 'Sintético · WS abierto', mult: 1.0, src: 'ES proxy', night: false },
+      { a: 1320, b: 1440, name: 'Madrugada', mult: 0.7, src: 'ES proxy', night: true }
+    ];
+    let cache = null, lg = null, st2 = null, keys = null;
+    try { cache = JSON.parse(localStorage.getItem(this.CACHEK) || 'null'); } catch (e) { }
+    try { lg = JSON.parse(localStorage.getItem(this.LOGK) || 'null'); } catch (e) { }
+    try { st2 = JSON.parse(localStorage.getItem(this.SETK) || 'null'); } catch (e) { }
+    try { keys = JSON.parse(localStorage.getItem('dax-ot-keys-v1') || 'null'); } catch (e) { }
+    this.KEYS = keys || {};
+    this.state = {
+      nowTick: Date.now(), fetching: false, lastFetch: 0,
+      dax: cache && cache.dax ? cache.dax : null,
+      es: cache && cache.es ? cache.es : null,
+      q: cache && cache.q ? cache.q : {}, qAt: cache && cache.qAt ? cache.qAt : 0,
+      emp: cache && cache.emp ? cache.emp : null,
+      cal: cache && cache.cal ? cache.cal : null,
+      tg: cache && cache.tg ? cache.tg : null,
+      xq: cache && cache.xq ? cache.xq : {},
+      ig: null,
+      log: lg && lg.trades ? lg : { trades: [] },
+      paused: !!(st2 && st2.paused)
+    };
+  }
+  componentDidMount() {
+    this._clk = setInterval(() => { this.setState({ nowTick: Date.now() }); }, 1000);
+    this._eng = setInterval(() => this.engine(), 20000);
+    this._auto = setInterval(() => this.fetchAll(), 180000);
+    this.fetchAll();
+    setTimeout(() => { try { this.audit(); } catch (e) { console.log('[C50 AUDIT] excepción', e.message); } }, 14000);
+  }
+  componentWillUnmount() { clearInterval(this._clk); clearInterval(this._eng); clearInterval(this._auto); }
+  cl(v, a, b) { return Math.min(b, Math.max(a, isFinite(v) ? v : a)); }
+  fmtN(v, d) { const x = v != null && isFinite(v) ? v : 0; return x.toLocaleString('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  fmtSN(v, d) { return (v > 0 ? '+' : '') + this.fmtN(v, d); }
+  berlin() {
+    const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric', hour12: false }).formatToParts(new Date(this.state.nowTick));
+    const g = t => { const x = p.find(y => y.type === t); return x ? x.value : '00'; };
+    const wd = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0 }[g('weekday')] || 0;
+    return { mins: (parseInt(g('hour'), 10) % 24) * 60 + parseInt(g('minute'), 10), wd, str: g('hour') + ':' + g('minute') + ':' + g('second'), dk: g('year') + '-' + g('month') + '-' + g('day') };
+  }
+  async proxyFetch(url) {
+    const wraps = [u => u, u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u), u => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u), u => 'https://corsproxy.io/?url=' + encodeURIComponent(u)];
+    for (let i = 0; i < wraps.length; i++) {
+      try {
+        const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), i ? 11000 : 4500);
+        const r = await fetch(wraps[i](url), { signal: ctl.signal }); clearTimeout(t);
+        if (!r.ok) throw new Error('http ' + r.status);
+        const j = await r.json();
+        return j && typeof j.contents === 'string' ? JSON.parse(j.contents) : j;
+      } catch (e) { }
+    }
+    throw new Error('sin proxies');
+  }
+  annBars(res) {
+    const ts = res.timestamp || [], q = (((res.indicators || {}).quote || [])[0]) || {};
+    if (!this._fmt) this._fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
+    const out = [];
+    for (let i = 0; i < ts.length; i++) {
+      const o = q.open && q.open[i], h = q.high && q.high[i], l = q.low && q.low[i], c = q.close && q.close[i];
+      if (o == null || h == null || l == null || c == null || !isFinite(c)) continue;
+      const p = this._fmt.formatToParts(new Date(ts[i] * 1000));
+      const g = t => { const x = p.find(y => y.type === t); return x ? x.value : '00'; };
+      out.push({ t: ts[i], m: parseInt(g('hour'), 10) * 60 + parseInt(g('minute'), 10), dk: g('year') + '-' + g('month') + '-' + g('day'), o, h, l, c });
+    }
+    return out;
+  }
+  async fetchChart(sym, range) {
+    const j = await this.proxyFetch('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(sym) + '?range=' + range + '&interval=15m');
+    const res = j && j.chart && j.chart.result && j.chart.result[0];
+    return res ? this.annBars(res) : null;
+  }
+  saveCache() { try { localStorage.setItem(this.CACHEK, JSON.stringify({ dax: this.state.dax, es: this.state.es, q: this.state.q, qAt: this.state.qAt, emp: this.state.emp, cal: this.state.cal, tg: this.state.tg, xq: this.state.xq })); } catch (e) { } }
+  parseSpark(j) {
+    const out = {};
+    if (!(j && j.spark && j.spark.result)) return out;
+    j.spark.result.forEach(r => {
+      const rs = r.response && r.response[0]; if (!rs) return;
+      const meta = rs.meta || {};
+      const cls = ((((rs.indicators || {}).quote || [])[0] || {}).close || []);
+      const sp = [], ts = [];
+      for (let k = 0; k < cls.length; k++) if (cls[k] != null && isFinite(cls[k])) { sp.push(cls[k]); ts.push((rs.timestamp && rs.timestamp[k]) || 0); }
+      const p = meta.regularMarketPrice != null ? meta.regularMarketPrice : sp[sp.length - 1];
+      const prev = meta.chartPreviousClose != null ? meta.chartPreviousClose : meta.previousClose;
+      if (p == null || !(prev > 0)) return;
+      out[r.symbol] = { p, prev, chg: (p - prev) / prev * 100, sp: sp.slice(-40), ts: ts.slice(-40) };
+    });
+    return out;
+  }
+  async fetchAll() {
+    if (this.state.fetching && Date.now() - this._fs < 60000) return;
+    this._fs = Date.now();
+    this.setState({ fetching: true, lastFetch: Date.now() });
+    try {
+      const dax = await this.fetchChart('%5EGDAXI', '5d').catch(() => null);
+      if (dax && dax.length > 10) this.setState({ dax: { at: Date.now(), bars: dax.slice(-500) } });
+      const es = await this.fetchChart('ES%3DF', '5d').catch(() => null);
+      if (es && es.length > 10) this.setState({ es: { at: Date.now(), bars: es.slice(-500) } });
+      try {
+        const acc = {};
+        for (let i = 0; i < this.SYMS.length; i += 8) {
+          const u = 'https://query1.finance.yahoo.com/v8/finance/spark?symbols=' + encodeURIComponent(this.SYMS.slice(i, i + 8).join(',')) + '&range=1d&interval=15m';
+          Object.assign(acc, this.parseSpark(await this.proxyFetch(u)));
+          await new Promise(r => setTimeout(r, 250));
+        }
+        if (Object.keys(acc).length) this.setState({ q: Object.assign({}, this.state.q, acc), qAt: Date.now() });
+      } catch (e) { }
+      if (!this.state.cal || Date.now() - this.state.cal.at > 3600000) {
+        try {
+          const r = await fetch('https://nfs.faireconomy.media/ff_calendar_thisweek.json'); const j = await r.json();
+          if (Array.isArray(j)) {
+            const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
+            const evs = j.filter(e => /high/i.test(e.impact || '') && (e.country === 'EUR' || e.country === 'USD')).map(e => {
+              const d = new Date(e.date); if (isNaN(d.getTime())) return null;
+              const p = fmt.formatToParts(d); const g = t => { const x = p.find(y => y.type === t); return x ? x.value : '00'; };
+              return { dk: g('year') + '-' + g('month') + '-' + g('day'), m: parseInt(g('hour'), 10) * 60 + parseInt(g('minute'), 10), name: e.title };
+            }).filter(Boolean);
+            this.setState({ cal: { at: Date.now(), evs } });
+          }
+        } catch (e) { }
+      }
+      this.fetchBinance(); this.fetchStooq(); this.fetchTG(); this.fetchIG();
+      this.saveCache();
+      this.engine();
+      this.fetchEmp();
+    } finally { this.setState({ fetching: false }); }
+  }
+  async fetchBinance() {
+    if (this._bnAt && Date.now() - this._bnAt < 170000) return;
+    this._bnAt = Date.now();
+    try {
+      const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=%5B%22BTCUSDT%22%2C%22ETHUSDT%22%5D');
+      const j = await r.json();
+      const o = {}; (Array.isArray(j) ? j : [j]).forEach(t => { if (t && t.symbol) o[t.symbol] = { p: parseFloat(t.lastPrice), chg: parseFloat(t.priceChangePercent) }; });
+      if (o.BTCUSDT) { this.setState({ xq: Object.assign({}, this.state.xq, { btc: Object.assign({ at: Date.now() }, o.BTCUSDT), eth: o.ETHUSDT }) }); }
+    } catch (e) { }
+  }
+  async fetchStooq() {
+    if (this._stAt && Date.now() - this._stAt < 590000) return;
+    this._stAt = Date.now();
+    try {
+      const wraps = [u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u), u => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u)];
+      const url = 'https://stooq.com/q/l/?s=%5Edax&f=sd2t2ohlcv&h&e=csv';
+      let tx = null;
+      for (let i = 0; i < wraps.length && !tx; i++) { try { const r = await fetch(wraps[i](url)); if (r.ok) tx = await r.text(); } catch (e) { } }
+      if (!tx) return;
+      const ln = tx.trim().split(/\r?\n/);
+      if (ln.length >= 2) { const c = ln[ln.length - 1].split(','); const close = parseFloat(c[6]); if (isFinite(close) && close > 1000) this.setState({ xq: Object.assign({}, this.state.xq, { stooq: { p: close, ds: (c[1] || '') + ' ' + (c[2] || ''), at: Date.now() } }) }); }
+    } catch (e) { }
+  }
+  async fetchTG() {
+    const B = this.berlin();
+    if (B.wd === 0 || B.wd === 6 || B.mins < 475 || B.mins > 545) return;
+    if (this._tgAt && Date.now() - this._tgAt < 120000) return;
+    this._tgAt = Date.now();
+    try {
+      const rows = Object.assign({}, (this.state.tg && this.state.tg.rows) || {});
+      const gn = v => { if (v == null) return null; let s = String(v).trim().replace(/[%+\s\u00a0]/g, ''); if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.'); const n = parseFloat(s); return isFinite(n) ? n : null; };
+      const one = async it => {
+        try {
+          const j = await this.proxyFetch('https://www.tradegate.de/refresh.php?isin=' + it[1]);
+          const delta = gn(j && j.delta);
+          if (delta != null && Math.abs(delta) < 15) rows[it[0]] = { chg: delta, at: Date.now() };
+        } catch (e) { }
+      };
+      const queue = this.TGTOP.slice(); const workers = [];
+      for (let w = 0; w < 4; w++) workers.push((async () => { while (queue.length) { await one(queue.shift()); } })());
+      await Promise.all(workers);
+      let num = 0, den = 0, cov = 0;
+      const freshMs = Date.now() - 12 * 60000;
+      this.TGTOP.forEach(it => { const r = rows[it[0]]; if (r && r.at > freshMs) { num += it[2] * r.chg; den += it[2]; cov++; } });
+      if (cov >= 6 && den > 0) { this.setState({ tg: { at: Date.now(), rows, cov, idx: num / den } }); this.saveCache(); }
+    } catch (e) { }
+  }
+  async fetchIG() {
+    const K = this.KEYS;
+    if (!K.ig_key || !K.ig_user || !K.ig_pass) return;
+    if (this._igAt && Date.now() - this._igAt < 5 * 60000) return;
+    this._igAt = Date.now();
+    const base = (String(K.ig_env || 'DEMO').trim().toUpperCase() === 'REAL' ? 'https://api.ig.com' : 'https://demo-api.ig.com') + '/gateway/deal';
+    try {
+      if (!this._igCst || Date.now() - (this._igAuth || 0) > 5 * 3600000) {
+        const r = await fetch(base + '/session', { method: 'POST', headers: { 'Content-Type': 'application/json; charset=UTF-8', 'Accept': 'application/json; charset=UTF-8', 'X-IG-API-KEY': K.ig_key, 'Version': '2' }, body: JSON.stringify({ identifier: K.ig_user, password: K.ig_pass }) });
+        if (!r.ok) throw new Error('sesión ' + r.status);
+        this._igCst = r.headers.get('CST'); this._igXst = r.headers.get('X-SECURITY-TOKEN'); this._igAuth = Date.now();
+        if (!this._igCst) throw new Error('tokens no legibles');
+      }
+      const r3 = await fetch(base + '/markets/IX.D.DAX.IFMM.IP', { headers: { 'Accept': 'application/json; charset=UTF-8', 'X-IG-API-KEY': K.ig_key, 'CST': this._igCst, 'X-SECURITY-TOKEN': this._igXst, 'Version': '3' } });
+      if (r3.ok) { const j3 = await r3.json(); const sn = j3 && j3.snapshot; if (sn && sn.bid != null && sn.offer != null) this.setState({ ig: { at: Date.now(), mid: (sn.bid + sn.offer) / 2, status: sn.marketStatus || '' } }); }
+    } catch (e) { this._igCst = null; }
+  }
+  zigzag(bars, T) {
+    let swings = 0, ext = bars[0].c, dir = 0;
+    bars.forEach(b => {
+      if (dir >= 0) { ext = Math.max(ext, b.h); if (ext - b.l >= T) { swings++; dir = -1; ext = b.l; return; } }
+      if (dir <= 0) { ext = Math.min(ext, b.l); if (b.h - ext >= T) { swings++; dir = 1; ext = b.h; } }
+    });
+    return swings;
+  }
+  // simulación exacta de la jugada +TGT/−STP dentro de una ventana de barras (misma-vela = pérdida)
+  simPlay(bars, dir) {
+    if (bars.length < 3) return 0;
+    const e = bars[0].o;
+    for (const b of bars) {
+      const fav = dir > 0 ? b.h - e : e - b.l;
+      const adv = dir > 0 ? e - b.l : b.h - e;
+      if (adv >= this.STP) return -1;
+      if (fav >= this.TGT) return 1;
+    }
+    return 0; // timeout: excluida del WR
+  }
+  async fetchEmp() {
+    const cur = this.state.emp;
+    if (this._empBusy || (cur && cur.v === 2 && Date.now() - cur.at < 12 * 3600000) || (this._empFailAt && Date.now() - this._empFailAt < 180000)) return;
+    this._empBusy = true;
+    try {
+      const dax = await this.fetchChart('%5EGDAXI', '60d');
+      if (!dax || dax.length < 300) { this._empFailAt = Date.now(); return; }
+      const xet = dax.filter(b => b.m >= 540 && b.m < 1050);
+      const days = {}; xet.forEach(b => { (days[b.dk] = days[b.dk] || []).push(b); });
+      const dks = Object.keys(days).sort();
+      const swingsArr = [], slots = [540, 570, 600, 630, 660, 720, 780, 840, 900, 960];
+      const slotAgg = slots.map(() => ({ u: 0, d: 0, n: 0 }));
+      const phStats = this.PHASES.map(() => ({ wu: 0, lu: 0, wd: 0, ld: 0, retAbs: [] }));
+      const phIdxOf = m => { for (let i = 0; i < this.PHASES.length; i++) { if (m >= this.PHASES[i].a && m < this.PHASES[i].b) return i; } return 0; };
+      dks.forEach(dk => {
+        const bars = days[dk].sort((a, b) => a.m - b.m);
+        if (bars.length < 15) return;
+        swingsArr.push(this.zigzag(bars, this.TGT));
+        for (let i = 1; i < bars.length; i++) phStats[phIdxOf(bars[i].m)].retAbs.push(Math.abs(bars[i].c - bars[i - 1].c));
+        slots.forEach((s, si) => {
+          let idx = -1; for (let k = 0; k < bars.length; k++) { if (bars[k].m >= s) { idx = k; break; } }
+          if (idx < 0) return;
+          const e = bars[idx].o; let hU = 0, hD = 0;
+          for (let k = idx; k < bars.length; k++) { hU = Math.max(hU, bars[k].h - e); hD = Math.max(hD, e - bars[k].l); }
+          slotAgg[si].n++; if (hU >= this.TGT) slotAgg[si].u++; if (hD >= this.TGT) slotAgg[si].d++;
+        });
+        this.PHASES.forEach((p, pi) => {
+          if (p.a < 540 || p.b > 1050) return;
+          const w = bars.filter(b => b.m >= p.a && b.m < p.b);
+          const rU = this.simPlay(w, 1), rD = this.simPlay(w, -1);
+          if (rU === 1) phStats[pi].wu++; else if (rU === -1) phStats[pi].lu++;
+          if (rD === 1) phStats[pi].wd++; else if (rD === -1) phStats[pi].ld++;
+        });
+      });
+      swingsArr.sort((a, b) => a - b);
+      let nightMed = null;
+      try {
+        const es = await this.fetchChart('ES%3DF', '60d');
+        if (es && es.length > 300) {
+          const lvl = xet.length ? xet[xet.length - 1].c : 24000;
+          const nights = {}; es.forEach(b => { if (b.m >= 1050 || b.m < 540) (nights[b.dk] = nights[b.dk] || []).push(b); });
+          const nsw = [];
+          Object.keys(nights).forEach(dk => {
+            const bars = nights[dk];
+            if (bars.length < 10) return;
+            const base = bars[0].c;
+            const conv = bars.map(b => ({ m: b.m, o: (b.o / base - 1) * lvl * 0.85, h: (b.h / base - 1) * lvl * 0.85, l: (b.l / base - 1) * lvl * 0.85, c: (b.c / base - 1) * lvl * 0.85 }));
+            nsw.push(this.zigzag(conv, this.TGT));
+            for (let i = 1; i < conv.length; i++) { const pi = phIdxOf(conv[i].m); if (this.PHASES[pi].a >= 1050 || this.PHASES[pi].b <= 540) phStats[pi].retAbs.push(Math.abs(conv[i].c - conv[i - 1].c)); }
+            this.PHASES.forEach((p, pi) => {
+              if (!(p.a >= 1050 || p.b <= 540)) return;
+              const w = conv.filter(b => b.m >= p.a && b.m < p.b).map(b => ({ o: b.o, h: b.h, l: b.l, c: b.c }));
+              const rU = this.simPlay(w, 1), rD = this.simPlay(w, -1);
+              if (rU === 1) phStats[pi].wu++; else if (rU === -1) phStats[pi].lu++;
+              if (rD === 1) phStats[pi].wd++; else if (rD === -1) phStats[pi].ld++;
+            });
+          });
+          nsw.sort((a, b) => a - b);
+          if (nsw.length >= 10) nightMed = nsw[Math.floor(nsw.length / 2)];
+        }
+      } catch (e) { }
+      const medOf = a => { const s = a.slice().sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : null; };
+      const allAbs = [];
+      phStats.forEach(p => { allAbs.push.apply(allAbs, p.retAbs); });
+      const base15 = medOf(allAbs) || 1;
+      const ph = phStats.map((p, i) => ({ n: p.retAbs.length, mult: p.retAbs.length >= 30 ? this.cl((medOf(p.retAbs) || base15) / base15, 0.4, 2.2) : null, wu: p.wu, lu: p.lu, wd: p.wd, ld: p.ld }));
+      const med = swingsArr.length ? swingsArr[Math.floor(swingsArr.length / 2)] : null;
+      const p75 = swingsArr.length ? swingsArr[Math.floor(swingsArr.length * 0.75)] : null;
+      this.setState({ emp: { at: Date.now(), v: 2, nDays: dks.length, med, p75, nightMed, slots: slotAgg.map((a, i) => ({ m: slots[i], pu: a.n ? a.u / a.n * 100 : 0, pd: a.n ? a.d / a.n * 100 : 0, n: a.n })), ph } });
+      this.saveCache();
+      console.log('[C50] estadística v2: ' + dks.length + ' sesiones · mediana ' + med + ' tramos/día · multiplicadores de fase medidos');
+    } catch (e) { this._empFailAt = Date.now(); console.log('[C50] emp error (reintento ~3 min):', e.message); } finally { this._empBusy = false; }
+  }
+  liveSource() {
+    const B = this.berlin();
+    const D = this.state.dax, E = this.state.es;
+    const xetOpen = B.wd >= 1 && B.wd <= 5 && B.mins >= 540 && B.mins < 1050;
+    if (xetOpen && D && D.bars.length) {
+      const dks = D.bars.map(b => b.dk); const last = dks[dks.length - 1];
+      const bars = D.bars.filter(b => b.dk === last && b.m >= 540 && b.m < 1050);
+      if (bars.length >= 2) return { src: 'xetra', label: 'Xetra real (~15 min retardo)', bars, px: bars[bars.length - 1].c, at: D.at };
+    }
+    if (E && E.bars.length && D && D.bars.length) {
+      const lastDax = D.bars[D.bars.length - 1].c;
+      const cut = Date.now() / 1000 - 10 * 3600;
+      const recent = E.bars.filter(b => b.t >= cut);
+      if (recent.length >= 2) {
+        const base = recent[0].c;
+        const bars = recent.map(b => ({ t: b.t, m: b.m, dk: b.dk, o: lastDax * (1 + (b.o / base - 1) * 0.85), h: lastDax * (1 + (b.h / base - 1) * 0.85), l: lastDax * (1 + (b.l / base - 1) * 0.85), c: lastDax * (1 + (b.c / base - 1) * 0.85) }));
+        return { src: 'es', label: 'proxy futuros ES · β 0,85', bars, px: bars[bars.length - 1].c, at: E.at };
+      }
+    }
+    return null;
+  }
+  phaseOf(mins) { return this.PHASES.find(p => mins >= p.a && mins < p.b) || this.PHASES[0]; }
+  phaseIdx(mins) { for (let i = 0; i < this.PHASES.length; i++) { if (mins >= this.PHASES[i].a && mins < this.PHASES[i].b) return i; } return 0; }
+  phMultOf(i) {
+    const E = this.state.emp;
+    const emp = E && E.ph && E.ph[i] && E.ph[i].mult != null ? E.ph[i].mult : null;
+    return { v: emp != null ? emp : this.PHASES[i].mult, measured: emp != null };
+  }
+  pBarrier(dir, muPts, sigPts, tgt, stp) {
+    if (!(sigPts > 1)) return null;
+    const m = dir * muPts, u = -2 * m / (sigPts * sigPts);
+    let p; if (Math.abs(u * (tgt + stp)) < 1e-6) p = stp / (tgt + stp);
+    else p = (1 - Math.exp(this.cl(-u * stp, -40, 40))) / (Math.exp(this.cl(u * tgt, -40, 40)) - Math.exp(this.cl(-u * stp, -40, 40)));
+    return this.cl(p, 0.02, 0.98);
+  }
+  // deriva multi-fuente en pts/h + desglose
+  driftNow(S) {
+    const q = this.state.q || {};
+    const lvl = S.px;
+    const bars = S.bars.slice(-8);
+    const n90 = Math.min(6, bars.length - 1);
+    const momH = n90 >= 2 ? (bars[bars.length - 1].c - bars[bars.length - 1 - n90].c) * (60 / (n90 * 15)) : 0;
+    const futH = sym => {
+      const x = q[sym];
+      if (!x || !x.sp || x.sp.length < 5) return 0;
+      const k = Math.min(6, x.sp.length - 1);
+      return (x.sp[x.sp.length - 1] / x.sp[x.sp.length - 1 - k] - 1) * lvl * 0.85 * (60 / (k * 15));
+    };
+    const esH = futH('ES=F'), nqH = futH('NQ=F');
+    const vixQ = q['^VIX'];
+    const vixD = vixQ && isFinite(vixQ.chg) ? vixQ.p - vixQ.prev : 0;
+    const wX = S.src === 'xetra' ? 0.45 : 0.85;
+    const parts = [
+      { k: 'mom', name: 'Momentum DAX 90 min', v: this.cl(0.32 * momH, -30, 30) },
+      { k: 'fut', name: 'Futuros US (ES 2/3 + NQ 1/3)', v: this.cl(wX * (0.34 * esH + 0.17 * nqH), -30, 30) },
+      { k: 'vix', name: 'Freno VIX (Δ miedo)', v: this.cl(-2.2 * vixD, -12, 12) }
+    ];
+    const mu = this.cl(parts.reduce((a, p) => a + p.v, 0), -45, 45);
+    return { mu, parts, vixD };
+  }
+  sigmaNow(S, phI) {
+    const bars = S.bars.slice(-27);
+    const rets = [];
+    for (let i = 1; i < bars.length; i++) { const r = bars[i].c - bars[i - 1].c; if (isFinite(r)) rets.push(r); }
+    if (rets.length < 4) return null;
+    let v94 = rets[0] * rets[0];
+    for (let i = 1; i < rets.length; i++) v94 = 0.94 * v94 + 0.06 * rets[i] * rets[i];
+    const sReal = Math.sqrt(v94) * 2; // 1 h = 4 barras de 15 min
+    const vixQ = (this.state.q || {})['^VIX'];
+    let sVix = null;
+    if (vixQ && vixQ.p > 5) sVix = S.px * (vixQ.p / 100) / Math.sqrt(252 * 8.5);
+    const mix = sVix != null ? 0.6 * sReal + 0.4 * sVix : sReal;
+    const M = this.phMultOf(phI);
+    return { sig1h: this.cl(mix * M.v, 8, 400), sReal, sVix, mult: M };
+  }
+  calFactor() {
+    const done = (this.state.log.trades || []).filter(t => t.pts != null && t.p != null && t.out !== 'FUENTE');
+    if (done.length < 25) return { f: 1, n: done.length };
+    const Pm = done.reduce((a, t) => a + t.p, 0) / done.length;
+    const Hm = done.filter(t => t.pts > 0).length / done.length * 100;
+    const beW = this.STP / (this.TGT + this.STP) * 100;
+    if (Pm <= beW + 2) return { f: 1, n: done.length };
+    return { f: this.cl((Hm - beW) / (Pm - beW), 0.7, 1.3), n: done.length };
+  }
+  signalCore() {
+    const S = this.liveSource();
+    if (!S) return null;
+    const B = this.berlin();
+    const phI = this.phaseIdx(B.mins);
+    const ph = this.PHASES[phI];
+    const SG = this.sigmaNow(S, phI);
+    if (!SG) return null;
+    const DR = this.driftNow(S);
+    const sigH = SG.sig1h * Math.sqrt(this.TIMEOUT / 60);
+    const muH = DR.mu * this.TIMEOUT / 60;
+    const pUp = this.pBarrier(1, muH, sigH, this.TGT, this.STP);
+    const pDn = this.pBarrier(-1, muH, sigH, this.TGT, this.STP);
+    if (pUp == null || pDn == null) return null;
+    const dir = pUp >= pDn ? 1 : -1;
+    const pModel = Math.max(pUp, pDn) * 100;
+    // capa empírica: WR de la jugada exacta en esta fase y dirección
+    const E = this.state.emp;
+    let pEmp = null, empN = 0;
+    if (E && E.ph && E.ph[phI]) {
+      const s = E.ph[phI];
+      const w = dir > 0 ? s.wu : s.wd, l = dir > 0 ? s.lu : s.ld;
+      if (w + l >= 12) { pEmp = w / (w + l) * 100; empN = w + l; }
+    }
+    let pBlend = pEmp != null ? 0.65 * pModel + 0.35 * pEmp : pModel;
+    const CAL = this.calFactor();
+    const p = this.cl(50 + (pBlend - 50) * CAL.f, 3, 97);
+    const ev = (p / 100) * this.TGT - (1 - p / 100) * this.STP - this.SPREAD;
+    const night = B.mins >= 1320 || B.mins < 540;
+    const umbralEff = this.UMBRAL + (night ? this.NIGHTBUMP : 0);
+    return { S, ph, phI, B, px: S.px, SG, DR, pUp: pUp * 100, pDn: pDn * 100, dir, pModel, pEmp, empN, p, ev, CAL, umbralEff, night };
+  }
+  nearEvent(B) {
+    const evs = (this.state.cal && this.state.cal.evs) || [];
+    for (const e of evs) { if (e.dk === B.dk && B.mins >= e.m - 40 && B.mins <= e.m + 10) return e.name; }
+    return null;
+  }
+  saveLog() { try { localStorage.setItem(this.LOGK, JSON.stringify(this.state.log)); } catch (e) { } }
+  engine() {
+    const L = this.state.log; const trades = (L.trades || []).slice();
+    const S = this.liveSource(); const B = this.berlin();
+    let changed = false;
+    const open = trades.find(t => !t.out);
+    if (open && S) {
+      if (open.src && open.src !== S.src) {
+        open.out = 'FUENTE'; open.pts = Math.round((S.px - open.entry) * open.dir - this.SPREAD);
+        open.closedAt = Date.now(); changed = true;
+        console.log('[C50] cerrada por cambio de fuente', open.pts, 'pts');
+      } else {
+        const after = S.bars.filter(b => b.t * 1000 > open.at + 60000);
+        for (const b of after) {
+          const up = b.h - open.entry, dn = open.entry - b.l;
+          const win = open.dir > 0 ? up >= this.TGT : dn >= this.TGT;
+          const loss = open.dir > 0 ? dn >= this.STP : up >= this.STP;
+          if (loss) { open.out = 'SL'; open.pts = -this.STP - this.SPREAD; break; }
+          if (win) { open.out = 'TP'; open.pts = this.TGT - this.SPREAD; break; }
+        }
+        if (!open.out && Date.now() - open.at > this.TIMEOUT * 60000) {
+          const last = S.bars[S.bars.length - 1].c;
+          open.out = 'TIEMPO'; open.pts = Math.round((last - open.entry) * open.dir - this.SPREAD);
+        }
+        if (open.out) { open.closedAt = Date.now(); changed = true; console.log('[C50] cerrada', open.out, open.pts, 'pts'); }
+      }
+    }
+    if (!this.state.paused && S && !trades.find(t => !t.out)) {
+      const C = this.signalCore();
+      if (C) {
+        const todayN = trades.filter(t => t.dk === B.dk).length;
+        const lastT = trades.length ? trades[trades.length - 1] : null;
+        const cooldownOk = !lastT || Date.now() - (lastT.closedAt || lastT.at) > this.COOLDOWN * 60000;
+        const fresh = Date.now() - C.S.at < 25 * 60000;
+        const ev9 = this.nearEvent(B);
+        const dayPts = trades.filter(t => t.dk === B.dk && t.pts != null).reduce((a, t) => a + t.pts, 0);
+        const lossCap = dayPts <= -3 * this.STP;
+        const vixQ = (this.state.q || {})['^VIX'];
+        const panic = vixQ && vixQ.p >= 32;
+        if (C.p >= C.umbralEff && C.ev > 0 && todayN < this.MAXOPS && cooldownOk && fresh && !ev9 && !lossCap && !panic && B.wd >= 1 && B.wd <= 5) {
+          trades.push({ at: Date.now(), dk: B.dk, dir: C.dir, entry: Math.round(C.px), p: Math.round(C.p), pm: Math.round(C.pModel), pe: C.pEmp != null ? Math.round(C.pEmp) : null, phase: C.ph.name, src: C.S.src, out: null, pts: null });
+          changed = true;
+          console.log('[C50] ABRE papel', C.dir > 0 ? 'LARGO' : 'CORTO', '@', Math.round(C.px), 'p', Math.round(C.p));
+        }
+      }
+    }
+    if (changed) { this.setState({ log: { trades: trades.slice(-200) } }); this.saveLog(); }
+  }
+  audit() {
+    const out = [];
+    const ok = (n, c, x) => out.push((c ? 'OK   · ' : 'FAIL · ') + n + (x != null ? ' — ' + x : ''));
+    let rv = null;
+    try { rv = this.renderVals(); } catch (e) { out.push('FAIL · renderVals — ' + e.message); }
+    if (rv) {
+      const P = s => parseFloat(String(s).replace(',', '.'));
+      ok('Fases: 9 filas y suman 24 h', (rv.phRows || []).length === 9 && this.PHASES.reduce((a, p) => a + (p.b - p.a), 0) === 1440);
+      ok('p de fases acotadas 0–100', (rv.phRows || []).every(p => { const a = P(p.pu), b = P(p.pd); return (p.pu === '—' || (a >= 0 && a <= 100)) && (p.pd === '—' || (b >= 0 && b <= 100)); }));
+      ok('Señal: p final acotada 3–97', rv.sigP === '—' || (P(rv.sigP) >= 3 && P(rv.sigP) <= 97), rv.sigP);
+      ok('Puertas ≥ 10 con marca', (rv.gates || []).length >= 10 && rv.gates.every(g => g.mark), String((rv.gates || []).length));
+      ok('Desglose μ: 3 componentes (o señal aún sin datos)', rv.sigP === '—' || (rv.muRows || []).length === 3, rv.sigP === '—' ? 'sin datos aún' : String((rv.muRows || []).length));
+      ok('Fuentes listadas ≥ 9', (rv.srcRows || []).length >= 9, String((rv.srcRows || []).length));
+      ok('Contraste multi-fuente construido', Array.isArray(rv.xRows));
+      ok('Calibración en rango 0,7–1,3', P(rv.calStr) >= 0.7 && P(rv.calStr) <= 1.3, rv.calStr);
+      ok('Umbral efectivo coherente', P(rv.umbralEffStr) >= this.UMBRAL, rv.umbralEffStr);
+      ok('KPIs empíricos', (rv.empKpis || []).length === 4);
+      ok('Registro renderizable', Array.isArray(rv.lgRows));
+      ok('Break-even coherente con TGT/STP', Math.abs(P(rv.beRate) - this.STP / (this.TGT + this.STP) * 100) < 6, rv.beRate);
+    }
+    const fails = out.filter(l => l.indexOf('FAIL') === 0);
+    console.log('[C50 AUDIT] ' + (fails.length ? fails.length + ' fallo(s): ' + fails.join(' || ') : 'todo OK') + String.fromCharCode(10) + out.join(String.fromCharCode(10)));
+  }
+  renderVals() {
+    const B = this.berlin();
+    const C = this.signalCore();
+    const S = C ? C.S : this.liveSource();
+    const phI = this.phaseIdx(B.mins);
+    const ph = this.PHASES[phI];
+    const weekend = B.wd === 0 || B.wd === 6;
+    const q = this.state.q || {};
+    const vixQ = q['^VIX'];
+    const trades = (this.state.log.trades || []);
+    const todayT = trades.filter(t => t.dk === B.dk);
+    const dayPts = todayT.filter(t => t.pts != null).reduce((a, t) => a + t.pts, 0);
+    const doneAll = trades.filter(t => t.pts != null);
+    const wins = doneAll.filter(t => t.pts > 0).length;
+    const totPts = doneAll.reduce((a, t) => a + t.pts, 0);
+    const open = trades.find(t => !t.out);
+    const fresh = S ? Date.now() - S.at < 25 * 60000 : false;
+    const ev9 = this.nearEvent(B);
+    const lossCap = dayPts <= -3 * this.STP;
+    const panic = !!(vixQ && vixQ.p >= 32);
+    const lastT = trades.length ? trades[trades.length - 1] : null;
+    const coolLeft = lastT ? Math.max(0, this.COOLDOWN - (Date.now() - (lastT.closedAt || lastT.at)) / 60000) : 0;
+    const umbralEff = C ? C.umbralEff : this.UMBRAL + ((B.mins >= 1320 || B.mins < 540) ? this.NIGHTBUMP : 0);
+    const gatesDef = [
+      { l: 'Datos frescos (< 25 min)', ok: fresh, note: S ? Math.round((Date.now() - S.at) / 60000) + ' min' : 'SIN FUENTE' },
+      { l: 'Mercado disponible (L–V)', ok: !weekend, note: weekend ? 'FIN DE SEMANA' : 'OK' },
+      { l: 'Probabilidad ≥ umbral efectivo (' + this.fmtN(umbralEff, 0) + ' %)', ok: !!C && C.p >= umbralEff, note: C ? this.fmtN(C.p, 0) + ' %' : '—' },
+      { l: 'EV > 0 tras spread', ok: !!C && C.ev > 0, note: C ? this.fmtSN(C.ev, 1) + ' pts' : '—' },
+      { l: 'VIX sin pánico (< 32)', ok: !panic, note: vixQ ? this.fmtN(vixQ.p, 1) : '—' },
+      { l: 'Sin evento HIGH (−40/+10 min)', ok: !ev9, note: ev9 ? String(ev9).slice(0, 22) : 'OK' },
+      { l: 'Tope diario (' + this.MAXOPS + ' ops)', ok: todayT.length < this.MAXOPS, note: todayT.length + '/' + this.MAXOPS },
+      { l: 'Cooldown entre operaciones', ok: coolLeft <= 0, note: coolLeft > 0 ? Math.ceil(coolLeft) + ' min' : 'OK' },
+      { l: 'Freno de pérdida diaria (−' + (3 * this.STP) + ' pts)', ok: !lossCap, note: this.fmtSN(dayPts, 0) + ' pts' },
+      { l: 'Motor activo y sin operación abierta', ok: !this.state.paused && !open, note: this.state.paused ? 'PAUSADO' : open ? 'OP. ABIERTA' : 'OK' }
+    ];
+    const gates = gatesDef.map(g => ({ label: g.l, note: g.note, mark: g.ok ? '✓' : '✕', col: g.ok ? '#34d399' : '#f43f5e', bg: g.ok ? 'rgba(52,211,153,0.13)' : 'rgba(244,63,94,0.13)' }));
+    const allOk = gatesDef.every(g => g.ok);
+    const dir = C ? C.dir : 1;
+    let px = C ? C.px : (S ? S.px : null);
+    const IG = this.state.ig;
+    const igFresh = !!(IG && Date.now() - IG.at < 6 * 60000 && IG.mid > 1000);
+    const sigCol = !C ? '#94a3b8' : C.p < umbralEff ? '#94a3b8' : dir > 0 ? '#34d399' : '#f43f5e';
+    const muRows = (C ? C.DR.parts : []).map(p => {
+      const w = Math.min(48, Math.abs(p.v) / 30 * 48);
+      return { name: p.name, val: this.fmtSN(p.v, 0) + ' pts/h', col: p.v > 1 ? '#34d399' : p.v < -1 ? '#f43f5e' : '#94a3b8', bL: (p.v >= 0 ? 50 : 50 - w).toFixed(1), bW: Math.max(0.8, w).toFixed(1) };
+    });
+    const E = this.state.emp;
+    const hm = m => Math.floor(m / 60) + ':' + (m % 60 < 10 ? '0' : '') + (m % 60);
+    const phRows = this.PHASES.map((p, i) => {
+      const cur = i === phI;
+      const M = this.phMultOf(i);
+      let pu = '—', pd = '—', puN = null, pdN = null;
+      if (C) {
+        const durH = (p.b - p.a) / 60;
+        const sgW = (C.SG.sig1h / C.SG.mult.v) * M.v * Math.sqrt(Math.min(durH, 3));
+        const a1 = this.pBarrier(1, 0, sgW, this.TGT, 1e9), a2 = this.pBarrier(-1, 0, sgW, this.TGT, 1e9);
+        puN = a1 != null ? a1 * 100 : null; pdN = a2 != null ? a2 * 100 : null;
+        if (puN != null) pu = this.fmtN(puN, 0); if (pdN != null) pd = this.fmtN(pdN, 0);
+      }
+      let wr = '—';
+      if (E && E.ph && E.ph[i]) {
+        const s = E.ph[i];
+        const nu = s.wu + s.lu, nd = s.wd + s.ld;
+        if (nu >= 8 || nd >= 8) wr = '▲' + (nu ? this.fmtN(s.wu / nu * 100, 0) : '—') + '/▼' + (nd ? this.fmtN(s.wd / nd * 100, 0) : '—') + ' % (n' + Math.max(nu, nd) + ')';
+      }
+      return { span: hm(p.a) + '–' + (p.b === 1440 ? '24:00' : hm(p.b)), name: p.name, now: cur ? '◄ AHORA' : '', mult: this.fmtN(M.v, 2), multCol: M.measured ? '#7dd3fc' : '#64748b', src: p.src + (M.measured ? ' · ×medido' : ' · ×por defecto'), pu, pd, wr, puCol: puN != null && puN >= 40 ? '#34d399' : '#64748b', pdCol: pdN != null && pdN >= 40 ? '#f43f5e' : '#64748b', bg: cur ? 'rgba(56,189,248,0.08)' : 'rgba(2,6,23,0.45)', bord: cur ? 'rgba(56,189,248,0.4)' : '#0f172a' };
+    });
+    const empKpis = [
+      { label: 'TRAMOS ±' + Math.round(this.TGT) + ' / SESIÓN (MEDIANA)', val: E && E.med != null ? String(E.med) : '…', col: '#34d399', note: 'zigzag real en horario Xetra' },
+      { label: 'DÍA MOVIDO (P75)', val: E && E.p75 != null ? String(E.p75) : '…', col: '#e2e8f0', note: '1 de cada 4 días da esto o más' },
+      { label: 'TRAMOS / NOCHE (ES β 0,85)', val: E && E.nightMed != null ? String(E.nightMed) : '…', col: '#c084fc', note: '17:30→9:00 vía futuros' },
+      { label: 'TOPE REALISTA DE OPS/DÍA', val: E && E.med != null ? String(Math.max(1, Math.min(this.MAXOPS, E.med))) : '…', col: '#fbbf24', note: 'cazar más que esto es pagar ruido' }
+    ];
+    const empSlots = ((E && E.slots) || []).map(s => ({ t: hm(s.m), pu: this.fmtN(s.pu, 0), pd: this.fmtN(s.pd, 0), puW: String(Math.round(this.cl(s.pu, 0, 100))), pdW: String(Math.round(this.cl(s.pd, 0, 100))), bg: !weekend && B.mins >= s.m && B.mins < s.m + 30 ? 'rgba(56,189,248,0.08)' : 'transparent', bord: !weekend && B.mins >= s.m && B.mins < s.m + 30 ? 'rgba(56,189,248,0.4)' : 'transparent' }));
+    const fmtT = ts => new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }).format(new Date(ts));
+    const lgRows = trades.slice(-40).reverse().map(t => ({
+      when: fmtT(t.at), dir: t.dir > 0 ? '▲ L' : '▼ C', dirCol: t.dir > 0 ? '#34d399' : '#f43f5e',
+      entry: String(t.entry), p: String(t.p), phase: t.phase + (t.src === 'es' ? ' · proxy' : ''),
+      out: t.out ? (t.out === 'TP' ? '+' + this.fmtN(t.pts, 0) : t.out === 'SL' ? this.fmtN(t.pts, 0) : this.fmtSN(t.pts, 0) + (t.out === 'FUENTE' ? ' (f)' : ' (t)')) : 'abierta',
+      outCol: t.out ? (t.pts > 0 ? '#34d399' : '#f43f5e') : '#fbbf24'
+    }));
+    const onPause = () => { const p = !this.state.paused; this.setState({ paused: p }); try { localStorage.setItem(this.SETK, JSON.stringify({ paused: p })); } catch (e) { } };
+    const onClearLog = () => { if (!confirm('¿Vaciar el registro papel?')) return; this.setState({ log: { trades: [] } }); this.saveLog(); };
+    // fuentes
+    const agoM = ts => ts ? Math.round((Date.now() - ts) / 60000) + ' min' : '—';
+    const D = this.state.dax, ES = this.state.es, TG = this.state.tg, XQ = this.state.xq || {}, CALz = this.state.cal;
+    const nQ = Object.keys(q).length;
+    const srcRows = [
+      { name: 'Yahoo · DAX intradía 5 días (OHLC 15 min)', detail: D ? D.bars.length + ' velas · hace ' + agoM(D.at) : 'pendiente', state: D && Date.now() - D.at < 25 * 60000 ? 'EN VIVO' : D ? 'CACHÉ' : '—', col: D && Date.now() - D.at < 25 * 60000 ? '#34d399' : D ? '#fbbf24' : '#64748b' },
+      { name: 'Yahoo · futuros ES 5 días (proxy nocturno)', detail: ES ? ES.bars.length + ' velas · hace ' + agoM(ES.at) : 'pendiente', state: ES && Date.now() - ES.at < 25 * 60000 ? 'EN VIVO' : ES ? 'CACHÉ' : '—', col: ES && Date.now() - ES.at < 25 * 60000 ? '#34d399' : ES ? '#fbbf24' : '#64748b' },
+      { name: 'Yahoo · macro y riesgo (' + this.SYMS.length + ' símbolos)', detail: nQ + ' recibidos (NQ/YM, VIX, EUR/USD, oro, Brent, 10A, DXY, Asia, BTC) → deriva μ y σ', state: nQ >= 8 ? 'EN VIVO' : nQ ? 'PARCIAL' : '—', col: nQ >= 8 ? '#34d399' : nQ ? '#fbbf24' : '#64748b' },
+      { name: 'Tradegate · pre-mercado real (top 16 del DAX)', detail: TG && Date.now() - TG.at < 15 * 60000 ? TG.cov + '/16 valores · índice ' + this.fmtSN(TG.idx, 2) + ' % — contraste del proxy ES en 8:00–9:00' : 'activo solo L–V 7:55–9:05 (ventana pre-mercado)', state: TG && Date.now() - TG.at < 15 * 60000 ? 'EN VIVO' : 'EN ESPERA', col: TG && Date.now() - TG.at < 15 * 60000 ? '#34d399' : '#64748b' },
+      { name: 'IG · futuro DAX real 24 h (credenciales compartidas)', detail: igFresh ? this.fmtN(IG.mid, 0) + ' pts · hace ' + agoM(IG.at) + ' · contraste del proxy toda la noche' : (this.KEYS.ig_key ? 'credenciales detectadas · esperando lectura (~5 min)' : 'guarda tus credenciales IG en Conexiones del dashboard principal y esta página las usará sola'), state: igFresh ? 'EN VIVO' : this.KEYS.ig_key ? 'CONECTANDO' : 'PENDIENTE', col: igFresh ? '#34d399' : this.KEYS.ig_key ? '#fbbf24' : '#64748b' },
+      { name: 'Binance · BTC/ETH 24/7', detail: XQ.btc ? 'BTC ' + this.fmtSN(XQ.btc.chg, 1) + ' % · ETH ' + (XQ.eth ? this.fmtSN(XQ.eth.chg, 1) + ' %' : '—') + ' · termómetro de riesgo nocturno y de fin de semana' : 'pendiente', state: XQ.btc ? 'EN VIVO' : '—', col: XQ.btc ? '#34d399' : '#64748b' },
+      { name: 'Stooq · DAX de contraste', detail: XQ.stooq ? this.fmtN(XQ.stooq.p, 0) + ' pts (' + XQ.stooq.ds + ')' : 'pendiente (1×/10 min)', state: XQ.stooq ? 'OK' : '—', col: XQ.stooq ? '#34d399' : '#64748b' },
+      { name: 'ForexFactory · eventos HIGH EUR/USD', detail: CALz ? CALz.evs.length + ' eventos esta semana → puerta de evento 24 h' : 'pendiente (1×/h)', state: CALz ? 'OK' : '—', col: CALz ? '#34d399' : '#64748b' },
+      { name: 'Histórico 60 días · Xetra + noches ES', detail: E ? E.nDays + ' sesiones · multiplicadores de fase y WR medidos · hace ' + Math.round((Date.now() - E.at) / 3600000) + ' h' : 'primer barrido en curso (reintento cada 3 min si falla)', state: E ? 'OK' : '…', col: E ? '#34d399' : '#fbbf24' }
+    ];
+    // contraste multi-fuente
+    const xRows = [];
+    if (px != null && igFresh) { const dv = (IG.mid - px) / px * 100; xRows.push({ name: 'IG futuro real vs. fuente activa', val: this.fmtN(IG.mid, 0) + ' vs ' + this.fmtN(px, 0) + ' (' + this.fmtSN(dv, 2) + ' %)', mark: Math.abs(dv) < 0.6 ? '✓' : '≠', col: Math.abs(dv) < 0.6 ? '#34d399' : '#fbbf24' }); }
+    if (px != null && XQ.stooq && S && S.src === 'xetra') { const dv = (px - XQ.stooq.p) / XQ.stooq.p * 100; xRows.push({ name: 'Yahoo vs. Stooq (mismo índice)', val: this.fmtSN(dv, 2) + ' %', mark: Math.abs(dv) < 0.35 ? '✓' : '≠', col: Math.abs(dv) < 0.35 ? '#34d399' : '#fbbf24' }); }
+    if (TG && Date.now() - TG.at < 15 * 60000 && S && S.src === 'es') xRows.push({ name: 'Tradegate pre-mercado vs. proxy ES', val: this.fmtSN(TG.idx, 2) + ' % real (' + TG.cov + '/16)', mark: '✓', col: '#34d399' });
+    if (!xRows.length) xRows.push({ name: 'Se activa cuando hay dos fuentes simultáneas del mismo dato', val: '—', mark: '·', col: '#64748b' });
+    const CALF = C ? C.CAL : this.calFactor();
+    const beRate = this.STP / (this.TGT + this.STP) * 100 + this.SPREAD / (this.TGT + this.STP) * 100;
+    const sigWhy = !S ? 'Sin fuente de datos todavía: pulsa Actualizar.' : !C ? 'Serie insuficiente para medir σ — espera un par de ciclos.' :
+      'Fase «' + ph.name + '» (' + S.label + '). σ = EWMA realizada' + (C.SG.sVix != null ? ' mezclada con la implícita del VIX' : '') + ' × ' + (C.SG.mult.measured ? 'multiplicador MEDIDO' : 'multiplicador por defecto') + ' ×' + this.fmtN(C.SG.mult.v, 2) + ' = ±' + this.fmtN(C.SG.sig1h, 0) + ' pts/h. Deriva μ ' + this.fmtSN(C.DR.mu, 0) + ' pts/h (desglose abajo). p(alcista) ' + this.fmtN(C.pUp, 0) + ' % vs. p(bajista) ' + this.fmtN(C.pDn, 0) + ' % → lado ' + (dir > 0 ? 'LARGO' : 'CORTO') + (C.pEmp != null ? '; la historia de esta fase da ' + this.fmtN(C.pEmp, 0) + ' % (n=' + C.empN + ') y pesa un 35 %' : '; sin muestra empírica suficiente en esta fase: manda el modelo') + '.' + (C.night ? ' Umbral nocturno +' + this.NIGHTBUMP + ' pp por spread ancho.' : '');
+    return {
+      clockStr: B.str, srcCount: String(srcRows.filter(s => s.col === '#34d399').length),
+      phName: ph.name.toUpperCase(), phCol: allOk ? '#34d399' : '#fbbf24', phSrc: S ? (S.src === 'xetra' ? 'Xetra' : 'futuros ES') : '—', phMult: C ? this.fmtN(C.SG.mult.v, 2) : '—',
+      vixStr: vixQ ? this.fmtN(vixQ.p, 1) : '—', vixReg: !vixQ ? '—' : vixQ.p < 14 ? 'COMPLACENCIA' : vixQ.p < 22 ? 'NORMAL' : vixQ.p < 28 ? 'TENSO' : vixQ.p < 32 ? 'MUY TENSO' : 'PÁNICO', vixCol: !vixQ ? '#64748b' : vixQ.p < 22 ? '#34d399' : vixQ.p < 28 ? '#fbbf24' : '#f43f5e',
+      opsToday: String(todayT.length), opsMax: String(this.MAXOPS), opsCol: todayT.length >= this.MAXOPS ? '#f43f5e' : '#e2e8f0',
+      dayPtsStr: this.fmtSN(dayPts, 0) + ' pts', dayPtsCol: dayPts > 0 ? '#34d399' : dayPts < 0 ? '#f43f5e' : '#94a3b8',
+      pauseLabel: this.state.paused ? '▶ Reanudar motor' : '⏸ Pausar motor', pauseBord: this.state.paused ? 'rgba(52,211,153,0.4)' : 'rgba(245,158,11,0.4)', pauseBg: this.state.paused ? 'rgba(52,211,153,0.1)' : 'rgba(245,158,11,0.1)', pauseCol: this.state.paused ? '#34d399' : '#fbbf24',
+      refreshLabel: this.state.fetching ? '↻ Sincronizando…' : '↻ Actualizar', onRefresh: () => this.fetchAll(), onPause, onClearLog,
+      sigArrow: !C ? '◆' : dir > 0 ? '▲' : '▼', sigLabel: !C ? 'SIN DATOS' : C.p < umbralEff ? 'ESPERA' : dir > 0 ? 'LARGO' : 'CORTO', sigCol,
+      sigP: C ? this.fmtN(C.p, 0) : '—', sigWhy, sigAt: S ? 'fuente hace ' + Math.round((Date.now() - S.at) / 60000) + ' min' : '—',
+      pModelStr: C ? this.fmtN(C.pModel, 0) : '—', pEmpStr: C && C.pEmp != null ? this.fmtN(C.pEmp, 0) + ' % (n' + C.empN + ')' : 'sin muestra', calStr: this.fmtN(CALF.f, 2),
+      sigBg: sigCol === '#94a3b8' ? 'rgba(15,23,42,0.72)' : dir > 0 ? 'linear-gradient(160deg, rgba(6,78,59,0.3) 0%, rgba(15,23,42,0.72) 55%)' : 'linear-gradient(160deg, rgba(76,5,25,0.3) 0%, rgba(15,23,42,0.72) 55%)',
+      sigBord: sigCol === '#94a3b8' ? '#1e293b' : dir > 0 ? 'rgba(52,211,153,0.35)' : 'rgba(244,63,94,0.35)',
+      pxStr: px != null ? this.fmtN(px, 0) : '—', pxSrc: S ? S.label : '—',
+      sig1h: C ? this.fmtN(C.SG.sig1h, 0) : '—', sigRealW: '60', sigVixW: C && C.SG.sVix != null ? '40' : '0',
+      momStr: C ? this.fmtSN(C.DR.mu, 0) : '—', momCol: C && C.DR.mu > 2 ? '#34d399' : C && C.DR.mu < -2 ? '#f43f5e' : '#94a3b8',
+      evStr: C ? this.fmtSN(C.ev, 1) + ' pts' : '—', evCol: C && C.ev > 0 ? '#34d399' : '#f43f5e', spreadStr: this.fmtN(this.SPREAD, 1),
+      muRows, gates,
+      execLabel: !C ? '◔ SIN DATOS — pulsa Actualizar' : allOk ? '● SEÑAL VIVA · ' + (dir > 0 ? 'LARGO' : 'CORTO') + ' con p ' + this.fmtN(C.p, 0) + ' % — el motor la anota solo' : this.state.paused ? '⏸ MOTOR PAUSADO' : '◔ EN VIGILANCIA · faltan puertas en verde',
+      execCol: !C ? '#94a3b8' : allOk ? sigCol : '#fbbf24', execBord: allOk ? (dir > 0 ? 'rgba(52,211,153,0.4)' : 'rgba(244,63,94,0.4)') : '#334155',
+      tgtPts: String(Math.round(this.TGT)), stpPts: String(Math.round(this.STP)), nightBump: String(this.NIGHTBUMP),
+      umbralEffStr: this.fmtN(umbralEff, 0), umbralNote: C && C.night ? 'nocturno: base ' + this.UMBRAL + ' + ' + this.NIGHTBUMP : 'base ' + this.UMBRAL, cooldownStr: String(this.COOLDOWN), timeoutStr: String(this.TIMEOUT),
+      beRate: this.fmtN(beRate, 0),
+      planEntry: px != null ? this.fmtN(px, 0) : '—',
+      planTp: px != null ? this.fmtN(px + dir * this.TGT, 0) : '—',
+      planSl: px != null ? this.fmtN(px - dir * this.STP, 0) : '—',
+      timeExitStr: this.TIMEOUT + ' min sin tocar TP/SL → cierre',
+      curOn: !!open, curOff: !open,
+      curDir: open ? (open.dir > 0 ? '▲ LARGO' : '▼ CORTO') : '', curCol: open && open.dir > 0 ? '#34d399' : '#f43f5e',
+      curEntry: open ? String(open.entry) : '', curAgo: open ? 'hace ' + Math.round((Date.now() - open.at) / 60000) + ' min' : '',
+      curPnl: open && px != null ? this.fmtSN((px - open.entry) * open.dir, 0) + ' pts' : '', curPnlCol: open && px != null && (px - open.entry) * open.dir >= 0 ? '#34d399' : '#f43f5e',
+      xRows, phRows, srcRows,
+      empKpis, empSlots, empAt: E ? 'Medido: ' + E.nDays + ' sesiones · hace ' + Math.round((Date.now() - E.at) / 3600000) + ' h.' : 'Primer barrido en curso…',
+      calChip: CALF.n >= 25 ? 'calibrado con ' + CALF.n + ' ops · ×' + this.fmtN(CALF.f, 2) : 'calibración a partir de 25 ops (' + CALF.n + '/25)',
+      lgRows, lgEmpty: trades.length === 0,
+      lgN: String(doneAll.length) + (open ? ' +1' : ''),
+      lgHit: doneAll.length ? this.fmtN(wins / doneAll.length * 100, 0) + ' %' : '—', lgHitCol: doneAll.length && wins / doneAll.length * 100 >= beRate ? '#34d399' : '#fbbf24',
+      lgPts: this.fmtSN(totPts, 0), lgPtsCol: totPts > 0 ? '#34d399' : totPts < 0 ? '#f43f5e' : '#94a3b8'
+    };
+  }
+}
+</script>
+</body>
+</html>

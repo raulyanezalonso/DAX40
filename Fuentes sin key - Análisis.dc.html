@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  html, body { margin: 0; padding: 0; }
+  doc-page:not(:defined) { visibility: hidden; }
+  a { color: #0369a1; text-decoration: none; }
+  a:hover { color: #0284c7; text-decoration: underline; }
+  .keep { break-inside: avoid; orphans: 3; widows: 3; }
+</style>
+</helmet>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" size="a4" orientation="portrait" margin="0.8in" hint-size="100%,1400px">
+
+<div style="font-family:'Archivo',system-ui,sans-serif;color:#1a2333;font-size:14px;line-height:1.62">
+
+  <div class="keep" style="border-bottom:3px solid #1a2333;padding-bottom:16px;margin-bottom:20px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:#0369a1;font-weight:600;margin-bottom:6px">DAX OPENING TRADER · INFORME TÉCNICO · JULIO 2026</div>
+    <h1 style="margin:0;font-size:26px;font-weight:800;letter-spacing:-0.5px">Fuentes sin API key: análisis en profundidad</h1>
+    <p style="margin:8px 0 0;color:#5a6a80">Qué conexiones adicionales pueden alimentar el dashboard <strong>sin registro ni key</strong>, evaluadas por latencia, fiabilidad, acceso desde navegador (CORS) y qué parte del modelo mejoran.</p>
+  </div>
+
+  <div class="keep" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:22px">
+    <div style="background:#f1f5f9;padding:10px 12px;border-radius:6px"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:#64748b">CRITERIO 1</div><div style="font-weight:700;font-size:13px">Latencia</div><div style="font-size:12px;color:#5a6a80">Segundos → diaria. Manda la ventana 8:25–9:00 CET.</div></div>
+    <div style="background:#f1f5f9;padding:10px 12px;border-radius:6px"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:#64748b">CRITERIO 2</div><div style="font-weight:700;font-size:13px">Fiabilidad</div><div style="font-size:12px;color:#5a6a80">Oficial &gt; CDN público &gt; endpoint no documentado.</div></div>
+    <div style="background:#f1f5f9;padding:10px 12px;border-radius:6px"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:#64748b">CRITERIO 3</div><div style="font-weight:700;font-size:13px">CORS</div><div style="font-size:12px;color:#5a6a80">Directo desde el navegador o vía los proxies ya montados.</div></div>
+    <div style="background:#f1f5f9;padding:10px 12px;border-radius:6px"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:#64748b">CRITERIO 4</div><div style="font-weight:700;font-size:13px">Qué alimenta</div><div style="font-size:12px;color:#5a6a80">Gap implícito, β por empresa, puertas de evento o sentimiento.</div></div>
+  </div>
+
+  <div class="keep" style="margin-bottom:22px">
+    <h2 style="font-size:15px;font-weight:800;margin:0 0 8px;letter-spacing:0.3px">Ya conectado hoy (sin key)</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+      <tr style="background:#1a2333;color:#fff;text-align:left"><th style="padding:6px 10px;font-weight:600">Fuente</th><th style="padding:6px 10px;font-weight:600">Papel actual</th><th style="padding:6px 10px;font-weight:600">Latencia</th></tr>
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 10px;font-weight:600">Yahoo Finance</td><td style="padding:6px 10px">Índice, las 40, intradía 15m, histórico, RSS por valor</td><td style="padding:6px 10px;font-family:'IBM Plex Mono',monospace">1–15 min</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc"><td style="padding:6px 10px;font-weight:600">Frankfurter (BCE)</td><td style="padding:6px 10px">EUR/USD — fixing diario del BCE</td><td style="padding:6px 10px;font-family:'IBM Plex Mono',monospace">diaria ~16:00</td></tr>
+      <tr><td style="padding:6px 10px;font-weight:600">GDELT 2.0</td><td style="padding:6px 10px">Noticias macro/empresa + tono agregado</td><td style="padding:6px 10px;font-family:'IBM Plex Mono',monospace">~15 min</td></tr>
+    </table>
+  </div>
+
+  <h2 class="keep" style="font-size:16px;font-weight:800;margin:0 0 4px;padding:8px 12px;background:#0369a1;color:#fff;border-radius:6px">TIER 1 · Alto impacto — conectar primero</h2>
+  <p style="margin:6px 0 14px;font-size:12.5px;color:#5a6a80">Atacan directamente la predicción de apertura. Ordenadas por impacto esperado en la precisión.</p>
+
+  <div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:14px 16px;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <h3 style="margin:0;font-size:14.5px;font-weight:800">1 · Tradegate Exchange — pre-mercado alemán real</h3>
+      <div style="display:flex;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600">
+        <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px">LATENCIA: SEGUNDOS</span>
+        <span style="background:#fef9c3;color:#854d0e;padding:2px 8px;border-radius:4px">FIABILIDAD: MEDIA</span>
+        <span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:4px">VÍA PROXY</span>
+      </div>
+    </div>
+    <p style="margin:8px 0 6px;font-size:12.5px">Tradegate cotiza las 40 del DAX desde las <strong>8:00 CET</strong> — una hora antes que Xetra. Endpoint JSON no documentado pero estable durante años: <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 5px;border-radius:3px">tradegate.de/refresh.php?isin=…</code> devuelve bid/ask/último/volumen por ISIN. Ojo: hay señales recientes de redirección a <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 5px;border-radius:3px">tradegatebsx.com</code> — cablear con ambos dominios como fallback.</p>
+    <p style="margin:0;font-size:12.5px"><strong>Qué alimenta:</strong> sustituye la estimación β×μ por el <strong>precio pre-mercado observado</strong> de cada empresa en la ventana 8:25–9:00, y da un gap implícito del índice construido con precios reales. Es la mejora individual más grande disponible sin key. <strong>Riesgo:</strong> endpoint no oficial — mantener β×μ como fallback automático.</p>
+  </div>
+
+  <div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:14px 16px;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <h3 style="margin:0;font-size:14.5px;font-weight:800">2 · Calendario ForexFactory (feed semanal JSON)</h3>
+      <div style="display:flex;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600">
+        <span style="background:#fef9c3;color:#854d0e;padding:2px 8px;border-radius:4px">LATENCIA: SEMANAL+REVISIONES</span>
+        <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px">FIABILIDAD: ALTA</span>
+      </div>
+    </div>
+    <p style="margin:8px 0 6px;font-size:12.5px"><code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 5px;border-radius:3px">nfs.faireconomy.media/ff_calendar_thisweek.json</code> — calendario macro de la semana con <strong>hora exacta, impacto (alto/medio/bajo), consenso y dato previo</strong> por divisa. Gratuito, sin key, usado por media industria MT4/MT5. Límite: ~2 descargas / 5 min → cachear en localStorage y refrescar 1×/hora como mucho.</p>
+    <p style="margin:0;font-size:12.5px"><strong>Qué alimenta:</strong> automatiza las <strong>puertas de evento</strong> (hoy la agenda es estimada a mano): filtrar EUR/USD/DE con impacto alto y bloquear/avisar si hay publicación en la ventana 9:00–10:30. <strong>Límite conocido:</strong> el feed semanal no trae el dato publicado (actual) — para el "sorpresa vs. consenso" en vivo seguiría haciendo falta Trading Economics (de pago). El worker de GitHub Actions puede descargarlo sin CORS y adjuntarlo a <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 5px;border-radius:3px">history.json</code>.</p>
+  </div>
+
+  <div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:14px 16px;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <h3 style="margin:0;font-size:14.5px;font-weight:800">3 · Ampliar Yahoo: más factores con el plumbing ya montado</h3>
+      <div style="display:flex;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600">
+        <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px">LATENCIA: 1–15 MIN</span>
+        <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px">ESFUERZO: MÍNIMO</span>
+      </div>
+    </div>
+    <p style="margin:8px 0 6px;font-size:12.5px">Cero infraestructura nueva: cada símbolo extra es una llamada más al endpoint ya cableado. Candidatos que afectan a la apertura del DAX (omitir los ya conectados):</p>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'IBM Plex Mono',monospace">
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:4px 8px;font-weight:600;width:170px">EURUSD=X</td><td style="padding:4px 8px;font-family:'Archivo',sans-serif">FX intradía (Frankfurter solo da el fixing diario)</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc"><td style="padding:4px 8px;font-weight:600">^VIX · ^TNX</td><td style="padding:4px 8px;font-family:'Archivo',sans-serif">Riesgo global y 10Y americano del overnight</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:4px 8px;font-weight:600">^N225 · ^HSI</td><td style="padding:4px 8px;font-family:'Archivo',sans-serif">Cierre asiático — cotiza mientras Europa duerme</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc"><td style="padding:4px 8px;font-weight:600">ES=F · NQ=F</td><td style="padding:4px 8px;font-family:'Archivo',sans-serif">Futuros US en vivo a las 8:25 (mejor proxy del gap)</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:4px 8px;font-weight:600">BZ=F · GC=F</td><td style="padding:4px 8px;font-family:'Archivo',sans-serif">Brent y oro — energía/defensivo, β sectoriales</td></tr>
+      <tr><td style="padding:4px 8px;font-weight:600">^STOXX50E</td><td style="padding:4px 8px;font-family:'Archivo',sans-serif">Beta europea común, aísla lo idiosincrático alemán</td></tr>
+    </table>
+    <p style="margin:6px 0 0;font-size:12.5px"><strong>Qué alimenta:</strong> más regresores para la regresión de 90 min y para las β sectoriales por empresa.</p>
+  </div>
+
+  <div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:14px 16px;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <h3 style="margin:0;font-size:14.5px;font-weight:800">4 · EQS-News — comunicados regulatorios (ad-hoc) alemanes</h3>
+      <div style="display:flex;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600">
+        <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px">LATENCIA: MINUTOS</span>
+        <span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px">FIABILIDAD: ALTA</span>
+        <span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:4px">VÍA PROXY</span>
+      </div>
+    </div>
+    <p style="margin:8px 0 0;font-size:12.5px">Los <em>Ad-hoc-Mitteilungen</em> (obligatorios por ley) son la fuente primaria de profit warnings, M&amp;A y guidance — muchos se publican <strong>antes de las 9:00</strong> y mueven la apertura del valor con violencia. EQS (antes DGAP) publica listado/RSS público sin key; se lee vía proxy como los RSS de Yahoo. <strong>Qué alimenta:</strong> alerta pre-apertura por empresa que hoy solo llega tarde vía GDELT. <em>Verificar la URL exacta del feed al cablearlo (EQS la ha movido alguna vez).</em></p>
+  </div>
+
+  <h2 class="keep" style="font-size:16px;font-weight:800;margin:20px 0 4px;padding:8px 12px;background:#1a2333;color:#fff;border-radius:6px">TIER 2 · Fuentes oficiales — fiabilidad máxima, cadencia diaria</h2>
+  <p style="margin:6px 0 14px;font-size:12.5px;color:#5a6a80">APIs públicas de instituciones. No dan tiempo real, pero su dato de la mañana está disponible antes de la apertura y no se caen nunca.</p>
+
+  <table class="keep" style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px">
+    <tr style="background:#1a2333;color:#fff;text-align:left">
+      <th style="padding:6px 10px;font-weight:600">Fuente</th><th style="padding:6px 10px;font-weight:600">Qué alimenta</th><th style="padding:6px 10px;font-weight:600">Publicación</th><th style="padding:6px 10px;font-weight:600">Acceso</th>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px 10px;font-weight:700">BCE Data Portal<br><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:400;color:#64748b">data-api.ecb.europa.eu</span></td>
+      <td style="padding:8px 10px">€STR, tipos oficiales, curva de tipos euro — régimen de tipos para β de bancos (Deutsche Bank, Commerzbank) e inmobiliarias (Vonovia)</td>
+      <td style="padding:8px 10px">€STR a las 8:00 CET (T+1)</td>
+      <td style="padding:8px 10px">Sin key, JSON/CSV, CORS directo</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+      <td style="padding:8px 10px;font-weight:700">Bundesbank SDMX<br><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:400;color:#64748b">api.statistiken.bundesbank.de</span></td>
+      <td style="padding:8px 10px">Rendimiento Bund 10Y diario — el factor tipos "alemán" puro que Yahoo no da bien</td>
+      <td style="padding:8px 10px">Diaria (tarde, T+1 pre-apertura)</td>
+      <td style="padding:8px 10px">Sin key, SDMX-JSON/CSV</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px 10px;font-weight:700">Energy-Charts (Fraunhofer ISE)<br><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:400;color:#64748b">api.energy-charts.info</span></td>
+      <td style="padding:8px 10px">Precio eléctrico day-ahead alemán — β para RWE, E.ON, Siemens Energy y energía-intensivas (BASF, Heidelberg)</td>
+      <td style="padding:8px 10px">~12:45 CET del día anterior → disponible pre-apertura</td>
+      <td style="padding:8px 10px">Sin key, JSON, CORS directo</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 10px;font-weight:700">FRED (CSV abierto)<br><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:400;color:#64748b">fred.stlouisfed.org/graph/fredgraph.csv?id=…</span></td>
+      <td style="padding:8px 10px">Histórico largo (VIXCLS, DGS10, spreads) para <strong>calibrar y backtest</strong>, no para el vivo</td>
+      <td style="padding:8px 10px">T+1</td>
+      <td style="padding:8px 10px">Sin key, CSV, vía proxy</td>
+    </tr>
+  </table>
+
+  <h2 class="keep" style="font-size:16px;font-weight:800;margin:20px 0 4px;padding:8px 12px;background:#64748b;color:#fff;border-radius:6px">TIER 3 · Redundancia y contexto</h2>
+
+  <table class="keep" style="width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 12px">
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px 10px;font-weight:700;width:160px">Stooq (CSV)</td>
+      <td style="padding:8px 10px"><strong>Backup de Yahoo</strong>: mismos índices y materias primas en CSV trivial, sin key. Si Yahoo cambia su API (ya pasó en 2017 y 2023), el dashboard no se queda ciego. Latencia EOD/retrasada — solo redundancia.</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+      <td style="padding:8px 10px;font-weight:700">Binance (público)</td>
+      <td style="padding:8px 10px">BTC/ETH en tiempo real, 24/7, <strong>CORS directo sin proxy</strong>. Único termómetro de apetito de riesgo que cotiza el fin de semana y de 22:00 a 8:00 → señal para el gap del lunes y para el overnight. Correlación variable: usar como indicador suave, no como regresor fijo.</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px 10px;font-weight:700">Wikimedia Pageviews</td>
+      <td style="padding:8px 10px">Vistas diarias del artículo de cada empresa (sin key, CORS). Pico de atención = evento en marcha. T+1, señal lenta: contexto, no predicción.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 10px;font-weight:700">Reddit JSON</td>
+      <td style="padding:8px 10px">r/mauerstrassenwetten y r/Finanzen exponen .json públicos (vía proxy). Sentimiento retail alemán: muy ruidoso, solo como curiosidad en el panel de noticias.</td>
+    </tr>
+  </table>
+
+  <div class="keep" style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 16px;margin-bottom:18px">
+    <h3 style="margin:0 0 6px;font-size:13.5px;font-weight:800;color:#991b1b">Evaluadas y descartadas</h3>
+    <ul style="margin:0;padding-left:18px;font-size:12.5px">
+      <li><strong>exchangerate.host</strong> — pasó a requerir key; Frankfurter ya cubre el fixing.</li>
+      <li><strong>API interna de Börse Frankfurt</strong> — cabeceras firmadas que rotan; se rompe cada pocos meses.</li>
+      <li><strong>Google Trends</strong> — sin API estable; los wrappers no oficiales se bloquean.</li>
+      <li><strong>Scraping de investing.com</strong> — anti-bot agresivo, poco fiable vía proxy CORS.</li>
+      <li><strong>ENTSO-E / EIA (energía oficial)</strong> — requieren key (gratuita); Energy-Charts da lo mismo sin ella.</li>
+    </ul>
+  </div>
+
+  <div class="keep" style="border:2px solid #0369a1;border-radius:8px;padding:14px 16px">
+    <h3 style="margin:0 0 8px;font-size:14px;font-weight:800;color:#0369a1">Orden de cableado recomendado</h3>
+    <ol style="margin:0;padding-left:20px;font-size:12.5px">
+      <li style="margin-bottom:4px"><strong>Tradegate</strong> en la ventana 8:25–9:00 (con fallback β×μ) — máximo impacto en la predicción por empresa.</li>
+      <li style="margin-bottom:4px"><strong>Calendario ForexFactory</strong> → puertas de evento automáticas (cache 1 h).</li>
+      <li style="margin-bottom:4px"><strong>Símbolos Yahoo extra</strong> (EURUSD=X, ^VIX, ES=F, ^N225, BZ=F) → recalibrar la regresión con más factores.</li>
+      <li style="margin-bottom:4px"><strong>BCE + Bundesbank + Energy-Charts</strong> → factores de régimen (tipos, energía) para β sectoriales.</li>
+      <li><strong>EQS ad-hoc + Stooq backup</strong> → alertas por empresa y resiliencia.</li>
+    </ol>
+    <p style="margin:8px 0 0;font-size:12px;color:#5a6a80">Nota: el <strong>worker de GitHub Actions</strong> puede descargar cualquiera de estas fuentes sin restricción CORS y congelarlas en <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 5px;border-radius:3px">history.json</code> a las 8:25 — útil para Tradegate y ForexFactory aunque la pestaña esté cerrada. Pídeme el cableado de cualquier punto y regenero <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 5px;border-radius:3px">index.html</code> listo para subir al repo.</p>
+  </div>
+
+</div>
+</x-import>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,25 @@
+name: dax-capture
+on:
+  schedule:
+    - cron: '25 6 * * 1-5'   # 8:25 CEST (verano) - congelar prediccion
+    - cron: '25 7 * * 1-5'   # 8:25 CET (invierno) - congelar (fuera de ventana se descarta solo)
+    - cron: '40 8 * * 1-5'   # 10:40 CEST - cerrar resultado real
+    - cron: '40 9 * * 1-5'   # 10:40 CET - cerrar (invierno)
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node capture.mjs
+      - run: |
+          git config user.name "dax-bot"
+          git config user.email "dax-bot@users.noreply.github.com"
+          git add history.json
+          git commit -m "captura $(date -u +%F_%H%M)" || echo "sin cambios"
+          git push

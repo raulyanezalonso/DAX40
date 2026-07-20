@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #020617; color: #e2e8f0; font-family: 'Archivo', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #38bdf8; text-decoration: none; }
+  a:hover { color: #7dd3fc; text-decoration: underline; }
+</style>
+</helmet>
+<div style="min-height:100vh;background:#020617;padding:20px 16px 60px">
+  <div style="max-width:1020px;margin:0 auto;display:grid;gap:14px">
+    <header style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:18px 20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>
+          <h1 style="margin:0;font-size:19px;font-weight:800;color:#f8fafc">Checklist de puesta en marcha · DAX Opening Trader</h1>
+          <p style="margin:4px 0 0;font-size:12px;color:#94a3b8;line-height:1.6;max-width:740px">Paso a paso, acción por acción. Marca cada punto al completarlo (se guarda solo en este navegador); al marcarlo, sus sub-pasos se pliegan. Fases A–C = sistema funcionando 24/7 · D–F = eliminar puntos ciegos · G = mantenimiento.</p>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;color:{{ pctCol }}">{{ doneN }}/{{ totalN }}</div>
+          <div style="font-size:10px;color:#64748b;font-weight:700;letter-spacing:0.08em">COMPLETADO</div>
+        </div>
+      </div>
+      <div style="height:6px;background:#0b1224;border-radius:3px;margin-top:12px;overflow:hidden">
+        <div style="height:100%;border-radius:3px;background:linear-gradient(90deg,#0ea5e9,#34d399);width:{{ pctW }}%;transition:width 0.3s"></div>
+      </div>
+      <p style="margin:10px 0 0;font-size:11px;color:#64748b">Dashboard: <a href="DAX Opening Trader Live.dc.html">abrir versión de trabajo →</a> · Guía del worker: <span style="font-family:'IBM Plex Mono',monospace;color:#94a3b8">worker/README.md</span></p>
+    </header>
+
+    <section style="background:rgba(192,132,252,0.07);border:1px solid rgba(192,132,252,0.35);border-radius:14px;padding:16px 18px">
+      <h2 style="margin:0 0 8px;font-size:14px;font-weight:800;color:#c084fc">⚠ Léelo primero · actualizaciones, cableados y tus datos (respuesta a la duda clave)</h2>
+      <div style="display:grid;gap:7px;font-size:11.5px;color:#cbd5e1;line-height:1.65">
+        <p style="margin:0"><strong style="color:#e2e8f0">1 · El repositorio solo contiene el CÓDIGO</strong> (index.html + support.js). Tus API keys, el histórico de señales, el aprendizaje del ML, los ajustes y este checklist viven en el <strong style="color:#e2e8f0">almacenamiento local de TU navegador</strong>, ligados a la URL de la web — nunca dentro del repo.</p>
+        <p style="margin:0"><strong style="color:#e2e8f0">2 · Actualizar NO borra nada</strong>: se hace <strong style="color:#e2e8f0">reemplazando index.html en el MISMO repositorio</strong> (Upload files → sobrescribir → Commit). La URL no cambia, así que el navegador conserva keys e histórico intactos. <strong style="color:#fda4af">Nunca crees un repositorio nuevo para actualizar</strong>: cambiaría la URL y el navegador lo trataría como otra web (los datos no viajan solos).</p>
+        <p style="margin:0"><strong style="color:#e2e8f0">3 · Flujo de un «cableado»</strong> (FDAX real, profundidad L2, sorpresa del dato…): ① activas la conexión en tu web online y la key queda guardada en tu navegador → ② me dices aquí «conexión X activa: cablea Y» → ③ te entrego el index.html actualizado → ④ lo re-subes al MISMO repo (2 min) → ⑤ recargas la web: la key sigue ahí y la nueva integración la usa al instante.</p>
+        <p style="margin:0"><strong style="color:#e2e8f0">4 · Los datos son por navegador y dispositivo</strong>: las keys se pegan una vez en cada dispositivo donde uses la web. El histórico de señales sí se comparte entre dispositivos a través del worker (☁ Sync). No borres los «datos de sitios» del navegador sin exportar antes el CSV (fase G6).</p>
+      </div>
+    </section>
+
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="7">
+      <section style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px 18px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+          <h2 style="margin:0;font-size:14px;font-weight:800;color:{{ sec.col }}">{{ sec.title }}</h2>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#64748b">{{ sec.done }}/{{ sec.n }}</span>
+        </div>
+        <p style="margin:4px 0 10px;font-size:11px;color:#94a3b8;line-height:1.55;max-width:860px">{{ sec.sub }}</p>
+        <div style="display:grid;gap:7px">
+          <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="6">
+            <div style="background:{{ it.bg }};border:1px solid {{ it.bord }};border-radius:10px;overflow:hidden">
+              <button data-k="{{ it.k }}" onClick="{{ onToggle }}" style="display:flex;align-items:flex-start;gap:11px;text-align:left;width:100%;background:transparent;border:none;padding:11px 12px 9px;cursor:pointer">
+                <span style="width:19px;height:19px;border-radius:6px;border:2px solid {{ it.boxBord }};background:{{ it.boxBg }};color:#052e1c;font-size:13px;line-height:16px;text-align:center;font-weight:800;flex-shrink:0;margin-top:1px">{{ it.mark }}</span>
+                <span style="min-width:0">
+                  <span style="display:block;font-size:12.5px;font-weight:700;color:{{ it.tCol }};line-height:1.45">{{ it.t }}</span>
+                  <span style="display:block;font-size:10.5px;color:#94a3b8;line-height:1.55;margin-top:2px">{{ it.d }}</span>
+                </span>
+              </button>
+              <sc-if value="{{ it.open }}" hint-placeholder-val="{{ true }}">
+                <div style="padding:2px 14px 12px 42px;display:grid;gap:5px">
+                  <sc-for list="{{ it.steps }}" as="stp" hint-placeholder-count="4">
+                    <div style="display:flex;align-items:flex-start;gap:9px">
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;color:{{ it.numCol }};background:rgba(2,6,23,0.7);border:1px solid #1e293b;border-radius:5px;padding:2px 6px;flex-shrink:0;margin-top:1px">{{ stp.n }}</span>
+                      <span style="font-size:11px;color:#cbd5e1;line-height:1.6;min-width:0">{{ stp.t }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+    <footer style="background:rgba(2,6,23,0.6);border:1px dashed #1e293b;border-radius:12px;padding:12px 16px">
+      <p style="margin:0;font-size:10.5px;color:#64748b;line-height:1.6">Cada vez que un paso diga «pídeme el cableado», el circuito es siempre el del recuadro morado: activar conexión → pedirme la integración → reemplazar index.html en el mismo repo. Nada se borra. Herramienta de análisis y aprendizaje: no es asesoramiento de inversión; los CFD conllevan alto riesgo.</p>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.KEY = 'dax-ot-checklist-v1';
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(this.KEY) || '{}') || {}; } catch (e) { }
+    this.state = { done: saved };
+    this.DEFS = [
+      ['A · GitHub Pages — el dashboard online 24 h', '#7dd3fc', 'La web pública: se abre desde cualquier dispositivo. El código vive en el repo; tus datos, en el navegador que la abre.', [
+        ['a1', 'Crear el repositorio del dashboard y subir los 2 archivos', 'index.html + support.js en la raíz del repo.', [
+          'Descarga de este proyecto la carpeta export/github-pages (contiene index.html y support.js).',
+          'Entra en github.com con tu cuenta → botón «+» (arriba a la derecha) → «New repository».',
+          'Repository name: dax-dashboard (o el que prefieras) · visibilidad Public · NO marques «Add a README» → «Create repository».',
+          'En la pantalla del repo recién creado, pulsa el enlace «uploading an existing file».',
+          'Arrastra index.html y support.js a la zona de subida → botón verde «Commit changes».',
+          'Comprueba que ambos archivos quedan en la RAÍZ del repo, no dentro de una subcarpeta (si arrastraste la carpeta entera, GitHub crea github-pages/ — en ese caso borra y sube los 2 archivos sueltos).'
+        ]],
+        ['a2', 'Activar GitHub Pages', 'Publica el repo como web con URL propia.', [
+          'En el repo → pestaña superior «Settings».',
+          'Menú izquierdo → «Pages».',
+          'En «Build and deployment» → Source: «Deploy from a branch».',
+          'Branch: main · carpeta: /(root) → «Save».',
+          'Espera 1–2 minutos y recarga la página de Settings → Pages: arriba aparece «Your site is live at https://TUUSUARIO.github.io/dax-dashboard/».',
+          'Abre esa URL: el dashboard debe cargar y empezar a sincronizar datos.'
+        ]],
+        ['a3', 'Comprobar la cabecera en la URL pública', 'Los semáforos MERCADO / NEWS confirman que las fuentes entran.', [
+          'Abre la URL pública en el navegador que vayas a usar a diario (importante: ahí se guardarán tus datos).',
+          'Cabecera → «MERCADO LIVE Xm» en verde (en fin de semana «CACHÉ» es lo normal).',
+          '«NEWS LIVE» tras el primer ciclo completo (~1–3 min). Si tarda, pulsa «↻ Actualizar ahora».',
+          'Recorre las 4 pestañas (Dashboard · 🧠 Cerebro · 📅 Sucesos · 🔌 Conexiones) y comprueba que todas pintan con datos.'
+        ]],
+        ['a4', 'Verificar la auditoría automática de cálculos', 'Valida 40+ invariantes (probabilidades, velas, sumas, coherencia entre módulos) en cada carga.', [
+          'Con la web abierta, pulsa F12 (o clic derecho → «Inspeccionar») → pestaña «Console».',
+          'Espera ~15 segundos desde la carga de la página.',
+          'Busca la línea que empieza por «[AUDIT DASHBOARD]» → debe decir «todo OK».',
+          'Si alguna línea dice FAIL, cópiala entera y pégamela aquí para corregirla.'
+        ]],
+        ['a5', 'Instalarla en el móvil / tablet', 'Acceso de un toque, a pantalla completa.', [
+          'Abre la URL pública en el navegador del móvil.',
+          'iPhone/iPad (Safari): botón Compartir (cuadrado con flecha) → «Añadir a pantalla de inicio» → Añadir.',
+          'Android (Chrome): menú ⋮ → «Añadir a pantalla de inicio» → Instalar.',
+          'Ábrela desde el icono nuevo: se ve a pantalla completa. Recuerda: el histórico del móvil es independiente del PC; se igualan vía worker (fase B).'
+        ]]
+      ]],
+      ['B · Worker en GitHub Actions — imprescindible para el 24/7 real', '#34d399', 'OJO: la web de Pages (fase A) solo calcula y registra mientras alguien la tiene ABIERTA en un navegador. Este worker corre en los servidores de GitHub (no en tu ordenador): congela la predicción a las 8:25 y cierra el resultado a las 10:40 todos los laborables, aunque nadie abra la web y tu PC esté apagado. Sin él, los días que no abras la página no quedan registrados y el ML no aprende.', [
+        ['b1', 'Crear el repo privado dax-worker con los 2 archivos', 'capture.mjs en la raíz + capture.yml en .github/workflows/.', [
+          'github.com → «+» → «New repository» → nombre: dax-worker → visibilidad Private → «Create repository».',
+          '«uploading an existing file» → sube capture.mjs (está en la carpeta worker/ de este proyecto) → «Commit changes».',
+          'De vuelta en el repo → «Add file» → «Create new file».',
+          'En el campo del nombre escribe exactamente: .github/workflows/capture.yml (al teclear cada «/» GitHub crea la carpeta).',
+          'Abre worker/capture.yml de este proyecto, copia TODO su contenido y pégalo en el editor → «Commit changes».'
+        ]],
+        ['b2', 'Exportar config.json del dashboard y subirlo al worker', 'Le pasa al worker tus β calibradas, umbral y calibración de probabilidad.', [
+          'Abre tu dashboard (la URL pública) → baja al módulo «Histórico de predicciones».',
+          'Pulsa «⬇ Config worker»: se descarga config.json.',
+          'En el repo dax-worker → «Add file» → «Upload files» → arrastra config.json → «Commit changes» (debe quedar en la raíz, junto a capture.mjs).',
+          'Anota: cada vez que recalibres el modelo (fase G4) hay que re-exportar y reemplazar este archivo.'
+        ]],
+        ['b3', 'Dar permisos de escritura a GitHub Actions', 'Sin esto el worker no puede guardar history.json.', [
+          'dax-worker → «Settings» → menú izquierdo «Actions» → «General».',
+          'Baja hasta «Workflow permissions».',
+          'Marca «Read and write permissions» → «Save».'
+        ]],
+        ['b4', 'Lanzar una ejecución de prueba', 'Confirma que el workflow corre en verde.', [
+          'Pestaña «Actions» del repo (si pide habilitar los workflows, acepta).',
+          'Menú izquierdo → «dax-capture» → botón «Run workflow» → confirma sobre la rama main.',
+          'Espera ~1 minuto → entra en la ejecución: todos los pasos en verde.',
+          'Fuera de las ventanas (8:20–9:00 / 10:40–13:00 hora española) el log dirá «fuera de ventana Berlín — nada que hacer»: es el comportamiento CORRECTO.',
+          'Si la lanzas dentro de ventana un laborable, aparecerá history.json en la raíz del repo.'
+        ]],
+        ['b5', 'Conectar history.json al dashboard (☁ Sync)', 'Fusiona lo capturado por el worker con tu navegador.', [
+          'Cuando exista history.json (tras la primera captura en ventana), ábrelo en el repo → botón «Raw» → copia la URL de la barra de direcciones.',
+          'Con repo PRIVADO la URL Raw caduca: lo simple es hacer el repo público (solo contiene predicciones); si no, usa un fine-grained token de solo lectura.',
+          'Dashboard → módulo Histórico → pega la URL en el campo junto a «☁ Sync worker» → pulsa el botón.',
+          'Debe aparecer el aviso «Sync worker: N señal(es)…». Desde ahora se auto-sincroniza cada vez que abres la pestaña.',
+          'Repite el pegado de la URL una vez en cada dispositivo (móvil, tablet…).'
+        ]],
+        ['b6', 'Verificar la primera captura real completa', 'El ciclo entero: congelar 8:25 → cerrar 10:40 → fusionar.', [
+          'Un día laborable, a partir de las 10:45, abre dax-worker → history.json.',
+          'La fila con la fecha de hoy debe tener mu, p, dir y también out / hit rellenos.',
+          'Abre el dashboard → «☁ Sync worker» → la sesión debe aparecer en el Histórico de predicciones con su resultado.',
+          'Comprueba en Actions que las ejecuciones programadas corren solas (pueden retrasarse hasta ~15 min: está previsto).'
+        ]]
+      ]],
+      ['C · Primer arranque del modelo — calibraciones y muestras', '#fbbf24', 'Se lanzan solas tras la primera sincronización; aquí verificas que terminaron bien y ajustas tus parámetros.', [
+        ['c1', 'Calibración 2 años (gap de apertura)', 'Las β que estiman el gap desde US/futuros/Asia.', [
+          'Dashboard → columna derecha → módulo «Calibración histórica · gap de apertura (2 años)».',
+          'Si dice «sin calibrar», pulsa «▶ Calibrar ahora» y espera ~1 min (descarga 7 series de 2 años).',
+          'Resultado esperado: ~400–500 sesiones alineadas y un R² (20–40 % es lo normal y útil en bolsa).',
+          'Opcional: pulsa «Aplicar a pesos» para repartir los bloques US/futuros/Asia según la evidencia medida.'
+        ]],
+        ['c2', 'Calibración 90 minutos', 'Ancla μ y σ al comportamiento real de la ventana 9:00–10:30.', [
+          'En el mismo módulo, bloque «90 min» → pulsa «▶ Calibrar 90 min (60 días)» si está sin calibrar.',
+          'Resultado esperado: 40–60 sesiones, R² y σ90 real.',
+          'Verificación: pestaña Cerebro → la síntesis matemática debe decir «0,55·bloques + 0,15·bottom-up + 0,30·regresión 90 min».'
+        ]],
+        ['c3', 'Muestra de tramos ±100 (60 sesiones reales)', 'Alimenta Tramos, Días como hoy, Sala de entradas y el histograma.', [
+          'Deja la pestaña abierta 2–3 minutos tras la primera sincronización.',
+          'Módulo «Tramos de 100 puntos»: los 4 KPIs y la tabla de 10 franjas horarias deben tener números.',
+          '«Días como hoy» y «Sala de entradas» se rellenan con la misma muestra.',
+          'Si sigue «pendiente de primer barrido», pulsa «↻ Actualizar ahora» y espera: se reintenta solo cada 4 min.'
+        ]],
+        ['c4', 'Histórico de 2 años de sucesos', 'Los multiplicadores ×N reales de FOMC, BCE, IPC, vencimientos…', [
+          'Pestaña «📅 Sucesos».',
+          'La cabecera debe decir «histórico 2a: ~500 sesiones medidas».',
+          'En «Peso histórico por tipo de suceso», cada tipo debe mostrar su ×N morado medido (pasa el cursor para el detalle).'
+        ]],
+        ['c5', 'Ajustar los Tweaks a tu bróker', 'Umbral, objetivo y spread real: afectan al EV y a las puertas.', [
+          'Abre el panel de Tweaks del documento (controles laterales).',
+          '«Umbral probabilidad»: 58 % por defecto — súbelo a 60–62 si prefieres operar menos veces con más calidad.',
+          '«Objetivo máx %»: 1,0 por defecto.',
+          '«Spread pts»: pon el spread REAL de tu CFD del DAX (p. ej. IG 1,2–2,4 pts según la hora). Es el coste que decide si el EV sale positivo.'
+        ]],
+        ['c6', 'Configurar capital, riesgo y €/punto', 'Dimensiona stop, tamaño y los euros del radar.', [
+          'Módulo «Plan de trade»: introduce tu capital y el % de riesgo por operación (1 % recomendado).',
+          'Módulo «Mesa 100 puntos» → panel «Mi posición»: pon tus €/punto (contrato estándar 25 €/pt, mini 1 €/pt).',
+          'Verifica en «Radar 100 pts» que los € de TP/SL/spread reflejan tu €/punto.'
+        ]],
+        ['c7', 'Activar el aviso de las 8:20 (opcional)', 'Notificación del navegador antes de la ventana de captura.', [
+          'Módulo Histórico → botón «🔕/🔔 Aviso 8:20».',
+          'Acepta el permiso de notificaciones que pide el navegador.',
+          'Requiere la pestaña abierta a esa hora; si no lo está, el worker captura igualmente (fase B).'
+        ]]
+      ]],
+      ['D · Tier 1 — eliminar los puntos ciegos críticos', '#f472b6', 'El futuro del DAX real y cotizaciones sin el retardo de ~15 min. Con UNA de estas fuentes la ventana operativa queda cubierta.', [
+        ['d1', 'IG Markets: cuenta DEMO + API key + conectar', 'La vía más rápida al futuro DAX real y al posicionamiento de clientes.', [
+          'ig.com → «Crear cuenta» → elige cuenta DEMO (sin ingreso).',
+          'Dentro de Mi IG → «Configuración» → «claves API» → «Crear clave API» (de demo) → cópiala.',
+          'Tu dashboard → pestaña «🔌 Conexiones» → tarjeta «IG Markets · API REST».',
+          'Rellena: API Key, Usuario IG, Contraseña y en Entorno escribe DEMO.',
+          'Pulsa «Probar conexión» → debe decir «Sesión IG creada».',
+          'Si da error de CORS, prueba desde Chrome o Edge de escritorio (las apps móviles a veces bloquean las cabeceras).'
+        ]],
+        ['d2', 'Verificar que la integración IG está entrando al modelo', 'Futuro real en el gap + sentimiento contrario en μ.', [
+          'Espera al siguiente ciclo (~8 min) o pulsa «↻ Actualizar ahora».',
+          'Módulo «Fondo de mercado»: fila «Sentimiento posicional de clientes (IG)» = ACTIVO, con % largos/cortos y su ajuste ±pp en μ.',
+          'Fila «Futuro DAX real (IG)» = ACTIVO con el precio en vivo.',
+          'Antes de las 9:00, la etiqueta del gap debe indicar que mezcla el futuro IG (60/40) con el implícito.'
+        ]],
+        ['d3', 'IG: pasar a cuenta REAL cuando valides el flujo', 'Mismo proceso con la key real.', [
+          'Crea la API key de tu cuenta real en el mismo menú de IG.',
+          'En Conexiones sustituye key/usuario/contraseña y cambia Entorno a REAL → «Probar conexión».',
+          'Seguridad: las credenciales solo viven en tu navegador; no compartas capturas con las keys visibles ni el proyecto con las keys puestas.'
+        ]],
+        ['d4', 'IBKR: abrir cuenta + suscripción de datos Eurex', 'La única vía asequible al FDAX real y al libro con profundidad.', [
+          'interactivebrokers.com → «Open account» (pide identificación y datos fiscales; aprobación en 1–2 días).',
+          'Aprobada la cuenta: Portal → «Settings» → «Account Settings» → «Market Data Subscriptions».',
+          'Suscribe «Eurex – Core» (nivel 1, ~3 €/mes) o «Eurex – Total» si quieres PROFUNDIDAD de libro L2 (para la fase F4).',
+          'El coste se descuenta del saldo de la cuenta cada mes.'
+        ]],
+        ['d5', 'IBKR: instalar y arrancar el Client Portal Gateway', 'El puente local entre tu navegador e IBKR.', [
+          'IBKR → sección API → descarga «Client Portal Gateway» (ZIP) → descomprímelo en una carpeta.',
+          'Windows: doble clic en bin\\run.bat · Mac/Linux: en Terminal, bin/run.sh root/conf.yaml.',
+          'Abre https://localhost:5000 en el navegador → acepta el aviso del certificado autofirmado → haz login con tu usuario IBKR.',
+          'Debe decir «Client login succeeds».',
+          'Dashboard → Conexiones → IBKR → deja la URL https://localhost:5000 → «Probar conexión» → «Gateway local respondiendo».',
+          'Importante: el gateway corre en TU máquina — los datos IBKR solo entran cuando tu PC está encendido con el gateway abierto (el resto de fuentes siguen funcionando sin él).'
+        ]],
+        ['d6', 'Pedirme el cableado FDAX + las 40 en tiempo real', 'Sustituye proxies por el futuro real y quita el retardo en la ventana.', [
+          'Con D5 en verde, vuelve a este chat y dime: «gateway IBKR funcionando — cablea FDAX y las 40».',
+          'Yo actualizo el dashboard: gap = FDAX real, cotizaciones sin retardo 9:00–10:30 y recalibración contra el futuro real.',
+          'Tú reemplazas index.html en el MISMO repo de Pages (recuadro morado) → recargas → tus keys e histórico siguen intactos.'
+        ]],
+        ['d7', 'Databento: registrar y guardar la key (opcional)', 'FDAX tick a tick para recalibración histórica futura.', [
+          'databento.com → «Sign up» (incluye crédito inicial gratuito).',
+          'Panel → «API keys» → «Create key» → cópiala.',
+          'Conexiones → Databento → pégala: queda GUARDADA (su API no permite probarse desde navegador; se usará cuando montemos el backend de recalibración).'
+        ]]
+      ]],
+      ['E · Tier 2 — noticias, calendario y resultados', '#c084fc', 'Menos latencia informativa y agenda automática completa. Todas se prueban desde la pestaña Conexiones.', [
+        ['e1', 'Finnhub (gratis): noticias de baja latencia', 'Refuerza el radar de titulares de ~15 min a ~1 min.', [
+          'finnhub.io → «Get free API key» → completa el registro.',
+          'En el dashboard de Finnhub, copia la API key.',
+          'Tu dashboard → Conexiones → Finnhub → pegar → «Probar conexión» → «Conectada».',
+          'Verificación: en «Noticias overnight», tras el siguiente ciclo, entran titulares con fuente finnhub.'
+        ]],
+        ['e2', 'FMP (gratis): resultados de las 40 → agenda', 'Los resultados son los mayores movedores de valores individuales.', [
+          'financialmodelingprep.com → «Sign up» (plan gratuito) → Dashboard → copia la API key.',
+          'Conexiones → Financial Modeling Prep → pegar → «Probar conexión».',
+          'En ≤12 h la «Agenda de catalizadores» mostrará «Resultados de …» de las 40 con relevancia Alta (próximos 21 días).'
+        ]],
+        ['e3', 'Trading Economics (trial/pago): calendario con dato publicado', 'Desbloquea la SORPRESA del dato en vivo (hoy solo hay hora y consenso).', [
+          'tradingeconomics.com/api → solicita trial o plan.',
+          'Te dan una key con formato usuario:clave → Conexiones → Trading Economics → pegar → «Probar conexión».',
+          'Con la key válida, pídeme aquí el cableado: puertas de evento con dato publicado + sorpresa vs. consenso en tiempo real → re-subes index.html.'
+        ]],
+        ['e4', 'Marketaux (gratis): sentimiento etiquetado de contraste', 'Valida nuestro léxico contra un sentimiento externo.', [
+          'marketaux.com → registro gratuito → copia el api_token.',
+          'Conexiones → Marketaux → pegar → «Probar conexión» → «Conectada».'
+        ]],
+        ['e5', 'Twelve Data: solo si contratas Grow/Pro', 'El free tier NO da tiempo real europeo.', [
+          'Si decides contratarlo (29–79 $/mes): twelvedata.com → plan Grow o Pro → copia la key.',
+          'Conexiones → Twelve Data → pegar → «Probar conexión».',
+          'Pídeme entonces el cableado del feed en tiempo real del DAX y las 40 (WebSocket).'
+        ]],
+        ['e6', 'Benzinga (pago, opcional): upgrades/downgrades pre-apertura', 'Cambios de recomendación 7:00–8:30 que mueven aperturas concretas.', [
+          'benzinga.com/apis → solicita acceso comercial (presupuesto por API).',
+          'Guarda la key en Conexiones (no se puede probar desde navegador).',
+          'Con el acceso confirmado, pídeme el cableado del panel de ratings pre-apertura.'
+        ]]
+      ]],
+      ['F · Fondo de mercado — todas las órdenes alcanzables', '#22d3ee', 'El libro de órdenes, de lo más accesible a lo más profundo. F1, F2 y F6 ya funcionan sin hacer nada: aquí se verifican.', [
+        ['f1', 'Verificar Tradegate: pre-mercado REAL de las 40 (ya activo)', 'Órdenes cruzándose desde las 8:00, una hora antes de Xetra.', [
+          'Un día laborable entre 8:00 y 9:00, abre el dashboard.',
+          'Módulo «Fondo de mercado» → fila «Pre-mercado Tradegate» = ACTIVO · N/40 valores.',
+          'Módulo «Overnight en vivo» → pestaña «PRE-MERCADO TRADEGATE»: la línea del gap bottom-up formándose en directo.',
+          'En la lista «Las 40», los valores muestran ◆ con su variación de pre-mercado real.',
+          'Ese gap real pesa un 55 % en el gap implícito hasta que a las 9:00 entra el cruce oficial de Xetra.'
+        ]],
+        ['f2', 'Verificar top-of-book de las 40 (ya activo, intermitente)', 'Bid/ask con tamaños de la primera fila del libro.', [
+          'Módulo «Fondo de mercado» → fila «Top-of-book de las 40».',
+          'ACTIVO = imbalance ponderado con N/40 valores respondiendo (ajusta μ hasta ±0,10 pp, visible en el panel).',
+          'INTERMITENTE = Yahoo v7 no respondió este ciclo: es normal, se reintenta en cada sync (~3 min). No hay que hacer nada.'
+        ]],
+        ['f3', 'IG conectado = posicionamiento del dinero minorista', 'El mejor proxy gratuito de cómo está colocada la multitud.', [
+          'Completa D1 y D2.',
+          'En «Fondo de mercado» verás el % largos vs. cortos en Germany 40 con su barra.',
+          'Lectura: multitud >62 % larga = sesgo contrario bajista (y viceversa); el ajuste ±pp ya entra solo en μ.'
+        ]],
+        ['f4', 'IBKR + Eurex Total = profundidad L1/L2 REAL', 'El único acceso asequible al libro real de FDAX y las 40 por niveles.', [
+          'Completa D4 eligiendo la suscripción «Eurex – Total» (incluye profundidad) y D5 (gateway).',
+          'Vuelve aquí y dime: «IBKR con Eurex Total activo — cablea el módulo de profundidad».',
+          'Te entrego el módulo nuevo: imbalance por niveles de precio, paredes de órdenes (grandes bloques que frenan) y absorción (cuánto papel se come el precio al avanzar).',
+          'Reemplaza index.html en el mismo repo → recarga → listo, sin perder nada.'
+        ]],
+        ['f5', 'Asumir el límite: libro Xetra completo y subasta de apertura', 'Lo único sin API gratuita — y su alternativa práctica.', [
+          'El libro L2 completo de Xetra y el precio indicativo de subasta solo existen en feeds de pago de Deutsche Börse (CEF/EOBI, cientos de €/mes): no compensan a nivel particular.',
+          'Para mirarlos a mano: boerse-frankfurt.de → busca DAX o el valor → sección Order book / datos de subasta (8:50–9:00).',
+          'La alternativa real y barata a todo esto ES la fase F4 (IBKR): profundidad de FDAX, que es donde se mueve el dinero rápido del índice.'
+        ]],
+        ['f6', 'Verificar volumen por franja (ya activo)', 'La participación real detrás de cada tramo del día.', [
+          'Módulo «Microestructura» → pestaña «VOLUMEN POR FRANJA».',
+          'Barras azules = hoy · línea = mediana de sesiones previas · fuente indicada al pie (ETF EXS1, réplica del DAX: Yahoo no publica volumen del índice).',
+          'El ratio ×N vs. ayer alimenta el disparo del Radar (necesita ≥×0,8) y las heurísticas del Cerebro.'
+        ]]
+      ]],
+      ['G · Rutina de validación — que todo siga perfecto', '#94a3b8', 'Lo que el sistema hace solo y los pocos minutos de revisión que conviene dedicarle.', [
+        ['g1', 'Diario (2 min): comprobar el ciclo del día', 'Señal congelada → resultado cerrado → fusionado.', [
+          'A partir de las 10:45 abre la web (o déjalo todo al worker).',
+          'Módulo Histórico: la fila de hoy debe tener predicción Y resultado real.',
+          'Si falta algo: pulsa «☁ Sync worker» y, si sigue pendiente, «↻ Cerrar pendientes (60 d)».'
+        ]],
+        ['g2', 'Revisar el motor de aprendizaje (ML)', 'Que aprenda de verdad, día a día.', [
+          'Pestaña Cerebro → módulo «Motor de aprendizaje continuo».',
+          '«SESIONES ASIMILADAS» (n) debe crecer cada día laborable.',
+          'Desde n≥5 los multiplicadores de bloque están activos; desde n≥6, la corrección residual (su valor de hoy sale en «CORRECCIÓN HOY»).',
+          'Vigila «TENDENCIA MAE»: ▼ mejora = converge. Si empeora 2 semanas seguidas, revisa la taxonomía de fallos y cuéntamelo.'
+        ]],
+        ['g3', 'Con 25 señales cerradas: calibrar la probabilidad', 'Ajusta lo prometido a lo observado en TU histórico.', [
+          'Módulo «Precisión real»: cuando SEÑALES CERRADAS llegue a 25, pulsa el botón de calibración.',
+          'Aplica la corrección de pendiente (×0,6–1,4) a todas las probabilidades del sistema.',
+          'Al llegar a 40, vuelve a pulsarlo: pasa automáticamente a Platt completo (pendiente + intercepto).'
+        ]],
+        ['g4', 'Semanal: recalibraciones + config.json al worker', 'Mantiene el modelo lite del worker al día.', [
+          'Las calibraciones 2A y 90 min se renuevan solas cada 7 días (mira el sello de fecha en su módulo).',
+          'Tras cada recalibración: «⬇ Config worker» → repo dax-worker → «Add file → Upload files» → reemplaza config.json → Commit.'
+        ]],
+        ['g5', 'Semanal: contrastar con los benchmarks naïve', 'El modelo debe ganarse su sitio.', [
+          'Módulo «Precisión real» → bloque de benchmarks.',
+          'El modelo debe superar a «seguir el gap» y a «siempre alcista» con n≥25.',
+          'Si no los bate, exporta el CSV y tráemelo: ajustamos pesos/features con datos, no a ojo.'
+        ]],
+        ['g6', 'Mensual: copias de seguridad', 'El histórico local vive en el navegador: expórtalo.', [
+          'Botón «⬇ CSV» (histórico de predicciones) y «⬇ Dataset» (features completas) → guárdalos.',
+          'El history.json del worker ya queda versionado en git: es tu segunda copia automática.',
+          'Nunca borres «datos de sitios» del navegador sin haber exportado antes.'
+        ]],
+        ['g7', 'Tras cada mejora del dashboard: re-subir al MISMO repo', 'Así se despliegan los cableados sin perder nada.', [
+          'Cuando hagamos aquí una mejora o cableado, descarga el nuevo export/github-pages/index.html (y support.js solo si te lo indico).',
+          'Repo de Pages → «Add file» → «Upload files» → arrastra el archivo (mismo nombre = se sobrescribe) → «Commit changes».',
+          'Espera ~1 min y recarga la web pública con Ctrl+Mayús+R (recarga forzada).',
+          'Keys, histórico, ML y este checklist siguen intactos: viven en tu navegador, no en el repo.'
+        ]]
+      ]],
+      ['H · Auto-trading — los 3 ejecutores (SIEMPRE demo primero)', '#fb7185', 'Bots que leen la señal congelada y operan solos con TP/SL, salida 10:30, límites duros y kill-switch. Todo está en la carpeta autotrade/ del proyecto (README incluido). Regla de oro: enabled=false por defecto; nada opera hasta que TÚ lo actives, y solo tras ≥40–60 señales reales validadas + 4–6 semanas en demo.', [
+        ['h1', 'Preparar la configuración común (trade-config.json)', 'Un solo archivo de riesgo para los 3 ejecutores.', [
+          'Copia autotrade/trade-config.json a la RAÍZ del repo dax-worker (junto a capture.mjs y config.json) → Commit.',
+          'Ajusta: capitalEur, riskPctPorOperacion (1 %), umbralProbabilidad, spreadPts de tu broker, maxDailyLossEur y maxWeeklyLossEur.',
+          'Deja "enabled": false y "demo": true por ahora: los bots evaluarán y dirán qué HARÍAN sin operar.',
+          'Kill-switch de emergencia adicional: crear un archivo llamado STOP-TRADING en la raíz del repo detiene los 3 al instante.'
+        ]],
+        ['h2', 'Ejecutor IG en GitHub Actions (opera con el PC apagado)', 'CFD Germany 40, cuenta DEMO idéntica a la real.', [
+          'Sube autotrade/ig-trader.mjs a la raíz de dax-worker y autotrade/ig-trader.yml a .github/workflows/.',
+          'Repo → Settings → Secrets and variables → Actions → «New repository secret» ×4: IG_API_KEY, IG_USERNAME, IG_PASSWORD, IG_ENV = DEMO.',
+          'Cambia "enabled": true en trade-config.json → Commit.',
+          'Prueba: Actions → dax-ig-trader → Run workflow. Fuera de ventana responde «nada que hacer» (correcto).',
+          'Ciclo automático: 9:05 evalúa/abre · 10:31 cierra por tiempo o reconcilia TP/SL · registro en trades-ig.json (committeado).',
+          'Verifica la primera mañana: en el log de Actions debe aparecer «ABRE …» con TP/SL o «NO OPERA · motivo exacto».'
+        ]],
+        ['h3', 'Ejecutor IBKR con el gateway local (futuro Micro-DAX, 1 €/pt)', 'El más robusto; usa la cuenta PAPER de IBKR primero.', [
+          'Requisitos previos: fase D4 (suscripción Eurex) y D5 (gateway con login) en verde. Para paper: login del gateway con el usuario paper.',
+          'En tu PC: clona el repo dax-worker y copia dentro autotrade/ibkr-trader.mjs.',
+          'Ejecuta: node ibkr-trader.mjs find → localiza el Micro-DAX (FDXS, multiplicador 1) del vencimiento más cercano → pega su conid en trade-config.json → ibkr.conid.',
+          'node ibkr-trader.mjs status → debe mostrar señal, puertas y «gateway OK».',
+          'Cada mañana operativa: git pull (para el history.json fresco) y node ibkr-trader.mjs wait desde ~8:50 — abre a las 9:05 si procede y cierra a las 10:30.',
+          'Nota de tamaño: 1 contrato ≈ 1 €/pt → SL de 60 pts = ~60 € de riesgo; el bot no abre si supera tu presupuesto.'
+        ]],
+        ['h4', 'Ejecutor MetaTrader 5 (EA) — para cualquier broker con DE40', 'El clásico: EA en un VPS de ~5 €/mes = 24/7 real.', [
+          'Abre una cuenta DEMO en un broker MT5 con el índice DE40/GER40.',
+          'MT5 → Archivo → Abrir carpeta de datos → MQL5/Experts → copia autotrade/DaxOpeningTrader.mq5 → MetaEditor → Compilar (0 errores).',
+          'Herramientas → Opciones → Asesores Expertos → «Permitir WebRequest para las URL» → añade https://raw.githubusercontent.com y https://nfs.faireconomy.media.',
+          'Arrastra el EA al gráfico DE40 y configura los inputs: URLs RAW de tu history.json y config.json, riesgo, umbral, límite diario y InpBrokerMinusBerlin (60 si tu broker va en EET; compara el reloj del terminal con Berlín).',
+          'Pon InpEnabled = true (en demo) y deja el terminal abierto: opera 9:05–9:20, TP/SL nativos, cierre 10:30, bloqueo por pérdida diaria.',
+          'Para no depender de tu PC: VPS integrado de MT5 (~15 $/mes) o VPS Windows (~5 €/mes) con el terminal abierto.'
+        ]],
+        ['h5', 'Validación en demo antes de un solo euro real', 'El aval son datos, no el backtest sintético.', [
+          'Deja el/los ejecutores en DEMO 4–6 semanas completas sin tocar nada.',
+          'Cruza cada viernes trades-ig.json / el historial MT5 con el módulo «Precisión real» del dashboard: acierto, EV realizado tras spread, y comparación con los benchmarks naïve.',
+          'Requisito mínimo para plantear real: ≥40–60 señales reales cerradas, acierto sostenido ≥55 % en p≥umbral, EV medio positivo tras costes y sin drawdown anómalo en demo.',
+          'Si algo no cuadra, tráeme el CSV del dataset y lo diagnosticamos antes de seguir.'
+        ]],
+        ['h6', 'Paso a real — tamaño mínimo y límites a la mitad', 'La transición más conservadora posible.', [
+          'IG: cambia el secret IG_ENV a REAL (con la API key de la cuenta real) · IBKR: login del gateway con la cuenta real · MT5: cuenta real del broker.',
+          'Activa SOLO UNA plataforma con dinero real (los límites son por plataforma, no globales).',
+          'Empieza con maxEurPerPoint: 1 (IG/MT5) o 1 contrato micro (IBKR) y maxDailyLossEur a la mitad de lo que tolerarías.',
+          'Primer mes en real: revisa a diario; ante cualquier comportamiento raro, crea STOP-TRADING en el repo (para todo al instante) y cuéntamelo.',
+          'Sube tamaño solo tras un mes real coherente con la demo — y nunca por encima del 1 % de riesgo por operación.'
+        ]]
+      ]]
+    ];
+  }
+  renderVals() {
+    const done = this.state.done || {};
+    const onToggle = e => {
+      const k = e.currentTarget.dataset.k;
+      this.setState(s => {
+        const nd = Object.assign({}, s.done, { [k]: !s.done[k] });
+        try { localStorage.setItem(this.KEY, JSON.stringify(nd)); } catch (e2) { }
+        return { done: nd };
+      });
+    };
+    let total = 0, dn = 0;
+    const sections = this.DEFS.map(sd => {
+      let secDone = 0;
+      const items = sd[3].map(it => {
+        const on = !!done[it[0]];
+        total++; if (on) { dn++; secDone++; }
+        return {
+          k: it[0], t: it[1], d: on ? 'Completado — pulsa para reabrir los pasos.' : it[2],
+          open: !on,
+          steps: (it[3] || []).map((t9, i9) => ({ n: String(i9 + 1), t: t9 })),
+          numCol: '#7dd3fc',
+          mark: on ? '✓' : '',
+          boxBord: on ? '#34d399' : '#475569', boxBg: on ? '#34d399' : 'transparent',
+          bg: on ? 'rgba(52,211,153,0.06)' : 'rgba(2,6,23,0.5)',
+          bord: on ? 'rgba(52,211,153,0.3)' : '#0f172a',
+          tCol: on ? '#6ee7b7' : '#e2e8f0'
+        };
+      });
+      return { title: sd[0], col: sd[1], sub: sd[2] || '', items, n: String(sd[3].length), done: String(secDone) };
+    });
+    const pct = total ? dn / total * 100 : 0;
+    return {
+      sections, onToggle,
+      doneN: String(dn), totalN: String(total),
+      pctW: pct.toFixed(1),
+      pctCol: pct >= 100 ? '#34d399' : pct >= 50 ? '#fbbf24' : '#e2e8f0'
+    };
+  }
+}
+</script>
+</body>
+</html>

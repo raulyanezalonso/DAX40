@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  html, body { margin: 0; padding: 0; }
+  doc-page:not(:defined) { visibility: hidden; }
+  a { color: #0369a1; text-decoration: none; }
+  a:hover { color: #0284c7; text-decoration: underline; }
+  .keep { break-inside: avoid; orphans: 3; widows: 3; }
+</style>
+</helmet>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" size="a4" orientation="portrait" margin="0.8in" hint-size="100%,1400px">
+
+<div style="font-family:'Archivo',system-ui,sans-serif;color:#1a2333;font-size:14px;line-height:1.62">
+
+<h1 style="margin:0 0 4px;font-size:27px;font-weight:800;line-height:1.2;color:#0f172a">Plan de mejora · DAX Opening Trader</h1>
+<p style="margin:0 0 6px;font-size:14.5px;color:#475569">Auditoría técnica del sistema actual y hoja de ruta para elevar la fiabilidad de la predicción 9:00–10:30 CET</p>
+<p style="margin:0 0 22px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#64748b">14/07/2026 · v1 · Análisis sobre: ensemble 3 modelos · 19 bloques · ~200 factores · registro señal→resultado</p>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">1 · Resumen ejecutivo</h2>
+<p style="margin:0 0 10px">El sistema ya hace lo difícil: encadena EE. UU. → Asia → DAX con un ensemble (bloques heurísticos 55 %, bottom-up de las 40 empresas 15 %, regresión intradía 90 min 30 %), calibra contra histórico (OLS 2 años para el gap, OLS 60 días para la ventana) y —lo más valioso— registra cada predicción contra el resultado real. Su techo actual no está en añadir más indicadores, sino en <strong>tres cuellos de botella</strong>:</p>
+<ol style="margin:0 0 12px;padding-left:22px">
+  <li style="margin-bottom:5px"><strong>Datos con 15 minutos de retardo y sin futuro DAX real.</strong> El gap implícito es la variable más importante del modelo y hoy se estima; entre las 8:00 y las 9:00 ese error de estimación domina el error total de μ.</li>
+  <li style="margin-bottom:5px"><strong>Muestra propia insuficiente.</strong> Con 1 señal cerrada en el registro, toda la calibración de probabilidad descansa en datos sintéticos e históricos genéricos. Sin 40–60 sesiones propias no se puede afirmar (ni mejorar) la fiabilidad real.</li>
+  <li style="margin-bottom:5px"><strong>Pesos declarados a mano.</strong> Los pesos de bloques, hemisferios y heurísticas son razonables pero no están aprendidos ni validados fuera de muestra: es la principal fuente de sobreconfianza silenciosa.</li>
+</ol>
+<div class="keep" style="background:#f1f5f9;border:1px solid #cbd5e1;border-left:3px solid #0369a1;border-radius:8px;padding:11px 14px;margin:0 0 14px">
+  <p style="margin:0;font-size:13.5px"><strong>Tesis del plan:</strong> la precisión no se compra con más factores, se construye con (a) mejor dato de entrada en la hora crítica, (b) un dataset propio que crece cada día y (c) calibración estadística disciplinada sobre ese dataset. Objetivo realista a 3 meses: acierto direccional sostenido del 55–58 % en señales operables (p ≥ umbral) con EV positivo tras fricciones — cualquier promesa de «precisión casi total» en 90 minutos de mercado es matemáticamente insostenible y debe desconfiarse de ella.</p>
+</div>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">2 · Diagnóstico por capas</h2>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px">
+  <thead>
+    <tr style="background:#0f172a;color:#f8fafc">
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Capa</th>
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Qué hay hoy</th>
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Limitación técnica</th>
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Impacto en precisión</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Datos de mercado</td><td style="padding:7px 9px">121 símbolos vía fuentes gratuitas (proxies en cascada), ~15 min de retardo</td><td style="padding:7px 9px">Sin FDAX real; el gap se infiere con β; retardo máximo justo en la ventana 8:45–9:15; proxies caen a veces</td><td style="padding:7px 9px;font-weight:700;color:#b91c1c">ALTO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Modelo de gap (2A)</td><td style="padding:7px 9px">OLS 10 regresores, 2 años diarios, R² visible</td><td style="padding:7px 9px">Sin regularización ni estandarización; colinealidad SPX↔ES; β estáticas (un solo régimen); sin términos no lineales</td><td style="padding:7px 9px;font-weight:700;color:#b45309">MEDIO-ALTO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Modelo 90 min</td><td style="padding:7px 9px">OLS 5 regresores sobre 60 días de 15 min</td><td style="padding:7px 9px">n≈40 sesiones útiles para 5 parámetros → varianza alta; la fuente no permite más de 60 días: el techo lo pone el dato, no el método</td><td style="padding:7px 9px;font-weight:700;color:#b45309">MEDIO-ALTO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Ensemble</td><td style="padding:7px 9px">0,55 / 0,15 / 0,30 fijos</td><td style="padding:7px 9px">Pesos no aprendidos ni walk-forward; el bottom-up comparte insumos con los bloques (doble conteo parcial)</td><td style="padding:7px 9px;font-weight:700;color:#b45309">MEDIO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Probabilidad</td><td style="padding:7px 9px">p = logística(1,15·μ/σ), acotada 15–85 %, corrección de pendiente con el registro</td><td style="padding:7px 9px">Transformación ad hoc de 1 parámetro; sin intercepto (sesgo no corregible); σ semiheurística; sin bandas de confianza</td><td style="padding:7px 9px;font-weight:700;color:#b45309">MEDIO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Sentimiento / psicología</td><td style="padding:7px 9px">GDELT + geopolítica + VIX + lóbulo contrario (cerebro) con pesos por régimen</td><td style="padding:7px 9px">Patrones contrarios definidos por reglas, nunca contrastados contra outcomes propios; tono GDELT ruidoso intradía</td><td style="padding:7px 9px;font-weight:700;color:#b45309">MEDIO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Evaluación</td><td style="padding:7px 9px">Registro señal→resultado, Brier, buckets de calibración, backtest sintético</td><td style="padding:7px 9px">n=1 señal cerrada; backtest es sintético (valida coherencia, no rentabilidad); sin benchmarks naïve de control</td><td style="padding:7px 9px;font-weight:700;color:#b91c1c">ALTO</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:7px 9px;font-weight:700">Ejecución</td><td style="padding:7px 9px">Plan entrada/objetivo/stop, EV tras spread fijo, tamaño por riesgo</td><td style="padding:7px 9px">Spread constante (2 pts) irrealista en la subasta; sin modelo de slippage; stop/target no validados walk-forward</td><td style="padding:7px 9px;font-weight:700;color:#15803d">BAJO-MEDIO</td></tr>
+  </tbody>
+</table>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">3 · Dónde se pierde precisión hoy (ranking de error)</h2>
+<p style="margin:0 0 8px">Descomposición cualitativa del error de μ en la ventana, ordenada de mayor a menor (estimaciones, a validar con el dataset propio de la Fase 2):</p>
+<ol style="margin:0 0 14px;padding-left:22px">
+  <li style="margin-bottom:4px"><strong>Gap implícito vs. gap real</strong> — estimar la apertura sin el futuro DAX introduce un error típico de 0,15–0,35 pp que contamina todos los términos que dependen del gap. <em>Se elimina casi entero con FDAX en vivo (Fase 1).</em></li>
+  <li style="margin-bottom:4px"><strong>Varianza del modelo 90 min</strong> — 5 β con ~40 observaciones; cada recalibración mueve μ. <em>Se mitiga acumulando dataset propio y con ridge (Fases 2–3).</em></li>
+  <li style="margin-bottom:4px"><strong>Pesos heurísticos fijos</strong> — bloques y hemisferios suman opiniones no contrastadas. <em>Se sustituyen por pesos aprendidos cuando n≥60 (Fase 3/5).</em></li>
+  <li style="margin-bottom:4px"><strong>σ heurística</strong> — la probabilidad es tan buena como su σ; hoy mezcla VIX y vol realizada con factores fijos. <em>EWMA de la propia ventana + término de evento (Fase 3).</em></li>
+  <li style="margin-bottom:4px"><strong>Ruido de sentimiento</strong> — GDELT aporta señal real pero con retardo/ruido; sin contraste propio puede restar. <em>Se cuantifica en la Fase 5 y se poda lo que no predice.</em></li>
+</ol>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">4 · Plan por fases</h2>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 10px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 0 · YA EN MARCHA — DISCIPLINA DE MEDICIÓN (semanas 1–8, coste 0)</p>
+  <p style="margin:0 0 6px"><strong>Objetivo:</strong> 40 señales cerradas sin huecos ni sesgo de selección. Es el prerrequisito de todo lo demás: sin muestra propia no hay calibración legítima.</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px">Pestaña abierta 8:25–9:00 (captura) y a partir de 10:35 (cierre), o «Cerrar pendientes» al día siguiente. Registrar TODAS las mañanas, también las de señal débil — si solo se registran las convincentes, el acierto medido queda inflado.</li>
+    <li style="margin-bottom:3px">Exportar el CSV cada viernes (copia de seguridad fuera del navegador).</li>
+    <li><strong>KPI de éxito:</strong> n≥40, cero días laborables sin fila, Brier y MAE publicados en el módulo.</li>
+  </ul>
+</div>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 10px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 1 · DATOS EN LA HORA CRÍTICA (semanas 1–2 · máximo impacto por euro)</p>
+  <p style="margin:0 0 6px"><strong>Objetivo:</strong> eliminar el error del gap implícito y el retardo de 15 min entre 8:00 y 10:30.</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px"><strong>Futuro DAX real (FDAX/mini-DAX):</strong> conexión IG en cuenta DEMO (ya cableada en la pestaña Conexiones) → el gap pasa de estimado a observado. Es la mejora individual más grande del plan.</li>
+    <li style="margin-bottom:3px"><strong>Cotizaciones sin retardo</strong> para ES/NQ, EUR/USD y VIX (Twelve Data o Finnhub, tier gratuito) en la franja 8:00–10:30; el resto del día pueden seguir las fuentes gratuitas.</li>
+    <li style="margin-bottom:3px"><strong>Panel de salud del dato:</strong> edad de cada fuente y aviso si la señal de las 8:45 se está formando con datos viejos (hoy puede pasar en silencio).</li>
+    <li><strong>KPI:</strong> |gap implícito − gap real| medido a diario; objetivo &lt; 0,10 pp de mediana. Si tras 20 sesiones el implícito ya clava el real, el coste de IG se puede reevaluar.</li>
+  </ul>
+</div>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 10px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 2 · DATASET PROPIO ACUMULATIVO (semana 2 · la palanca compuesta)</p>
+  <p style="margin:0 0 6px"><strong>Objetivo:</strong> que cada mañana quede grabado el vector completo de entrada junto al resultado — hoy solo se guardan μ, p y el outcome; se pierde la atribución.</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px">Extender el registro para adjuntar a cada señal el <strong>snapshot de los 19 bloques + activaciones de los 12 lóbulos del cerebro + gap/σ/vol/tono</strong> (~45 números por día). En 3 meses: dataset propio de ~60 filas ricas, imposible de comprar.</li>
+    <li style="margin-bottom:3px">Export «dataset completo» (CSV ancho) además del CSV de resultados.</li>
+    <li style="margin-bottom:3px">Post-mortem automático: al cerrar cada señal, guardar qué bloques empujaron en la dirección correcta y cuáles no — alimenta el ranking de fiabilidad por factor.</li>
+    <li><strong>KPI:</strong> 100 % de señales con snapshot; primer informe de atribución a las 30 sesiones.</li>
+  </ul>
+</div>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 10px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 3 · ENDURECER EL MODELO (semanas 3–5)</p>
+  <p style="margin:0 0 6px"><strong>Objetivo:</strong> menos varianza y mejores β sin cambiar la arquitectura.</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px"><strong>Ridge (λ·I) + estandarización</strong> en ambas OLS — una línea en el solver actual; corta la colinealidad SPX↔ES y estabiliza las recalibraciones.</li>
+    <li style="margin-bottom:3px"><strong>No linealidad barata:</strong> añadir |gap| y gap² (captura la asimetría momentum/reversión que hoy es una regla fija) e interacción gap×vol.</li>
+    <li style="margin-bottom:3px"><strong>Dos regímenes:</strong> β separadas para vol&lt;20 / vol≥20 cuando el dataset propio llegue a n≥60; hasta entonces, el ajuste por régimen actual (peso del sentimiento) se mantiene.</li>
+    <li style="margin-bottom:3px"><strong>σ honesta:</strong> EWMA (λ≈0,94) de los movimientos reales 9:00–10:30 del propio registro + recargo por evento de agenda, en lugar de la mezcla heurística actual.</li>
+    <li style="margin-bottom:3px"><strong>Pesos del ensemble por validación:</strong> walk-forward mensual (entrena 40, prueba 20) para elegir 0,55/0,15/0,30 con evidencia; congelados entre revisiones.</li>
+    <li><strong>KPI:</strong> MAE fuera de muestra ≤ MAE actual −10 %; estabilidad de β entre recalibraciones (Δ&lt;20 %).</li>
+  </ul>
+</div>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 10px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 4 · PROBABILIDAD DE VERDAD (semanas 5–8, tras n≥40)</p>
+  <p style="margin:0 0 6px"><strong>Objetivo:</strong> que «p = 62 %» signifique que el 62 % de esas señales aciertan — calibración, no adorno.</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px"><strong>Platt scaling completo</strong> (pendiente + intercepto) sobre el registro con n≥40; sustituye la corrección de 1 parámetro actual. Con n≥150, regresión isotónica.</li>
+    <li style="margin-bottom:3px"><strong>Bandas p50/p80</strong> del movimiento esperado en vez de σ única — el plan de trading pasa a «objetivo dentro de la banda p50».</li>
+    <li style="margin-bottom:3px"><strong>Tamaño por Kelly fraccional (¼ Kelly)</strong> usando la p calibrada — hoy el tamaño es por riesgo fijo; Kelly fraccional liga tamaño y ventaja real.</li>
+    <li><strong>KPI:</strong> Brier ≤ 0,23 sostenido; curva de calibración con pendiente 0,9–1,1.</li>
+  </ul>
+</div>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 10px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 5 · SENTIMIENTO CUANTIFICADO (semanas 6–10)</p>
+  <p style="margin:0 0 6px"><strong>Objetivo:</strong> pasar la psicología de reglas declaradas a patrones con evidencia propia.</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px">Con el snapshot de la Fase 2, medir el acierto condicional de cada patrón contrario (distribución encubierta, muro de preocupación, complacencia…): ¿qué pasó de verdad los días que se activó?</li>
+    <li style="margin-bottom:3px">Regresión logística de los outcomes sobre las activaciones de lóbulos → pesos de hemisferio aprendidos; podar sin piedad los patrones que no aporten (esperable: 2–3 de los 6 sobreviven).</li>
+    <li style="margin-bottom:3px">Añadir 2 fuentes de posicionamiento baratas: ratio put/call (CBOE, diario) y el COT semanal de futuros europeos — posicionamiento real de grandes vs. pequeños, el dato que hoy falta para la «psicología de los grandes».</li>
+    <li><strong>KPI:</strong> cada patrón activo con n≥10 activaciones y acierto condicional publicado; los podados quedan visibles pero sin peso.</li>
+  </ul>
+</div>
+
+<div class="keep" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px 14px;margin:0 0 14px">
+  <p style="margin:0 0 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#0369a1">FASE 6 · VALIDACIÓN Y GOBERNANZA (continuo desde semana 6)</p>
+  <ul style="margin:0;padding-left:20px">
+    <li style="margin-bottom:3px"><strong>Benchmarks naïve obligatorios:</strong> «seguir el gap», «seguir el S&amp;P de ayer» y «siempre alcista». Si el modelo no bate a los tres fuera de muestra, no hay ventaja — mejor saberlo pronto.</li>
+    <li style="margin-bottom:3px"><strong>Walk-forward mensual</strong> con informe fijo: acierto por régimen, por día de semana, por tramo de p; el backtest sintético queda degradado a control de coherencia, nunca a promesa.</li>
+    <li style="margin-bottom:3px"><strong>Regla anti-sobreajuste:</strong> ningún peso se toca a mano sin 30 sesiones de evidencia en contra; cada cambio de modelo se anota (changelog) para poder atribuir mejoras/empeoramientos.</li>
+    <li><strong>KPI:</strong> ventaja sobre el mejor naïve ≥ +4 pp de acierto en señales operables, sostenida 2 meses.</li>
+  </ul>
+</div>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">5 · Mejoras del dashboard (ingeniería y UX)</h2>
+<ul style="margin:0 0 14px;padding-left:20px">
+  <li style="margin-bottom:4px"><strong>Aviso de captura 8:20:</strong> notificación del navegador para no perder la ventana de congelación — el histórico solo vale si no tiene huecos.</li>
+  <li style="margin-bottom:4px"><strong>Salud de datos visible:</strong> edad por fuente junto a la señal; si μ se calculó con datos &gt;5 min viejos en la franja crítica, marcarlo en la propia señal y en el registro.</li>
+  <li style="margin-bottom:4px"><strong>Atribución en el histórico:</strong> al abrir una fila, ver el snapshot de bloques de aquel día y qué acertó/falló (post-mortem de un clic).</li>
+  <li style="margin-bottom:4px"><strong>Curva de calibración gráfica</strong> (prometido vs. observado con intervalos) en el módulo de precisión, sustituyendo a los buckets de texto cuando n≥40.</li>
+  <li style="margin-bottom:4px"><strong>Acierto por contexto:</strong> desglose del hit-rate por régimen de vol, día de semana y tamaño de gap — dónde gana y dónde pierde el sistema.</li>
+  <li style="margin-bottom:4px"><strong>Cerebro:</strong> mostrar en cada lóbulo su acierto condicional histórico (Fase 5) en vez de solo el peso declarado; el peso visible pasa a ser el aprendido.</li>
+</ul>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">6 · Qué NO hacer</h2>
+<ul style="margin:0 0 14px;padding-left:20px">
+  <li style="margin-bottom:4px"><strong>No añadir más indicadores</strong> hasta que los actuales tengan atribución medida: cada factor nuevo sin evidencia es varianza gratis y precisión de menos.</li>
+  <li style="margin-bottom:4px"><strong>No retocar pesos a mano</strong> tras una mala racha — es la forma más rápida de destruir un sistema medible.</li>
+  <li style="margin-bottom:4px"><strong>No leer el backtest sintético como rentabilidad esperada</strong>: valida coherencia interna, nada más.</li>
+  <li style="margin-bottom:4px"><strong>No operar la señal sin p ≥ umbral y EV &gt; 0</strong> «porque hoy lo veo claro»: el registro demostrará que ese impulso es exactamente el que hay que suprimir.</li>
+  <li><strong>No perseguir la «precisión casi total»</strong>: el mercado en 90 minutos tiene un suelo de ruido irreducible; la ventaja rentable vive en el 55–60 % bien calibrado con gestión de riesgo, no en el 90 %.</li>
+</ul>
+
+<h2 style="margin:0 0 8px;font-size:17px;font-weight:800;color:#0f172a;border-bottom:2px solid #0f172a;padding-bottom:4px">7 · Calendario y criterios go/no-go</h2>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 12px">
+  <thead>
+    <tr style="background:#0f172a;color:#f8fafc">
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Semana</th>
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Hito</th>
+      <th style="text-align:left;padding:7px 9px;font-weight:700">Criterio go/no-go</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 9px;font-family:'IBM Plex Mono',monospace">1–2</td><td style="padding:6px 9px">IG demo + tiempo real en franja crítica; panel salud de datos; registro diario sin huecos</td><td style="padding:6px 9px">Gap real capturado ≥ 8/10 sesiones</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 9px;font-family:'IBM Plex Mono',monospace">2–3</td><td style="padding:6px 9px">Snapshot completo por señal + export dataset</td><td style="padding:6px 9px">100 % señales con vector completo</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 9px;font-family:'IBM Plex Mono',monospace">3–5</td><td style="padding:6px 9px">Ridge + estandarización + |gap|, gap², gap×vol; σ EWMA</td><td style="padding:6px 9px">MAE out-of-sample mejora ≥ 10 %</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 9px;font-family:'IBM Plex Mono',monospace">5–8</td><td style="padding:6px 9px">n≥40 → Platt completo, bandas p50/p80, ¼ Kelly</td><td style="padding:6px 9px">Brier ≤ 0,23; pendiente calibración 0,9–1,1</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 9px;font-family:'IBM Plex Mono',monospace">6–10</td><td style="padding:6px 9px">Atribución de lóbulos + put/call + COT; poda de patrones</td><td style="padding:6px 9px">Cada patrón con acierto condicional publicado</td></tr>
+    <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 9px;font-family:'IBM Plex Mono',monospace">8+</td><td style="padding:6px 9px">Walk-forward mensual contra benchmarks naïve</td><td style="padding:6px 9px">+4 pp sobre mejor naïve, 2 meses seguidos → sistema validado</td></tr>
+  </tbody>
+</table>
+
+<p style="margin:0;font-size:12.5px;color:#475569;border-top:1px solid #cbd5e1;padding-top:10px">Conclusión del analista: el sistema tiene la arquitectura correcta y el activo más raro (un registro honesto predicción→realidad). El orden importa: primero el dato de la hora crítica, después el dataset propio, después la estadística. Ejecutado así, el salto de fiabilidad no vendrá de un truco, sino de que cada componente pase de «razonable» a «medido». Puedo implementar las fases directamente en el dashboard cuando lo pidas — la 1 y la 2 son las de mayor retorno inmediato.</p>
+
+</div>
+</x-import>
+</x-dc>
+</body>
+</html>

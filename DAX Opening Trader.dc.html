@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #020617; color: #e2e8f0; font-family: 'Archivo', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #38bdf8; text-decoration: none; }
+  a:hover { color: #7dd3fc; text-decoration: underline; }
+  @keyframes ot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  button { font-family: 'Archivo', system-ui, sans-serif; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+  input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; height: 20px; width: 100%; margin: 0; padding: 0; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: #1e293b; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: #38bdf8; margin-top: -5px; border: 2px solid #0f172a; box-shadow: 0 0 0 1px #38bdf8; }
+  input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: #1e293b; }
+  input[type="range"]::-moz-range-thumb { height: 14px; width: 14px; border: none; border-radius: 50%; background: #38bdf8; }
+  input[type="text"] { font-family: 'IBM Plex Mono', monospace; }
+  #ot-grid { display: grid; grid-template-columns: minmax(280px, 27fr) minmax(0, 43fr) minmax(300px, 30fr); gap: 14px; align-items: start; }
+  #ot-col-left, #ot-col-mid, #ot-col-right { display: grid; gap: 14px; align-content: start; min-width: 0; }
+  @media (max-width: 1360px) {
+    #ot-grid { grid-template-columns: minmax(270px, 32fr) minmax(0, 68fr); }
+    #ot-col-right { grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  }
+  @media (max-width: 940px) {
+    #ot-grid { grid-template-columns: 1fr; }
+    #ot-col-right { grid-template-columns: 1fr; }
+  }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#020617">
+
+  <sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:fixed;top:14px;right:14px;z-index:80;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px 14px;font-size:12.5px;color:#e2e8f0;box-shadow:0 12px 32px rgba(2,6,23,0.7);display:flex;align-items:center;gap:8px;max-width:340px">
+      <span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;flex-shrink:0"></span>
+      <span>{{ toastMsg }}</span>
+    </div>
+  </sc-if>
+
+  <!-- ============ HEADER ============ -->
+  <header data-screen-label="Cabecera" style="position:sticky;top:0;z-index:40;background:rgba(2,6,23,0.94);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b">
+    <div style="max-width:1760px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <div style="width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#0ea5e9 0%,#0f172a 130%);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:12px;color:#f8fafc;flex-shrink:0">OT</div>
+        <div style="min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <h1 style="margin:0;font-size:16px;font-weight:800;color:#f8fafc;white-space:nowrap">DAX Opening Trader</h1>
+            <span style="font-size:9.5px;font-weight:700;letter-spacing:0.08em;padding:2px 7px;border-radius:4px;background:rgba(56,189,248,0.12);color:#7dd3fc;border:1px solid rgba(56,189,248,0.35);font-family:'IBM Plex Mono',monospace">CFD GERMANY 40 · IG / SAXO</span>
+          </div>
+          <p style="margin:1px 0 0;font-size:11px;color:#64748b">Ventana operativa 9:00–10:30 CET · Objetivo diario 0,5 %–1 % · <a href="DAX 40 Predictive Intelligence.dc.html">Análisis multi-factor →</a></p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:9px;padding:5px 12px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:700;color:#f8fafc">{{ clockStr }}</span>
+          <span style="font-size:9.5px;color:#64748b;font-weight:700">CET<br>BERLÍN</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:{{ phaseBg }};border:1px solid {{ phaseBord }}">
+          <span style="width:7px;height:7px;border-radius:50%;background:{{ phaseCol }};animation:ot-pulse 2.2s ease-in-out infinite"></span>
+          <div>
+            <div style="font-size:10.5px;font-weight:800;letter-spacing:0.06em;color:{{ phaseCol }}">{{ phaseLabel }}</div>
+            <div style="font-size:9.5px;color:#94a3b8;font-family:'IBM Plex Mono',monospace">{{ countLabel }} {{ countVal }}</div>
+          </div>
+        </div>
+        <div title="Estado de las fuentes de datos" style="display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700">
+          <span style="color:{{ fxBadgeCol }}">FX {{ fxBadge }}</span>
+          <span style="color:#334155">|</span>
+          <span style="color:{{ newsBadgeCol }}">NEWS {{ newsBadge }}</span>
+          <span style="color:#334155">|</span>
+          <span style="color:#fbbf24">ÍNDICES MANUAL</span>
+        </div>
+        <button onClick="{{ onResetAll }}" style="padding:7px 13px;border-radius:8px;border:1px solid rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);color:#7dd3fc;font-size:11.5px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="background:rgba(56,189,248,0.2)">↺ Reset sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <div style="max-width:1760px;margin:0 auto;padding:14px 18px 30px;display:grid;gap:14px">
+
+    <!-- ============ HERO: SIGNAL / PLAN / OPENING ============ -->
+    <div data-screen-label="Señal de apertura" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px">
+
+      <!-- SIGNAL -->
+      <section style="background:{{ sigCardBg }};border:1px solid {{ sigCardBord }};border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;transition:all 0.3s">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#94a3b8;font-weight:700">Señal primera 1,5 h</h2>
+          <span style="font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(2,6,23,0.5);color:#94a3b8;font-family:'IBM Plex Mono',monospace">{{ sigValidity }}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span style="font-size:38px;font-weight:800;letter-spacing:0.01em;color:{{ sigCol }};line-height:1">{{ sigArrow }} {{ sigLabel }}</span>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:700;color:{{ sigCol }};line-height:1.1">{{ sigProb }} %</div>
+            <div style="font-size:10.5px;color:#94a3b8">probabilidad estimada</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px">
+          <span style="color:#94a3b8">Mov. esperado <span style="color:{{ sigCol }};font-weight:700">{{ sigMu }}</span></span>
+          <span style="color:#94a3b8">Convicción <span style="color:{{ sigConvCol }};font-weight:700">{{ sigConv }}</span></span>
+        </div>
+        <p style="margin:0;font-size:12px;line-height:1.5;color:#cbd5e1">{{ sigReason }}</p>
+        <p style="margin:0;font-size:10.5px;color:{{ sigPhaseNoteCol }}">{{ sigPhaseNote }}</p>
+        <div style="border-top:1px solid rgba(148,163,184,0.15);padding-top:9px;display:grid;gap:4px">
+          <sc-for list="{{ gates }}" as="g" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:7px;font-size:10.5px">
+              <span style="width:14px;height:14px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;background:{{ g.bg }};color:{{ g.col }};flex-shrink:0">{{ g.mark }}</span>
+              <span style="color:#94a3b8;flex:1">{{ g.label }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:{{ g.col }}">{{ g.note }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <!-- TRADE PLAN -->
+      <section data-screen-label="Plan de trade" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:18px">
+        <h2 style="margin:0 0 11px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Plan de trade · CFD</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+            <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">ENTRADA (CFD ACTUAL)</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:#f8fafc">{{ planEntry }}</div>
+          </div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+            <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">OBJETIVO</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:#34d399">{{ planTarget }}</div>
+            <div style="font-size:9.5px;color:#94a3b8;font-family:'IBM Plex Mono',monospace">{{ planTargetPts }}</div>
+          </div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+            <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">STOP</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:#f43f5e">{{ planStop }}</div>
+            <div style="font-size:9.5px;color:#94a3b8;font-family:'IBM Plex Mono',monospace">{{ planStopPts }}</div>
+          </div>
+          <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+            <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">RATIO R/R · EV NETO</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:{{ planEvCol }}">{{ planRR }} · {{ planEv }}</div>
+            <div style="font-size:9.5px;color:#94a3b8">incluye spread {{ spreadStr }} pts</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <label for="ot-cap" style="font-size:10.5px;color:#94a3b8">Capital €</label>
+          <input id="ot-cap" type="text" inputmode="decimal" value="{{ capital }}" onChange="{{ onCapital }}" style="width:86px;padding:5px 8px;border-radius:7px;border:1px solid #334155;background:#0b1224;color:#f8fafc;font-size:12px">
+          <label for="ot-risk" style="font-size:10.5px;color:#94a3b8">Riesgo %</label>
+          <input id="ot-risk" type="text" inputmode="decimal" value="{{ riskPct }}" onChange="{{ onRisk }}" style="width:52px;padding:5px 8px;border-radius:7px;border:1px solid #334155;background:#0b1224;color:#f8fafc;font-size:12px">
+          <span style="font-size:11px;color:#e2e8f0;font-family:'IBM Plex Mono',monospace;font-weight:700">→ {{ planSize }}</span>
+        </div>
+        <p style="margin:9px 0 0;font-size:10px;color:#64748b">Salida por tiempo: 10:30 CET si no se alcanza objetivo ni stop. Riesgo máx. por operación: {{ planRiskEur }}.</p>
+      </section>
+
+      <!-- OPENING / GAP -->
+      <section data-screen-label="Apertura y gap" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:16px;padding:18px">
+        <h2 style="margin:0 0 11px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Apertura esperada · Gap</h2>
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:700;color:{{ gapCol }}">{{ gapStr }}</span>
+          <span style="font-size:11px;color:#94a3b8">{{ gapPts }} pts vs. cierre Xetra</span>
+        </div>
+        <p style="margin:7px 0 12px;font-size:11px;line-height:1.5;color:#cbd5e1">{{ gapNote }}</p>
+        <div style="display:grid;gap:7px">
+          <sc-for list="{{ scenarios }}" as="s" hint-placeholder-count="3">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:3px">
+                <span style="color:#cbd5e1;font-weight:600">{{ s.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:{{ s.col }}">{{ s.p }} %</span>
+              </div>
+              <div style="height:5px;border-radius:3px;background:#1e293b;overflow:hidden"><div style="height:100%;width:{{ s.p }}%;background:{{ s.col }};border-radius:3px;transition:all 0.3s"></div></div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:11px 0 0;font-size:10px;color:#64748b">{{ scenarioNote }}</p>
+      </section>
+    </div>
+
+    <!-- ============ MAIN GRID ============ -->
+    <div id="ot-grid">
+
+      <!-- LEFT: BRIEFING INPUTS -->
+      <div id="ot-col-left">
+        <section data-screen-label="Briefing manual" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Briefing 8:30 · entrada manual</h2>
+            <span style="font-size:9px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#64748b">{{ savedLabel }}</span>
+          </div>
+          <p style="margin:0 0 8px;font-size:10px;color:#64748b;line-height:1.5">Copia estos valores de IG / Saxo / Investing antes de las 9:00. Decimales con coma, sin separador de miles. Se guardan en este navegador.</p>
+          <sc-for list="{{ inputGroups }}" as="gr" hint-placeholder-count="4">
+            <div style="margin-top:9px">
+              <h3 style="margin:0 0 5px;font-size:9.5px;letter-spacing:0.1em;color:{{ gr.col }};font-weight:800">{{ gr.title }}</h3>
+              <sc-for list="{{ gr.fields }}" as="f" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:7px;padding:3.5px 0">
+                  <span title="{{ f.status }}" style="width:7px;height:7px;border-radius:50%;background:{{ f.dotCol }};flex-shrink:0"></span>
+                  <label for="ot-in-{{ f.k }}" style="flex:1;font-size:11.5px;color:#cbd5e1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.label }}</label>
+                  <input id="ot-in-{{ f.k }}" type="text" inputmode="decimal" value="{{ f.val }}" data-k="{{ f.k }}" onChange="{{ onInput }}" aria-label="{{ f.label }}" style="width:76px;padding:4.5px 7px;border-radius:7px;border:1px solid {{ f.bord }};background:#0b1224;color:#f8fafc;font-size:11.5px;text-align:right;transition:border-color 0.2s">
+                  <span style="width:30px;font-size:9.5px;color:#64748b;font-family:'IBM Plex Mono',monospace">{{ f.unit }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+          <div style="display:flex;gap:12px;margin-top:9px;font-size:9px;color:#64748b;flex-wrap:wrap">
+            <span><span style="color:#fbbf24">●</span> ejemplo — sustituir</span>
+            <span><span style="color:#22d3ee">●</span> introducido hoy</span>
+            <span><span style="color:#34d399">●</span> fuente en vivo</span>
+          </div>
+        </section>
+
+        <section data-screen-label="Condiciones especiales" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 9px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Condiciones especiales de hoy</h2>
+          <div style="display:grid;gap:6px">
+            <sc-for list="{{ flagBtns }}" as="fl" hint-placeholder-count="3">
+              <button data-k="{{ fl.k }}" onClick="{{ onFlag }}" aria-pressed="{{ fl.pressed }}" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:9px;border:1px solid {{ fl.bord }};background:{{ fl.bg }};color:{{ fl.col }};font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;text-align:left" style-hover="border-color:#f59e0b">
+                <span style="width:14px;height:14px;border-radius:4px;border:1px solid {{ fl.boxBord }};background:{{ fl.boxBg }};display:flex;align-items:center;justify-content:center;font-size:9px;color:#020617;font-weight:800;flex-shrink:0">{{ fl.mark }}</span>
+                <span style="flex:1">{{ fl.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <p style="margin:9px 0 0;font-size:10px;color:#64748b">{{ flagNote }}</p>
+        </section>
+
+        <section data-screen-label="Pesos del modelo" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Pesos por factor</h2>
+            <span style="font-size:10.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#94a3b8">Σ {{ wTotal }} %</span>
+          </div>
+          <p style="margin:0 0 4px;font-size:9.5px;color:#64748b">Defaults según evidencia publicada de spillover overnight. Se normalizan a 100 %.</p>
+          <sc-for list="{{ weightRows }}" as="w" hint-placeholder-count="6">
+            <div style="padding:7px 0;border-bottom:1px solid #0f172a">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:12px;font-weight:700;color:#e2e8f0;flex:1">{{ w.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:#f8fafc">{{ w.pctStr }}</span>
+              </div>
+              <input type="range" min="0" max="100" step="1" value="{{ w.raw }}" data-k="{{ w.k }}" onChange="{{ onWeightO }}" aria-label="Peso {{ w.label }}">
+              <div style="font-size:9.5px;color:#64748b;line-height:1.45">{{ w.evidence }}</div>
+            </div>
+          </sc-for>
+          <button onClick="{{ onWeightsDefault }}" style="margin-top:10px;width:100%;padding:7px;border-radius:8px;border:1px solid #334155;background:transparent;color:#cbd5e1;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8;color:#f8fafc">Restaurar pesos de evidencia</button>
+        </section>
+      </div>
+
+      <!-- CENTER: FACTORS & MATH -->
+      <div id="ot-col-mid">
+        <section data-screen-label="Contribución de factores" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px;min-width:0">
+          <h2 style="margin:0 0 3px;font-size:13px;font-weight:800;color:#f8fafc">Contribución al movimiento esperado</h2>
+          <p style="margin:0 0 12px;font-size:10.5px;color:#64748b">Cada factor aporta puntos porcentuales al movimiento previsto de la primera 1,5 h (9:00–10:30)</p>
+          <sc-for list="{{ factorRows }}" as="fr" hint-placeholder-count="6">
+            <div style="padding:8px 0;border-bottom:1px solid #0f172a">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:12px;font-weight:700;color:#e2e8f0;flex:1;min-width:0">{{ fr.label }}</span>
+                <span style="font-size:10px;color:#64748b;font-family:'IBM Plex Mono',monospace">{{ fr.rawStr }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;color:{{ fr.col }};width:74px;text-align:right">{{ fr.contrib }}</span>
+              </div>
+              <div style="height:7px;border-radius:3px;background:#1e293b;position:relative;overflow:hidden;margin-top:5px">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#475569"></div>
+                <div style="position:absolute;top:0;bottom:0;left:{{ fr.barLeft }}%;width:{{ fr.barW }}%;background:{{ fr.col }};border-radius:3px;transition:all 0.3s"></div>
+              </div>
+              <div style="font-size:9.5px;color:#64748b;margin-top:3px">{{ fr.detail }}</div>
+            </div>
+          </sc-for>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px">
+            <span style="font-size:12.5px;font-weight:800;color:#f8fafc">Movimiento esperado total (μ)</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:800;color:{{ sigCol }}">{{ sigMu }}</span>
+          </div>
+        </section>
+
+        <section data-screen-label="Cálculo de probabilidad" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px">
+          <h2 style="margin:0 0 10px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Cálculo transparente</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px">
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+              <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">σ 90 MIN (DE VDAX {{ mathVdax }})</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#e2e8f0">{{ mathSigma }}</div>
+            </div>
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+              <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">Z = μ / σ</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#e2e8f0">{{ mathZ }}</div>
+            </div>
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+              <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">P(DIRECCIÓN) = LOGIT(1,15·Z)</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:{{ sigCol }}">{{ sigProb }} %</div>
+            </div>
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 11px">
+              <div style="font-size:9px;color:#64748b;font-weight:700;letter-spacing:0.08em">UMBRAL OPERATIVO</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#e2e8f0">≥ {{ mathThreshold }} % y |μ| ≥ 0,30 %</div>
+            </div>
+          </div>
+          <p style="margin:10px 0 0;font-size:10px;color:#64748b;line-height:1.5">La probabilidad está acotada a 15 %–85 %: ningún setup de apertura ofrece certeza. El EV neto descuenta el spread del CFD ({{ spreadStr }} pts) y penaliza operar contra el stop.</p>
+        </section>
+
+        <section data-screen-label="Fondo de mercado" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px">
+          <h2 style="margin:0 0 3px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Fondo de mercado · proxies</h2>
+          <p style="margin:0 0 10px;font-size:10px;color:#64748b;line-height:1.5">El libro de órdenes L2 de Eurex/Xetra es de pago; estos proxies aproximan la presión de los grandes flujos.</p>
+          <div style="display:grid;gap:8px">
+            <sc-for list="{{ proxyRows }}" as="px" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="font-size:11.5px;color:#cbd5e1;font-weight:600;flex:1">{{ px.label }}</span>
+                <span style="font-size:10px;padding:2px 8px;border-radius:999px;background:{{ px.bg }};color:{{ px.col }};font-weight:700;white-space:nowrap">{{ px.state }}</span>
+                <span style="font-size:10px;color:#64748b;width:150px;text-align:right">{{ px.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: NEWS / COMPANIES / BACKTEST -->
+      <div id="ot-col-right">
+        <section data-screen-label="Noticias en vivo" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Noticias overnight · GDELT</h2>
+            <button onClick="{{ onRefreshLive }}" style="padding:4px 10px;border-radius:999px;border:1px solid #334155;background:transparent;color:#cbd5e1;font-size:10px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8;color:#f8fafc">{{ refreshLabel }}</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+            <sc-for list="{{ newsFilters }}" as="nf" hint-placeholder-count="3">
+              <button data-f="{{ nf.k }}" onClick="{{ onNewsFilter }}" aria-pressed="{{ nf.pressed }}" style="padding:3px 9px;border-radius:999px;border:1px solid {{ nf.bord }};background:{{ nf.bg }};color:{{ nf.col }};font-size:9.5px;font-weight:700;cursor:pointer;transition:all 0.2s">{{ nf.label }}</button>
+            </sc-for>
+            <span style="margin-left:auto;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:{{ toneBg }};color:{{ toneCol }};font-family:'IBM Plex Mono',monospace">TONO {{ toneStr }}</span>
+          </div>
+          <div style="font-size:9.5px;color:#64748b;margin-bottom:6px;font-family:'IBM Plex Mono',monospace">{{ newsStatus }}</div>
+          <div style="display:grid;gap:7px;max-height:430px;overflow-y:auto">
+            <sc-for list="{{ articles }}" as="ar" hint-placeholder-count="5">
+              <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:8px 10px">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;flex-wrap:wrap">
+                  <span style="font-size:9px;font-weight:800;padding:1.5px 6px;border-radius:4px;background:{{ ar.tagBg }};color:{{ ar.tagCol }};white-space:nowrap">{{ ar.tag }}</span>
+                  <span style="font-size:9px;color:#475569;font-family:'IBM Plex Mono',monospace">{{ ar.when }} · {{ ar.domain }}</span>
+                  <span style="margin-left:auto;font-size:9.5px;font-weight:700;color:{{ ar.impCol }};font-family:'IBM Plex Mono',monospace">{{ ar.impStr }}</span>
+                </div>
+                <a href="{{ ar.url }}" target="_blank" rel="noopener" style="font-size:11px;line-height:1.45;color:#cbd5e1;font-weight:600;display:block" style-hover="color:#7dd3fc">{{ ar.title }}</a>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ newsEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:14px;border:1px dashed #334155;border-radius:9px;text-align:center;font-size:11px;color:#64748b">{{ newsEmptyMsg }}</div>
+          </sc-if>
+          <p style="margin:8px 0 0;font-size:9px;color:#475569">GDELT indexa medios globales con ~15 min de retardo. Verifica titulares críticos en tu broker antes de operar.</p>
+        </section>
+
+        <section data-screen-label="Las 40 del DAX" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Las 40 del DAX · impacto por peso</h2>
+            <button onClick="{{ onToggle40 }}" style="padding:3px 9px;border-radius:999px;border:1px solid #334155;background:transparent;color:#cbd5e1;font-size:9.5px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8">{{ toggle40Label }}</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 52px 60px 74px;gap:6px;font-size:8.5px;font-weight:700;letter-spacing:0.06em;color:#475569;padding-bottom:4px;border-bottom:1px solid #1e293b">
+            <span>EMPRESA</span><span style="text-align:right">PESO</span><span style="text-align:right">NOTICIAS</span><span style="text-align:right">IMPACTO EST.</span>
+          </div>
+          <sc-for list="{{ companies }}" as="co" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:1fr 52px 60px 74px;gap:6px;align-items:center;padding:4.5px 0;border-bottom:1px solid #0f172a">
+              <span style="font-size:11px;font-weight:600;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ co.name }}</span>
+              <span style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#94a3b8">{{ co.w }} %</span>
+              <span style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ co.nCol }}">{{ co.n }}</span>
+              <span style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:{{ co.impCol }}">{{ co.imp }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:8px 0 0;font-size:9px;color:#475569">Impacto = peso en el índice × movimiento típico según severidad del titular. Pesos aproximados, editables en código.</p>
+        </section>
+
+        <section data-screen-label="Backtest sintético" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 3px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Backtest de reglas · 250 sesiones sintéticas</h2>
+          <p style="margin:0 0 9px;font-size:9.5px;color:#fbbf24;line-height:1.45">⚠ Validación interna con datos sintéticos deterministas: muestra el comportamiento de las reglas si los pesos fueran correctos. NO es histórico real ni garantía de resultados.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px">
+            <sc-for list="{{ btCells }}" as="bt" hint-placeholder-count="6">
+              <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:7px 10px">
+                <div style="font-size:8.5px;color:#64748b;font-weight:700;letter-spacing:0.06em">{{ bt.label }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;color:{{ bt.col }}">{{ bt.val }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:10px;position:relative;height:74px">
+            <svg viewBox="0 0 400 74" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+              <line x1="0" x2="400" y1="37" y2="37" stroke="#1e293b" stroke-width="1"></line>
+              <polyline points="{{ btCurve }}" fill="none" stroke="#38bdf8" stroke-width="1.6" vector-effect="non-scaling-stroke"></polyline>
+            </svg>
+            <span style="position:absolute;top:2px;left:6px;font-size:8.5px;color:#475569;font-family:'IBM Plex Mono',monospace">EQUITY (base 100)</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============ METHODOLOGY & DISCLAIMER ============ -->
+    <section data-screen-label="Metodología y aviso" style="background:rgba(15,23,42,0.5);border:1px solid #1e293b;border-radius:14px;padding:15px 18px">
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1.2;min-width:280px">
+          <h2 style="margin:0 0 6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Metodología · Opening Range Model</h2>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7dd3fc;background:rgba(2,6,23,0.6);border:1px solid #0f172a;border-radius:8px;padding:8px 12px;display:inline-block">μ = Σ ŵᵢ·fᵢ·k → p = 1/(1+e^(−1,15·μ/σ90)) → señal si p ≥ umbral y |μ| ≥ 0,30 %</div>
+          <p style="margin:8px 0 0;font-size:10.5px;color:#64748b;line-height:1.6">Correcciones de lógica sobre la v1: (1) el EV descuenta ahora el spread del CFD; (2) el composite EE. UU. separa cierre de contado y futuros overnight para no contar dos veces; (3) el gap usa una función continua de momentum/reversión en vez de escalones; (4) probabilidades acotadas 15–85 % y sin divisiones por cero; (5) la señal exige pasar todas las puertas de riesgo, no solo el umbral de probabilidad.</p>
+        </div>
+        <div style="flex:1;min-width:260px">
+          <h2 style="margin:0 0 6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#fbbf24;font-weight:700">⚠ Límites y aviso</h2>
+          <p style="margin:0;font-size:10.5px;color:#94a3b8;line-height:1.6">Fuentes en vivo: FX (BCE/Frankfurter, referencia diaria) y noticias (GDELT, ~15 min retardo). Cotizaciones de índices y VDAX: entrada manual desde tu broker — no hay feed gratuito en tiempo real. No existe acceso gratuito al libro de órdenes L2. Ningún modelo garantiza un 0,5–1 % diario: esta herramienta estima probabilidades y organiza tu decisión, no la sustituye. Los CFD son productos apalancados de alto riesgo. Esto no constituye asesoramiento financiero.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer style="text-align:center;font-size:10px;color:#334155;font-family:'IBM Plex Mono',monospace;padding-bottom:6px">DAX OPENING TRADER · OPENING RANGE MODEL · FX BCE + NOTICIAS GDELT + BRIEFING MANUAL · NO ES ASESORAMIENTO FINANCIERO</footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;1600px&quot;, &quot;height&quot;: &quot;1000px&quot; },
+  &quot;umbralProbabilidad&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 58, &quot;min&quot;: 52, &quot;max&quot;: 70, &quot;unit&quot;: &quot;%&quot;, &quot;section&quot;: &quot;Reglas&quot; },
+  &quot;objetivoMaxPct&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.5, &quot;max&quot;: 1.5, &quot;step&quot;: 0.1, &quot;unit&quot;: &quot;%&quot;, &quot;section&quot;: &quot;Reglas&quot; },
+  &quot;spreadPts&quot;: { &quot;editor&quot;: &quot;float&quot;, &quot;default&quot;: 2, &quot;min&quot;: 0.5, &quot;max&quot;: 10, &quot;unit&quot;: &quot;pts&quot;, &quot;section&quot;: &quot;Reglas&quot; }
+}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const P = props || {};
+    this.THRESH = this.cl(parseFloat(P.umbralProbabilidad) || 58, 52, 70);
+    this.TGTMAX = this.cl(parseFloat(P.objetivoMaxPct) || 1.0, 0.5, 1.5);
+    this.SPREAD = this.cl(parseFloat(P.spreadPts) || 2, 0.5, 10);
+    this.LSKEY = 'dax-opening-trader-v1';
+    this.DEFW = { us: 30, asia: 25, gap: 15, news: 12, tech: 10, fx: 8 };
+    this.DEFIN = {
+      nikkei: '+0,6', hsi: '-0,3', sse: '+0,1', kospi: '+0,4', asx: '+0,2',
+      spx: '+0,45', es: '+0,15', nq: '+0,25',
+      prevClose: '24150', prevHigh: '24260', prevLow: '23980', cfd: '24205',
+      vdax: '16,5', eurusd: '1,0880', eurusdPrev: '1,0865'
+    };
+    this.FIELDS = [
+      { g: 'SESIÓN ASIÁTICA (% cierre)', col: '#22d3ee', items: [['nikkei', 'Nikkei 225', '%'], ['hsi', 'Hang Seng', '%'], ['sse', 'Shanghai Comp.', '%'], ['kospi', 'KOSPI', '%'], ['asx', 'ASX 200', '%']] },
+      { g: 'EE. UU. OVERNIGHT', col: '#c084fc', items: [['spx', 'S&P 500 cierre previo', '%'], ['es', 'Futuros ES desde 22:00', '%'], ['nq', 'Futuros NQ desde 22:00', '%']] },
+      { g: 'DAX · NIVELES (pts)', col: '#38bdf8', items: [['prevClose', 'Cierre Xetra anterior', 'pts'], ['prevHigh', 'Máximo día anterior', 'pts'], ['prevLow', 'Mínimo día anterior', 'pts'], ['cfd', 'CFD ahora (IG/Saxo)', 'pts']] },
+      { g: 'VOLATILIDAD Y DIVISA', col: '#fbbf24', items: [['vdax', 'VDAX-NEW / VIX DE40', ''], ['eurusd', 'EUR/USD ahora', '$'], ['eurusdPrev', 'EUR/USD cierre previo', '$']] }
+    ];
+    this.COMPANIES = [
+      ['SAP', 14.0, ['sap ']], ['Siemens', 9.8, ['siemens']], ['Allianz', 7.4, ['allianz']], ['Airbus', 7.0, ['airbus']],
+      ['Deutsche Telekom', 6.4, ['deutsche telekom', 'telekom']], ['Munich Re', 4.1, ['munich re', 'münchener rück', 'muenchener rueck']],
+      ['Rheinmetall', 3.8, ['rheinmetall']], ['Infineon', 3.3, ['infineon']], ['Mercedes-Benz', 3.0, ['mercedes']],
+      ['BMW', 2.8, ['bmw']], ['Deutsche Börse', 2.7, ['deutsche börse', 'deutsche boerse']], ['Deutsche Bank', 2.6, ['deutsche bank']],
+      ['DHL Group', 2.5, ['dhl', 'deutsche post']], ['Siemens Energy', 2.5, ['siemens energy']], ['BASF', 2.4, ['basf']],
+      ['E.ON', 2.3, ['e.on', 'eon energy']], ['Adidas', 2.2, ['adidas']], ['RWE', 1.9, ['rwe']],
+      ['Volkswagen', 1.8, ['volkswagen', ' vw ']], ['Bayer', 1.7, ['bayer']], ['Hannover Re', 1.6, ['hannover re']],
+      ['Commerzbank', 1.5, ['commerzbank']], ['Daimler Truck', 1.5, ['daimler truck']], ['Merck KGaA', 1.4, ['merck kgaa', 'merck group']],
+      ['Heidelberg Materials', 1.4, ['heidelberg materials', 'heidelbergcement']], ['MTU Aero', 1.4, ['mtu aero', 'mtu ']],
+      ['Siemens Healthineers', 1.3, ['healthineers']], ['Vonovia', 1.2, ['vonovia']], ['Henkel', 1.0, ['henkel']],
+      ['Fresenius', 1.0, ['fresenius']], ['Beiersdorf', 1.0, ['beiersdorf']], ['Symrise', 0.9, ['symrise']],
+      ['Continental', 0.9, ['continental ag', 'continental tyre']], ['Brenntag', 0.8, ['brenntag']], ['Qiagen', 0.8, ['qiagen']],
+      ['Zalando', 0.7, ['zalando']], ['Porsche AG', 0.7, ['porsche']], ['Sartorius', 0.6, ['sartorius']],
+      ['FMC', 0.5, ['fresenius medical']], ['Porsche SE', 0.4, ['porsche se']]
+    ];
+    this.NEGW = ['profit warning', 'cuts guidance', 'lowers guidance', 'misses', 'recall', 'strike', 'lawsuit', 'probe', 'investigation', 'downgrade', 'slump', 'plunge', 'falls', 'drops', 'cuts outlook', 'insolvency', 'warns', 'warning', 'layoffs', 'scandal', 'fine', 'tariff'];
+    this.POSW = ['beats', 'raises guidance', 'upgrade', 'record profit', 'buyback', 'dividend increase', 'wins order', 'contract win', 'surges', 'jumps', 'soars', 'approval', 'raises outlook', 'record high'];
+    let stored = null;
+    try { stored = JSON.parse(localStorage.getItem(this.LSKEY) || 'null'); } catch (e) { stored = null; }
+    this.state = {
+      inputs: Object.assign({}, this.DEFIN, stored && stored.inputs ? stored.inputs : {}),
+      touched: stored && stored.touched ? stored.touched : {},
+      flags: Object.assign({ crit: false, macro: false, expiry: false }, stored && stored.flags ? stored.flags : {}),
+      weightsO: Object.assign({}, this.DEFW, stored && stored.weightsO ? stored.weightsO : {}),
+      capital: stored && stored.capital ? stored.capital : '10000',
+      riskPct: stored && stored.riskPct ? stored.riskPct : '1',
+      savedAt: stored && stored.savedAt ? stored.savedAt : null,
+      newsFilter: 'all', show40: false,
+      fx: { status: 'off', latest: null, prev: null },
+      news: { status: 'off', arts: [], tone: null, at: null },
+      lastFetch: 0, nowTick: Date.now(),
+      toastShow: false, toastMsg: ''
+    };
+  }
+
+  componentDidMount() {
+    this._clk = setInterval(() => this.setState({ nowTick: Date.now() }), 1000);
+    this.fetchLive(true);
+  }
+  componentWillUnmount() { clearInterval(this._clk); clearTimeout(this._tt); }
+
+  cl(v, a, b) { return Math.min(b, Math.max(a, isFinite(v) ? v : a)); }
+  fmtN(v, d) { const x = isFinite(v) ? v : 0; return x.toLocaleString('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  fmtSN(v, d) { return (v > 0 ? '+' : '') + this.fmtN(v, d); }
+  fmtPct(v, d) { return this.fmtSN(v, d === undefined ? 2 : d) + ' %'; }
+  pnum(s, def) {
+    if (typeof s === 'number') return isFinite(s) ? s : def;
+    if (!s) return def;
+    let t = String(s).trim().replace(/\s/g, '').replace(/%/g, '');
+    if (t.indexOf(',') >= 0) t = t.replace(/\./g, '').replace(',', '.');
+    const v = parseFloat(t);
+    return isFinite(v) ? v : def;
+  }
+
+  persist(extra) {
+    const st = Object.assign({}, this.state, extra || {});
+    const savedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(this.LSKEY, JSON.stringify({ inputs: st.inputs, touched: st.touched, flags: st.flags, weightsO: st.weightsO, capital: st.capital, riskPct: st.riskPct, savedAt }));
+    } catch (e) { }
+    return savedAt;
+  }
+  notify(msg) {
+    clearTimeout(this._tt);
+    this.setState({ toastShow: true, toastMsg: msg });
+    this._tt = setTimeout(() => this.setState({ toastShow: false }), 2600);
+  }
+
+  async fetchJson(url, ms) {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), ms || 9000);
+    try {
+      const r = await fetch(url, { signal: ctl.signal });
+      clearTimeout(t);
+      if (!r.ok) throw new Error('http ' + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
+  }
+
+  async fetchLive(auto) {
+    const now = Date.now();
+    if (!auto && now - this.state.lastFetch < 90000) { this.notify('Espera 90 s entre actualizaciones (límite de las fuentes gratuitas)'); return; }
+    this.setState({ lastFetch: now, fx: Object.assign({}, this.state.fx, { status: 'loading' }), news: Object.assign({}, this.state.news, { status: 'loading' }) });
+    // ---- FX (Frankfurter / ECB, sin clave) ----
+    try {
+      const fx = await this.fetchJson('https://api.frankfurter.app/latest?from=EUR&to=USD');
+      let prev = null;
+      try {
+        const d = new Date(fx.date + 'T12:00:00Z');
+        do { d.setUTCDate(d.getUTCDate() - 1); } while (d.getUTCDay() % 6 === 0);
+        const pd = d.toISOString().slice(0, 10);
+        const fx2 = await this.fetchJson('https://api.frankfurter.app/' + pd + '?from=EUR&to=USD');
+        prev = fx2.rates && fx2.rates.USD;
+      } catch (e) { }
+      const latest = fx.rates && fx.rates.USD;
+      const patch = {};
+      if (latest && !this.state.touched.eurusd) patch.eurusd = String(latest).replace('.', ',');
+      if (prev && !this.state.touched.eurusdPrev) patch.eurusdPrev = String(prev).replace('.', ',');
+      this.setState(s => ({ fx: { status: 'ok', latest, prev, date: fx.date }, inputs: Object.assign({}, s.inputs, patch) }));
+    } catch (e) {
+      this.setState({ fx: Object.assign({}, this.state.fx, { status: 'err' }) });
+    }
+    // ---- NEWS (GDELT, sin clave) ----
+    try {
+      const base = 'https://api.gdeltproject.org/api/v2/doc/doc?format=json&sort=datedesc&timespan=16h&mode=artlist';
+      const mkQ = q => base + '&maxrecords=18&query=' + encodeURIComponent(q);
+      const macroQ = '("DAX" OR "Bundesbank" OR "European Central Bank" OR "German economy" OR "Germany inflation")';
+      const batches = [];
+      for (let i = 0; i < this.COMPANIES.length; i += 10) {
+        const names = this.COMPANIES.slice(i, i + 10).map(c => '"' + c[0] + '"').join(' OR ');
+        batches.push('(' + names + ') (stock OR shares OR profit OR earnings OR guidance OR CEO OR orders)');
+      }
+      const queries = [['macro', macroQ]].concat(batches.map((b, i) => ['emp', b]));
+      const results = await Promise.all(queries.map(q => this.fetchJson(mkQ(q[1])).then(j => ({ kind: q[0], j })).catch(() => null)));
+      let arts = [];
+      const seen = {};
+      results.forEach(res => {
+        if (!res || !res.j || !res.j.articles) return;
+        res.j.articles.forEach(a => {
+          if (!a.url || seen[a.url] || !a.title) return;
+          seen[a.url] = 1;
+          arts.push({ kind: res.kind, title: a.title, url: a.url, domain: a.domain || '', seendate: a.seendate || '' });
+        });
+      });
+      arts.sort((a, b) => (b.seendate || '').localeCompare(a.seendate || ''));
+      arts = arts.slice(0, 40);
+      let tone = null;
+      try {
+        const tj = await this.fetchJson('https://api.gdeltproject.org/api/v2/doc/doc?format=json&timespan=24h&mode=timelinetone&query=' + encodeURIComponent(macroQ));
+        const series = tj && tj.timeline && tj.timeline[0] && tj.timeline[0].data;
+        if (series && series.length) {
+          const lastN = series.slice(-4);
+          tone = lastN.reduce((s, p) => s + (p.value || 0), 0) / lastN.length;
+        }
+      } catch (e) { }
+      this.setState({ news: { status: arts.length ? 'ok' : 'empty', arts, tone, at: new Date() } });
+      if (!auto) this.notify('Fuentes actualizadas: ' + arts.length + ' titulares');
+    } catch (e) {
+      this.setState({ news: Object.assign({}, this.state.news, { status: 'err' }) });
+    }
+  }
+
+  berlin() {
+    const d = new Date(this.state.nowTick);
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', weekday: 'short', hour12: false }).formatToParts(d);
+    const get = t => { const p = parts.find(x => x.type === t); return p ? p.value : ''; };
+    const h = parseInt(get('hour'), 10) % 24, m = parseInt(get('minute'), 10), s = parseInt(get('second'), 10);
+    const wd = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0 }[get('weekday')] || 0;
+    return { h, m, s, wd, mins: h * 60 + m, str: get('hour') + ':' + get('minute') + ':' + get('second') };
+  }
+
+  cd(secs) {
+    secs = Math.max(0, Math.round(secs));
+    const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60), s = secs % 60;
+    const p = x => (x < 10 ? '0' : '') + x;
+    return (h > 0 ? h + ':' : '') + p(m) + ':' + p(s);
+  }
+
+  matchCompany(title) {
+    const t = ' ' + title.toLowerCase() + ' ';
+    for (let i = 0; i < this.COMPANIES.length; i++) {
+      const c = this.COMPANIES[i];
+      for (let j = 0; j < c[2].length; j++) if (t.indexOf(c[2][j]) >= 0) return c;
+    }
+    return null;
+  }
+  classify(title) {
+    const t = title.toLowerCase();
+    let sc = 0;
+    this.NEGW.forEach(w => { if (t.indexOf(w) >= 0) sc -= 1; });
+    this.POSW.forEach(w => { if (t.indexOf(w) >= 0) sc += 1; });
+    return sc > 0 ? 1 : sc < 0 ? -1 : 0;
+  }
+
+  backtest(wN) {
+    const rand = this.mul(42);
+    let eq = 100, peak = 100, maxDD = 0, wins = 0, losses = 0, sumW = 0, sumL = 0, trades = 0, hiConv = 0, hiWin = 0;
+    const curve = [100];
+    for (let d = 0; d < 250; d++) {
+      const fUs = (rand() - 0.5) * 1.6, fAsia = (rand() - 0.5) * 1.2, fGap = (rand() - 0.5) * 0.8, fNews = (rand() - 0.5) * 0.5, fTech = (rand() - 0.5) * 0.4, fFx = (rand() - 0.5) * 0.4;
+      const mu = this.cl((wN.us * fUs * 0.55 + wN.asia * fAsia * 0.35 + wN.gap * fGap + wN.news * fNews + wN.tech * fTech + wN.fx * fFx) / 100 * 3.2, -1.5, 1.5);
+      const sigma = 0.45;
+      const noise = (rand() + rand() + rand() - 1.5) / 1.5 * sigma * 1.9;
+      const trueMove = mu * 0.62 + noise;
+      const p = this.cl(1 / (1 + Math.exp(-1.15 * mu / sigma)), 0.15, 0.85);
+      const prob = mu >= 0 ? p : 1 - p;
+      const dir = mu >= 0 ? 1 : -1;
+      if (prob * 100 < this.THRESH || Math.abs(mu) < 0.3) { curve.push(eq); continue; }
+      trades++;
+      const hi = prob >= 0.65 && Math.abs(mu) >= 0.55;
+      if (hi) hiConv++;
+      const tgt = this.cl(Math.abs(mu) * 1.6, 0.5, this.TGTMAX);
+      const stp = tgt * 0.6;
+      const spreadPct = this.SPREAD / 24000 * 100;
+      let pnl;
+      const mv = dir * trueMove;
+      if (mv >= tgt) pnl = tgt; else if (mv <= -stp) pnl = -stp; else pnl = mv * 0.75;
+      pnl -= spreadPct;
+      if (pnl > 0) { wins++; sumW += pnl; if (hi) hiWin++; } else { losses++; sumL += -pnl; }
+      eq *= (1 + pnl / 100);
+      peak = Math.max(peak, eq);
+      maxDD = Math.max(maxDD, (peak - eq) / peak * 100);
+      curve.push(eq);
+    }
+    return {
+      trades, hit: trades ? wins / trades * 100 : 0, hiHit: hiConv ? hiWin / hiConv * 100 : 0, hiConv,
+      avgW: wins ? sumW / wins : 0, avgL: losses ? sumL / losses : 0,
+      pf: sumL > 0 ? sumW / sumL : 9.9, exp: trades ? (sumW - sumL) / trades : 0, maxDD, ret: eq - 100, curve
+    };
+  }
+  mul(seed) {
+    let t = seed >>> 0;
+    return function () {
+      t = (t + 0x6D2B79F5) | 0;
+      let r = Math.imul(t ^ (t >>> 15), 1 | t);
+      r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  renderVals() {
+    const st = this.state, IN = st.inputs;
+    const P = k => this.pnum(IN[k], this.pnum(this.DEFIN[k], 0));
+
+    // ---- handlers ----
+    const onInput = e => {
+      const k = e.target.dataset.k, v = e.target.value;
+      this.setState(s => {
+        const inputs = Object.assign({}, s.inputs, { [k]: v });
+        const touched = Object.assign({}, s.touched, { [k]: true });
+        return { inputs, touched, savedAt: this.persist({ inputs, touched }) };
+      });
+    };
+    const onFlag = e => {
+      const k = e.currentTarget.dataset.k;
+      this.setState(s => {
+        const flags = Object.assign({}, s.flags, { [k]: !s.flags[k] });
+        return { flags, savedAt: this.persist({ flags }) };
+      });
+    };
+    const onWeightO = e => {
+      const k = e.target.dataset.k, v = this.cl(parseFloat(e.target.value), 0, 100);
+      this.setState(s => {
+        const weightsO = Object.assign({}, s.weightsO, { [k]: v });
+        return { weightsO, savedAt: this.persist({ weightsO }) };
+      });
+    };
+    const onWeightsDefault = () => { this.setState(s => ({ weightsO: Object.assign({}, this.DEFW), savedAt: this.persist({ weightsO: Object.assign({}, this.DEFW) }) })); this.notify('Pesos restaurados a la evidencia por defecto'); };
+    const onCapital = e => { const v = e.target.value; this.setState(s => ({ capital: v, savedAt: this.persist({ capital: v }) })); };
+    const onRisk = e => { const v = e.target.value; this.setState(s => ({ riskPct: v, savedAt: this.persist({ riskPct: v }) })); };
+    const onResetAll = () => {
+      const fresh = { inputs: Object.assign({}, this.DEFIN), touched: {}, flags: { crit: false, macro: false, expiry: false }, weightsO: Object.assign({}, this.DEFW) };
+      this.setState(Object.assign({ savedAt: this.persist(fresh) }, fresh));
+      this.notify('Sesión restablecida: vuelve a introducir el briefing');
+    };
+    const onNewsFilter = e => this.setState({ newsFilter: e.currentTarget.dataset.f });
+    const onToggle40 = () => this.setState(s => ({ show40: !s.show40 }));
+    const onRefreshLive = () => this.fetchLive(false);
+
+    // ---- clock & phase ----
+    const B = this.berlin();
+    let phaseLabel, phaseCol, phaseBg, phaseBord, countLabel, countTo, sigPhaseNote, sigPhaseNoteCol = '#64748b';
+    const secNow = B.mins * 60 + B.s;
+    const toSecs = mins => mins * 60 - secNow;
+    const weekend = B.wd === 0 || B.wd === 6;
+    if (weekend) {
+      phaseLabel = 'MERCADO CERRADO'; phaseCol = '#94a3b8'; countLabel = 'Apertura lunes';
+      countTo = ((B.wd === 6 ? 2 : 1) * 1440 + 540) * 60 - secNow;
+      sigPhaseNote = 'Fin de semana: la señal se recalculará con el briefing del lunes.';
+    } else if (B.mins < 480) {
+      phaseLabel = 'PRE-BRIEFING'; phaseCol = '#94a3b8'; countLabel = 'Briefing 8:00 en'; countTo = toSecs(480);
+      sigPhaseNote = 'Introduce el briefing entre 8:30 y 9:00 para afinar la señal de apertura.';
+    } else if (B.mins < 540) {
+      phaseLabel = 'BRIEFING ACTIVO'; phaseCol = '#fbbf24'; countLabel = 'Apertura 9:00 en'; countTo = toSecs(540);
+      sigPhaseNote = 'Ventana de preparación: completa los datos manuales y revisa noticias antes de las 9:00.';
+      sigPhaseNoteCol = '#fbbf24';
+    } else if (B.mins < 630) {
+      phaseLabel = 'VENTANA OPERATIVA'; phaseCol = '#34d399'; countLabel = 'Cierre ventana en'; countTo = toSecs(630);
+      sigPhaseNote = 'Ventana 9:00–10:30 activa. Ejecuta solo si todas las puertas están en verde.';
+      sigPhaseNoteCol = '#34d399';
+    } else if (B.mins < 1050) {
+      phaseLabel = 'FUERA DE VENTANA'; phaseCol = '#f43f5e'; countLabel = 'Xetra cierra en'; countTo = toSecs(1050);
+      sigPhaseNote = 'Señal caducada (era válida solo 9:00–10:30). Próximo briefing: mañana 8:00.';
+      sigPhaseNoteCol = '#f43f5e';
+    } else {
+      phaseLabel = 'SESIÓN CERRADA'; phaseCol = '#94a3b8'; countLabel = 'Apertura en';
+      countTo = ((B.wd === 5 ? 3 : 1) * 1440 + 540) * 60 - secNow;
+      sigPhaseNote = 'Sesión cerrada: prepara el briefing de mañana con los cierres de hoy.';
+    }
+    phaseBg = phaseCol === '#34d399' ? 'rgba(52,211,153,0.1)' : phaseCol === '#fbbf24' ? 'rgba(245,158,11,0.1)' : phaseCol === '#f43f5e' ? 'rgba(244,63,94,0.08)' : 'rgba(15,23,42,0.8)';
+    phaseBord = phaseCol === '#94a3b8' ? '#1e293b' : phaseCol.replace(')', ',0.4)').replace('#', '');
+    phaseBord = phaseCol === '#34d399' ? 'rgba(52,211,153,0.4)' : phaseCol === '#fbbf24' ? 'rgba(245,158,11,0.4)' : phaseCol === '#f43f5e' ? 'rgba(244,63,94,0.4)' : '#1e293b';
+
+    // ---- weights normalized ----
+    const wRaw = st.weightsO;
+    let wSum = 0; Object.keys(this.DEFW).forEach(k => { wSum += (+wRaw[k] || 0); });
+    const wN = {}; Object.keys(this.DEFW).forEach(k => { wN[k] = wSum > 0 ? (+wRaw[k] || 0) / wSum * 100 : 100 / 6; });
+
+    // ---- factor computation ----
+    const prevClose = Math.max(1000, P('prevClose'));
+    const prevHigh = Math.max(prevClose, P('prevHigh'));
+    const prevLow = Math.min(prevClose, P('prevLow'));
+    const cfd = Math.max(1000, P('cfd'));
+    const vdax = this.cl(P('vdax'), 8, 60);
+    const eur = P('eurusd'), eurPrev = P('eurusdPrev') || eur;
+    const gapPct = (cfd - prevClose) / prevClose * 100;
+    const asiaComp = 0.30 * P('nikkei') + 0.20 * P('hsi') + 0.15 * P('sse') + 0.15 * P('kospi') + 0.20 * P('asx');
+    const usComp = 0.35 * P('spx') + 0.50 * P('es') + 0.15 * P('nq');
+    const fxPct = eurPrev > 0 ? (eur - eurPrev) / eurPrev * 100 : 0;
+    const clv = prevHigh > prevLow ? this.cl((2 * prevClose - prevHigh - prevLow) / (prevHigh - prevLow), -1, 1) : 0;
+    const g = gapPct, ag = Math.abs(g), sg = Math.sign(g);
+    const fGap = 0.5 * g * Math.min(1, 0.4 / Math.max(ag, 0.01)) - 0.35 * sg * Math.max(0, ag - 0.8);
+    const tone = st.news.tone;
+    let newsHead = 0, matchedToday = {};
+    (st.news.arts || []).forEach(a => {
+      const cls = this.classify(a.title);
+      const co = this.matchCompany(a.title);
+      if (co) {
+        matchedToday[co[0]] = (matchedToday[co[0]] || 0) + 1;
+        if (cls !== 0) newsHead += cls * co[1] / 100 * 2.2;
+      } else if (cls !== 0 && a.kind === 'macro') newsHead += cls * 0.04;
+    });
+    const fNews = this.cl((tone !== null && isFinite(tone) ? this.cl(tone * 0.08, -0.3, 0.3) : 0) + this.cl(newsHead, -0.4, 0.4), -0.6, 0.6);
+    const F = {
+      us: 0.55 * usComp,
+      asia: 0.35 * asiaComp,
+      gap: fGap,
+      news: fNews,
+      tech: 0.22 * clv,
+      fx: -0.25 * fxPct
+    };
+    const K = 3.2;
+    const contribs = {}; let mu = 0;
+    Object.keys(F).forEach(k => { contribs[k] = wN[k] / 100 * F[k] * K; mu += contribs[k]; });
+    mu = this.cl(mu, -1.5, 1.5);
+    const sigma = Math.max(0.12, vdax / 15.87 * 0.42);
+    const z = mu / sigma;
+    const pRaw = this.cl(1 / (1 + Math.exp(-1.15 * z)), 0.15, 0.85);
+    const dir = mu >= 0 ? 1 : -1;
+    const prob = Math.round((dir > 0 ? pRaw : 1 - pRaw) * 100);
+
+    // ---- gates ----
+    const bigGap = ag > 1.5;
+    const gates = [
+      { label: 'Sin noticia crítica sin digerir', ok: !st.flags.crit, note: st.flags.crit ? 'BLOQUEA' : 'OK' },
+      { label: 'Sin dato macro en la ventana (IFO/ZEW/BCE)', ok: !st.flags.macro, warn: st.flags.macro, note: st.flags.macro ? 'REDUCE' : 'OK' },
+      { label: 'Sin vencimiento de derivados / rebalanceo', ok: !st.flags.expiry, note: st.flags.expiry ? 'BLOQUEA' : 'OK' },
+      { label: 'Gap dentro de límites (|gap| ≤ 1,5 %)', ok: !bigGap, warn: bigGap, note: bigGap ? 'ESPERA 15 MIN' : this.fmtPct(gapPct) },
+      { label: 'Probabilidad ≥ umbral (' + this.THRESH + ' %)', ok: prob >= this.THRESH, note: prob + ' %' },
+      { label: 'Movimiento esperado ≥ 0,30 %', ok: Math.abs(mu) >= 0.30, note: this.fmtPct(mu) },
+      { label: 'Volatilidad manejable (VDAX < 30)', ok: vdax < 30, warn: vdax >= 30 && vdax < 38, note: this.fmtN(vdax, 1) }
+    ].map(gt => ({
+      label: gt.label, note: gt.note,
+      mark: gt.ok ? '✓' : gt.warn ? '!' : '✕',
+      col: gt.ok ? '#34d399' : gt.warn ? '#fbbf24' : '#f43f5e',
+      bg: gt.ok ? 'rgba(52,211,153,0.13)' : gt.warn ? 'rgba(245,158,11,0.13)' : 'rgba(244,63,94,0.13)',
+      blocked: !gt.ok && !gt.warn
+    }));
+    const blocked = gates.some(gt => gt.blocked);
+    const softWarn = st.flags.macro || bigGap || (vdax >= 30 && vdax < 38);
+
+    // ---- signal ----
+    let sigLabel, sigArrow, sigCol, sigConv;
+    const hiConv = prob >= 65 && Math.abs(mu) >= 0.55 && !softWarn;
+    if (blocked) { sigLabel = 'NO OPERAR'; sigArrow = '⏸'; sigCol = '#94a3b8'; sigConv = '—'; }
+    else if (dir > 0) { sigLabel = 'LONG'; sigArrow = '▲'; sigCol = '#34d399'; sigConv = hiConv ? 'ALTA' : 'MEDIA'; }
+    else { sigLabel = 'SHORT'; sigArrow = '▼'; sigCol = '#f43f5e'; sigConv = hiConv ? 'ALTA' : 'MEDIA'; }
+    const FNAMES = { us: 'EE. UU. overnight', asia: 'Sesión asiática', gap: 'Dinámica del gap', news: 'Noticias', tech: 'Técnico previo', fx: 'EUR/USD' };
+    const contribArr = Object.keys(contribs).map(k => [k, contribs[k]]).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+    const topDrv = contribArr[0], secDrv = contribArr[1];
+    let sigReason;
+    if (blocked) {
+      const blockers = gates.filter(gt => gt.blocked).map(gt => gt.label.toLowerCase());
+      sigReason = 'Señal bloqueada: ' + blockers.join('; ') + '. El coste de operar sin ventaja estadística supera al beneficio esperado.';
+    } else {
+      sigReason = 'Impulso dominante: ' + FNAMES[topDrv[0]] + ' (' + this.fmtSN(topDrv[1], 2) + ' pp) apoyado por ' + FNAMES[secDrv[0]] + ' (' + this.fmtSN(secDrv[1], 2) + ' pp).' + (softWarn ? ' Convicción reducida por las advertencias activas.' : '') + (st.news.status === 'ok' && tone !== null ? ' Tono mediático overnight: ' + this.fmtSN(tone, 1) + '.' : '');
+    }
+
+    // ---- plan ----
+    const tgtPct = this.cl(Math.abs(mu) * 1.6, 0.5, this.TGTMAX);
+    const stpPct = tgtPct * 0.6;
+    const target = cfd * (1 + dir * tgtPct / 100);
+    const stop = cfd * (1 - dir * stpPct / 100);
+    const tgtPts = Math.abs(target - cfd), stpPts = Math.abs(cfd - stop);
+    const pWin = prob / 100;
+    const ev = pWin * tgtPts - (1 - pWin) * stpPts - this.SPREAD;
+    const rrv = stpPts > 0.1 ? tgtPts / stpPts : 9.9;
+    const cap = Math.max(0, this.pnum(st.capital, 10000));
+    const rPct = this.cl(this.pnum(st.riskPct, 1), 0.1, 5);
+    const riskEur = cap * rPct / 100;
+    const sizePerPt = stpPts > 0.1 ? riskEur / stpPts : 0;
+
+    // ---- scenarios ----
+    let pGo, pRev;
+    if (ag < 0.15) { pGo = 34; pRev = 26; }
+    else {
+      const aligned = Math.sign(mu) === sg || mu === 0;
+      pGo = this.cl(38 + (aligned ? Math.abs(mu) * 22 : -10) - Math.max(0, ag - 0.8) * 18, 12, 62);
+      pRev = this.cl(26 + Math.max(0, ag - 0.8) * 24 + (aligned ? 0 : 12), 12, 62);
+      pGo = Math.round(pGo); pRev = Math.round(pRev);
+      if (pGo + pRev > 82) { const ex = pGo + pRev - 82; pGo -= Math.round(ex / 2); pRev -= ex - Math.round(ex / 2); }
+    }
+    pGo = Math.round(pGo); pRev = Math.round(pRev);
+    const pRange = 100 - pGo - pRev;
+    const scenarios = [
+      { label: 'Continuación del gap (gap & go)', p: pGo, col: '#34d399' },
+      { label: 'Reversión / cierre del gap', p: pRev, col: '#f43f5e' },
+      { label: 'Rango lateral (sin trade)', p: pRange, col: '#94a3b8' }
+    ];
+    const gapNote = ag < 0.15 ? 'Apertura casi plana: la dirección dependerá del flujo de las 9:00–9:15 más que del gap.' :
+      ag <= 0.8 ? 'Gap moderado ' + this.fmtPct(gapPct) + ': estadísticamente tiende a continuar en la primera hora si Asia y futuros US lo confirman.' :
+        'Gap amplio ' + this.fmtPct(gapPct) + ': los gaps > 0,8 % tienden a cerrarse parcialmente; espera confirmación de 15 min antes de entrar.';
+
+    // ---- factor rows ----
+    const FDETAIL = {
+      us: 'S&P cierre ' + this.fmtPct(P('spx')) + ' · ES ' + this.fmtPct(P('es')) + ' · NQ ' + this.fmtPct(P('nq')) + ' → composite ' + this.fmtPct(usComp),
+      asia: 'Nikkei ' + this.fmtPct(P('nikkei')) + ' · HSI ' + this.fmtPct(P('hsi')) + ' · SSE ' + this.fmtPct(P('sse')) + ' · KOSPI ' + this.fmtPct(P('kospi')) + ' · ASX ' + this.fmtPct(P('asx')),
+      gap: 'Gap ' + this.fmtPct(gapPct) + ': momentum hasta ±0,4 %, reversión progresiva a partir de ±0,8 %',
+      news: (st.news.status === 'ok' ? 'Tono GDELT ' + (tone !== null ? this.fmtSN(tone, 1) : '—') + ' · ' + (st.news.arts || []).length + ' titulares · impacto titulares ' + this.fmtSN(this.cl(newsHead, -0.4, 0.4), 2) + ' pp' : 'Sin conexión con GDELT: factor neutralizado'),
+      tech: 'Cierre previo en el ' + this.fmtN((clv + 1) / 2 * 100, 0) + ' % del rango del día (CLV ' + this.fmtSN(clv, 2) + ')',
+      fx: 'EUR/USD ' + this.fmtN(eur, 4) + ' vs ' + this.fmtN(eurPrev, 4) + ' → ' + this.fmtPct(fxPct) + ' (euro débil favorece exportadoras)'
+    };
+    const maxC = Math.max.apply(null, contribArr.map(c => Math.abs(c[1])).concat([0.1]));
+    const factorRows = Object.keys(this.DEFW).map(k => ({
+      label: FNAMES[k],
+      rawStr: 'f=' + this.fmtSN(F[k], 2) + ' · ŵ=' + this.fmtN(wN[k], 0) + ' %',
+      contrib: this.fmtSN(contribs[k], 2) + ' pp',
+      col: contribs[k] > 0.02 ? '#34d399' : contribs[k] < -0.02 ? '#f43f5e' : '#94a3b8',
+      barLeft: contribs[k] >= 0 ? '50' : (50 - Math.abs(contribs[k]) / maxC * 48).toFixed(1),
+      barW: (Math.abs(contribs[k]) / maxC * 48).toFixed(1),
+      detail: FDETAIL[k]
+    }));
+
+    // ---- inputs UI ----
+    const inputGroups = this.FIELDS.map(gr => ({
+      title: gr.g, col: gr.col,
+      fields: gr.items.map(it => {
+        const k = it[0];
+        const live = (k === 'eurusd' || k === 'eurusdPrev') && st.fx.status === 'ok' && !st.touched[k];
+        const touched = !!st.touched[k];
+        return {
+          k, label: it[1], unit: it[2], val: IN[k],
+          dotCol: live ? '#34d399' : touched ? '#22d3ee' : '#fbbf24',
+          status: live ? 'Fuente en vivo (BCE)' : touched ? 'Introducido hoy' : 'Valor de ejemplo: sustitúyelo',
+          bord: touched || live ? '#334155' : 'rgba(245,158,11,0.45)'
+        };
+      })
+    }));
+    const exampleCount = this.FIELDS.reduce((n, gr) => n + gr.items.filter(it => !st.touched[it[0]] && !((it[0] === 'eurusd' || it[0] === 'eurusdPrev') && st.fx.status === 'ok')).length, 0);
+
+    // ---- flags UI ----
+    const FLAGDEF = [
+      { k: 'crit', label: 'Noticia crítica sin digerir (bloquea la señal)' },
+      { k: 'macro', label: 'Dato macro 9:00–10:30 hoy (IFO / ZEW / BCE)' },
+      { k: 'expiry', label: 'Vencimiento derivados / rebalanceo (bloquea)' }
+    ];
+    const flagBtns = FLAGDEF.map(f => {
+      const on = !!st.flags[f.k];
+      return {
+        k: f.k, label: f.label, pressed: on ? 'true' : 'false',
+        bord: on ? 'rgba(245,158,11,0.6)' : '#334155', bg: on ? 'rgba(245,158,11,0.1)' : 'transparent',
+        col: on ? '#fbbf24' : '#cbd5e1', boxBord: on ? '#fbbf24' : '#475569', boxBg: on ? '#fbbf24' : 'transparent', mark: on ? '✓' : ''
+      };
+    });
+
+    // ---- weights UI ----
+    const WEV = {
+      us: 'Los estudios de spillover dan al cierre/futuros de EE. UU. la mayor beta sobre la apertura europea (~0,4–0,6).',
+      asia: 'Asia cierra justo antes: beta conjunta ~0,2–0,4; el Nikkei pondera más (30 % del composite).',
+      gap: 'Gaps pequeños continúan; > 0,8 % tienden a cierre parcial (evidencia de gap-fill intradía).',
+      news: 'Tono agregado + titulares de las 40 ponderados por peso en el índice (GDELT).',
+      tech: 'Cierre cerca de máximos → continuación matinal (close location value).',
+      fx: 'EUR débil favorece a las exportadoras; efecto intradía moderado.'
+    };
+    const weightRows = Object.keys(this.DEFW).map(k => ({
+      k, label: FNAMES[k], raw: wRaw[k], pctStr: this.fmtN(wN[k], 0) + ' %', evidence: WEV[k]
+    }));
+
+    // ---- proxies ----
+    const volState = vdax < 14 ? ['Compresión', '#34d399'] : vdax < 20 ? ['Normal', '#94a3b8'] : vdax < 28 ? ['Estrés', '#fbbf24'] : ['Pánico', '#f43f5e'];
+    const gapPressure = ag < 0.2 ? ['Equilibrio', '#94a3b8'] : sg > 0 ? ['Demanda en subasta', '#34d399'] : ['Oferta en subasta', '#f43f5e'];
+    const rangePos = prevHigh > prevLow ? (cfd - prevLow) / (prevHigh - prevLow) : 0.5;
+    const posState = rangePos > 1 ? ['Sobre máximos', '#34d399'] : rangePos < 0 ? ['Bajo mínimos', '#f43f5e'] : rangePos > 0.7 ? ['Zona alta', '#34d399'] : rangePos < 0.3 ? ['Zona baja', '#f43f5e'] : ['Zona media', '#94a3b8'];
+    const toneState = tone === null ? ['Sin datos', '#64748b'] : tone > 1 ? ['Constructivo', '#34d399'] : tone < -1.5 ? ['Negativo', '#f43f5e'] : ['Mixto', '#94a3b8'];
+    const mkPx = (label, s, note) => ({ label, state: s[0], col: s[1], bg: s[1] === '#64748b' ? 'rgba(100,116,139,0.13)' : s[1] === '#94a3b8' ? 'rgba(148,163,184,0.13)' : s[1] === '#34d399' ? 'rgba(52,211,153,0.13)' : s[1] === '#fbbf24' ? 'rgba(245,158,11,0.13)' : 'rgba(244,63,94,0.13)', note });
+    const proxyRows = [
+      mkPx('Presión pre-apertura (gap CFD)', gapPressure, this.fmtPct(gapPct) + ' vs. cierre'),
+      mkPx('Régimen de volatilidad (VDAX)', volState, 'nivel ' + this.fmtN(vdax, 1)),
+      mkPx('Posición vs. rango del día previo', posState, this.fmtN(this.cl(rangePos, -0.5, 1.5) * 100, 0) + ' % del rango'),
+      mkPx('Sesgo del flujo de noticias', toneState, tone === null ? 'activa GDELT' : 'tono ' + this.fmtSN(tone, 1))
+    ];
+
+    // ---- news UI ----
+    const newsFilters = [['all', 'Todas'], ['macro', 'Macro'], ['emp', 'Empresas']].map(nf => {
+      const on = st.newsFilter === nf[0];
+      return { k: nf[0], label: nf[1], pressed: on ? 'true' : 'false', bord: on ? 'rgba(56,189,248,0.6)' : '#1e293b', bg: on ? 'rgba(56,189,248,0.13)' : 'transparent', col: on ? '#7dd3fc' : '#64748b' };
+    });
+    const relTime = sd => {
+      if (!sd || sd.length < 13) return '—';
+      const dt = Date.UTC(+sd.slice(0, 4), +sd.slice(4, 6) - 1, +sd.slice(6, 8), +sd.slice(9, 11), +sd.slice(11, 13));
+      const mins = Math.max(0, Math.round((Date.now() - dt) / 60000));
+      return mins < 60 ? 'hace ' + mins + ' min' : 'hace ' + Math.round(mins / 60) + ' h';
+    };
+    const daxLevel = prevClose;
+    const articles = (st.news.arts || []).filter(a => st.newsFilter === 'all' || (st.newsFilter === 'macro' ? a.kind === 'macro' : a.kind === 'emp')).slice(0, 18).map(a => {
+      const co = this.matchCompany(a.title);
+      const cls = this.classify(a.title);
+      const impPct = co && cls !== 0 ? cls * co[1] / 100 * (Math.abs(cls) > 0 ? 2.2 : 0) : 0;
+      return {
+        title: a.title.length > 110 ? a.title.slice(0, 108) + '…' : a.title, url: a.url, domain: a.domain, when: relTime(a.seendate),
+        tag: co ? co[0].toUpperCase().slice(0, 12) : 'MACRO',
+        tagBg: co ? 'rgba(251,191,36,0.12)' : 'rgba(56,189,248,0.12)', tagCol: co ? '#fbbf24' : '#7dd3fc',
+        impStr: co && cls !== 0 ? this.fmtSN(impPct, 2) + ' % índice' : cls !== 0 ? (cls > 0 ? 'positiva' : 'negativa') : 'neutra',
+        impCol: cls > 0 ? '#34d399' : cls < 0 ? '#f43f5e' : '#64748b'
+      };
+    });
+    const ns = st.news.status;
+    const newsStatus = ns === 'ok' ? 'EN VIVO · ' + (st.news.arts || []).length + ' titulares · actualizado ' + (st.news.at ? new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }).format(st.news.at) : '') + ' CET' :
+      ns === 'loading' ? 'Conectando con GDELT…' : ns === 'err' ? 'ERROR de conexión — reintenta o usa el checklist manual' : ns === 'empty' ? 'Sin titulares en las últimas 16 h' : 'Sin conexión aún';
+    const toneStr = tone === null ? '—' : this.fmtSN(tone, 1);
+    const toneCol = tone === null ? '#64748b' : tone > 1 ? '#34d399' : tone < -1.5 ? '#f43f5e' : '#94a3b8';
+
+    // ---- companies UI ----
+    const compList = this.COMPANIES.slice().sort((a, b) => b[1] - a[1]).slice(0, st.show40 ? 40 : 12).map(c => {
+      const n = matchedToday[c[0]] || 0;
+      let imp = 0;
+      (st.news.arts || []).forEach(a => { const co = this.matchCompany(a.title); if (co && co[0] === c[0]) { imp += this.classify(a.title) * c[1] / 100 * 2.2; } });
+      return {
+        name: c[0], w: this.fmtN(c[1], 1), n: n ? String(n) : '—', nCol: n ? '#7dd3fc' : '#334155',
+        imp: n && Math.abs(imp) > 0.001 ? this.fmtSN(imp, 2) + ' %' : '—',
+        impCol: imp > 0.001 ? '#34d399' : imp < -0.001 ? '#f43f5e' : '#334155'
+      };
+    });
+
+    // ---- backtest ----
+    const bt = this.backtest(wN);
+    const btCells = [
+      { label: 'OPERACIONES / 250 D', val: String(bt.trades), col: '#e2e8f0' },
+      { label: 'ACIERTO GLOBAL', val: this.fmtN(bt.hit, 0) + ' %', col: bt.hit >= 55 ? '#34d399' : '#fbbf24' },
+      { label: 'ACIERTO CONV. ALTA', val: bt.hiConv ? this.fmtN(bt.hiHit, 0) + ' % (' + bt.hiConv + ')' : '—', col: '#34d399' },
+      { label: 'EXPECTANCY / TRADE', val: this.fmtPct(bt.exp), col: bt.exp > 0 ? '#34d399' : '#f43f5e' },
+      { label: 'PROFIT FACTOR', val: this.fmtN(Math.min(bt.pf, 9.9), 2), col: bt.pf >= 1.2 ? '#34d399' : '#fbbf24' },
+      { label: 'MAX DRAWDOWN', val: '−' + this.fmtN(bt.maxDD, 1) + ' %', col: '#f43f5e' }
+    ];
+    const bmin = Math.min.apply(null, bt.curve), bmax = Math.max.apply(null, bt.curve);
+    const bspan = Math.max(0.1, bmax - bmin);
+    const btCurve = bt.curve.map((v, i) => (i / (bt.curve.length - 1) * 400).toFixed(1) + ',' + (6 + (1 - (v - bmin) / bspan) * 62).toFixed(1)).join(' ');
+
+    // ---- misc ----
+    const savedLabel = st.savedAt ? 'GUARDADO ' + new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }).format(new Date(st.savedAt)) : 'SIN GUARDAR';
+    const cooldown = Date.now() - st.lastFetch < 90000 && st.lastFetch > 0;
+
+    return {
+      // header
+      clockStr: B.str, phaseLabel, phaseCol, phaseBg, phaseBord, countLabel, countVal: this.cd(countTo),
+      fxBadge: st.fx.status === 'ok' ? 'LIVE' : st.fx.status === 'loading' ? '…' : st.fx.status === 'err' ? 'ERR' : 'OFF',
+      fxBadgeCol: st.fx.status === 'ok' ? '#34d399' : st.fx.status === 'err' ? '#f43f5e' : '#64748b',
+      newsBadge: ns === 'ok' ? 'LIVE' : ns === 'loading' ? '…' : ns === 'err' ? 'ERR' : 'OFF',
+      newsBadgeCol: ns === 'ok' ? '#34d399' : ns === 'err' ? '#f43f5e' : '#64748b',
+      onResetAll,
+      // signal
+      sigLabel, sigArrow, sigCol, sigProb: blocked ? '—' : String(prob), sigMu: this.fmtPct(mu),
+      sigConv, sigConvCol: sigConv === 'ALTA' ? '#34d399' : sigConv === 'MEDIA' ? '#fbbf24' : '#64748b',
+      sigReason, sigValidity: 'VÁLIDA 9:00–10:30 CET', sigPhaseNote, sigPhaseNoteCol,
+      sigCardBg: blocked ? 'rgba(15,23,42,0.72)' : dir > 0 ? 'linear-gradient(160deg, rgba(6,78,59,0.35) 0%, rgba(15,23,42,0.72) 55%)' : 'linear-gradient(160deg, rgba(76,5,25,0.35) 0%, rgba(15,23,42,0.72) 55%)',
+      sigCardBord: blocked ? '#1e293b' : dir > 0 ? 'rgba(52,211,153,0.35)' : 'rgba(244,63,94,0.35)',
+      gates,
+      // plan
+      planEntry: this.fmtN(cfd, 1), planTarget: this.fmtN(target, 1), planTargetPts: this.fmtSN(dir * tgtPts, 0) + ' pts (' + this.fmtPct(dir * tgtPct) + ')',
+      planStop: this.fmtN(stop, 1), planStopPts: this.fmtSN(-dir * stpPts, 0) + ' pts (' + this.fmtPct(-dir * stpPct) + ')',
+      planRR: this.fmtN(rrv, 2) + '×', planEv: this.fmtSN(ev, 1) + ' pts', planEvCol: ev > 0 ? '#34d399' : '#f43f5e',
+      spreadStr: this.fmtN(this.SPREAD, 1), capital: st.capital, riskPct: st.riskPct, onCapital, onRisk,
+      planSize: sizePerPt > 0 ? this.fmtN(sizePerPt, 2) + ' €/pt' : '—', planRiskEur: this.fmtN(riskEur, 0) + ' €',
+      // opening
+      gapStr: this.fmtPct(gapPct), gapCol: gapPct > 0.05 ? '#34d399' : gapPct < -0.05 ? '#f43f5e' : '#94a3b8',
+      gapPts: this.fmtSN(cfd - prevClose, 0), gapNote, scenarios,
+      scenarioNote: 'Probabilidades derivadas del tamaño del gap, su alineación con μ y la evidencia de gap-fill. Suman 100 %.',
+      // inputs
+      inputGroups, onInput, savedLabel,
+      flagBtns, onFlag,
+      flagNote: exampleCount > 0 ? '⚠ ' + exampleCount + ' campos siguen con valores de EJEMPLO: la señal no es operativa hasta sustituirlos.' : 'Briefing completo: todos los campos introducidos hoy.',
+      // weights
+      wTotal: this.fmtN(wSum, 0), weightRows, onWeightO, onWeightsDefault,
+      // factors
+      factorRows,
+      mathVdax: this.fmtN(vdax, 1), mathSigma: this.fmtN(sigma, 2) + ' %', mathZ: this.fmtSN(z, 2), mathThreshold: String(this.THRESH),
+      // proxies
+      proxyRows,
+      // news
+      newsFilters, onNewsFilter, articles, newsStatus, toneStr, toneCol,
+      toneBg: toneCol === '#34d399' ? 'rgba(52,211,153,0.13)' : toneCol === '#f43f5e' ? 'rgba(244,63,94,0.13)' : 'rgba(148,163,184,0.13)',
+      newsEmpty: articles.length === 0, newsEmptyMsg: ns === 'loading' ? 'Cargando titulares…' : ns === 'err' ? 'Sin conexión con GDELT. Comprueba tu red o revisa las noticias en tu broker.' : 'Sin titulares que mostrar con este filtro.',
+      onRefreshLive, refreshLabel: ns === 'loading' ? 'Cargando…' : cooldown ? '↻ Actualizar (90 s)' : '↻ Actualizar',
+      // companies
+      companies: compList, onToggle40, toggle40Label: st.show40 ? 'Ver top 12' : 'Ver las 40',
+      // backtest
+      btCells, btCurve,
+      // toast
+      toastShow: st.toastShow, toastMsg: st.toastMsg
+    };
+  }
+}
+</script>
+</body>
+</html>

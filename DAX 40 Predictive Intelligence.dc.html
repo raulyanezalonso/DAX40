@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #020617; color: #e2e8f0; font-family: 'Archivo', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #38bdf8; text-decoration: none; }
+  a:hover { color: #7dd3fc; text-decoration: underline; }
+  @keyframes dax-tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes dax-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  button { font-family: 'Archivo', system-ui, sans-serif; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+  input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; height: 20px; width: 100%; margin: 0; padding: 0; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: #1e293b; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: #38bdf8; margin-top: -5px; border: 2px solid #0f172a; box-shadow: 0 0 0 1px #38bdf8; }
+  input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: #1e293b; }
+  input[type="range"]::-moz-range-thumb { height: 14px; width: 14px; border: none; border-radius: 50%; background: #38bdf8; }
+  #dax-grid { display: grid; grid-template-columns: minmax(252px, 23fr) minmax(0, 52fr) minmax(268px, 25fr); gap: 14px; align-items: start; }
+  #dax-col-left, #dax-col-mid, #dax-col-right { display: grid; gap: 14px; align-content: start; min-width: 0; }
+  @media (max-width: 1380px) {
+    #dax-grid { grid-template-columns: minmax(240px, 27fr) minmax(0, 73fr); }
+    #dax-col-right { grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  }
+  @media (max-width: 940px) {
+    #dax-grid { grid-template-columns: 1fr; }
+    #dax-col-right { grid-template-columns: 1fr; }
+  }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#020617">
+
+  <!-- ============ TOAST ============ -->
+  <sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:fixed;top:14px;right:14px;z-index:80;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px 14px;font-size:12.5px;color:#e2e8f0;box-shadow:0 12px 32px rgba(2,6,23,0.7);display:flex;align-items:center;gap:8px;max-width:320px">
+      <span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;flex-shrink:0"></span>
+      <span>{{ toastMsg }}</span>
+    </div>
+  </sc-if>
+
+  <!-- ============ HEADER ============ -->
+  <header data-screen-label="Cabecera" style="position:sticky;top:0;z-index:40;background:rgba(2,6,23,0.94);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b">
+    <div style="max-width:1760px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <div style="width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#0ea5e9 0%,#0f172a 130%);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:13px;color:#f8fafc;letter-spacing:-0.02em;flex-shrink:0">DX</div>
+        <div style="min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <h1 style="margin:0;font-size:16.5px;font-weight:800;letter-spacing:0.01em;color:#f8fafc;white-space:nowrap">DAX 40 Predictive Intelligence</h1>
+            <span style="font-size:9.5px;font-weight:700;letter-spacing:0.1em;padding:2px 7px;border-radius:4px;background:rgba(245,158,11,0.14);color:#fbbf24;border:1px solid rgba(245,158,11,0.35);font-family:'IBM Plex Mono',monospace">SIMULATED DATA</span>
+            <span tabindex="0" title="Este dashboard utiliza un motor de datos simulados y deterministas con fines educativos. No emplea datos de mercado en tiempo real ni constituye asesoramiento financiero." aria-label="Información sobre los datos simulados" style="width:16px;height:16px;border-radius:50%;border:1px solid #475569;color:#94a3b8;font-size:10px;display:inline-flex;align-items:center;justify-content:center;cursor:help;font-family:'IBM Plex Mono',monospace">i</span>
+          </div>
+          <p style="margin:1px 0 0;font-size:11px;color:#64748b;letter-spacing:0.04em">Technical, Macro &amp; Fundamental Forecast Engine</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b">
+          <span style="width:7px;height:7px;border-radius:50%;background:#fbbf24;animation:dax-pulse 2.4s ease-in-out infinite"></span>
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:0.08em;color:#fbbf24">MERCADO SIMULADO</span>
+          <span style="font-size:10.5px;color:#64748b;font-family:'IBM Plex Mono',monospace">{{ updatedLabel }}</span>
+        </div>
+        <div title="Confianza global del modelo" style="display:flex;align-items:center;gap:7px;padding:5px 10px;border-radius:8px;background:rgba(15,23,42,0.8);border:1px solid #1e293b">
+          <span style="font-size:10px;color:#64748b;letter-spacing:0.06em">CONF.</span>
+          <div style="width:52px;height:4px;border-radius:2px;background:#1e293b;overflow:hidden"><div style="height:100%;width:{{ k6pct }}%;background:{{ k6col }};border-radius:2px;transition:all 0.3s"></div></div>
+          <span style="font-size:11px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:{{ k6col }}">{{ k6pct }} %</span>
+        </div>
+        <button onClick="{{ onToggleView }}" style="padding:7px 12px;border-radius:8px;border:1px solid #334155;background:transparent;color:#cbd5e1;font-size:11.5px;font-weight:600;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8;color:#f8fafc">{{ viewLabel }}</button>
+        <button onClick="{{ onReset }}" style="padding:7px 14px;border-radius:8px;border:1px solid rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);color:#7dd3fc;font-size:11.5px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="background:rgba(56,189,248,0.2);color:#e0f2fe">↺ Reset Model</button>
+      </div>
+    </div>
+
+    <!-- Ticker -->
+    <div data-screen-label="Ticker de mercado" style="border-top:1px solid #0f172a;background:#030a1c;overflow:hidden">
+      <div style="display:flex;gap:34px;width:max-content;padding:6px 0;animation:dax-tick 46s linear infinite" style-hover="animation-play-state:paused">
+        <sc-for list="{{ tickerLoop }}" as="t" hint-placeholder-count="6">
+          <div style="display:flex;align-items:baseline;gap:8px;font-family:'IBM Plex Mono',monospace;white-space:nowrap">
+            <span style="font-size:10.5px;font-weight:700;color:#64748b;letter-spacing:0.06em">{{ t.name }}</span>
+            <span style="font-size:12px;font-weight:600;color:#e2e8f0">{{ t.val }}</span>
+            <span style="font-size:11px;font-weight:600;color:{{ t.col }}">{{ t.chg }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <div style="max-width:1760px;margin:0 auto;padding:14px 18px 30px;display:grid;gap:14px">
+
+    <!-- ============ KPI ROW ============ -->
+    <section data-screen-label="Tarjetas KPI" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:12px;border-radius:14px;box-shadow:{{ kpiRing }};transition:box-shadow 0.4s">
+
+      <div style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:13px;padding:13px 15px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:#64748b;margin-bottom:6px">DAX 40 · ÚLTIMO</div>
+        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:700;color:#f8fafc">{{ k1v }}</span>
+          <span style="font-size:12.5px;font-weight:700;color:{{ k1col }}">{{ k1arrow }} {{ k1chgPct }}</span>
+        </div>
+        <div style="margin-top:6px;font-size:10.5px;color:#94a3b8;display:flex;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace">
+          <span>1S <span style="color:{{ k1weekCol }};font-weight:600">{{ k1week }}</span></span>
+          <span style="color:#64748b">MáX {{ k1hi }}</span>
+          <span style="color:#64748b">MíN {{ k1lo }}</span>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:13px;padding:13px 15px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:#64748b;margin-bottom:6px">OBJETIVO DEL MODELO · {{ k2date }}</div>
+        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:700;color:#f8fafc">{{ k2target }}</span>
+          <span style="font-size:12.5px;font-weight:700;color:{{ k2retCol }}">{{ k2ret }}</span>
+        </div>
+        <div style="margin-top:6px;font-size:10.5px;color:#94a3b8;font-family:'IBM Plex Mono',monospace">Rango: {{ k2range }}</div>
+      </div>
+
+      <div style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:13px;padding:13px 15px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:#64748b;margin-bottom:6px">SESGO DEL MODELO</div>
+        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+          <span style="font-size:15px;font-weight:800;color:{{ k3col }}">{{ k3label }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#94a3b8">{{ k3score }} / ±100</span>
+        </div>
+        <div style="margin-top:9px;height:5px;border-radius:3px;background:#1e293b;position:relative;overflow:hidden">
+          <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#475569"></div>
+          <div style="position:absolute;top:0;bottom:0;left:{{ k3barLeft }}%;width:{{ k3barW }}%;background:{{ k3col }};border-radius:3px;transition:all 0.3s"></div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:13px;padding:13px 15px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:#64748b;margin-bottom:2px">SENTIMIENTO</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <svg viewBox="0 0 120 70" style="width:96px;height:56px;flex-shrink:0" role="img" aria-label="Medidor de sentimiento miedo-codicia">
+            <path d="M 14 62 A 46 46 0 0 1 27.47 29.47" fill="none" stroke="#f43f5e" stroke-width="7" stroke-linecap="round" opacity="0.85"></path>
+            <path d="M 27.47 29.47 A 46 46 0 0 1 52.81 16.57" fill="none" stroke="#fb923c" stroke-width="7" opacity="0.85"></path>
+            <path d="M 52.81 16.57 A 46 46 0 0 1 67.19 16.57" fill="none" stroke="#94a3b8" stroke-width="7" opacity="0.85"></path>
+            <path d="M 67.19 16.57 A 46 46 0 0 1 92.53 29.47" fill="none" stroke="#4ade80" stroke-width="7" opacity="0.85"></path>
+            <path d="M 92.53 29.47 A 46 46 0 0 1 106 62" fill="none" stroke="#10b981" stroke-width="7" stroke-linecap="round" opacity="0.85"></path>
+            <line x1="60" y1="62" x2="{{ needleX }}" y2="{{ needleY }}" stroke="#f8fafc" stroke-width="2.5" stroke-linecap="round"></line>
+            <circle cx="60" cy="62" r="4" fill="#f8fafc"></circle>
+          </svg>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:700;color:{{ k4col }}">{{ k4val }}</div>
+            <div style="font-size:11.5px;font-weight:700;color:{{ k4col }}">{{ k4label }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:13px;padding:13px 15px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:#64748b;margin-bottom:6px">VDAX-NEW · VOLATILIDAD</div>
+        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:700;color:#f8fafc">{{ k5val }}</span>
+          <span style="font-size:12.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:{{ k5chgCol }}">{{ k5chg }}</span>
+        </div>
+        <div style="margin-top:6px"><span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:{{ k5regBg }};color:{{ k5regCol }}">Régimen: {{ k5reg }}</span></div>
+      </div>
+
+      <div style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:13px;padding:13px 15px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:#64748b;margin-bottom:6px">CONFIANZA DEL MODELO</div>
+        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:700;color:{{ k6col }}">{{ k6pct }} %</span>
+          <span style="font-size:12.5px;font-weight:700;color:{{ k6col }}">{{ k6level }}</span>
+        </div>
+        <div style="margin-top:6px;font-size:10.5px;color:#94a3b8">Incertidumbre: {{ k6cause }}</div>
+      </div>
+    </section>
+
+    <!-- ============ MAIN GRID ============ -->
+    <div id="dax-grid">
+
+      <!-- ==================== LEFT COLUMN ==================== -->
+      <div id="dax-col-left">
+
+        <section data-screen-label="Horizonte" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 10px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Horizonte de previsión</h2>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+            <sc-for list="{{ horizonBtns }}" as="hb" hint-placeholder-count="3">
+              <button data-h="{{ hb.h }}" onClick="{{ onHorizon }}" aria-pressed="{{ hb.pressed }}" style="padding:9px 4px;border-radius:8px;border:1px solid {{ hb.bord }};background:{{ hb.bg }};color:{{ hb.col }};font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'IBM Plex Mono',monospace" style-hover="border-color:#38bdf8">{{ hb.label }}</button>
+            </sc-for>
+          </div>
+          <p style="margin:9px 0 0;font-size:10.5px;color:#64748b">Objetivo: {{ k2date }} · {{ horizonNote }}</p>
+        </section>
+
+        <section data-screen-label="Pesos del modelo" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Pesos por factor</h2>
+            <span style="font-size:10.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#94a3b8">Σ {{ wTotal }} %</span>
+          </div>
+          <sc-if value="{{ wNoteShow }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:10px;color:#fbbf24;margin-bottom:2px">Los pesos se normalizan automáticamente a 100 %.</div>
+          </sc-if>
+          <sc-for list="{{ weightRows }}" as="w" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:5px;padding:9px 0;border-bottom:1px solid #0f172a">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:21px;height:21px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;background:{{ w.iconBg }};color:{{ w.iconCol }};font-family:'IBM Plex Mono',monospace;flex-shrink:0">{{ w.glyph }}</span>
+                <span style="font-size:12.5px;font-weight:600;color:#e2e8f0;flex:1">{{ w.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;color:#f8fafc">{{ w.pctStr }}</span>
+              </div>
+              <input type="range" min="0" max="100" step="1" value="{{ w.raw }}" data-k="{{ w.k }}" onChange="{{ onWeight }}" aria-label="Peso del factor {{ w.label }}">
+              <div style="display:flex;align-items:center;gap:7px">
+                <span style="font-size:10px;padding:2px 7px;border-radius:999px;background:{{ w.chipBg }};color:{{ w.chipCol }};font-weight:700;white-space:nowrap">{{ w.scoreLabel }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#94a3b8">{{ w.scoreStr }}</span>
+                <div style="flex:1;height:4px;border-radius:2px;background:#1e293b;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#475569"></div>
+                  <div style="position:absolute;top:0;bottom:0;left:{{ w.barLeft }}%;width:{{ w.barW }}%;background:{{ w.barCol }};border-radius:2px;transition:all 0.3s"></div>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:11px">
+            <button onClick="{{ onEqual }}" style="padding:7px 4px;border-radius:8px;border:1px solid #334155;background:transparent;color:#cbd5e1;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8;color:#f8fafc">Equal Weights</button>
+            <button onClick="{{ onInstitutional }}" style="padding:7px 4px;border-radius:8px;border:1px solid #334155;background:transparent;color:#cbd5e1;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8;color:#f8fafc">Institutional Default</button>
+          </div>
+        </section>
+
+        <section data-screen-label="Presets de escenario" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 10px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Presets de escenario</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ presetBtns }}" as="p" hint-placeholder-count="4">
+              <button data-id="{{ p.id }}" onClick="{{ onPreset }}" aria-pressed="{{ p.pressed }}" style="padding:6px 11px;border-radius:999px;border:1px solid {{ p.bord }};background:{{ p.bg }};color:{{ p.col }};font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8">{{ p.label }}</button>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-screen-label="Shock Simulator" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Shock Simulator</h2>
+            <span style="font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:{{ shockCountCol }}">{{ shockCountLabel }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <sc-for list="{{ shockBtns }}" as="s" hint-placeholder-count="6">
+              <button data-id="{{ s.id }}" onClick="{{ onShock }}" aria-pressed="{{ s.pressed }}" style="padding:8px 6px;border-radius:8px;border:1px solid {{ s.bord }};background:{{ s.bg }};color:{{ s.col }};font-size:10.5px;font-weight:600;cursor:pointer;transition:all 0.2s;opacity:{{ s.op }};text-align:left;display:flex;align-items:center;gap:6px" style-hover="border-color:#f59e0b">
+                <span style="width:6px;height:6px;border-radius:50%;background:{{ s.dot }};flex-shrink:0"></span>{{ s.label }}
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ clearShow }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ onClearShocks }}" style="margin-top:9px;width:100%;padding:7px;border-radius:8px;border:1px solid rgba(244,63,94,0.4);background:rgba(244,63,94,0.08);color:#fda4af;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="background:rgba(244,63,94,0.18)">Clear Active Shocks</button>
+          </sc-if>
+          <p style="margin:9px 0 0;font-size:10px;color:#64748b">Los shocks se superponen a los supuestos actuales (máx. {{ maxShocks }} simultáneos).</p>
+        </section>
+
+        <sc-if value="{{ advanced }}" hint-placeholder-val="{{ true }}">
+          <section data-screen-label="Supuestos internos" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+            <button onClick="{{ onToggleAssumps }}" aria-expanded="{{ assumpPressed }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;background:transparent;border:none;padding:0;cursor:pointer;color:#64748b">
+              <span style="font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700">Ajuste de supuestos internos</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#94a3b8">{{ assumpChevron }}</span>
+            </button>
+            <sc-if value="{{ assumpOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:6px">
+                <sc-for list="{{ assumpRows }}" as="a" hint-placeholder-count="4">
+                  <div style="padding:9px 0;border-bottom:1px solid #0f172a">
+                    <div style="display:flex;align-items:center;gap:7px">
+                      <span style="font-size:11.5px;font-weight:600;color:#cbd5e1;flex:1">{{ a.label }}</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;color:#f8fafc">{{ a.valStr }}</span>
+                      <button data-k="{{ a.k }}" onClick="{{ onAssumpReset }}" title="Restaurar valor inicial ({{ a.defStr }})" aria-label="Restaurar {{ a.label }}" style="width:20px;height:20px;border-radius:6px;border:1px solid #334155;background:transparent;color:#94a3b8;font-size:10px;cursor:pointer;transition:all 0.2s;padding:0" style-hover="border-color:#38bdf8;color:#e0f2fe">↺</button>
+                    </div>
+                    <input type="range" min="{{ a.min }}" max="{{ a.max }}" step="{{ a.step }}" value="{{ a.val }}" data-k="{{ a.k }}" onChange="{{ onAssump }}" aria-label="{{ a.label }}">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
+                      <span style="font-size:9.5px;color:#475569;font-family:'IBM Plex Mono',monospace">{{ a.minStr }} – {{ a.maxStr }}</span>
+                      <span style="font-size:10px;font-weight:700;color:{{ a.impCol }}">{{ a.impact }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </section>
+        </sc-if>
+      </div>
+
+      <!-- ==================== CENTER COLUMN ==================== -->
+      <div id="dax-col-mid">
+
+        <section data-screen-label="Gráfico principal" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+            <div>
+              <h2 style="margin:0;font-size:13px;font-weight:800;color:#f8fafc">Histórico 90 días &amp; proyección a {{ horizon }} días</h2>
+              <p style="margin:2px 0 0;font-size:10.5px;color:#64748b">Líneas discontinuas = escenarios simulados · Banda = intervalo de confianza</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px">
+              <sc-for list="{{ seriesChips }}" as="c" hint-placeholder-count="7">
+                <button data-k="{{ c.k }}" onClick="{{ onToggleSeries }}" aria-pressed="{{ c.pressed }}" style="display:flex;align-items:center;gap:5px;padding:3.5px 9px;border-radius:999px;border:1px solid {{ c.bord }};background:{{ c.bg }};color:{{ c.col }};font-size:10px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8">
+                  <span style="width:13px;height:{{ c.swH }};border-top:{{ c.swTop }};background:{{ c.swBg }};border-radius:2px"></span>{{ c.label }}
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="position:relative;height:432px" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}">
+            <div style="position:absolute;top:0;left:0;right:0;bottom:20px">
+              <svg viewBox="0 0 1000 430" preserveAspectRatio="none" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block">
+                <line x1="0" x2="1000" y1="8" y2="8" stroke="#0f172a" stroke-width="1"></line>
+                <line x1="0" x2="1000" y1="111.5" y2="111.5" stroke="#0f172a" stroke-width="1"></line>
+                <line x1="0" x2="1000" y1="215" y2="215" stroke="#0f172a" stroke-width="1"></line>
+                <line x1="0" x2="1000" y1="318.5" y2="318.5" stroke="#0f172a" stroke-width="1"></line>
+                <line x1="0" x2="1000" y1="422" y2="422" stroke="#0f172a" stroke-width="1"></line>
+                <rect x="0" width="1000" y="{{ chart.resY }}" height="{{ chart.resH }}" fill="rgba(244,63,94,0.07)"></rect>
+                <rect x="0" width="1000" y="{{ chart.supY }}" height="{{ chart.supH }}" fill="rgba(16,185,129,0.07)"></rect>
+                <path d="{{ chart.bandPath }}" fill="rgba(56,189,248,0.09)" stroke="none"></path>
+                <line x1="{{ chart.divX }}" x2="{{ chart.divX }}" y1="0" y2="430" stroke="#334155" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"></line>
+                <polyline points="{{ chart.ema20Pts }}" fill="none" stroke="#f59e0b" stroke-width="1.3" opacity="0.9" vector-effect="non-scaling-stroke"></polyline>
+                <polyline points="{{ chart.ema50Pts }}" fill="none" stroke="#c084fc" stroke-width="1.3" opacity="0.9" vector-effect="non-scaling-stroke"></polyline>
+                <polyline points="{{ chart.histPts }}" fill="none" stroke="#e0f2fe" stroke-width="1.8" vector-effect="non-scaling-stroke"></polyline>
+                <polyline points="{{ chart.optPts }}" fill="none" stroke="#34d399" stroke-width="1.7" stroke-dasharray="7 5" vector-effect="non-scaling-stroke"></polyline>
+                <polyline points="{{ chart.basePts }}" fill="none" stroke="#38bdf8" stroke-width="1.9" stroke-dasharray="7 5" vector-effect="non-scaling-stroke"></polyline>
+                <polyline points="{{ chart.pessPts }}" fill="none" stroke="#f43f5e" stroke-width="1.7" stroke-dasharray="7 5" vector-effect="non-scaling-stroke"></polyline>
+                <circle cx="{{ chart.divX }}" cy="{{ chart.lastY }}" r="3.5" fill="#e0f2fe"></circle>
+              </svg>
+
+              <sc-for list="{{ chart.yTicks }}" as="yt" hint-placeholder-count="5">
+                <div style="position:absolute;left:5px;top:{{ yt.top }}%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#64748b;background:rgba(2,6,23,0.55);padding:0 4px;border-radius:3px;pointer-events:none">{{ yt.label }}</div>
+              </sc-for>
+
+              <div style="position:absolute;top:6px;left:{{ chart.divPct }}%;transform:translateX(6px);font-size:9px;font-weight:700;letter-spacing:0.08em;color:#94a3b8;background:rgba(2,6,23,0.7);border:1px solid #1e293b;padding:2px 7px;border-radius:4px;pointer-events:none;white-space:nowrap">PREVISIÓN ▸</div>
+
+              <sc-if value="{{ chart.shockChipShow }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:26px;left:{{ chart.divPct }}%;transform:translateX(6px);font-size:9px;font-weight:700;color:#fbbf24;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.4);padding:2px 7px;border-radius:4px;pointer-events:none;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">⚡ {{ chart.shockChip }}</div>
+              </sc-if>
+
+              <sc-if value="{{ chart.levelsShow }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;right:6px;top:{{ chart.resTop }}%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:9px;color:#fda4af;background:rgba(2,6,23,0.6);padding:0 4px;border-radius:3px;pointer-events:none">R {{ chart.resLabel }}</div>
+                <div style="position:absolute;right:6px;top:{{ chart.supTop }}%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:9px;color:#6ee7b7;background:rgba(2,6,23,0.6);padding:0 4px;border-radius:3px;pointer-events:none">S {{ chart.supLabel }}</div>
+              </sc-if>
+
+              <sc-if value="{{ chart.hoverShow }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:0;bottom:0;left:{{ chart.hoverLeft }}%;width:1px;background:rgba(148,163,184,0.45);pointer-events:none"></div>
+              </sc-if>
+
+              <sc-if value="{{ tip.show }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:{{ tip.top }}px;left:{{ tip.left }};transform:{{ tip.tf }};z-index:20;background:rgba(2,6,23,0.96);border:1px solid #334155;border-radius:10px;padding:10px 12px;min-width:190px;max-width:250px;pointer-events:none;box-shadow:0 12px 32px rgba(2,6,23,0.8)">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#f8fafc">{{ tip.date }}</span>
+                    <span style="font-size:9px;font-weight:700;letter-spacing:0.06em;padding:1.5px 6px;border-radius:4px;background:{{ tip.phaseBg }};color:{{ tip.phaseCol }}">{{ tip.phase }}</span>
+                  </div>
+                  <sc-for list="{{ tip.rows }}" as="r" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:1.5px 0">
+                      <span style="display:flex;align-items:center;gap:5px;font-size:10.5px;color:#94a3b8"><span style="width:8px;height:2px;background:{{ r.col }};border-radius:1px"></span>{{ r.label }}</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:#e2e8f0">{{ r.val }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+
+            <div style="position:absolute;left:0;right:0;bottom:0;height:16px;pointer-events:none">
+              <sc-for list="{{ chart.xTicks }}" as="xt" hint-placeholder-count="6">
+                <div style="position:absolute;left:{{ xt.left }}%;transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#64748b;white-space:nowrap">{{ xt.label }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <section data-screen-label="Probabilidades" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px">
+          <h2 style="margin:0 0 12px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Probabilidades por escenario</h2>
+          <div style="display:flex;height:26px;border-radius:8px;overflow:hidden;border:1px solid #1e293b">
+            <div style="width:{{ probUp }}%;background:rgba(52,211,153,0.75);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#022c22;font-family:'IBM Plex Mono',monospace;transition:width 0.35s;min-width:34px">{{ probUp }} %</div>
+            <div style="width:{{ probBase }}%;background:rgba(56,189,248,0.55);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#082f49;font-family:'IBM Plex Mono',monospace;transition:width 0.35s;min-width:34px">{{ probBase }} %</div>
+            <div style="width:{{ probDown }}%;background:rgba(244,63,94,0.7);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#4c0519;font-family:'IBM Plex Mono',monospace;transition:width 0.35s;min-width:34px">{{ probDown }} %</div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:7px;font-size:10.5px;color:#94a3b8;flex-wrap:wrap">
+            <span><span style="color:#34d399;font-weight:700">■</span> Alcista</span>
+            <span><span style="color:#38bdf8;font-weight:700">■</span> Caso base</span>
+            <span><span style="color:#f43f5e;font-weight:700">■</span> Bajista</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px">
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 11px">
+              <div style="font-size:9.5px;color:#64748b;font-weight:700;letter-spacing:0.08em">DIRECCIÓN DOMINANTE</div>
+              <div style="font-size:13px;font-weight:800;color:{{ domCol }};margin-top:2px">{{ dominant }}</div>
+            </div>
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 11px">
+              <div style="font-size:9.5px;color:#64748b;font-weight:700;letter-spacing:0.08em">DIF. ALCISTA − BAJISTA</div>
+              <div style="font-size:13px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:{{ domCol }};margin-top:2px">{{ probSpread }} pts</div>
+            </div>
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 11px">
+              <div style="font-size:9.5px;color:#64748b;font-weight:700;letter-spacing:0.08em">CONVICCIÓN</div>
+              <div style="font-size:13px;font-weight:800;color:#e2e8f0;margin-top:2px">{{ conviction }}</div>
+            </div>
+            <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 11px">
+              <div style="font-size:9.5px;color:#64748b;font-weight:700;letter-spacing:0.08em">P(ALCISTA) VS. NEUTRAL</div>
+              <div style="font-size:13px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:#e2e8f0;margin-top:2px">{{ probDelta }} pts</div>
+            </div>
+          </div>
+        </section>
+
+        <section data-screen-label="Resumen de previsión" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px">
+          <h2 style="margin:0 0 12px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Resumen de previsión · {{ horizon }} días</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px">
+            <sc-for list="{{ summaryCells }}" as="sc" hint-placeholder-count="8">
+              <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:9px;padding:9px 11px">
+                <div style="font-size:9.5px;color:#64748b;font-weight:700;letter-spacing:0.08em">{{ sc.label }}</div>
+                <div style="font-size:14px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:{{ sc.col }};margin-top:2px">{{ sc.val }}</div>
+                <div style="font-size:10px;color:#94a3b8;margin-top:1px">{{ sc.sub }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-screen-label="Why This Forecast" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:16px">
+          <h2 style="margin:0 0 10px;font-size:13px;font-weight:800;color:#f8fafc">Why This Forecast?</h2>
+          <p style="margin:0 0 8px;font-size:12.5px;line-height:1.55;color:#cbd5e1">{{ why1 }}</p>
+          <p style="margin:0 0 8px;font-size:12.5px;line-height:1.55;color:#cbd5e1">{{ why2 }}</p>
+          <p style="margin:0 0 12px;font-size:12.5px;line-height:1.55;color:#94a3b8">{{ why3 }}</p>
+          <div style="border-top:1px solid #0f172a;padding-top:11px">
+            <h3 style="margin:0 0 8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Forecast Sensitivity · Top 3 variables</h3>
+            <div style="display:grid;gap:6px">
+              <sc-for list="{{ sens }}" as="sv" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:9px">
+                  <span style="width:19px;height:19px;border-radius:5px;background:rgba(56,189,248,0.13);color:#7dd3fc;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;flex-shrink:0">{{ sv.rank }}</span>
+                  <span style="font-size:12px;font-weight:700;color:#e2e8f0;white-space:nowrap">{{ sv.name }}</span>
+                  <span style="font-size:11px;color:#64748b">{{ sv.note }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ==================== RIGHT COLUMN ==================== -->
+      <div id="dax-col-right">
+
+        <section data-screen-label="Componentes del DAX" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;flex-wrap:wrap">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Componentes del DAX</h2>
+            <div style="display:flex;gap:4px">
+              <sc-for list="{{ sortChips }}" as="so" hint-placeholder-count="4">
+                <button data-k="{{ so.k }}" onClick="{{ onSort }}" aria-pressed="{{ so.pressed }}" style="padding:3px 8px;border-radius:999px;border:1px solid {{ so.bord }};background:{{ so.bg }};color:{{ so.col }};font-size:9.5px;font-weight:700;cursor:pointer;transition:all 0.2s" style-hover="border-color:#38bdf8">{{ so.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <sc-for list="{{ comps }}" as="c" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:88px 1fr 96px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #0f172a">
+              <div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:#f8fafc">{{ c.ticker }}</div>
+                <div style="font-size:9.5px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</div>
+              </div>
+              <div style="min-width:0">
+                <div style="display:flex;justify-content:space-between;gap:6px;font-size:9.5px;color:#64748b;font-family:'IBM Plex Mono',monospace"><span>Peso {{ c.weight }} %</span><span>Mom {{ c.mom }}</span></div>
+                <div style="height:4px;border-radius:2px;background:#1e293b;margin-top:3px;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#475569"></div>
+                  <div style="position:absolute;top:0;bottom:0;left:{{ c.barLeft }}%;width:{{ c.barW }}%;background:{{ c.barCol }};border-radius:2px;transition:all 0.3s"></div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;color:{{ c.chgCol }}">{{ c.chg }}</div>
+                <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:#94a3b8">{{ c.impact }} <span style="color:{{ c.sigCol }};font-weight:800">●</span></div>
+              </div>
+            </div>
+          </sc-for>
+          <p style="margin:8px 0 0;font-size:9.5px;color:#475569">● señal positiva / neutral / negativa · Impacto = contribución neta simulada en puntos</p>
+        </section>
+
+        <section data-screen-label="Radar de factores" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Radar de factores</h2>
+          <svg viewBox="0 0 260 240" preserveAspectRatio="xMidYMid meet" style="width:100%;max-height:242px;display:block" role="img" aria-label="Radar de scores por factor">
+            <polygon points="130,32 218,120 130,208 42,120" fill="none" stroke="#1e293b" stroke-width="1"></polygon>
+            <polygon points="130,54 196,120 130,186 64,120" fill="none" stroke="#16213a" stroke-width="1"></polygon>
+            <polygon points="130,76 174,120 130,164 86,120" fill="none" stroke="#16213a" stroke-width="1"></polygon>
+            <polygon points="130,98 152,120 130,142 108,120" fill="none" stroke="#16213a" stroke-width="1"></polygon>
+            <line x1="130" y1="32" x2="130" y2="208" stroke="#16213a" stroke-width="1"></line>
+            <line x1="42" y1="120" x2="218" y2="120" stroke="#16213a" stroke-width="1"></line>
+            <polygon points="{{ radar.neutral }}" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 4"></polygon>
+            <polygon points="{{ radar.user }}" fill="rgba(56,189,248,0.16)" stroke="#38bdf8" stroke-width="1.8" stroke-linejoin="round"></polygon>
+            <circle cx="130" cy="{{ radar.my }}" r="3" fill="#38bdf8"></circle>
+            <circle cx="{{ radar.tx }}" cy="120" r="3" fill="#38bdf8"></circle>
+            <circle cx="130" cy="{{ radar.gy }}" r="3" fill="#38bdf8"></circle>
+            <circle cx="{{ radar.fx }}" cy="120" r="3" fill="#38bdf8"></circle>
+            <text x="130" y="18" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace">MACRO {{ radar.mLabel }}</text>
+            <text x="224" y="112" text-anchor="end" fill="#94a3b8" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace">TÉCNICO</text>
+            <text x="224" y="124" text-anchor="end" fill="#e2e8f0" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace">{{ radar.tLabel }}</text>
+            <text x="130" y="226" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace">GLOBAL {{ radar.gLabel }}</text>
+            <text x="36" y="112" text-anchor="start" fill="#94a3b8" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace">FUNDAM.</text>
+            <text x="36" y="124" text-anchor="start" fill="#e2e8f0" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace">{{ radar.fLabel }}</text>
+          </svg>
+          <div style="display:flex;gap:14px;font-size:10px;color:#94a3b8;margin-top:4px">
+            <span><span style="color:#38bdf8;font-weight:800">—</span> Escenario actual</span>
+            <span><span style="color:#64748b;font-weight:800">- -</span> Neutral (referencia)</span>
+          </div>
+        </section>
+
+        <sc-if value="{{ advanced }}" hint-placeholder-val="{{ true }}">
+          <section data-screen-label="Matriz de señales" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px;min-width:0">
+            <h2 style="margin:0 0 9px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Matriz de señales</h2>
+            <div style="display:grid;grid-template-columns:1.15fr 0.62fr 0.5fr 0.62fr 0.55fr 0.75fr;gap:4px;font-size:9px;font-weight:700;letter-spacing:0.06em;color:#475569;padding-bottom:5px;border-bottom:1px solid #1e293b">
+              <span>FACTOR</span><span style="text-align:right">SCORE</span><span style="text-align:center">TEND.</span><span style="text-align:right">CONF.</span><span style="text-align:right">PESO</span><span style="text-align:right">CONTRIB.</span>
+            </div>
+            <sc-for list="{{ matrixRows }}" as="m" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:1.15fr 0.62fr 0.5fr 0.62fr 0.55fr 0.75fr;gap:4px;align-items:center;padding:6.5px 0;border-bottom:1px solid #0f172a;font-family:'IBM Plex Mono',monospace;font-size:10.5px">
+                <span style="font-family:'Archivo',sans-serif;font-size:11.5px;font-weight:600;color:#e2e8f0">{{ m.name }}</span>
+                <span style="text-align:right;font-weight:700;color:{{ m.col }}">{{ m.score }}</span>
+                <span style="text-align:center;color:{{ m.col }}">{{ m.trend }}</span>
+                <span style="text-align:right;color:#94a3b8">{{ m.conf }} %</span>
+                <span style="text-align:right;color:#94a3b8">{{ m.weight }} %</span>
+                <span style="text-align:right;font-weight:700;color:{{ m.col }}">{{ m.contrib }}</span>
+              </div>
+            </sc-for>
+            <div style="display:flex;justify-content:space-between;padding-top:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px">
+              <span style="color:#64748b;font-family:'Archivo',sans-serif;font-weight:600;font-size:11px">Σ contribuciones = score final</span>
+              <span style="font-weight:800;color:{{ k3col }}">{{ matrixTotal }}</span>
+            </div>
+          </section>
+        </sc-if>
+
+        <section data-screen-label="Risk Monitor" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+            <h2 style="margin:0;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Risk Monitor</h2>
+            <span style="font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;background:{{ riskCompBg }};color:{{ riskCompCol }};font-family:'IBM Plex Mono',monospace">COMPOSITE {{ riskComp }} · {{ riskCompLabel }}</span>
+          </div>
+          <sc-for list="{{ risks }}" as="r" hint-placeholder-count="5">
+            <div style="padding:6.5px 0;border-bottom:1px solid #0f172a">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                <span style="font-size:11.5px;font-weight:600;color:#e2e8f0">{{ r.name }}</span>
+                <span style="font-size:10px;font-weight:700;color:{{ r.col }};font-family:'IBM Plex Mono',monospace">{{ r.level }} · {{ r.label }}</span>
+              </div>
+              <div style="height:4px;border-radius:2px;background:#1e293b;margin-top:4px;overflow:hidden">
+                <div style="height:100%;width:{{ r.level }}%;background:{{ r.col }};border-radius:2px;transition:all 0.3s"></div>
+              </div>
+              <div style="font-size:9.5px;color:#64748b;margin-top:3px">{{ r.note }}</div>
+            </div>
+          </sc-for>
+        </section>
+
+        <section data-screen-label="Insights del modelo" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 10px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Model Insights</h2>
+          <div style="display:grid;gap:8px">
+            <sc-for list="{{ insights }}" as="i" hint-placeholder-count="4">
+              <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:10px;padding:10px 12px">
+                <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px">
+                  <span style="width:20px;height:20px;border-radius:6px;background:{{ i.tagBg }};color:{{ i.tagCol }};font-size:8.5px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;flex-shrink:0">{{ i.tag }}</span>
+                  <span style="font-size:12px;font-weight:700;color:#f8fafc;flex:1;min-width:0">{{ i.title }}</span>
+                  <span style="font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;background:{{ i.sevBg }};color:{{ i.sevCol }};white-space:nowrap">{{ i.sev }}</span>
+                </div>
+                <p style="margin:0;font-size:11px;line-height:1.5;color:#94a3b8">{{ i.desc }}</p>
+                <div style="display:flex;gap:10px;margin-top:5px;font-size:9.5px;color:#475569;flex-wrap:wrap">
+                  <span>{{ i.cat }}</span><span>Impacto: <span style="color:{{ i.impCol }};font-weight:700">{{ i.imp }}</span></span><span>{{ i.hor }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============ BOTTOM SECTION ============ -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px">
+
+      <sc-if value="{{ advanced }}" hint-placeholder-val="{{ true }}">
+        <section data-screen-label="Correlaciones" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 4px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Correlaciones simuladas · 90 días</h2>
+          <p style="margin:0 0 10px;font-size:10px;color:#475569">Escala −1,00 a +1,00 · centro = sin correlación</p>
+          <sc-for list="{{ corrRows }}" as="cr" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:150px 1fr 52px;gap:9px;align-items:center;padding:6px 0;border-bottom:1px solid #0f172a">
+              <span style="font-size:11.5px;color:#cbd5e1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ cr.label }}</span>
+              <div style="height:6px;border-radius:3px;background:#0b1224;position:relative;overflow:hidden">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#475569"></div>
+                <div style="position:absolute;top:0;bottom:0;left:{{ cr.left }}%;width:{{ cr.width }}%;background:{{ cr.col }};border-radius:3px;transition:all 0.3s"></div>
+              </div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;text-align:right;color:{{ cr.col }}">{{ cr.val }}</span>
+            </div>
+          </sc-for>
+        </section>
+      </sc-if>
+
+      <section data-screen-label="Calendario de catalizadores" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px;min-width:0">
+        <h2 style="margin:0 0 9px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Calendario de catalizadores</h2>
+        <sc-for list="{{ events }}" as="e" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:9px;padding:6.5px 0;border-bottom:1px solid #0f172a;opacity:{{ e.op }};transition:opacity 0.2s">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:#7dd3fc;width:38px;flex-shrink:0">{{ e.date }}</span>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:11.5px;font-weight:600;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.name }}</div>
+              <div style="font-size:9.5px;color:#64748b">{{ e.factor }} · Relevancia <span style="color:{{ e.relCol }};font-weight:700">{{ e.rel }}</span> · <span style="color:{{ e.dirCol }};font-weight:700">{{ e.dir }}</span></div>
+            </div>
+            <button data-id="{{ e.id }}" onClick="{{ onPriced }}" aria-pressed="{{ e.pressed }}" style="padding:3px 8px;border-radius:999px;border:1px solid {{ e.pBord }};background:{{ e.pBg }};color:{{ e.pCol }};font-size:9px;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap" style-hover="border-color:#38bdf8">{{ e.pLabel }}</button>
+          </div>
+        </sc-for>
+      </section>
+
+      <sc-if value="{{ advanced }}" hint-placeholder-val="{{ true }}">
+        <section data-screen-label="Comparación de escenarios" style="background:rgba(15,23,42,0.72);border:1px solid #1e293b;border-radius:14px;padding:15px">
+          <h2 style="margin:0 0 10px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Comparación de escenarios</h2>
+          <div style="display:grid;gap:9px">
+            <sc-for list="{{ compare }}" as="cp" hint-placeholder-count="3">
+              <div style="background:rgba(2,6,23,0.5);border:1px solid #0f172a;border-radius:10px;padding:10px 12px">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+                  <span style="font-size:12px;font-weight:800;color:{{ cp.accent }}">{{ cp.name }}</span>
+                  <span style="font-size:9.5px;color:#64748b">{{ cp.note }}</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-family:'IBM Plex Mono',monospace">
+                  <div><div style="font-size:8.5px;color:#475569;font-weight:700">SCORE</div><div style="font-size:11.5px;font-weight:700;color:{{ cp.scoreCol }}">{{ cp.score }}</div></div>
+                  <div><div style="font-size:8.5px;color:#475569;font-weight:700">RET. ESP.</div><div style="font-size:11.5px;font-weight:700;color:{{ cp.scoreCol }}">{{ cp.er }}</div></div>
+                  <div><div style="font-size:8.5px;color:#475569;font-weight:700">OBJETIVO</div><div style="font-size:11.5px;font-weight:700;color:#e2e8f0">{{ cp.target }}</div></div>
+                  <div><div style="font-size:8.5px;color:#475569;font-weight:700">CONF.</div><div style="font-size:11.5px;font-weight:700;color:#e2e8f0">{{ cp.conf }} %</div></div>
+                  <div><div style="font-size:8.5px;color:#475569;font-weight:700">P(ALZA)</div><div style="font-size:11.5px;font-weight:700;color:#34d399">{{ cp.pUp }} %</div></div>
+                  <div><div style="font-size:8.5px;color:#475569;font-weight:700">P(BAJA)</div><div style="font-size:11.5px;font-weight:700;color:#f43f5e">{{ cp.pDown }} %</div></div>
+                  <div style="grid-column:span 2"><div style="font-size:8.5px;color:#475569;font-weight:700">RIESGO COMPUESTO</div><div style="font-size:11.5px;font-weight:700;color:{{ cp.riskCol }}">{{ cp.risk }} · {{ cp.riskLabel }}</div></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+    </div>
+
+    <!-- ============ METHODOLOGY & DISCLAIMER ============ -->
+    <section data-screen-label="Aviso metodológico" style="background:rgba(15,23,42,0.5);border:1px solid #1e293b;border-radius:14px;padding:15px 18px">
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:260px">
+          <h2 style="margin:0 0 6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#64748b;font-weight:700">Metodología · Weighted Multi-Factor DAX Forecast Engine</h2>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7dd3fc;background:rgba(2,6,23,0.6);border:1px solid #0f172a;border-radius:8px;padding:8px 12px;display:inline-block">Sₜ = wₘ·M + wₜ·T + w_f·F + w_g·G &nbsp;→&nbsp; retorno esperado, probabilidades y confianza</div>
+          <p style="margin:8px 0 0;font-size:10.5px;color:#64748b;line-height:1.55">Las proyecciones representan rangos probabilísticos sujetos a volatilidad, cambios macroeconómicos y eventos no previstos. La confianza del modelo está acotada (35 %–88 %) y nunca alcanza el 100 %.</p>
+        </div>
+        <div style="flex:1;min-width:260px">
+          <h2 style="margin:0 0 6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#fbbf24;font-weight:700">⚠ Aviso</h2>
+          <p style="margin:0;font-size:11px;color:#94a3b8;line-height:1.6">Modelo simulado con fines educativos y de análisis de escenarios. No utiliza datos en tiempo real y no constituye asesoramiento financiero. Los niveles del índice, componentes, correlaciones y eventos son ficticios y deterministas; cualquier parecido con datos reales es aproximado. Formulaciones empleadas: sesgo estimado, probabilidad estimada, escenario simulado, rango proyectado.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer style="text-align:center;font-size:10px;color:#334155;font-family:'IBM Plex Mono',monospace;padding-bottom:6px">DAX 40 PREDICTIVE INTELLIGENCE · WEIGHTED MULTI-FACTOR FORECAST ENGINE · SIMULATED &amp; DETERMINISTIC DATA · {{ updatedLabel }}</footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;1600px&quot;, &quot;height&quot;: &quot;1000px&quot; },
+  &quot;horizonteInicial&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;7&quot;, &quot;14&quot;, &quot;30&quot;], &quot;default&quot;: &quot;14&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Modelo&quot; },
+  &quot;maxShocksActivos&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 3, &quot;min&quot;: 1, &quot;max&quot;: 5, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Modelo&quot; },
+  &quot;vistaSimplificada&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Interfaz&quot; }
+}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const P = props || {};
+    const hRaw = parseInt(P.horizonteInicial, 10);
+    this.MAXSH = Math.max(1, Math.min(5, parseInt(P.maxShocksActivos, 10) || 3));
+    this.DEF = {
+      weights: { macro: 30, technical: 30, fundamental: 25, global: 15 },
+      factors: {
+        ecbRate: 2.15, inflation: 2.4, ifo: 91.5, zew: 12, gdp: 0.2, indProd: -0.4,
+        pmiMfg: 47.8, pmiSrv: 52.3, gas: 33, energyRisk: 35,
+        rsi: 61, macdH: 14, volRel: 1.04, breadth: 58,
+        epsGrowth: 6.4, per: 13.9, perHist: 13.2, divYield: 3.1, revisions: 4,
+        eurusd: 1.088, bund: 2.36, spMom: 57, vdax: 16.8, oil: 79, geoRisk: 35, usTech: 62
+      },
+      horizon: (hRaw === 7 || hRaw === 14 || hRaw === 30) ? hRaw : 14,
+      series: { ema20: false, ema50: true, opt: true, base: true, pess: true, band: true, levels: true }
+    };
+    this.LIM = {
+      ecbRate: [0, 5], inflation: [0, 8], ifo: [78, 106], zew: [-60, 80], gdp: [-2.5, 2.5], indProd: [-6, 6],
+      pmiMfg: [35, 62], pmiSrv: [35, 62], gas: [15, 130], energyRisk: [0, 100],
+      rsi: [3, 97], macdH: [-90, 90], volRel: [0.5, 2], breadth: [5, 95],
+      epsGrowth: [-12, 16], per: [7, 24], perHist: [10, 18], divYield: [1, 6], revisions: [-25, 25],
+      eurusd: [0.92, 1.28], bund: [0.8, 4.6], spMom: [0, 100], vdax: [9, 48], oil: [40, 150], geoRisk: [0, 100], usTech: [0, 100]
+    };
+    this.ASSUMP = [
+      { k: 'inflation', label: 'Inflación IPCA (DE)', unit: '%', min: 0, max: 8, step: 0.1, dec: 1, dir: -1 },
+      { k: 'ecbRate', label: 'Tipo depósito BCE', unit: '%', min: 0, max: 5, step: 0.05, dec: 2, dir: -1 },
+      { k: 'ifo', label: 'Índice IFO', unit: 'pts', min: 80, max: 105, step: 0.5, dec: 1, dir: 1 },
+      { k: 'zew', label: 'Índice ZEW', unit: 'pts', min: -60, max: 80, step: 1, dec: 0, dir: 1 },
+      { k: 'rsi', label: 'RSI 14', unit: '', min: 5, max: 95, step: 1, dec: 0, dir: 2 },
+      { k: 'macdH', label: 'Histograma MACD', unit: 'pts', min: -80, max: 80, step: 1, dec: 0, dir: 1 },
+      { k: 'vdax', label: 'VDAX-NEW', unit: '', min: 9, max: 45, step: 0.5, dec: 1, dir: -1 },
+      { k: 'eurusd', label: 'EUR/USD', unit: '', min: 0.95, max: 1.25, step: 0.005, dec: 3, dir: -1 },
+      { k: 'bund', label: 'Bund 10 años', unit: '%', min: 1, max: 4.5, step: 0.05, dec: 2, dir: -1 },
+      { k: 'epsGrowth', label: 'Crecimiento BPA', unit: '%', min: -10, max: 15, step: 0.5, dec: 1, dir: 1 },
+      { k: 'per', label: 'PER agregado', unit: '×', min: 8, max: 22, step: 0.1, dec: 1, dir: -1 },
+      { k: 'spMom', label: 'Momentum S&P 500', unit: '/100', min: 0, max: 100, step: 1, dec: 0, dir: 1 }
+    ];
+    this.SHOCKS = [
+      { id: 'ecbUp', label: 'BCE +50 pb', d: { ecbRate: 0.5, bund: 0.32, zew: -9, spMom: -5, vdax: 2.5 } },
+      { id: 'ecbDown', label: 'BCE −50 pb', d: { ecbRate: -0.5, bund: -0.28, zew: 9, ifo: 1.6, vdax: -1.5 } },
+      { id: 'energy', label: 'Crisis energética', d: { gas: 46, energyRisk: 34, inflation: 0.9, ifo: -4, pmiMfg: -3.2, vdax: 7, geoRisk: 14 } },
+      { id: 'recession', label: 'Recesión alemana', d: { gdp: -0.8, ifo: -6.5, zew: -20, pmiMfg: -4.5, pmiSrv: -3.5, epsGrowth: -4.5, vdax: 5.5 } },
+      { id: 'techRally', label: 'Rally tecnológico', d: { usTech: 24, spMom: 16, vdax: -2.5, epsGrowth: 1.5, macdH: 10 } },
+      { id: 'eurWeak', label: 'EUR se debilita', d: { eurusd: -0.05, inflation: 0.25 } },
+      { id: 'eurStrong', label: 'EUR se fortalece', d: { eurusd: 0.05, spMom: -2 } },
+      { id: 'spCrash', label: 'Caída del S&P 500', d: { spMom: -30, vdax: 9, usTech: -18, geoRisk: 8, macdH: -14 } },
+      { id: 'industrial', label: 'Mejora industrial', d: { indProd: 1.7, pmiMfg: 4.2, ifo: 3.6, gdp: 0.35, zew: 6 } },
+      { id: 'geo', label: 'Escalada geopolítica', d: { geoRisk: 30, vdax: 8, oil: 15, gas: 13, spMom: -8 } }
+    ];
+    this.PRESETS = [
+      { id: 'neutral', label: 'Neutral', d: {} },
+      { id: 'soft', label: 'Soft Landing', d: { inflation: 2.1, ecbRate: 1.85, ifo: 94.5, zew: 24, pmiMfg: 50.5, pmiSrv: 54, spMom: 63, vdax: 14, gdp: 0.4 } },
+      { id: 'recovery', label: 'German Recovery', d: { ifo: 97.5, zew: 34, gdp: 0.7, indProd: 1.4, pmiMfg: 52, epsGrowth: 8.5, revisions: 9 } },
+      { id: 'tighten', label: 'ECB Tightening', d: { ecbRate: 2.95, bund: 2.85, zew: -8, inflation: 3, vdax: 19.5, spMom: 50 } },
+      { id: 'energyCrisis', label: 'Energy Crisis', d: { gas: 78, energyRisk: 72, inflation: 3.5, vdax: 24, ifo: 87.5, pmiMfg: 45 } },
+      { id: 'riskOff', label: 'Global Risk-Off', d: { spMom: 26, vdax: 27.5, geoRisk: 62, usTech: 36, macdH: -18, rsi: 42 } },
+      { id: 'techLed', label: 'Tech-Led Rally', d: { usTech: 82, spMom: 74, epsGrowth: 9.5, vdax: 13, rsi: 68, macdH: 32 } }
+    ];
+    this.EVENTS = [
+      { id: 'zew', date: '14/07', name: 'Índice ZEW (julio)', rel: 'Media', factor: 'Macro' },
+      { id: 'sap', date: '21/07', name: 'Resultados de SAP', rel: 'Alta', factor: 'Fundamental' },
+      { id: 'ecb', date: '23/07', name: 'Reunión del BCE', rel: 'Alta', factor: 'Macro' },
+      { id: 'ifo', date: '27/07', name: 'Índice IFO (julio)', rel: 'Alta', factor: 'Macro' },
+      { id: 'cpi', date: '30/07', name: 'Inflación alemana (prel.)', rel: 'Alta', factor: 'Macro' },
+      { id: 'pmi', date: '03/08', name: 'PMI manufacturero (final)', rel: 'Media', factor: 'Macro' },
+      { id: 'sie', date: '06/08', name: 'Resultados de Siemens', rel: 'Media', factor: 'Fundamental' },
+      { id: 'nfp', date: '07/08', name: 'Empleo EE. UU. (NFP)', rel: 'Media', factor: 'Global' },
+      { id: 'uscpi', date: '12/08', name: 'Inflación EE. UU. (IPC)', rel: 'Alta', factor: 'Global' }
+    ];
+    this.hist = this.genHistory();
+    this.dates = this.genDates();
+    this.state = {
+      weights: Object.assign({}, this.DEF.weights),
+      factors: Object.assign({}, this.DEF.factors),
+      horizon: this.DEF.horizon,
+      series: Object.assign({}, this.DEF.series),
+      activeShocks: [],
+      preset: 'neutral',
+      advanced: P.vistaSimplificada === true ? false : true,
+      assumpOpen: false,
+      sortKey: 'impact',
+      pricedIn: [],
+      hover: null,
+      toastShow: false, toastMsg: '',
+      flash: false
+    };
+  }
+
+  componentWillUnmount() { clearTimeout(this._tt); clearTimeout(this._ft); }
+
+  clamp(v, a, b) { return Math.min(b, Math.max(a, isFinite(v) ? v : a)); }
+  fmtN(v, d) { const x = isFinite(v) ? v : 0; return x.toLocaleString('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  fmtSN(v, d) { return (v > 0 ? '+' : '') + this.fmtN(v, d); }
+  fmtPct(v, d) { return this.fmtSN(v, d === undefined ? 2 : d) + ' %'; }
+  sigLabel(s) { return s >= 60 ? 'Fuertemente alcista' : s >= 20 ? 'Alcista' : s > -20 ? 'Neutral' : s > -60 ? 'Bajista' : 'Fuert. bajista'; }
+  sigCol(s) { return s >= 20 ? '#34d399' : s <= -20 ? '#f43f5e' : '#94a3b8'; }
+  sigBg(s) { return s >= 20 ? 'rgba(52,211,153,0.12)' : s <= -20 ? 'rgba(244,63,94,0.12)' : 'rgba(148,163,184,0.12)'; }
+
+  mulberry(seed) {
+    let t = seed >>> 0;
+    return function () {
+      t = (t + 0x6D2B79F5) | 0;
+      let r = Math.imul(t ^ (t >>> 15), 1 | t);
+      r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  genHistory() {
+    const rand = this.mulberry(20260710);
+    const n = 210; const raw = []; let p = 18150;
+    for (let i = 0; i < n; i++) {
+      const cycle = Math.sin(i / 34) * 0.0012 + Math.sin(i / 11 + 2) * 0.0007;
+      let drift = 0.00042 + cycle;
+      if (i > 118 && i < 138) drift -= 0.0045;
+      if (i > 150 && i < 196) drift += 0.0028;
+      p = Math.max(15000, p * (1 + drift + (rand() - 0.5) * 0.017));
+      raw.push(p);
+    }
+    const k = 19482.35 / raw[n - 1];
+    const px = raw.map(v => v * k);
+    const ema = per => { const out = []; let e = px[0]; const a = 2 / (per + 1); for (let i = 0; i < px.length; i++) { e = i ? px[i] * a + e * (1 - a) : px[0]; out.push(e); } return out; };
+    const e20 = ema(20), e50 = ema(50), e200 = ema(200);
+    const s = n - 90;
+    return {
+      px: px.slice(s), e20: e20.slice(s), e50: e50.slice(s),
+      e20Last: e20[n - 1], e50Last: e50[n - 1], e200Last: e200[n - 1],
+      last: px[n - 1], prev: px[n - 2], week: px[n - 6],
+      hi: px[n - 1] * 1.0062, lo: px[n - 1] * 0.9941,
+      support: Math.min.apply(null, px.slice(n - 30)), resistance: Math.max.apply(null, px.slice(n - 30))
+    };
+  }
+
+  genDates() {
+    const pad = x => (x < 10 ? '0' : '') + x;
+    const fmt = d => pad(d.getDate()) + '/' + pad(d.getMonth() + 1);
+    const base = new Date(2026, 6, 10);
+    const past = []; const d = new Date(base);
+    while (past.length < 90) { if (d.getDay() % 6 !== 0) past.push(fmt(d)); d.setDate(d.getDate() - 1); }
+    past.reverse();
+    const fut = []; const f = new Date(base);
+    while (fut.length < 31) { f.setDate(f.getDate() + 1); if (f.getDay() % 6 !== 0) fut.push(fmt(f)); }
+    return { past, fut };
+  }
+
+  normW(w) {
+    let s = (+w.macro || 0) + (+w.technical || 0) + (+w.fundamental || 0) + (+w.global || 0);
+    if (!isFinite(s) || s <= 0) return { macro: 25, technical: 25, fundamental: 25, global: 25, raw: 0 };
+    return { macro: w.macro / s * 100, technical: w.technical / s * 100, fundamental: w.fundamental / s * 100, global: w.global / s * 100, raw: s };
+  }
+
+  applyShocks(f, ids) {
+    const out = Object.assign({}, f);
+    ids.forEach(id => {
+      const sh = this.SHOCKS.find(x => x.id === id);
+      if (!sh) return;
+      Object.keys(sh.d).forEach(k => { out[k] = (out[k] || 0) + sh.d[k]; });
+    });
+    Object.keys(this.LIM).forEach(k => { out[k] = this.clamp(out[k], this.LIM[k][0], this.LIM[k][1]); });
+    return out;
+  }
+
+  buildComps(f) {
+    const dTech = f.usTech - 62, dEur = 1.088 - f.eurusd, dSp = f.spMom - 57;
+    const raw = [
+      ['SAP', 'SAP SE', 14.6, 1.62 + dTech * 0.06 + dSp * 0.02, 74],
+      ['SIE', 'Siemens AG', 10.1, 0.94 + dSp * 0.02 + (f.indProd + 0.4) * 0.5, 66],
+      ['ALV', 'Allianz SE', 7.6, 0.31 + (f.bund - 2.36) * 1.2, 55],
+      ['AIR', 'Airbus SE', 7.1, 1.18 + dEur * 6 + (f.geoRisk - 35) * 0.012, 63],
+      ['DTE', 'Deutsche Telekom', 6.4, -0.22 - (f.bund - 2.36) * 2.0, 48],
+      ['MUV2', 'Munich Re', 4.2, 0.42 + (f.vdax - 16.8) * 0.05, 57],
+      ['MBG', 'Mercedes-Benz', 3.3, -0.74 + dEur * 9 + dSp * 0.02, 38],
+      ['BMW', 'BMW AG', 2.9, -0.58 + dEur * 8 + dSp * 0.015, 41]
+    ];
+    return raw.map(r => {
+      const chg = this.clamp(r[3], -4.5, 4.5);
+      const mom = this.clamp(r[4] + chg * 9, 2, 98);
+      return { ticker: r[0], name: r[1], w: r[2], chg, mom, impact: 19482.35 * r[2] / 100 * chg / 100 };
+    });
+  }
+
+  scoreMacro(f) {
+    let s = 0;
+    s += (2.4 - f.ecbRate) * 14;
+    s += (2.0 - f.inflation) * 13;
+    s += (f.ifo - 90) * 2.4;
+    s += f.zew * 0.42;
+    s += f.gdp * 32;
+    s += f.indProd * 7;
+    s += (f.pmiMfg - 50) * 1.5;
+    s += (f.pmiSrv - 50) * 1.6;
+    s += this.clamp((40 - f.gas) * 0.55, -24, 24);
+    s += (35 - f.energyRisk) * 0.4;
+    return this.clamp(s, -100, 100);
+  }
+  scoreTech(f) {
+    const H = this.hist; let s = 0;
+    s += H.last > H.e20Last ? 6 : -6;
+    s += H.last > H.e50Last ? 8 : -8;
+    s += H.last > H.e200Last ? 9 : -9;
+    s += H.e50Last > H.e200Last ? 5 : -5;
+    s += (f.rsi - 50) * 1.1;
+    if (f.rsi > 70) s -= (f.rsi - 70) * 1.9;
+    if (f.rsi < 30) s += (30 - f.rsi) * 0.9;
+    s += this.clamp(f.macdH * 0.5, -22, 22);
+    s += (f.volRel - 1) * 26;
+    s += (f.breadth - 50) * 0.7;
+    s += this.clamp(((H.last - H.support) / Math.max(1, H.resistance - H.support)) * 10 - 5, -5, 5);
+    return this.clamp(s, -100, 100);
+  }
+  scoreFund(f, comps) {
+    let s = 0;
+    s += this.clamp(f.epsGrowth * 4.2, -42, 42);
+    s += this.clamp((f.perHist * 1.06 - f.per) * 9, -25, 25);
+    s += (f.divYield - 2.7) * 8;
+    s += this.clamp(f.revisions * 2.0, -20, 20);
+    let hw = 0, tw = 0;
+    comps.forEach(c => { hw += c.w * c.chg; tw += c.w; });
+    s += this.clamp(hw / Math.max(1, tw) * 14, -16, 16);
+    return this.clamp(s, -100, 100);
+  }
+  scoreGlob(f) {
+    let s = 0;
+    s += (f.spMom - 50) * 1.3;
+    s += this.clamp((1.10 - f.eurusd) * 180, -22, 22);
+    s += this.clamp((2.55 - f.bund) * 26, -20, 20);
+    s += this.clamp((17.5 - f.vdax) * 1.5, -22, 22);
+    s += this.clamp((84 - f.oil) * 0.35, -12, 12);
+    s += (35 - f.geoRisk) * 0.45;
+    s += (f.usTech - 50) * 0.55;
+    return this.clamp(s, -100, 100);
+  }
+
+  computeModel(wN, f, h, nShocks) {
+    const comps = this.buildComps(f);
+    const M = this.scoreMacro(f), T = this.scoreTech(f), F = this.scoreFund(f, comps), G = this.scoreGlob(f);
+    const S = this.clamp((wN.macro * M + wN.technical * T + wN.fundamental * F + wN.global * G) / 100, -100, 100);
+    const hf = { 7: 1, 14: 1.55, 30: 2.3 }[h] || 1.55;
+    const cap = { 7: 6, 14: 9, 30: 14 }[h] || 9;
+    const volF = Math.pow(this.clamp(f.vdax / 16.5, 0.6, 2.2), 0.5);
+    const er = this.clamp((S / 100) * 2.4 * hf * volF, -cap, cap);
+    const spread = (1.3 + f.vdax * 0.10) * Math.pow(hf, 0.75);
+    const erOpt = this.clamp(er + spread, -cap, cap);
+    const erPess = this.clamp(er - spread * 1.1, -cap, cap);
+    const P0 = this.hist.last;
+    const tOpt = Math.max(0, P0 * (1 + erOpt / 100)), tBase = Math.max(0, P0 * (1 + er / 100)), tPess = Math.max(0, P0 * (1 + erPess / 100));
+    const vp = Math.max(0, f.vdax - 18) * 0.4;
+    let bull = this.clamp(33 + S * 0.32 - vp, 6, 74);
+    let bear = this.clamp(33 - S * 0.30 + vp, 6, 74);
+    let base = 100 - bull - bear;
+    if (base < 12) { const ex = 12 - base; const tot = bull + bear; bull -= ex * bull / tot; bear -= ex * bear / tot; base = 12; }
+    bull = Math.round(bull); bear = Math.round(bear); base = 100 - bull - bear;
+    const scoresArr = [M, T, F, G];
+    const mean = (M + T + F + G) / 4;
+    const disp = Math.sqrt(scoresArr.reduce((a, x) => a + (x - mean) * (x - mean), 0) / 4);
+    const maxW = Math.max(wN.macro, wN.technical, wN.fundamental, wN.global);
+    const pen = {
+      'la volatilidad (VDAX-NEW)': Math.max(0, (f.vdax - 14) * 1.1),
+      'la divergencia entre factores': disp * 0.16,
+      'los shocks activos': nShocks * 4,
+      'la concentración de pesos': Math.max(0, maxW - 40) * 0.35
+    };
+    let conf = 79 + Math.abs(S) * 0.04;
+    let cause = 'ruido de mercado residual'; let mx = 4;
+    Object.keys(pen).forEach(k => { conf -= pen[k]; if (pen[k] > mx) { mx = pen[k]; cause = k; } });
+    conf = Math.round(this.clamp(conf, 35, 88));
+    const sent = this.clamp(50 + S * 0.38 + (17 - f.vdax) * 0.9 + (f.rsi - 50) * 0.15, 2, 98);
+    const rk = [];
+    const mk = (name, level, note) => rk.push({ name, level: Math.round(this.clamp(level, 2, 100)), note });
+    mk('Riesgo técnico', 22 + Math.max(0, (f.rsi - 65) * 2.4) + Math.max(0, (30 - f.rsi) * 1.6) + (f.breadth < 45 ? 12 : 0) + Math.max(0, (f.rsi - 58) * 0.5), f.rsi > 68 ? 'RSI en zona de sobrecompra: riesgo de corrección táctica.' : f.rsi < 32 ? 'RSI deprimido: tendencia débil pese al posible rebote.' : 'Estructura técnica sin excesos relevantes.');
+    mk('Riesgo macro', 24 + Math.max(0, (f.inflation - 2.2) * 10) + Math.max(0, (48 - f.pmiMfg) * 4) + Math.max(0, -f.gdp * 28) + f.energyRisk * 0.22, f.inflation > 3 ? 'La inflación persistente limita el margen del BCE.' : f.pmiMfg < 47 ? 'El PMI manufacturero sigue en contracción.' : 'Ciclo alemán frágil pero estabilizado.');
+    mk('Riesgo de valoración', 18 + Math.max(0, (f.per - f.perHist) * 9) + Math.max(0, (f.per - 14.5) * 7), f.per > f.perHist * 1.08 ? 'PER por encima de su media histórica.' : 'Valoración en línea con la media histórica.');
+    mk('Riesgo de volatilidad', (f.vdax - 9) * 2.9, f.vdax >= 22 ? 'VDAX-NEW elevado: bandas de confianza amplias.' : 'Volatilidad implícita contenida.');
+    mk('Riesgo global', 14 + f.geoRisk * 0.5 + Math.max(0, (50 - f.spMom) * 0.8) + Math.max(0, (f.bund - 2.4) * 30) + Math.max(0, (f.oil - 85) * 0.4), f.geoRisk > 50 ? 'Prima geopolítica en expansión.' : 'Entorno global sin tensiones extremas.');
+    mk('Riesgo de concentración', 16 + Math.max(0, (maxW - 32) * 2.4), maxW > 45 ? 'Los pesos dependen en exceso de un solo factor.' : 'Pesos razonablemente diversificados.');
+    mk('Riesgo de modelo', 18 + disp * 0.5 + nShocks * 9, disp > 30 ? 'Los factores se contradicen: menor fiabilidad del score.' : nShocks > 0 ? 'Shocks activos: el modelo opera fuera de su base.' : 'Factores alineados con el marco base.');
+    const rw = [0.15, 0.18, 0.12, 0.20, 0.15, 0.08, 0.12];
+    const comp = Math.round(rk.reduce((a, r, i) => a + r.level * rw[i], 0));
+    return { M, T, F, G, S, comps, er, erOpt, erPess, tOpt, tBase, tPess, pUp: bull, pBase: base, pDown: bear, conf, cause, sent, risks: rk, comp, disp, maxW, f, wN, h, P0 };
+  }
+
+  buildForecast(m, h) {
+    const P0 = m.P0, sd = m.f.vdax / 15.87;
+    const z = 0.75 + (88 - m.conf) * 0.015;
+    const ss = t => { const p = t / h; return p * p * (3 - 2 * p); };
+    const wigF = t => { const p = t / h; return Math.sqrt(p) * (1 - p) * 2; };
+    const noise = t => (Math.sin((t + 90) * 1.91 + 2.3) + 0.6 * Math.sin((t + 90) * 0.53 + 0.9)) / 1.6;
+    const opt = [], base = [], pess = [], up = [], lo = [];
+    for (let t = 0; t <= h; t++) {
+      const w = sd * 0.45 * noise(t) * wigF(t) / 100;
+      const b = P0 * (1 + (m.er / 100) * ss(t) + w);
+      base.push(Math.max(0, b));
+      opt.push(Math.max(0, P0 * (1 + (m.erOpt / 100) * ss(t) + w)));
+      pess.push(Math.max(0, P0 * (1 + (m.erPess / 100) * ss(t) + w)));
+      const bw = P0 * (sd / 100) * z * Math.sqrt(t) * 0.9;
+      up.push(b + bw); lo.push(Math.max(0, b - bw));
+    }
+    return { opt, base, pess, up, lo };
+  }
+
+  buildInsights(m, st) {
+    const f = m.f, out = [];
+    const TAGS = { 'Técnico': ['TC', '#c084fc'], 'Macro': ['MA', '#38bdf8'], 'Fundamental': ['FU', '#fbbf24'], 'Global': ['GL', '#22d3ee'], 'Riesgo': ['RG', '#f43f5e'], 'Oportunidad': ['OP', '#34d399'], 'Divergencia': ['DV', '#fb923c'], 'Modelo': ['MO', '#94a3b8'] };
+    const SEV = { Alto: ['#f43f5e', 'rgba(244,63,94,0.13)'], Medio: ['#fbbf24', 'rgba(245,158,11,0.13)'], Info: ['#7dd3fc', 'rgba(56,189,248,0.13)'], Oportunidad: ['#34d399', 'rgba(52,211,153,0.13)'] };
+    const hor = m.h <= 7 ? 'Corto plazo' : m.h <= 14 ? '2 semanas' : '1 mes';
+    const add = (sev, cat, title, desc, imp, pr) => out.push({ sev, cat, title, desc, imp, pr, hor });
+    if (f.rsi >= 70) add('Alto', 'Técnico', 'Riesgo de sobrecompra técnica', 'RSI en ' + this.fmtN(f.rsi, 0) + ': el momentum sigue vivo, pero la probabilidad de corrección táctica aumenta.', 'Bajista', 90);
+    if (f.rsi <= 32) add('Oportunidad', 'Técnico', 'Sobreventa: posible rebote técnico', 'RSI en ' + this.fmtN(f.rsi, 0) + ': la debilidad domina, aunque el suelo estadístico está cerca.', 'Mixto', 80);
+    if (f.eurusd >= 1.12) add('Medio', 'Global', 'La fortaleza del euro penaliza a los exportadores', 'EUR/USD en ' + this.fmtN(f.eurusd, 3) + ' presiona los márgenes de autos e industriales.', 'Bajista', 78);
+    if (f.eurusd <= 1.04) add('Oportunidad', 'Global', 'Euro débil: viento de cola exportador', 'EUR/USD en ' + this.fmtN(f.eurusd, 3) + ' mejora la competitividad de las exportadoras del DAX.', 'Alcista', 70);
+    if (f.vdax >= 21) add(f.vdax >= 27 ? 'Alto' : 'Medio', 'Riesgo', 'La volatilidad elevada amplía el intervalo de confianza', 'VDAX-NEW en ' + this.fmtN(f.vdax, 1) + ': las bandas se ensanchan y la confianza cae a ' + m.conf + ' %.', 'Bajista', 85);
+    if (Math.sign(m.M) !== Math.sign(m.T) && Math.abs(m.M) > 18 && Math.abs(m.T) > 18) add('Medio', 'Divergencia', 'Macro y técnico muestran señales contradictorias', 'Macro ' + this.fmtSN(m.M, 0) + ' vs. técnico ' + this.fmtSN(m.T, 0) + ': la dispersión resta convicción al score ponderado.', 'Mixto', 88);
+    if (f.ifo >= 93.5) add('Info', 'Macro', 'La mejora del IFO apuntala el escenario base', 'IFO en ' + this.fmtN(f.ifo, 1) + ' pts eleva la probabilidad del caso base y del sesgo alcista.', 'Alcista', 60);
+    if (f.bund >= 2.6) add('Medio', 'Riesgo', 'La subida del Bund reduce el atractivo relativo', 'Bund a ' + this.fmtN(f.bund, 2) + ' %: la renta fija compite con la rentabilidad por dividendo del índice.', 'Bajista', 76);
+    if (f.usTech >= 68) add('Oportunidad', 'Fundamental', 'El impulso de SAP sostiene el índice', 'El sector tecnológico global (' + this.fmtN(f.usTech, 0) + '/100) arrastra al mayor componente del DAX (14,6 % del índice).', 'Alcista', 72);
+    if (f.gas >= 50) add('Alto', 'Macro', 'El coste energético presiona márgenes industriales', 'Gas europeo en ' + this.fmtN(f.gas, 0) + ' €/MWh: riesgo directo para químicas e industriales.', 'Bajista', 86);
+    if (m.maxW >= 45) add('Info', 'Modelo', 'Pesos concentrados en un solo factor', 'El factor dominante pesa ' + this.fmtN(m.maxW, 0) + ' %: el score pierde diversificación y la confianza se penaliza.', 'Mixto', 65);
+    if (st.activeShocks.length) add('Info', 'Riesgo', 'Shocks activos en la simulación', st.activeShocks.map(id => (this.SHOCKS.find(s => s.id === id) || {}).label).join(' · ') + '.', 'Mixto', 92);
+    if (f.epsGrowth >= 8.5) add('Oportunidad', 'Fundamental', 'Las revisiones de beneficios sostienen la valoración', 'Crecimiento del BPA estimado en ' + this.fmtPct(f.epsGrowth, 1) + ': el PER actual queda mejor respaldado.', 'Alcista', 62);
+    if (f.spMom <= 35) add('Alto', 'Global', 'La debilidad de Wall Street resta soporte global', 'Momentum del S&P 500 en ' + this.fmtN(f.spMom, 0) + '/100 con correlación DAX ~0,82: lastre directo.', 'Bajista', 84);
+    if (f.geoRisk >= 55) add('Alto', 'Global', 'La prima de riesgo geopolítico se amplía', 'Índice de riesgo geopolítico en ' + this.fmtN(f.geoRisk, 0) + '/100: presión sobre energía y volatilidad.', 'Bajista', 87);
+    add('Info', 'Modelo', 'Confianza del ' + m.conf + ' %', 'Principal fuente de incertidumbre: ' + m.cause + '.', 'Mixto', 30);
+    const names = { macro: 'macro', technical: 'técnico', fundamental: 'fundamental', global: 'global' };
+    const ent = [['macro', m.M, m.wN.macro], ['technical', m.T, m.wN.technical], ['fundamental', m.F, m.wN.fundamental], ['global', m.G, m.wN.global]].sort((a, b) => Math.abs(b[1] * b[2]) - Math.abs(a[1] * a[2]))[0];
+    add('Info', 'Modelo', 'El factor ' + names[ent[0]] + ' domina la contribución', 'Aporta ' + this.fmtSN(ent[1] * ent[2] / 100, 1) + ' pts de los ' + this.fmtSN(m.S, 1) + ' del score final.', ent[1] >= 0 ? 'Alcista' : 'Bajista', 25);
+    out.sort((a, b) => b.pr - a.pr);
+    return out.slice(0, 7).map(i => ({
+      sev: i.sev === 'Oportunidad' ? 'OPORT.' : i.sev.toUpperCase(), sevCol: SEV[i.sev][0], sevBg: SEV[i.sev][1],
+      tag: TAGS[i.cat][0], tagCol: TAGS[i.cat][1], tagBg: TAGS[i.cat][1].replace(')', ',0.14)').replace('rgb', 'rgba').replace('#', ''),
+      title: i.title, desc: i.desc, cat: i.cat, imp: i.imp,
+      impCol: i.imp === 'Alcista' ? '#34d399' : i.imp === 'Bajista' ? '#f43f5e' : '#94a3b8', hor: i.hor
+    }));
+  }
+
+  notify(msg) {
+    clearTimeout(this._tt);
+    this.setState({ toastShow: true, toastMsg: msg });
+    this._tt = setTimeout(() => this.setState({ toastShow: false }), 2600);
+  }
+  flash() {
+    clearTimeout(this._ft);
+    this.setState({ flash: true });
+    this._ft = setTimeout(() => this.setState({ flash: false }), 900);
+  }
+
+  renderVals() {
+    const st = this.state, D = this.DEF, H = this.hist;
+    const wN = this.normW(st.weights);
+    const eff = this.applyShocks(st.factors, st.activeShocks);
+    const cur = this.computeModel(wN, eff, st.horizon, st.activeShocks.length);
+    const usr = this.computeModel(wN, st.factors, st.horizon, 0);
+    const neu = this.computeModel(this.normW(D.weights), D.factors, st.horizon, 0);
+    const fc = this.buildForecast(cur, st.horizon);
+    const h = st.horizon, N = 90 + h, P0 = H.last;
+
+    // ---- handlers ----
+    const onWeight = e => { const k = e.target.dataset.k; const v = this.clamp(parseFloat(e.target.value), 0, 100); this.setState(s => ({ weights: Object.assign({}, s.weights, { [k]: v }), preset: 'custom' })); };
+    const onAssump = e => { const k = e.target.dataset.k; const v = parseFloat(e.target.value); if (!isFinite(v)) return; this.setState(s => ({ factors: Object.assign({}, s.factors, { [k]: v }), preset: 'custom' })); };
+    const onAssumpReset = e => { const k = e.currentTarget.dataset.k; this.setState(s => ({ factors: Object.assign({}, s.factors, { [k]: D.factors[k] }), preset: 'custom' })); };
+    const onHorizon = e => this.setState({ horizon: parseInt(e.currentTarget.dataset.h, 10) });
+    const onEqual = () => { this.setState({ weights: { macro: 25, technical: 25, fundamental: 25, global: 25 }, preset: 'custom' }); this.notify('Pesos igualados: 25 % por factor'); };
+    const onInstitutional = () => { this.setState({ weights: Object.assign({}, D.weights), preset: 'custom' }); this.notify('Pesos institucionales: 30/30/25/15'); };
+    const onShock = e => {
+      const id = e.currentTarget.dataset.id; const sh = this.SHOCKS.find(x => x.id === id);
+      if (st.activeShocks.includes(id)) { this.setState(s => ({ activeShocks: s.activeShocks.filter(x => x !== id) })); this.notify('Shock desactivado: ' + sh.label); this.flash(); return; }
+      if (st.activeShocks.length >= this.MAXSH) { this.notify('Máximo ' + this.MAXSH + ' shocks simultáneos. Desactiva alguno primero.'); return; }
+      this.setState(s => ({ activeShocks: s.activeShocks.concat(id) })); this.notify('Shock aplicado: ' + sh.label); this.flash();
+    };
+    const onClearShocks = () => { this.setState({ activeShocks: [] }); this.notify('Shocks eliminados'); this.flash(); };
+    const onPreset = e => {
+      const id = e.currentTarget.dataset.id; const p = this.PRESETS.find(x => x.id === id); if (!p) return;
+      this.setState({ factors: Object.assign({}, D.factors, p.d), weights: Object.assign({}, D.weights), activeShocks: [], preset: id });
+      this.notify('Preset aplicado: ' + p.label); this.flash();
+    };
+    const onToggleSeries = e => { const k = e.currentTarget.dataset.k; this.setState(s => ({ series: Object.assign({}, s.series, { [k]: !s.series[k] }) })); };
+    const onSort = e => this.setState({ sortKey: e.currentTarget.dataset.k });
+    const onPriced = e => { const id = e.currentTarget.dataset.id; this.setState(s => ({ pricedIn: s.pricedIn.includes(id) ? s.pricedIn.filter(x => x !== id) : s.pricedIn.concat(id) })); };
+    const onReset = () => {
+      this.setState({ weights: Object.assign({}, D.weights), factors: Object.assign({}, D.factors), horizon: D.horizon, series: Object.assign({}, D.series), activeShocks: [], preset: 'neutral', hover: null, pricedIn: [] });
+      this.notify('Modelo restablecido al escenario inicial');
+    };
+    const onToggleView = () => this.setState(s => ({ advanced: !s.advanced }));
+    const onToggleAssumps = () => this.setState(s => ({ assumpOpen: !s.assumpOpen }));
+    const onChartMove = e => {
+      const r = e.currentTarget.getBoundingClientRect();
+      const frac = this.clamp((e.clientX - r.left) / Math.max(1, r.width), 0, 1);
+      const i = Math.round(frac * (N - 1));
+      const y = this.clamp(e.clientY - r.top, 14, 330);
+      const hv = this.state.hover;
+      if (!hv || hv.i !== i || Math.abs(hv.y - y) > 9) this.setState({ hover: { i, y } });
+    };
+    const onChartLeave = () => this.setState({ hover: null });
+
+    // ---- ticker ----
+    const dayPct = (H.last - H.prev) / H.prev * 100;
+    const weekPct = (H.last - H.week) / H.week * 100;
+    const sp = 6480 * (1 + (eff.spMom - 57) * 0.0012);
+    const stoxx = 5385 * (1 + cur.S * 0.0004);
+    const tkr = [
+      { name: 'DAX 40', val: this.fmtN(H.last, 2), n: dayPct, chg: this.fmtPct(dayPct), inv: false },
+      { name: 'VDAX-NEW', val: this.fmtN(eff.vdax, 1), n: eff.vdax - D.factors.vdax, chg: this.fmtSN(eff.vdax - D.factors.vdax, 1), inv: true },
+      { name: 'EUR/USD', val: this.fmtN(eff.eurusd, 4), n: eff.eurusd - D.factors.eurusd, chg: this.fmtPct((eff.eurusd - D.factors.eurusd) / D.factors.eurusd * 100), inv: false },
+      { name: 'BUND 10A', val: this.fmtN(eff.bund, 2) + ' %', n: eff.bund - D.factors.bund, chg: this.fmtSN((eff.bund - D.factors.bund) * 100, 0) + ' pb', inv: true },
+      { name: 'S&P 500', val: this.fmtN(sp, 0), n: (eff.spMom - 57), chg: this.fmtPct(0.32 + (eff.spMom - 57) * 0.045), inv: false },
+      { name: 'EURO STOXX 50', val: this.fmtN(stoxx, 0), n: cur.S, chg: this.fmtPct(0.25 + cur.S * 0.018), inv: false }
+    ].map(t => ({ name: t.name, val: t.val, chg: t.chg, col: t.n === 0 ? '#94a3b8' : (t.n > 0) !== t.inv ? '#34d399' : '#f43f5e' }));
+    const tickerLoop = tkr.concat(tkr).map((t, i) => Object.assign({ i }, t));
+
+    // ---- KPIs ----
+    const fut = this.dates.fut, past = this.dates.past;
+    const targetDate = fut[h - 1];
+    const k6col = cur.conf >= 70 ? '#34d399' : cur.conf >= 55 ? '#fbbf24' : '#f43f5e';
+    const sentLabel = cur.sent < 20 ? 'Miedo extremo' : cur.sent < 40 ? 'Miedo' : cur.sent < 60 ? 'Neutral' : cur.sent < 80 ? 'Codicia' : 'Codicia extrema';
+    const sentCol = cur.sent < 40 ? '#f43f5e' : cur.sent < 60 ? '#94a3b8' : '#34d399';
+    const ang = (180 - cur.sent * 1.8) * Math.PI / 180;
+    const vdaxDelta = eff.vdax - D.factors.vdax;
+    const reg = eff.vdax < 13 ? ['Bajo', '#34d399', 'rgba(52,211,153,0.13)'] : eff.vdax < 20 ? ['Normal', '#94a3b8', 'rgba(148,163,184,0.13)'] : eff.vdax < 28 ? ['Elevado', '#fbbf24', 'rgba(245,158,11,0.13)'] : ['Extremo', '#f43f5e', 'rgba(244,63,94,0.13)'];
+
+    // ---- chart ----
+    const vis = st.series;
+    let vals = H.px.slice();
+    if (vis.ema20) vals = vals.concat(H.e20);
+    if (vis.ema50) vals = vals.concat(H.e50);
+    if (vis.opt) vals = vals.concat(fc.opt);
+    if (vis.base) vals = vals.concat(fc.base);
+    if (vis.pess) vals = vals.concat(fc.pess);
+    if (vis.band) vals = vals.concat(fc.up, fc.lo);
+    if (vis.levels) { vals.push(H.support * 0.995); vals.push(H.resistance * 1.005); }
+    let mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+    const span = Math.max(1, mx - mn); mn -= span * 0.045; mx += span * 0.045;
+    const X = i => i / (N - 1) * 1000;
+    const Y = v => 8 + (1 - (v - mn) / (mx - mn)) * 414;
+    const pts = (arr, off) => arr.map((v, j) => X(off + j).toFixed(1) + ',' + Y(v).toFixed(1)).join(' ');
+    const upP = fc.up.map((v, j) => X(89 + j).toFixed(1) + ' ' + Y(v).toFixed(1));
+    const loP = fc.lo.map((v, j) => X(89 + j).toFixed(1) + ' ' + Y(v).toFixed(1)).reverse();
+    const yTicks = [0, 0.25, 0.5, 0.75, 1].map(fr => ({ label: this.fmtN(mx - fr * (mx - mn), 0), top: ((8 + fr * 414) / 430 * 100).toFixed(1) }));
+    const step = Math.ceil(N / 7); const xIdx = [];
+    for (let i = 0; i < N; i += step) xIdx.push(i);
+    if (xIdx[xIdx.length - 1] < N - 1 - step * 0.35) xIdx.push(N - 1); else xIdx[xIdx.length - 1] = N - 1;
+    const xTicks = xIdx.map(i => ({ label: i < 90 ? past[i] : fut[i - 90], left: (i / (N - 1) * 100).toFixed(2) }));
+    const rT = Y(H.resistance * 1.0035), rB = Y(H.resistance * 0.9965), sT = Y(H.support * 1.0035), sB = Y(H.support * 0.9965);
+    const shockNames = st.activeShocks.map(id => (this.SHOCKS.find(s => s.id === id) || {}).label).join(' · ');
+    const chart = {
+      histPts: pts(H.px, 0),
+      ema20Pts: vis.ema20 ? pts(H.e20, 0) : '',
+      ema50Pts: vis.ema50 ? pts(H.e50, 0) : '',
+      optPts: vis.opt ? pts(fc.opt, 89) : '',
+      basePts: vis.base ? pts(fc.base, 89) : '',
+      pessPts: vis.pess ? pts(fc.pess, 89) : '',
+      bandPath: vis.band ? 'M ' + upP.join(' L ') + ' L ' + loP.join(' L ') + ' Z' : '',
+      divX: X(89).toFixed(1), divPct: (89 / (N - 1) * 100).toFixed(2), lastY: Y(P0).toFixed(1),
+      resY: vis.levels ? rT.toFixed(1) : '0', resH: vis.levels ? Math.max(0, rB - rT).toFixed(1) : '0',
+      supY: vis.levels ? sT.toFixed(1) : '0', supH: vis.levels ? Math.max(0, sB - sT).toFixed(1) : '0',
+      levelsShow: vis.levels, resTop: (rT / 430 * 100).toFixed(1), supTop: (sT / 430 * 100).toFixed(1),
+      resLabel: this.fmtN(H.resistance, 0), supLabel: this.fmtN(H.support, 0),
+      yTicks, xTicks, shockChipShow: st.activeShocks.length > 0, shockChip: shockNames,
+      hoverShow: !!st.hover, hoverLeft: st.hover ? (st.hover.i / (N - 1) * 100).toFixed(2) : '0'
+    };
+
+    // ---- tooltip ----
+    let tip = { show: false, top: 0, left: '0px', tf: 'none', date: '', phase: '', phaseCol: '#94a3b8', phaseBg: 'rgba(148,163,184,0.13)', rows: [] };
+    if (st.hover) {
+      const i = st.hover.i, xPct = i / (N - 1) * 100;
+      const rows = [];
+      if (i <= 89) {
+        rows.push({ label: 'DAX (histórico)', col: '#e0f2fe', val: this.fmtN(H.px[i], 2) });
+        if (vis.ema20) rows.push({ label: 'EMA 20', col: '#f59e0b', val: this.fmtN(H.e20[i], 2) });
+        if (vis.ema50) rows.push({ label: 'EMA 50', col: '#c084fc', val: this.fmtN(H.e50[i], 2) });
+        rows.push({ label: 'Ret. desde inicio', col: '#94a3b8', val: this.fmtPct((H.px[i] - H.px[0]) / H.px[0] * 100) });
+        tip.phase = 'HISTÓRICO'; tip.phaseCol = '#7dd3fc'; tip.phaseBg = 'rgba(56,189,248,0.13)';
+        tip.date = past[i];
+      } else {
+        const t = i - 89;
+        if (vis.opt) rows.push({ label: 'Optimista', col: '#34d399', val: this.fmtN(fc.opt[t], 2) });
+        if (vis.base) rows.push({ label: 'Caso base', col: '#38bdf8', val: this.fmtN(fc.base[t], 2) });
+        if (vis.pess) rows.push({ label: 'Bajista', col: '#f43f5e', val: this.fmtN(fc.pess[t], 2) });
+        if (vis.band) rows.push({ label: 'Banda conf.', col: '#38bdf8', val: this.fmtN(fc.lo[t], 0) + '–' + this.fmtN(fc.up[t], 0) });
+        rows.push({ label: 'Ret. acumulado', col: '#94a3b8', val: this.fmtPct((fc.base[t] - P0) / P0 * 100) });
+        if (st.activeShocks.length) rows.push({ label: 'Shocks', col: '#fbbf24', val: st.activeShocks.length + ' activo(s)' });
+        tip.phase = 'PREDICCIÓN'; tip.phaseCol = '#fbbf24'; tip.phaseBg = 'rgba(245,158,11,0.13)';
+        tip.date = fut[t - 1] || fut[0];
+        if (t === 0) tip.date = past[89];
+      }
+      tip.show = rows.length > 0; tip.rows = rows; tip.top = Math.round(this.clamp(st.hover.y - 20, 8, 250));
+      if (xPct > 56) { tip.left = 'calc(' + xPct.toFixed(1) + '% - 14px)'; tip.tf = 'translateX(-100%)'; }
+      else { tip.left = 'calc(' + xPct.toFixed(1) + '% + 14px)'; tip.tf = 'none'; }
+    }
+
+    // ---- series chips ----
+    const chipDefs = [
+      { k: 'ema20', label: 'EMA 20', c: '#f59e0b', dash: false, fill: false },
+      { k: 'ema50', label: 'EMA 50', c: '#c084fc', dash: false, fill: false },
+      { k: 'opt', label: 'Optimista', c: '#34d399', dash: true, fill: false },
+      { k: 'base', label: 'Caso base', c: '#38bdf8', dash: true, fill: false },
+      { k: 'pess', label: 'Bajista', c: '#f43f5e', dash: true, fill: false },
+      { k: 'band', label: 'Banda conf.', c: 'rgba(56,189,248,0.5)', fill: true },
+      { k: 'levels', label: 'S/R', c: 'rgba(52,211,153,0.5)', fill: true }
+    ];
+    const seriesChips = chipDefs.map(c => {
+      const on = !!vis[c.k];
+      return {
+        k: c.k, label: c.label, pressed: on ? 'true' : 'false',
+        bord: on ? '#334155' : '#1e293b', bg: on ? 'rgba(30,41,59,0.6)' : 'transparent', col: on ? '#e2e8f0' : '#475569',
+        swH: c.fill ? '7px' : '0px', swTop: c.fill ? 'none' : '2px ' + (c.dash ? 'dashed ' : 'solid ') + c.c, swBg: c.fill ? c.c : 'transparent'
+      };
+    });
+
+    // ---- weights UI ----
+    const wDefs = [
+      { k: 'macro', label: 'Macroeconomía', glyph: 'M', c: '#38bdf8', score: cur.M },
+      { k: 'technical', label: 'Técnico', glyph: 'T', c: '#c084fc', score: cur.T },
+      { k: 'fundamental', label: 'Fundamental', glyph: 'F', c: '#fbbf24', score: cur.F },
+      { k: 'global', label: 'Global', glyph: 'G', c: '#22d3ee', score: cur.G }
+    ];
+    const weightRows = wDefs.map(w => ({
+      k: w.k, label: w.label, glyph: w.glyph,
+      iconBg: 'rgba(56,189,248,0.0)', iconCol: w.c, raw: st.weights[w.k],
+      pctStr: this.fmtN(wN[w.k], 0) + ' %',
+      scoreLabel: this.sigLabel(w.score), scoreStr: this.fmtSN(w.score, 0),
+      chipBg: this.sigBg(w.score), chipCol: this.sigCol(w.score), barCol: this.sigCol(w.score),
+      barLeft: w.score >= 0 ? 50 : (50 + w.score / 2).toFixed(1), barW: (Math.abs(w.score) / 2).toFixed(1)
+    })).map(w => { w.iconBg = 'rgba(30,41,59,0.9)'; return w; });
+
+    // ---- presets / shocks ----
+    const presetBtns = this.PRESETS.map(p => {
+      const on = st.preset === p.id;
+      return { id: p.id, label: p.label, pressed: on ? 'true' : 'false', bord: on ? 'rgba(56,189,248,0.6)' : '#334155', bg: on ? 'rgba(56,189,248,0.13)' : 'transparent', col: on ? '#7dd3fc' : '#94a3b8' };
+    });
+    const maxed = st.activeShocks.length >= this.MAXSH;
+    const shockBtns = this.SHOCKS.map(s => {
+      const on = st.activeShocks.includes(s.id);
+      return {
+        id: s.id, label: s.label, pressed: on ? 'true' : 'false',
+        bord: on ? 'rgba(245,158,11,0.65)' : '#334155', bg: on ? 'rgba(245,158,11,0.12)' : 'transparent',
+        col: on ? '#fbbf24' : '#cbd5e1', dot: on ? '#fbbf24' : '#334155', op: !on && maxed ? '0.45' : '1'
+      };
+    });
+
+    // ---- assumptions ----
+    const assumpRows = this.ASSUMP.map(a => {
+      const v = st.factors[a.k], dv = D.factors[a.k], delta = v - dv;
+      let impact = '— en línea con el escenario base', impCol = '#64748b';
+      if (Math.abs(delta) >= a.step * 0.9) {
+        if (a.dir === 2) {
+          if (v >= 70) { impact = '▲ Momentum + riesgo de sobrecompra'; impCol = '#fbbf24'; }
+          else if (v <= 30) { impact = '▼ Debilidad, posible rebote'; impCol = '#fb923c'; }
+          else { impact = delta > 0 ? '▲ Impulso alcista' : '▼ Presión bajista'; impCol = delta > 0 ? '#34d399' : '#f43f5e'; }
+        } else {
+          const effDir = a.dir * Math.sign(delta);
+          impact = effDir > 0 ? '▲ Impulso alcista' : '▼ Presión bajista';
+          impCol = effDir > 0 ? '#34d399' : '#f43f5e';
+        }
+      }
+      return {
+        k: a.k, label: a.label, min: a.min, max: a.max, step: a.step, val: v,
+        valStr: this.fmtN(v, a.dec) + (a.unit ? ' ' + a.unit : ''),
+        minStr: this.fmtN(a.min, a.dec), maxStr: this.fmtN(a.max, a.dec),
+        defStr: this.fmtN(dv, a.dec) + (a.unit ? ' ' + a.unit : ''), impact, impCol
+      };
+    });
+
+    // ---- summary ----
+    const upsidePts = cur.tOpt - P0, downPts = P0 - cur.tPess;
+    const rr = downPts > 5 ? Math.min(9.9, upsidePts / downPts) : 9.9;
+    const entPos = [['Macro', cur.M], ['Técnico', cur.T], ['Fundamental', cur.F], ['Global', cur.G]].sort((a, b) => b[1] - a[1]);
+    const catMap = { Macro: 'Reunión del BCE (23/07)', 'Técnico': 'Continuidad del momentum sobre la EMA 50', Fundamental: 'Resultados de SAP (21/07)', Global: 'Tono constructivo del S&P 500' };
+    const thrMap = { Macro: 'Sorpresa de inflación alemana (30/07)', 'Técnico': 'Pérdida del soporte en ' + this.fmtN(H.support, 0), Fundamental: 'Revisiones de beneficios a la baja', Global: 'Repunte brusco del VDAX-NEW' };
+    const weakest = entPos[3];
+    const threat = weakest[1] < -5 ? thrMap[weakest[0]] : (eff.rsi > 65 ? 'Sobrecompra táctica (RSI ' + this.fmtN(eff.rsi, 0) + ')' : 'Repunte de volatilidad residual');
+    const summaryCells = [
+      { label: 'OBJETIVO OPTIMISTA', val: this.fmtN(cur.tOpt, 0), sub: this.fmtPct(cur.erOpt) + ' · prob. ' + cur.pUp + ' %', col: '#34d399' },
+      { label: 'OBJETIVO BASE', val: this.fmtN(cur.tBase, 0), sub: this.fmtPct(cur.er) + ' · prob. ' + cur.pBase + ' %', col: '#38bdf8' },
+      { label: 'OBJETIVO BAJISTA', val: this.fmtN(cur.tPess, 0), sub: this.fmtPct(cur.erPess) + ' · prob. ' + cur.pDown + ' %', col: '#f43f5e' },
+      { label: 'RIESGO MÁX. ESTIMADO', val: this.fmtPct(Math.min(0, cur.erPess)), sub: 'hasta ' + this.fmtN(cur.tPess, 0) + ' pts', col: '#f43f5e' },
+      { label: 'POTENCIAL ALCISTA', val: this.fmtPct(Math.max(0, cur.erOpt)), sub: 'hasta ' + this.fmtN(cur.tOpt, 0) + ' pts', col: '#34d399' },
+      { label: 'RATIO RIESGO/RECOMPENSA', val: this.fmtN(rr, 2) + '×', sub: rr >= 1.2 ? 'perfil favorable' : rr >= 0.8 ? 'perfil equilibrado' : 'perfil defensivo', col: rr >= 1.2 ? '#34d399' : rr >= 0.8 ? '#94a3b8' : '#f43f5e' },
+      { label: 'PRINCIPAL CATALIZADOR', val: '▲', sub: catMap[entPos[0][0]], col: '#34d399' },
+      { label: 'PRINCIPAL AMENAZA', val: '▼', sub: threat, col: '#f43f5e' }
+    ];
+
+    // ---- why ----
+    const namesES = { Macro: 'macroeconómico', 'Técnico': 'técnico', Fundamental: 'fundamental', Global: 'global' };
+    const pos = entPos.filter(e => e[1] >= 12).map(e => 'el factor ' + namesES[e[0]] + ' (' + this.fmtSN(e[1], 0) + ')');
+    const neg = entPos.filter(e => e[1] <= -12).map(e => namesES[e[0]] + ' (' + this.fmtSN(e[1], 0) + ')');
+    const bias = cur.S >= 55 ? 'sesgo fuertemente alcista' : cur.S >= 25 ? 'sesgo moderadamente alcista' : cur.S >= 8 ? 'sesgo ligeramente alcista' : cur.S > -8 ? 'posicionamiento neutral' : cur.S > -25 ? 'sesgo ligeramente bajista' : cur.S > -55 ? 'sesgo moderadamente bajista' : 'sesgo fuertemente bajista';
+    let core;
+    if (pos.length && neg.length) core = pos.join(' y ') + (pos.length > 1 ? ' compensan' : ' compensa') + ' la debilidad de ' + neg.join(' y de ');
+    else if (pos.length) core = pos.join(' y ') + (pos.length > 1 ? ' empujan' : ' empuja') + ' al alza sin frenos relevantes en el resto de dimensiones';
+    else if (neg.length) core = 'la debilidad de ' + neg.join(' y de ') + ' domina la lectura sin apoyos que la compensen';
+    else core = 'las cuatro dimensiones se mueven en un rango neutral';
+    const volTxt = eff.vdax >= 20
+      ? ' Sin embargo, el VDAX-NEW en ' + this.fmtN(eff.vdax, 1) + ' reduce la confianza y amplía el rango bajista.'
+      : ' Con el VDAX-NEW contenido (' + this.fmtN(eff.vdax, 1) + '), el intervalo de confianza se mantiene estable.';
+    const divTxt = (Math.sign(cur.M) !== Math.sign(cur.T) && Math.abs(cur.M) > 18 && Math.abs(cur.T) > 18) ? ' Existe divergencia macro–técnica, lo que resta convicción.' : '';
+    const why1 = 'El modelo mantiene un ' + bias + ' porque ' + core + '.' + volTxt + divTxt;
+    const why2 = 'Con pesos de ' + this.fmtN(wN.macro, 0) + ' % macro, ' + this.fmtN(wN.technical, 0) + ' % técnico, ' + this.fmtN(wN.fundamental, 0) + ' % fundamental y ' + this.fmtN(wN.global, 0) + ' % global, el score ponderado es ' + this.fmtSN(cur.S, 1) + '. De ahí se derivan un ' + cur.pUp + ' % de probabilidad alcista, un ' + cur.pBase + ' % de caso base y un ' + cur.pDown + ' % bajista a ' + h + ' días; la probabilidad base nunca desaparece porque recoge la inercia del mercado ante señales incompletas.';
+    const sensCands = [
+      ['VDAX-NEW', 0.9 + (eff.vdax > 20 ? 0.5 : 0) + wN.global * 0.004, 'gobierna la amplitud de las bandas y la confianza'],
+      ['Tipo depósito BCE', wN.macro * 0.022, 'redefine el descuento de flujos y el score macro'],
+      ['Momentum S&P 500', wN.global * 0.020, 'arrastra la beta global del DAX'],
+      ['RSI 14', wN.technical * 0.016, 'condiciona el score técnico y el riesgo de corrección'],
+      ['PER agregado', wN.fundamental * 0.015, 'ancla la valoración relativa del índice'],
+      ['EUR/USD', wN.global * 0.010 + wN.fundamental * 0.004, 'mueve el peso exportador del índice'],
+      ['Índice IFO', wN.macro * 0.013, 'marca el pulso del ciclo alemán']
+    ].sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const sens = sensCands.map((s, i) => ({ rank: String(i + 1), name: s[0], note: s[2] }));
+    const why3 = 'Para invertir la dirección actual, el score ponderado tendría que cruzar ' + (cur.S >= 0 ? '−20' : '+20') + ': la vía más corta pasa por ' + sensCands[0][0] + ' y ' + sensCands[1][0] + '. ' + (cur.S >= 0 ? 'Un VDAX-NEW por encima de ~24 junto a un deterioro del factor ' + namesES[weakest[0]] + ' bastaría para girar el sesgo a bajista.' : 'Una relajación de la volatilidad y la recuperación del factor ' + namesES[entPos[0][0]] + ' bastarían para girar el sesgo a alcista.');
+
+    // ---- components table ----
+    const sk = st.sortKey;
+    const sorted = cur.comps.slice().sort((a, b) => sk === 'weight' ? b.w - a.w : sk === 'chg' ? b.chg - a.chg : sk === 'mom' ? b.mom - a.mom : b.impact - a.impact);
+    const maxImp = Math.max.apply(null, sorted.map(c => Math.abs(c.impact)).concat([0.1]));
+    const comps = sorted.map(c => ({
+      ticker: c.ticker, name: c.name, weight: this.fmtN(c.w, 1), mom: this.fmtN(c.mom, 0),
+      chg: this.fmtPct(c.chg), chgCol: c.chg > 0.05 ? '#34d399' : c.chg < -0.05 ? '#f43f5e' : '#94a3b8',
+      impact: this.fmtSN(c.impact, 1) + ' pts',
+      sigCol: c.chg > 0.25 ? '#34d399' : c.chg < -0.25 ? '#f43f5e' : '#94a3b8',
+      barCol: c.impact >= 0 ? '#34d399' : '#f43f5e',
+      barLeft: c.impact >= 0 ? 50 : (50 - Math.abs(c.impact) / maxImp * 50).toFixed(1),
+      barW: (Math.abs(c.impact) / maxImp * 50).toFixed(1)
+    }));
+    const sortChips = [
+      { k: 'impact', label: 'Impacto' }, { k: 'weight', label: 'Peso' }, { k: 'chg', label: 'Rend.' }, { k: 'mom', label: 'Mom.' }
+    ].map(s => {
+      const on = sk === s.k;
+      return { k: s.k, label: s.label, pressed: on ? 'true' : 'false', bord: on ? 'rgba(56,189,248,0.6)' : '#1e293b', bg: on ? 'rgba(56,189,248,0.13)' : 'transparent', col: on ? '#7dd3fc' : '#64748b' };
+    });
+
+    // ---- radar ----
+    const rr01 = s => 88 * this.clamp((s + 100) / 200, 0, 1);
+    const radar = {
+      user: '130,' + (120 - rr01(cur.M)).toFixed(1) + ' ' + (130 + rr01(cur.T)).toFixed(1) + ',120 130,' + (120 + rr01(cur.G)).toFixed(1) + ' ' + (130 - rr01(cur.F)).toFixed(1) + ',120',
+      neutral: '130,' + (120 - rr01(neu.M)).toFixed(1) + ' ' + (130 + rr01(neu.T)).toFixed(1) + ',120 130,' + (120 + rr01(neu.G)).toFixed(1) + ' ' + (130 - rr01(neu.F)).toFixed(1) + ',120',
+      my: (120 - rr01(cur.M)).toFixed(1), tx: (130 + rr01(cur.T)).toFixed(1), gy: (120 + rr01(cur.G)).toFixed(1), fx: (130 - rr01(cur.F)).toFixed(1),
+      mLabel: this.fmtSN(cur.M, 0), tLabel: this.fmtSN(cur.T, 0), gLabel: this.fmtSN(cur.G, 0), fLabel: this.fmtSN(cur.F, 0)
+    };
+
+    // ---- matrix ----
+    const mkRow = (name, sc, wgt) => ({
+      name, score: this.fmtSN(sc, 0), col: this.sigCol(sc),
+      trend: sc >= 20 ? '▲' : sc <= -20 ? '▼' : '→',
+      conf: this.fmtN(this.clamp(52 + Math.abs(sc) * 0.4 - Math.max(0, eff.vdax - 16) * 1.2, 30, 92), 0),
+      weight: this.fmtN(wgt, 0), contrib: this.fmtSN(wgt * sc / 100, 1)
+    });
+    const matrixRows = [mkRow('Macro', cur.M, wN.macro), mkRow('Técnico', cur.T, wN.technical), mkRow('Fundamental', cur.F, wN.fundamental), mkRow('Global', cur.G, wN.global)];
+
+    // ---- correlations ----
+    const corrBase = [
+      ['DAX vs. S&P 500', 0.82 + (eff.vdax > 22 ? 0.06 : 0)],
+      ['DAX vs. Euro Stoxx 50', 0.94],
+      ['DAX vs. EUR/USD', -0.34 - (1.088 - eff.eurusd) * 0.8],
+      ['DAX vs. Bund 10A', -0.47 - Math.max(0, eff.bund - 2.5) * 0.15],
+      ['DAX vs. Gas europeo', -0.41 - Math.max(0, eff.gas - 45) * 0.004],
+      ['DAX vs. Tech global', 0.72 + (eff.usTech - 62) * 0.003]
+    ];
+    const corrRows = corrBase.map(c => {
+      const v = this.clamp(c[1], -0.97, 0.97);
+      const col = Math.abs(v) < 0.25 ? '#94a3b8' : v > 0 ? '#22d3ee' : '#f43f5e';
+      return {
+        label: c[0], val: this.fmtSN(v, 2), col,
+        left: v >= 0 ? '50' : (50 + v * 50).toFixed(1), width: (Math.abs(v) * 50).toFixed(1)
+      };
+    });
+
+    // ---- risks ----
+    const rCol = l => l < 35 ? '#34d399' : l < 55 ? '#fbbf24' : l < 75 ? '#fb923c' : '#f43f5e';
+    const rLab = l => l < 35 ? 'Bajo' : l < 55 ? 'Moderado' : l < 75 ? 'Elevado' : 'Crítico';
+    const risks = cur.risks.map(r => ({ name: r.name, level: r.level, label: rLab(r.level), col: rCol(r.level), note: r.note }));
+
+    // ---- insights ----
+    const insights = this.buildInsights(cur, st).map(i => { i.tagBg = 'rgba(30,41,59,0.9)'; return i; });
+
+    // ---- events ----
+    const events = this.EVENTS.map(ev => {
+      const sc = ev.factor === 'Macro' ? cur.M : ev.factor === 'Fundamental' ? cur.F : cur.G;
+      const priced = st.pricedIn.includes(ev.id);
+      return {
+        id: ev.id, date: ev.date, name: ev.name, factor: ev.factor,
+        rel: ev.rel, relCol: ev.rel === 'Alta' ? '#fbbf24' : '#94a3b8',
+        dir: sc >= 15 ? '▲ sesgo alcista' : sc <= -15 ? '▼ sesgo bajista' : '± efecto neutro',
+        dirCol: sc >= 15 ? '#34d399' : sc <= -15 ? '#f43f5e' : '#94a3b8',
+        op: priced ? '0.5' : '1', pressed: priced ? 'true' : 'false',
+        pLabel: priced ? 'Priced in ✓' : 'Priced in',
+        pBord: priced ? 'rgba(52,211,153,0.55)' : '#334155', pBg: priced ? 'rgba(52,211,153,0.12)' : 'transparent', pCol: priced ? '#6ee7b7' : '#64748b'
+      };
+    });
+
+    // ---- comparison ----
+    const cmpRow = (name, m, note, accent) => ({
+      name, note, accent,
+      score: this.fmtSN(m.S, 1), scoreCol: this.sigCol(m.S), er: this.fmtPct(m.er),
+      target: this.fmtN(m.tBase, 0), conf: m.conf, pUp: m.pUp, pDown: m.pDown,
+      risk: m.comp, riskLabel: rLab(m.comp), riskCol: rCol(m.comp)
+    });
+    const compare = [
+      cmpRow('Neutral (referencia)', neu, 'Pesos y supuestos por defecto', '#94a3b8'),
+      cmpRow('Usuario (sin shocks)', usr, 'Tus pesos y supuestos', '#38bdf8'),
+      cmpRow('Usuario + shocks', cur, st.activeShocks.length ? shockNames : 'Sin shocks activos — igual al escenario usuario', '#fbbf24')
+    ];
+
+    // ---- misc ----
+    const horizonBtns = [7, 14, 30].map(x => {
+      const on = h === x;
+      return { h: x, label: x + ' D', pressed: on ? 'true' : 'false', bord: on ? 'rgba(56,189,248,0.6)' : '#334155', bg: on ? 'rgba(56,189,248,0.14)' : 'transparent', col: on ? '#7dd3fc' : '#94a3b8' };
+    });
+    const dom = cur.pUp > cur.pDown && cur.pUp >= cur.pBase ? ['Alcista', '#34d399'] : cur.pDown > cur.pUp && cur.pDown >= cur.pBase ? ['Bajista', '#f43f5e'] : ['Caso base', '#38bdf8'];
+    const sprd = cur.pUp - cur.pDown;
+
+    return {
+      // header
+      updatedLabel: '10/07/2026 · 17:45 CET', viewLabel: st.advanced ? 'Vista simplificada' : 'Vista avanzada',
+      onToggleView, onReset, tickerLoop,
+      kpiRing: st.flash ? '0 0 0 1px rgba(245,158,11,0.5), 0 0 28px rgba(245,158,11,0.1)' : 'none',
+      // KPIs
+      k1v: this.fmtN(H.last, 2), k1chgPct: this.fmtPct(dayPct), k1col: dayPct >= 0 ? '#34d399' : '#f43f5e',
+      k1arrow: dayPct >= 0 ? '▲' : '▼', k1week: this.fmtPct(weekPct), k1weekCol: weekPct >= 0 ? '#34d399' : '#f43f5e',
+      k1hi: this.fmtN(H.hi, 0), k1lo: this.fmtN(H.lo, 0),
+      k2target: this.fmtN(cur.tBase, 0), k2ret: this.fmtPct(cur.er), k2retCol: cur.er >= 0 ? '#34d399' : '#f43f5e',
+      k2range: this.fmtN(cur.tPess, 0) + ' – ' + this.fmtN(cur.tOpt, 0), k2date: targetDate,
+      k3label: this.sigLabel(cur.S), k3col: this.sigCol(cur.S), k3score: this.fmtSN(cur.S, 1),
+      k3barLeft: cur.S >= 0 ? '50' : (50 + cur.S / 2).toFixed(1), k3barW: (Math.abs(cur.S) / 2).toFixed(1),
+      k4val: this.fmtN(cur.sent, 0), k4label: sentLabel, k4col: sentCol,
+      needleX: (60 + 38 * Math.cos(ang)).toFixed(1), needleY: (62 - 38 * Math.sin(ang)).toFixed(1),
+      k5val: this.fmtN(eff.vdax, 1), k5chg: this.fmtSN(vdaxDelta, 1), k5chgCol: vdaxDelta > 0.05 ? '#f43f5e' : vdaxDelta < -0.05 ? '#34d399' : '#94a3b8',
+      k5reg: reg[0], k5regCol: reg[1], k5regBg: reg[2],
+      k6pct: cur.conf, k6col, k6level: cur.conf >= 70 ? 'Alta' : cur.conf >= 55 ? 'Moderada' : 'Baja', k6cause: cur.cause,
+      // left column
+      horizonBtns, onHorizon, horizon: h,
+      horizonNote: h + ' sesiones proyectadas',
+      wTotal: this.fmtN(wN.raw, 0), wNoteShow: Math.round(wN.raw) !== 100, weightRows, onWeight, onEqual, onInstitutional,
+      presetBtns, onPreset,
+      shockBtns, onShock, onClearShocks, clearShow: st.activeShocks.length > 0, maxShocks: this.MAXSH,
+      shockCountLabel: st.activeShocks.length + ' / ' + this.MAXSH + ' ACTIVOS', shockCountCol: st.activeShocks.length ? '#fbbf24' : '#475569',
+      advanced: st.advanced, assumpOpen: st.assumpOpen, assumpPressed: st.assumpOpen ? 'true' : 'false',
+      assumpChevron: st.assumpOpen ? '▾' : '▸', onToggleAssumps, assumpRows, onAssump, onAssumpReset,
+      // chart
+      chart, tip, seriesChips, onToggleSeries, onChartMove, onChartLeave,
+      // probabilities
+      probUp: cur.pUp, probBase: cur.pBase, probDown: cur.pDown,
+      dominant: dom[0], domCol: dom[1], probSpread: this.fmtSN(sprd, 0),
+      conviction: Math.abs(sprd) >= 30 ? 'Alta' : Math.abs(sprd) >= 12 ? 'Media' : 'Baja',
+      probDelta: this.fmtSN(cur.pUp - neu.pUp, 0),
+      // summary & why
+      summaryCells, why1, why2, why3, sens,
+      // right column
+      comps, sortChips, onSort, radar, matrixRows, matrixTotal: this.fmtSN(cur.S, 1),
+      risks, riskComp: cur.comp, riskCompLabel: rLab(cur.comp), riskCompCol: rCol(cur.comp),
+      riskCompBg: cur.comp < 35 ? 'rgba(52,211,153,0.12)' : cur.comp < 55 ? 'rgba(245,158,11,0.12)' : 'rgba(244,63,94,0.12)',
+      insights,
+      // bottom
+      corrRows, events, onPriced, compare,
+      // toast
+      toastShow: st.toastShow, toastMsg: st.toastMsg
+    };
+  }
+}
+</script>
+</body>
+</html>
