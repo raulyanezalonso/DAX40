@@ -2567,7 +2567,44 @@ class Component extends DCLogic {
     if (j && typeof j.contents === 'string') { try { return JSON.parse(j.contents); } catch (e) { throw new Error('bad wrapped json'); } }
     return j;
   }
+  // Snapshot server-side (worker GitHub Actions → data/yahoo.json): mismo origen, sin CORS, 24/7.
+  // Se consulta ANTES que los proxies; si no existe o es muy viejo, cae a los proxies como antes.
+  async _loadSnap() {
+    const now = Date.now();
+    if (this._snap !== undefined && now - (this._snapAt || 0) < 120000) return this._snap;
+    if (this._snapPend) return this._snapPend;
+    this._snapPend = (async () => {
+      try {
+        const r = await this.rawFetch('./data/yahoo.json?t=' + Math.floor(now / 120000), 6000);
+        this._snap = r && r.at ? r : null;
+      } catch (e) { this._snap = (this._snap !== undefined ? this._snap : null); }
+      this._snapAt = Date.now(); this._snapPend = null; return this._snap;
+    })();
+    return this._snapPend;
+  }
+  async snapServe(url) {
+    if (url.indexOf('finance.yahoo.com') < 0) return null;
+    const snap = await this._loadSnap();
+    if (!snap || !snap.at || Date.now() - snap.at > 21600000) return null; // válido 6 h
+    const mS = url.match(/\/spark\?(.*)$/);
+    if (mS) {
+      const qs = new URLSearchParams(mS[1]);
+      const syms = (qs.get('symbols') || '').split(',').filter(Boolean);
+      const result = [];
+      syms.forEach(s => { const e = snap.spark && snap.spark[s]; if (e) result.push({ symbol: s, response: [{ meta: e.meta || {}, timestamp: e.timestamp || [], indicators: { quote: [{ close: e.close || [] }] } }] }); });
+      return result.length ? { spark: { result } } : null;
+    }
+    const mC = url.match(/\/chart\/([^?]+)\?(.*)$/);
+    if (mC) {
+      const qs = new URLSearchParams(mC[2]);
+      const key = decodeURIComponent(mC[1]) + '|' + (qs.get('range') || '') + '|' + (qs.get('interval') || '');
+      const res = snap.chart && snap.chart[key];
+      return res ? { chart: { result: [res] } } : null;
+    }
+    return null;
+  }
   async proxyFetch(url) {
+    try { const hit = await this.snapServe(url); if (hit) return hit; } catch (e) { }
     const wraps = [
       u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
       u => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u),
