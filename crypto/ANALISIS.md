@@ -20,61 +20,61 @@ Puntuación 0-100 por moneda: matemática del x100 (0-25, automática según cap
 
 | Tier | Moneda | Score | Posición | Cap. | FDV | x plausible | Acción |
 |---|---|---:|---:|---:|---:|---:|---|
-| A | **COW** | 74 | 170 € | 57,6 M € | 100,2 M € | x15.0 | REFORZAR (peso alto del plan) |
-| A | **SYRUP** | 71 | 166 € | 148,1 M € | 160,8 M € | x12.4 | REFORZAR |
-| A | **NMR** | 70 | 205 € | 61,0 M € | 89,9 M € | x11.1 | REFORZAR (gradual, órdenes pequeñas por liquidez) |
-| A | **OGN** | 63 | 112 € | 16,1 M € | 30,4 M € | x13.2 | REFORZAR (peso pequeño) |
+| A | **COW** | 74 | 170 € | 57,5 M € | 100,1 M € | x15.0 | REFORZAR (peso alto del plan) |
+| A | **SYRUP** | 71 | 166 € | 147,8 M € | 160,5 M € | x12.5 | REFORZAR |
+| A | **NMR** | 70 | 205 € | 60,9 M € | 89,8 M € | x11.1 | REFORZAR (gradual, órdenes pequeñas por liquidez) |
+| A | **OGN** | 63 | 112 € | 16,2 M € | 30,4 M € | x13.1 | REFORZAR (peso pequeño) |
 | B | **AAVE** | 69 | 745 € | 1,8 B € | 1,9 B € | x4.3 | MANTENER / AÑADIR gradualmente en caídas |
 | B | **UNI** | 69 | 664 € | 3,8 B € | 5,5 B € | x3.6 | MANTENER / AÑADIR en caídas (variante prudente del plan) |
-| B | **HYPE** | 68 | 299 € | 16,9 B € | 67,2 B € | x1.2 | MANTENER / AÑADIR en caídas fuertes (variante prudente) |
+| B | **HYPE** | 68 | 299 € | 16,8 B € | 66,8 B € | x1.2 | MANTENER / AÑADIR en caídas fuertes (variante prudente) |
 | B | **SKY** | 66 | 438 € | 1,4 B € | 1,4 B € | x2.9 | MANTENER / AÑADIR en caídas como compounder defensivo |
-| B | **SOL** | 63 | 638 € | 47,9 B € | 51,7 B € | x2.9 | MANTENER como núcleo; acumular escalonado (momentum negativo a 3 meses) |
-| B | **GRASS** | 63 | 321 € | 324,6 M € | 449,5 M € | x5.6 | MANTENER / AÑADIR con disciplina (variante prudente) |
-| B | **LINK** | 62 | 615 € | 7,5 B € | 9,8 B € | x3.1 | MANTENER |
-| B | **PYTH** | 55 | 445 € | 468,4 M € | 594,8 M € | x6.7 | MANTENER / AÑADIR moderadamente con horizonte 2028; esperar debilidad en los meses previos al cliff del 19-may-2027 |
-| B | **STX** | 51 | 432 € | 568,9 M € | 568,9 M € | x7.0 | MANTENER; añadir moderadamente solo como apuesta BTC-fi (no como lotería) |
-| B | **JUP** | 51 | 110 € | 738,6 M € | 1,5 B € | x3.3 | MANTENER; subir peso a partir de enero de 2027, cuando terminan los unlocks de equipo (53 M JUP/mes) |
-| C | **PRCL** | 58 | 869 € | 4,7 M € | 5,2 M € | x57.8 | MANTENER como opción; no añadir hasta que V4 abra al público con auditoría y datos de volumen |
-| C | **HONEY** | 57 | 2.553 € | 11,3 M € | 11,3 M € | x70.8 | MANTENER como opción; NO añadir hasta ver un MIP que recorte emisiones o cifras de quema |
-| C | **EUL** | 55 | 229 € | 22,2 M € | 25,2 M € | x15.9 | MANTENER pequeño; no añadir hasta ver TVL e ingresos estabilizados dos trimestres |
+| B | **SOL** | 63 | 638 € | 47,6 B € | 51,4 B € | x2.9 | MANTENER como núcleo; acumular escalonado (momentum negativo a 3 meses) |
+| B | **GRASS** | 63 | 321 € | 324,9 M € | 450,1 M € | x5.6 | MANTENER / AÑADIR con disciplina (variante prudente) |
+| B | **LINK** | 62 | 615 € | 7,5 B € | 9,7 B € | x3.1 | MANTENER |
+| B | **PYTH** | 55 | 445 € | 469,2 M € | 595,9 M € | x6.7 | MANTENER / AÑADIR moderadamente con horizonte 2028; esperar debilidad en los meses previos al cliff del 19-may-2027 |
+| B | **STX** | 51 | 432 € | 568,2 M € | 568,2 M € | x7.0 | MANTENER; añadir moderadamente solo como apuesta BTC-fi (no como lotería) |
+| B | **JUP** | 51 | 110 € | 736,4 M € | 1,5 B € | x3.3 | MANTENER; subir peso a partir de enero de 2027, cuando terminan los unlocks de equipo (53 M JUP/mes) |
+| C | **PRCL** | 58 | 869 € | 4,8 M € | 5,2 M € | x57.5 | MANTENER como opción; no añadir hasta que V4 abra al público con auditoría y datos de volumen |
+| C | **HONEY** | 57 | 2.553 € | 11,2 M € | 11,2 M € | x71.3 | MANTENER como opción; NO añadir hasta ver un MIP que recorte emisiones o cifras de quema |
+| C | **EUL** | 55 | 229 € | 22,2 M € | 25,1 M € | x15.9 | MANTENER pequeño; no añadir hasta ver TVL e ingresos estabilizados dos trimestres |
 | C | **MORPHO** | 55 | 87 € | 1,3 B € | 1,9 B € | x2.7 | MANTENER pequeño; añadir solo si la DAO aprueba fee switch o recompras |
-| C | **TRAC** | 53 | 3.024 € | 137,6 M € | 153,8 M € | x9.8 | MANTENER |
+| C | **TRAC** | 53 | 3.024 € | 138,5 M € | 154,9 M € | x9.7 | MANTENER |
 | C | **LQTY** | 53 | 97 € | 15,9 M € | 16,1 M € | x12.4 | MANTENER o reducir; no añadir |
-| C | **LDO** | 52 | 212 € | 246,8 M € | 297,5 M € | x5.0 | MANTENER pequeño; no añadir |
-| C | **RAY** | 51 | 577 € | 430,5 M € | 885,1 M € | x3.4 | MANTENER; recortar parcialmente en rebotes (+165 % de P&L) |
-| C | **AKT** | 51 | 250 € | 174,0 M € | 174,0 M € | x5.7 | MANTENER pequeño; no añadir hasta que la migración a Solana esté ejecutada |
-| C | **DIMO** | 50 | 651 € | 6,7 M € | 15,3 M € | x19.6 | MANTENER como lotería; no añadir |
-| C | **PENDLE** | 50 | 576 € | 261,4 M € | 423,1 M € | x4.7 | MANTENER o recortar parcialmente hacia AAVE/UNI; no añadir |
+| C | **LDO** | 52 | 212 € | 246,3 M € | 296,9 M € | x5.1 | MANTENER pequeño; no añadir |
+| C | **RAY** | 51 | 577 € | 427,6 M € | 879,1 M € | x3.4 | MANTENER; recortar parcialmente en rebotes (+165 % de P&L) |
+| C | **AKT** | 51 | 250 € | 173,5 M € | 173,6 M € | x5.8 | MANTENER pequeño; no añadir hasta que la migración a Solana esté ejecutada |
+| C | **DIMO** | 50 | 651 € | 6,7 M € | 15,4 M € | x19.5 | MANTENER como lotería; no añadir |
+| C | **PENDLE** | 50 | 576 € | 260,9 M € | 422,2 M € | x4.7 | MANTENER o recortar parcialmente hacia AAVE/UNI; no añadir |
 | C | **JTO** | 50 | 123 € | 165,9 M € | 306,8 M € | x6.5 | MANTENER; añadir solo tras ver los primeros datos de volumen y quema de JTX |
-| C | **RENDER** | 50 | 108 € | 756,0 M € | 796,0 M € | x5.0 | MANTENER como proxy líquido del sector IA-DePIN; no hace falta añadir |
-| C | **MNDE** | 49 | 105 € | 10,9 M € | 14,0 M € | x10.7 | MANTENER los 105 € como lotería o rotar; no añadir |
-| C | **API3** | 47 | 439 € | 34,4 M € | 41,9 M € | x8.4 | MANTENER sin añadir; preferible a COTI/ANKR por la tesorería, inferior a OGN en captura de valor |
-| C | **ALEO** | 46 | 432 € | 48,0 M € | 65,2 M € | x30.7 | MANTENER como opción de alto riesgo; añadir solo cantidades pequeñas y solo si Shield Swap muestra volumen real |
+| C | **RENDER** | 50 | 108 € | 756,7 M € | 796,7 M € | x5.0 | MANTENER como proxy líquido del sector IA-DePIN; no hace falta añadir |
+| C | **MNDE** | 49 | 105 € | 10,9 M € | 13,9 M € | x10.8 | MANTENER los 105 € como lotería o rotar; no añadir |
+| C | **API3** | 47 | 439 € | 34,5 M € | 41,9 M € | x8.3 | MANTENER sin añadir; preferible a COTI/ANKR por la tesorería, inferior a OGN en captura de valor |
+| C | **ALEO** | 46 | 432 € | 48,2 M € | 65,5 M € | x30.5 | MANTENER como opción de alto riesgo; añadir solo cantidades pequeñas y solo si Shield Swap muestra volumen real |
 | C | **COOKIE** | 46 | 89 € | 6,4 M € | 7,9 M € | x18.9 | MANTENER los 89 € como opción; no añadir hasta que Cookie Pro sea público con métricas |
-| C | **ALCX** | 46 | 85 € | 4,6 M € | 5,8 M € | x17.2 | MANTENER solo si aceptas pérdida total; no añadir |
-| C | **VET** | 44 | 104 € | 426,0 M € | 426,0 M € | x7.0 | MANTENER la posición pequeña como opción barata; no añadir |
-| C | **XDC** | 43 | 448 € | 568,4 M € | 1,1 B € | x3.7 | MANTENER; si se añade, solo en tramos pequeños |
-| C | **TIA** | 42 | 418 € | 383,3 M € | 457,6 M € | x6.6 | MANTENER; añadir solo si la "blob economy" (fee base + quema) se aprueba como CIP |
+| C | **ALCX** | 46 | 85 € | 4,6 M € | 5,8 M € | x17.1 | MANTENER solo si aceptas pérdida total; no añadir |
+| C | **VET** | 44 | 104 € | 425,3 M € | 425,3 M € | x7.1 | MANTENER la posición pequeña como opción barata; no añadir |
+| C | **XDC** | 43 | 448 € | 568,9 M € | 1,1 B € | x3.7 | MANTENER; si se añade, solo en tramos pequeños |
+| C | **TIA** | 42 | 418 € | 382,4 M € | 456,5 M € | x6.6 | MANTENER; añadir solo si la "blob economy" (fee base + quema) se aprueba como CIP |
 | C | **DOT** | 42 | 111 € | 1,4 B € | 1,4 B € | x4.2 | MANTENER la posición pequeña; no añadir |
-| C | **GRT** | 41 | 101 € | 192,6 M € | 204,5 M € | x7.3 | MANTENER pequeño o rotar a candidatos tier A; no añadir |
+| C | **GRT** | 41 | 101 € | 192,3 M € | 204,1 M € | x7.3 | MANTENER pequeño o rotar a candidatos tier A; no añadir |
 | C | **HBAR** | 40 | 424 € | 2,7 B € | 3,1 B € | x3.3 | MANTENER o recortar parcialmente para financiar las posiciones tier A; no añadir |
-| C | **DOGE** | 31 | 475 € | 10,2 B € | 10,2 B € | x4.9 | MANTENER como proxy líquido de riesgo meme; no añadir |
-| D | **HNT** | 51 | 406 € | 54,8 M € | 54,8 M € | x14.6 | REDUCIR a posición testimonial (≤150 €) |
-| D | **COTI** | 47 | 424 € | 25,8 M € | 25,8 M € | x19.4 | REDUCIR (dejar ≤150 €) |
+| C | **DOGE** | 31 | 475 € | 10,1 B € | 10,1 B € | x4.9 | MANTENER como proxy líquido de riesgo meme; no añadir |
+| D | **HNT** | 51 | 406 € | 54,6 M € | 54,6 M € | x14.6 | REDUCIR a posición testimonial (≤150 €) |
+| D | **COTI** | 47 | 424 € | 25,7 M € | 25,7 M € | x19.4 | REDUCIR (dejar ≤150 €) |
 | D | **ONDO** | 45 | 87 € | 1,6 B € | 3,4 B € | x2.4 | VENDER antes del unlock del 17/18-ene-2027 (1,7-1,9 B ONDO, 35 % del circulante) |
-| D | **FLOKI** | 44 | 2.454 € | 188,8 M € | 188,8 M € | x7.9 | REDUCIR a tamaño especulativo (500-700 €) |
+| D | **FLOKI** | 44 | 2.454 € | 188,4 M € | 188,4 M € | x8.0 | REDUCIR a tamaño especulativo (500-700 €) |
 | D | **ANKR** | 44 | 98 € | 35,2 M € | 35,2 M € | x8.5 | SALIR / ROTAR los 98 €: el token no participa del negocio RPC y Neura se ha desacoplado |
-| D | **BEAM** | 42 | 409 € | 192,2 M € | 219,6 M € | x6.8 | REDUCIR en fuerza (ahora, tras el +70 %): dejar ≤200 € hasta ver comisiones reales de Dreamcash o un programa formal de recompras |
-| D | **KAITO** | 41 | 2.254 € | 47,8 M € | 198,0 M € | x7.6 | REDUCIR fuerte (dejar como mucho 400-600 € como opción sobre Katalyst/Markets) |
+| D | **BEAM** | 42 | 409 € | 191,3 M € | 218,6 M € | x6.9 | REDUCIR en fuerza (ahora, tras el +70 %): dejar ≤200 € hasta ver comisiones reales de Dreamcash o un programa formal de recompras |
+| D | **KAITO** | 41 | 2.254 € | 47,8 M € | 197,9 M € | x7.6 | REDUCIR fuerte (dejar como mucho 400-600 € como opción sobre Katalyst/Markets) |
 | D | **ENA** | 38 | 178 € | 2,0 B € | 2,2 B € | x4.5 | REDUCIR / ROTAR (acumulas +104 %) |
 | D | **AI** | 37 | 2.571 € | 17,8 M € | 136,1 M € | x14.7 | REDUCIR fuerte antes del cliff de abril-2027 (dejar como mucho 500-800 €) |
 | D | **ASM** | 37 | 77 € | 6,1 M € | 12,2 M € | x4.9 | SALIR / ROTAR los 77 € |
-| D | **FET** | 36 | 471 € | 308,3 M € | 362,0 M € | x5.5 | REDUCIR (dejar ≤150 €) salvo que quieras un beta líquido de IA |
-| D | **MINA** | 36 | 436 € | 64,9 M € | 64,9 M € | x7.7 | REDUCIR en rebotes (436 € es desproporcionado para la calidad) |
-| D | **EIGEN** | 36 | 421 € | 158,6 M € | 289,8 M € | x6.9 | ROTAR la mayor parte (dejar ≤150 €): dilución del ~4,5 % mensual hasta oct-2027 sin recompras |
-| D | **OCEAN** | 34 | 1.334 € | 28,7 M € | 31,7 M € | x3.2 | SALIR / ROTAR |
+| D | **FET** | 36 | 471 € | 306,3 M € | 359,7 M € | x5.6 | REDUCIR (dejar ≤150 €) salvo que quieras un beta líquido de IA |
+| D | **MINA** | 36 | 436 € | 65,0 M € | 65,0 M € | x7.7 | REDUCIR en rebotes (436 € es desproporcionado para la calidad) |
+| D | **EIGEN** | 36 | 421 € | 158,4 M € | 289,5 M € | x6.9 | ROTAR la mayor parte (dejar ≤150 €): dilución del ~4,5 % mensual hasta oct-2027 sin recompras |
+| D | **OCEAN** | 34 | 1.334 € | 28,6 M € | 31,7 M € | x3.2 | SALIR / ROTAR |
 | D | **BLZ** | 33 | 83 € | 3,5 M € | 3,6 M € | x0 | SALIR (o ignorar los 83 €) |
-| D | **BENJI** | 32 | 81 € | 888.560 € | 888.560 € | x0 | SALIR (o dejar los 81 € como billete de lotería) |
+| D | **BENJI** | 32 | 81 € | 887.313 € | 887.313 € | x0 | SALIR (o dejar los 81 € como billete de lotería) |
 | D | **BERA** | 30 | 424 € | 38,9 M € | 60,2 M € | x5.0 | SALIR total o parcialmente |
 | D | **GFI** | 27 | 736 € | 2,7 M € | 3,2 M € | x0 | SALIR |
 | D | **SPELL** | 23 | 87 € | 11,4 M € | 13,1 M € | x0 | SALIR |
@@ -158,11 +158,11 @@ Las únicas posiciones donde coinciden un negocio con ingresos verificables, un 
 
 #### COW · CoW Protocol — score 74/100
 
-*DeFi · posición 170 € · cap 57,6 M € · FDV 100,2 M € · estado: activo*
+*DeFi · posición 170 € · cap 57,5 M € · FDV 100,1 M € · estado: activo*
 
 **Acción:** REFORZAR (peso alto del plan). Comprar escalonado; tramo extra si se aprueba la quema/recompra ampliada.
 
-**Zona de compra:** Zona de compra: por debajo de 0,10 € (mínimos de 2026). Tramo extra si cae a 0,07-0,08 € sin noticias propias.
+**Zona de compra:** por debajo de 0,10 € (mínimos de 2026). Tramo extra si cae a 0,07-0,08 € sin noticias propias.
 
 **Qué es:** CoW Protocol (CoW Swap) es un agregador DEX basado en intenciones: los usuarios firman órdenes y una red de 'solvers' compite por ejecutarlas en subastas por lotes con protección MEV. También opera CoW AMM y fue cocreador de MEV Blocker (vendido a Consensys en enero 2026).
 
@@ -208,11 +208,11 @@ Las únicas posiciones donde coinciden un negocio con ingresos verificables, un 
 
 #### SYRUP · Maple Finance — score 71/100
 
-*DeFi · posición 166 € · cap 148,1 M € · FDV 160,8 M € · estado: activo*
+*DeFi · posición 166 € · cap 147,8 M € · FDV 160,5 M € · estado: activo*
 
 **Acción:** REFORZAR. La caída del 40 % en 30 días no tiene noticia propia detrás: escalonar compras en 3-4 tramos.
 
-**Zona de compra:** Zona de compra: 0,10-0,13 €. Si los préstamos vivos vuelven a crecer en el informe del 4T, acelerar.
+**Zona de compra:** 0,10-0,13 €. Si los préstamos vivos vuelven a crecer en el informe del 4T, acelerar.
 
 **Qué es:** Maple Finance es un gestor de activos on-chain que ofrece préstamos sobrecolateralizados a instituciones (fondos, market makers) y productos de rendimiento en stablecoins (syrupUSDC, syrupUSDT, syrupUSDG) para usuarios DeFi y plataformas como Robinhood.
 
@@ -220,7 +220,7 @@ Las únicas posiciones donde coinciden un negocio con ingresos verificables, un 
 
 **Puntuación:** matemática 10/25 · negocio 21/25 · comunidad 11/15 · tokenomics 12/15 · equipo 9/10 · catalizadores 8/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 161 M € a 16,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x12.4 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 161 M € a 16,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x12.5 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~17,6 M $ · TVL ~4,7 B $ · circulante 92 %
 
@@ -259,11 +259,11 @@ Las únicas posiciones donde coinciden un negocio con ingresos verificables, un 
 
 #### NMR · Numeraire — score 70/100
 
-*IA · posición 205 € · cap 61,0 M € · FDV 89,9 M € · estado: activo*
+*IA · posición 205 € · cap 60,9 M € · FDV 89,8 M € · estado: activo*
 
 **Acción:** REFORZAR (gradual, órdenes pequeñas por liquidez). Objetivo: construir posición de 1.500-3.000 € en 3 meses.
 
-**Zona de compra:** Zona de compra: por debajo de 9 €; capitulación si pierde 7 €. Usar órdenes límite, nunca a mercado en picos.
+**Zona de compra:** por debajo de 9 €; capitulación si pierde 7 €. Usar órdenes límite, nunca a mercado en picos.
 
 **Qué es:** Numerai es un hedge fund cuantitativo de San Francisco que agrega predicciones de miles de científicos de datos anónimos (torneo Numerai) para gestionar fondos de renta variable market-neutral (Numerai One, Numerai Supreme); los participantes hacen staking de NMR en sus modelos y pierden (quema) tokens si predicen mal.
 
@@ -309,11 +309,11 @@ Las únicas posiciones donde coinciden un negocio con ingresos verificables, un 
 
 #### OGN · Origin Protocol — score 63/100
 
-*DeFi · posición 112 € · cap 16,1 M € · FDV 30,4 M € · estado: activo*
+*DeFi · posición 112 € · cap 16,2 M € · FDV 30,4 M € · estado: activo*
 
 **Acción:** REFORZAR (peso pequeño). Posición objetivo 800-1.500 €; añadir solo en caídas, el token es volátil.
 
-**Zona de compra:** Zona de compra: por debajo de 0,02 €. No perseguir los picos del +100 % intradía que tuvo en octubre.
+**Zona de compra:** por debajo de 0,02 €. No perseguir los picos del +100 % intradía que tuvo en octubre.
 
 **Qué es:** Protocolo DeFi de rendimiento: OETH (LST de Ethereum), Super OETH (Base), OUSD (dólar con yield vía Morpho), vaults ARM (arbitraje de redenciones stETH/WETH) y Origin Sonic. OGN es el token de gobernanza que desde junio 2025 recibe el 100% de los ingresos netos del protocolo vía recompras distribuidas a los stakers (xOGN).
 
@@ -321,7 +321,7 @@ Las únicas posiciones donde coinciden un negocio con ingresos verificables, un 
 
 **Puntuación:** matemática 19/25 · negocio 12/25 · comunidad 7/15 · tokenomics 11/15 · equipo 8/10 · catalizadores 6/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 30 M € a 3,0 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 400 M €, es decir, un x13.2 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 30 M € a 3,0 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 400 M €, es decir, un x13.1 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~1,1 M $ · TVL ~76,6 M $ · circulante 53 %
 
@@ -459,7 +459,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### HYPE · Hyperliquid — score 68/100
 
-*DeFi · posición 299 € · cap 16,9 B € · FDV 67,2 B € · estado: activo*
+*DeFi · posición 299 € · cap 16,8 B € · FDV 66,8 B € · estado: activo*
 
 **Acción:** MANTENER / AÑADIR en caídas fuertes (variante prudente). Es el negocio más rentable de cripto, pero ya vale 67 B€ FDV.
 
@@ -557,7 +557,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### SOL · Solana — score 63/100
 
-*L1/L2 · posición 638 € · cap 47,9 B € · FDV 51,7 B € · estado: activo*
+*L1/L2 · posición 638 € · cap 47,6 B € · FDV 51,4 B € · estado: activo*
 
 **Acción:** MANTENER como núcleo; acumular escalonado (momentum negativo a 3 meses). Variante prudente del plan.
 
@@ -607,7 +607,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### GRASS · Grass — score 63/100
 
-*DePIN · posición 321 € · cap 324,6 M € · FDV 449,5 M € · estado: activo*
+*DePIN · posición 321 € · cap 324,9 M € · FDV 450,1 M € · estado: activo*
 
 **Acción:** MANTENER / AÑADIR con disciplina (variante prudente). Vigilar el unlock del 27-nov y el airdrop Season 2.
 
@@ -655,7 +655,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### LINK · Chainlink — score 62/100
 
-*Infraestructura · posición 615 € · cap 7,5 B € · FDV 9,8 B € · estado: activo*
+*Infraestructura · posición 615 € · cap 7,5 B € · FDV 9,7 B € · estado: activo*
 
 **Acción:** MANTENER. Opción defensiva si se quiere añadir con menos riesgo que las small caps.
 
@@ -704,7 +704,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### PYTH · Pyth Network — score 55/100
 
-*Infraestructura · posición 445 € · cap 468,4 M € · FDV 594,8 M € · estado: activo*
+*Infraestructura · posición 445 € · cap 469,2 M € · FDV 595,9 M € · estado: activo*
 
 **Acción:** MANTENER / AÑADIR moderadamente con horizonte 2028; esperar debilidad en los meses previos al cliff del 19-may-2027.
 
@@ -754,7 +754,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### STX · Stacks — score 51/100
 
-*L1/L2 · posición 432 € · cap 568,9 M € · FDV 568,9 M € · estado: activo*
+*L1/L2 · posición 432 € · cap 568,2 M € · FDV 568,2 M € · estado: activo*
 
 **Acción:** MANTENER; añadir moderadamente solo como apuesta BTC-fi (no como lotería).
 
@@ -801,7 +801,7 @@ Protocolos con ingresos de decenas o cientos de millones y captura de valor (que
 
 #### JUP · Jupiter — score 51/100
 
-*DeFi · posición 110 € · cap 738,6 M € · FDV 1,5 B € · estado: activo*
+*DeFi · posición 110 € · cap 736,4 M € · FDV 1,5 B € · estado: activo*
 
 **Acción:** MANTENER; subir peso a partir de enero de 2027, cuando terminan los unlocks de equipo (53 M JUP/mes).
 
@@ -855,7 +855,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### PRCL · Parcl — score 58/100
 
-*RWA · posición 869 € · cap 4,7 M € · FDV 5,2 M € · estado: activo*
+*RWA · posición 869 € · cap 4,8 M € · FDV 5,2 M € · estado: activo*
 
 **Acción:** MANTENER como opción; no añadir hasta que V4 abra al público con auditoría y datos de volumen. Pasa a A si el staking captura comisiones.
 
@@ -865,7 +865,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 25/25 · negocio 8/25 · comunidad 4/15 · tokenomics 9/15 · equipo 6/10 · catalizadores 6/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 5 M € a 519 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x57.8 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 5 M € a 522 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x57.5 sobre la FDV actual.
 
 **Métricas:** circulante 90 %
 
@@ -904,7 +904,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### HONEY · Hivemapper — score 57/100
 
-*DePIN · posición 2.553 € · cap 11,3 M € · FDV 11,3 M € · estado: activo*
+*DePIN · posición 2.553 € · cap 11,2 M € · FDV 11,2 M € · estado: activo*
 
 **Acción:** MANTENER como opción; NO añadir hasta ver un MIP que recorte emisiones o cifras de quema. Pasa a A si eso ocurre.
 
@@ -914,7 +914,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 22/25 · negocio 12/25 · comunidad 6/15 · tokenomics 4/15 · equipo 8/10 · catalizadores 5/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 11 M € a 1,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 800 M €, es decir, un x70.8 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 11 M € a 1,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 800 M €, es decir, un x71.3 sobre la FDV actual.
 
 **Métricas:** circulante 100 %
 
@@ -951,7 +951,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### EUL · Euler — score 55/100
 
-*DeFi · posición 229 € · cap 22,2 M € · FDV 25,2 M € · estado: activo*
+*DeFi · posición 229 € · cap 22,2 M € · FDV 25,1 M € · estado: activo*
 
 **Acción:** MANTENER pequeño; no añadir hasta ver TVL e ingresos estabilizados dos trimestres.
 
@@ -1046,7 +1046,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### TRAC · OriginTrail — score 53/100
 
-*IA · posición 3.024 € · cap 137,6 M € · FDV 153,8 M € · estado: activo*
+*IA · posición 3.024 € · cap 138,5 M € · FDV 154,9 M € · estado: activo*
 
 **Acción:** MANTENER. No añadir hasta que RFC-27 (tasas de inferencia pagadas en TRAC) esté aprobada; ya es el 10 % de la cartera.
 
@@ -1056,7 +1056,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 10/25 · negocio 10/25 · comunidad 8/15 · tokenomics 11/15 · equipo 8/10 · catalizadores 6/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 154 M € a 15,4 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 1,5 B €, es decir, un x9.8 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 155 M € a 15,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 1,5 B €, es decir, un x9.7 sobre la FDV actual.
 
 **Métricas:** circulante 89.5 %
 
@@ -1142,7 +1142,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### LDO · Lido DAO — score 52/100
 
-*DeFi · posición 212 € · cap 246,8 M € · FDV 297,5 M € · estado: activo*
+*DeFi · posición 212 € · cap 246,3 M € · FDV 296,9 M € · estado: activo*
 
 **Acción:** MANTENER pequeño; no añadir.
 
@@ -1152,7 +1152,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 9/25 · negocio 14/25 · comunidad 8/15 · tokenomics 7/15 · equipo 9/10 · catalizadores 5/10
 
-**Matemática del x100:** Techo plausible estimado: 1,5 B € (x5.0 sobre FDV).
+**Matemática del x100:** Techo plausible estimado: 1,5 B € (x5.1 sobre FDV).
 
 **Métricas:** ingresos anualizados ~40,5 M $ · circulante 83 %
 
@@ -1190,7 +1190,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### RAY · Raydium — score 51/100
 
-*DeFi · posición 577 € · cap 430,5 M € · FDV 885,1 M € · estado: activo*
+*DeFi · posición 577 € · cap 427,6 M € · FDV 879,1 M € · estado: activo*
 
 **Acción:** MANTENER; recortar parcialmente en rebotes (+165 % de P&L). No añadir: wash trading y dependencia de un socio.
 
@@ -1239,7 +1239,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### AKT · Akash Network — score 51/100
 
-*IA · posición 250 € · cap 174,0 M € · FDV 174,0 M € · estado: activo*
+*IA · posición 250 € · cap 173,5 M € · FDV 173,6 M € · estado: activo*
 
 **Acción:** MANTENER pequeño; no añadir hasta que la migración a Solana esté ejecutada.
 
@@ -1249,7 +1249,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 10/25 · negocio 9/25 · comunidad 9/15 · tokenomics 8/15 · equipo 8/10 · catalizadores 7/10
 
-**Matemática del x100:** Techo plausible estimado: 1,0 B € (x5.7 sobre FDV).
+**Matemática del x100:** Techo plausible estimado: 1,0 B € (x5.8 sobre FDV).
 
 **Métricas:** ingresos anualizados ~1,5 M $ · circulante 100 %
 
@@ -1288,7 +1288,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### DIMO · DIMO — score 50/100
 
-*DePIN · posición 651 € · cap 6,7 M € · FDV 15,3 M € · estado: estancado*
+*DePIN · posición 651 € · cap 6,7 M € · FDV 15,4 M € · estado: estancado*
 
 **Acción:** MANTENER como lotería; no añadir. Si DePIN rota con fuerza, vender parte en el rebote.
 
@@ -1298,7 +1298,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 22/25 · negocio 8/25 · comunidad 4/15 · tokenomics 7/15 · equipo 5/10 · catalizadores 4/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 15 M € a 1,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x19.6 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 15 M € a 1,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x19.5 sobre la FDV actual.
 
 **Métricas:** circulante 44 %
 
@@ -1336,7 +1336,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### PENDLE · Pendle — score 50/100
 
-*DeFi · posición 576 € · cap 261,4 M € · FDV 423,1 M € · estado: activo*
+*DeFi · posición 576 € · cap 260,9 M € · FDV 422,2 M € · estado: activo*
 
 **Acción:** MANTENER o recortar parcialmente hacia AAVE/UNI; no añadir. 576 € es grande para su calidad actual.
 
@@ -1434,7 +1434,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### RENDER · Render — score 50/100
 
-*IA · posición 108 € · cap 756,0 M € · FDV 796,0 M € · estado: activo*
+*IA · posición 108 € · cap 756,7 M € · FDV 796,7 M € · estado: activo*
 
 **Acción:** MANTENER como proxy líquido del sector IA-DePIN; no hace falta añadir.
 
@@ -1482,7 +1482,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### MNDE · Marinade — score 49/100
 
-*DeFi · posición 105 € · cap 10,9 M € · FDV 14,0 M € · estado: activo*
+*DeFi · posición 105 € · cap 10,9 M € · FDV 13,9 M € · estado: activo*
 
 **Acción:** MANTENER los 105 € como lotería o rotar; no añadir.
 
@@ -1492,7 +1492,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 21/25 · negocio 8/25 · comunidad 3/15 · tokenomics 6/15 · equipo 6/10 · catalizadores 5/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 14 M € a 1,4 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x10.7 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 14 M € a 1,4 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x10.8 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~4,0 M $ · TVL ~950,0 M $ · circulante 78 %
 
@@ -1529,7 +1529,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### API3 · API3 — score 47/100
 
-*Infraestructura · posición 439 € · cap 34,4 M € · FDV 41,9 M € · estado: activo*
+*Infraestructura · posición 439 € · cap 34,5 M € · FDV 41,9 M € · estado: activo*
 
 **Acción:** MANTENER sin añadir; preferible a COTI/ANKR por la tesorería, inferior a OGN en captura de valor.
 
@@ -1539,7 +1539,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 18/25 · negocio 6/25 · comunidad 5/15 · tokenomics 6/15 · equipo 7/10 · catalizadores 5/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 42 M € a 4,2 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 350 M €, es decir, un x8.4 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 42 M € a 4,2 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 350 M €, es decir, un x8.3 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~250.000 $ · circulante 87 %
 
@@ -1577,7 +1577,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### ALEO · Aleo — score 46/100
 
-*L1/L2 · posición 432 € · cap 48,0 M € · FDV 65,2 M € · estado: activo*
+*L1/L2 · posición 432 € · cap 48,2 M € · FDV 65,5 M € · estado: activo*
 
 **Acción:** MANTENER como opción de alto riesgo; añadir solo cantidades pequeñas y solo si Shield Swap muestra volumen real.
 
@@ -1587,7 +1587,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 18/25 · negocio 5/25 · comunidad 5/15 · tokenomics 3/15 · equipo 8/10 · catalizadores 7/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 65 M € a 6,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x30.7 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 66 M € a 6,6 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x30.5 sobre la FDV actual.
 
 **Métricas:** circulante 73.6 %
 
@@ -1634,7 +1634,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 24/25 · negocio 4/25 · comunidad 4/15 · tokenomics 5/15 · equipo 5/10 · catalizadores 4/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 8 M € a 793 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x18.9 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 8 M € a 794 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x18.9 sobre la FDV actual.
 
 **Métricas:** circulante 80 %
 
@@ -1680,7 +1680,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 24/25 · negocio 5/25 · comunidad 3/15 · tokenomics 6/15 · equipo 5/10 · catalizadores 3/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 6 M € a 583 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 100 M €, es decir, un x17.2 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 6 M € a 583 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 100 M €, es decir, un x17.1 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~350.000 $ · TVL ~34,0 M $ · circulante 79 %
 
@@ -1718,7 +1718,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### VET · VeChain — score 44/100
 
-*L1/L2 · posición 104 € · cap 426,0 M € · FDV 426,0 M € · estado: activo*
+*L1/L2 · posición 104 € · cap 425,3 M € · FDV 425,3 M € · estado: activo*
 
 **Acción:** MANTENER la posición pequeña como opción barata; no añadir.
 
@@ -1728,7 +1728,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 **Puntuación:** matemática 6/25 · negocio 7/25 · comunidad 8/15 · tokenomics 11/15 · equipo 7/10 · catalizadores 5/10
 
-**Matemática del x100:** Techo plausible estimado: 3,0 B € (x7.0 sobre FDV).
+**Matemática del x100:** Techo plausible estimado: 3,0 B € (x7.1 sobre FDV).
 
 **Métricas:** circulante 100 %
 
@@ -1765,7 +1765,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### XDC · XDC Network — score 43/100
 
-*RWA · posición 448 € · cap 568,4 M € · FDV 1,1 B € · estado: activo*
+*RWA · posición 448 € · cap 568,9 M € · FDV 1,1 B € · estado: activo*
 
 **Acción:** MANTENER; si se añade, solo en tramos pequeños. No es candidato x100.
 
@@ -1813,7 +1813,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### TIA · Celestia — score 42/100
 
-*L1/L2 · posición 418 € · cap 383,3 M € · FDV 457,6 M € · estado: activo*
+*L1/L2 · posición 418 € · cap 382,4 M € · FDV 456,5 M € · estado: activo*
 
 **Acción:** MANTENER; añadir solo si la "blob economy" (fee base + quema) se aprueba como CIP.
 
@@ -1909,7 +1909,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### GRT · The Graph — score 41/100
 
-*Infraestructura · posición 101 € · cap 192,6 M € · FDV 204,5 M € · estado: activo*
+*Infraestructura · posición 101 € · cap 192,3 M € · FDV 204,1 M € · estado: activo*
 
 **Acción:** MANTENER pequeño o rotar a candidatos tier A; no añadir.
 
@@ -2006,7 +2006,7 @@ Proyectos vivos pero sin razón para poner más dinero hoy: sin captura de valor
 
 #### DOGE · Dogecoin — score 31/100
 
-*Memecoin · posición 475 € · cap 10,2 B € · FDV 10,2 B € · estado: activo*
+*Memecoin · posición 475 € · cap 10,1 B € · FDV 10,1 B € · estado: activo*
 
 **Acción:** MANTENER como proxy líquido de riesgo meme; no añadir.
 
@@ -2057,7 +2057,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### HNT · Helium — score 51/100
 
-*DePIN · posición 406 € · cap 54,8 M € · FDV 54,8 M € · estado: activo*
+*DePIN · posición 406 € · cap 54,6 M € · FDV 54,6 M € · estado: activo*
 
 **Acción:** REDUCIR a posición testimonial (≤150 €). La tokenomics de 2026 es adversa al holder.
 
@@ -2105,7 +2105,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### COTI · COTI — score 47/100
 
-*Infraestructura · posición 424 € · cap 25,8 M € · FDV 25,8 M € · estado: activo*
+*Infraestructura · posición 424 € · cap 25,7 M € · FDV 25,7 M € · estado: activo*
 
 **Acción:** REDUCIR (dejar ≤150 €). Sin ingresos ni TVL verificables tras 18 meses de mainnet.
 
@@ -2201,7 +2201,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### FLOKI · FLOKI — score 44/100
 
-*Memecoin · posición 2.454 € · cap 188,8 M € · FDV 188,8 M € · estado: activo*
+*Memecoin · posición 2.454 € · cap 188,4 M € · FDV 188,4 M € · estado: activo*
 
 **Acción:** REDUCIR a tamaño especulativo (500-700 €). Hoy mismo (6-nov) reconoció un exploit en su bot de trading.
 
@@ -2211,7 +2211,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 **Puntuación:** matemática 10/25 · negocio 6/25 · comunidad 11/15 · tokenomics 8/15 · equipo 4/10 · catalizadores 5/10
 
-**Matemática del x100:** Techo plausible estimado: 1,5 B € (x7.9 sobre FDV).
+**Matemática del x100:** Techo plausible estimado: 1,5 B € (x8.0 sobre FDV).
 
 **Métricas:** circulante 100 %
 
@@ -2298,7 +2298,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### BEAM · Beam — score 42/100
 
-*Gaming · posición 409 € · cap 192,2 M € · FDV 219,6 M € · estado: activo*
+*Gaming · posición 409 € · cap 191,3 M € · FDV 218,6 M € · estado: activo*
 
 **Acción:** REDUCIR en fuerza (ahora, tras el +70 %): dejar ≤200 € hasta ver comisiones reales de Dreamcash o un programa formal de recompras.
 
@@ -2308,7 +2308,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 **Puntuación:** matemática 10/25 · negocio 8/25 · comunidad 7/15 · tokenomics 6/15 · equipo 6/10 · catalizadores 5/10
 
-**Matemática del x100:** Techo plausible estimado: 1,5 B € (x6.8 sobre FDV).
+**Matemática del x100:** Techo plausible estimado: 1,5 B € (x6.9 sobre FDV).
 
 **Métricas:** ingresos anualizados ~1,5 M $ · circulante 87 %
 
@@ -2347,7 +2347,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### KAITO · Kaito — score 41/100
 
-*IA · posición 2.254 € · cap 47,8 M € · FDV 198,0 M € · estado: activo*
+*IA · posición 2.254 € · cap 47,8 M € · FDV 197,9 M € · estado: activo*
 
 **Acción:** REDUCIR fuerte (dejar como mucho 400-600 € como opción sobre Katalyst/Markets). Es tu posición más grande y la de peor tokenomics.
 
@@ -2534,7 +2534,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### FET · Fetch.ai (ASI) — score 36/100
 
-*IA · posición 471 € · cap 308,3 M € · FDV 362,0 M € · estado: activo*
+*IA · posición 471 € · cap 306,3 M € · FDV 359,7 M € · estado: activo*
 
 **Acción:** REDUCIR (dejar ≤150 €) salvo que quieras un beta líquido de IA. Vigilar ASI:Chain y la disputa con Ocean.
 
@@ -2544,7 +2544,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 **Puntuación:** matemática 6/25 · negocio 6/25 · comunidad 8/15 · tokenomics 5/15 · equipo 6/10 · catalizadores 5/10
 
-**Matemática del x100:** Techo plausible estimado: 2,0 B € (x5.5 sobre FDV).
+**Matemática del x100:** Techo plausible estimado: 2,0 B € (x5.6 sobre FDV).
 
 **Métricas:** circulante 85 %
 
@@ -2582,7 +2582,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### MINA · Mina — score 36/100
 
-*L1/L2 · posición 436 € · cap 64,9 M € · FDV 64,9 M € · estado: activo*
+*L1/L2 · posición 436 € · cap 65,0 M € · FDV 65,0 M € · estado: activo*
 
 **Acción:** REDUCIR en rebotes (436 € es desproporcionado para la calidad). No añadir.
 
@@ -2629,7 +2629,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### EIGEN · EigenLayer — score 36/100
 
-*Infraestructura · posición 421 € · cap 158,6 M € · FDV 289,8 M € · estado: estancado*
+*Infraestructura · posición 421 € · cap 158,4 M € · FDV 289,5 M € · estado: estancado*
 
 **Acción:** ROTAR la mayor parte (dejar ≤150 €): dilución del ~4,5 % mensual hasta oct-2027 sin recompras.
 
@@ -2677,7 +2677,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### OCEAN · Ocean Protocol — score 34/100
 
-*IA · posición 1.334 € · cap 28,7 M € · FDV 31,7 M € · estado: zombie*
+*IA · posición 1.334 € · cap 28,6 M € · FDV 31,7 M € · estado: zombie*
 
 **Acción:** SALIR / ROTAR. Token huérfano: su propio equipo ya no le asigna utilidad. Si mantienes algo, solo como rebote técnico con stop.
 
@@ -2768,7 +2768,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 #### BENJI · Basenji — score 32/100
 
-*Memecoin · posición 81 € · cap 888.560 € · FDV 888.560 € · estado: zombie*
+*Memecoin · posición 81 € · cap 887.313 € · FDV 887.313 € · estado: zombie*
 
 **Acción:** SALIR (o dejar los 81 € como billete de lotería). Nadie trabaja para que suba.
 
@@ -2778,7 +2778,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 **Puntuación:** matemática 25/25 · negocio 0/25 · comunidad 1/15 · tokenomics 5/15 · equipo 0/10 · catalizadores 1/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 888.560 € a 89 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 887.313 € a 89 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~0 $ · circulante 100 %
 
@@ -2866,7 +2866,7 @@ Tesis rota: proyectos cerrados o zombis, tokenomics adversas (emisión o unlocks
 
 **Puntuación:** matemática 25/25 · negocio 0/25 · comunidad 1/15 · tokenomics 0/15 · equipo 1/10 · catalizadores 0/10
 
-**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 3 M € a 324 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual.
+**Matemática del x100:** Un x100 en precio exige pasar de una capitalización totalmente diluida de 3 M € a 325 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual.
 
 **Métricas:** ingresos anualizados ~0 $ · TVL ~1,6 M $ · circulante 84 %
 

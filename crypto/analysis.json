@@ -326,14 +326,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 137560221,
-    "fdv_eur": 153776192,
-    "mc_x100_eur": 13756022100,
-    "fdv_x100_eur": 15377619200,
+    "mc_actual_eur": 138527028,
+    "fdv_eur": 154856968,
+    "mc_x100_eur": 13852702800,
+    "fdv_x100_eur": 15485696800,
     "techo_plausible_eur": 1500000000.0,
-    "x_plausible": 9.8,
+    "x_plausible": 9.7,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 154 M € a 15,4 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 1,5 B €, es decir, un x9.8 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 155 M € a 15,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 1,5 B €, es decir, un x9.7 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -398,10 +398,10 @@
     "inflacion_pct": 83
    },
    "x100": {
-    "mc_actual_eur": 17757812,
-    "fdv_eur": 136109050,
-    "mc_x100_eur": 1775781200,
-    "fdv_x100_eur": 13610905000,
+    "mc_actual_eur": 17759828,
+    "fdv_eur": 136124502,
+    "mc_x100_eur": 1775982800,
+    "fdv_x100_eur": 13612450200,
     "techo_plausible_eur": 2000000000.0,
     "x_plausible": 14.7,
     "posible_por_tamano": true,
@@ -470,14 +470,14 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 11296426,
-    "fdv_eur": 11296426,
-    "mc_x100_eur": 1129642600,
-    "fdv_x100_eur": 1129642600,
+    "mc_actual_eur": 11221693,
+    "fdv_eur": 11221693,
+    "mc_x100_eur": 1122169300,
+    "fdv_x100_eur": 1122169300,
     "techo_plausible_eur": 800000000.0,
-    "x_plausible": 70.8,
+    "x_plausible": 71.3,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 11 M € a 1,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 800 M €, es decir, un x70.8 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 11 M € a 1,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 800 M €, es decir, un x71.3 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -542,14 +542,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 188827718,
-    "fdv_eur": 188827718,
-    "mc_x100_eur": 18882771800,
-    "fdv_x100_eur": 18882771800,
+    "mc_actual_eur": 188441001,
+    "fdv_eur": 188441001,
+    "mc_x100_eur": 18844100100,
+    "fdv_x100_eur": 18844100100,
     "techo_plausible_eur": 1500000000.0,
-    "x_plausible": 7.9,
+    "x_plausible": 8.0,
     "posible_por_tamano": false,
-    "veredicto": "Techo plausible estimado: 1,5 B € (x7.9 sobre FDV)."
+    "veredicto": "Techo plausible estimado: 1,5 B € (x8.0 sobre FDV)."
    },
    "precio_objetivo_eur": null
   },
@@ -617,10 +617,10 @@
     "inflacion_pct": 100
    },
    "x100": {
-    "mc_actual_eur": 47802952,
-    "fdv_eur": 198032941,
-    "mc_x100_eur": 4780295200,
-    "fdv_x100_eur": 19803294100,
+    "mc_actual_eur": 47779105,
+    "fdv_eur": 197934153,
+    "mc_x100_eur": 4777910500,
+    "fdv_x100_eur": 19793415300,
     "techo_plausible_eur": 1500000000.0,
     "x_plausible": 7.6,
     "posible_por_tamano": true,
@@ -690,10 +690,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 28654380,
-    "fdv_eur": 31705960,
-    "mc_x100_eur": 2865438000,
-    "fdv_x100_eur": 3170596000,
+    "mc_actual_eur": 28644088,
+    "fdv_eur": 31694571,
+    "mc_x100_eur": 2864408800,
+    "fdv_x100_eur": 3169457100,
     "techo_plausible_eur": 100000000.0,
     "x_plausible": 3.2,
     "posible_por_tamano": true,
@@ -764,14 +764,14 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 4728213,
-    "fdv_eur": 5186771,
-    "mc_x100_eur": 472821300,
-    "fdv_x100_eur": 518677100,
+    "mc_actual_eur": 4756658,
+    "fdv_eur": 5217975,
+    "mc_x100_eur": 475665800,
+    "fdv_x100_eur": 521797500,
     "techo_plausible_eur": 300000000.0,
-    "x_plausible": 57.8,
+    "x_plausible": 57.5,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 5 M € a 519 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x57.8 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 5 M € a 522 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x57.5 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -836,16 +836,16 @@
     "inflacion_pct": 1
    },
    "x100": {
-    "mc_actual_eur": 1804259271,
-    "fdv_eur": 1869666312,
-    "mc_x100_eur": 180425927100,
-    "fdv_x100_eur": 186966631200,
+    "mc_actual_eur": 1804056859,
+    "fdv_eur": 1869456563,
+    "mc_x100_eur": 180405685900,
+    "fdv_x100_eur": 186945656300,
     "techo_plausible_eur": 8000000000.0,
     "x_plausible": 4.3,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 8,0 B € (x4.3 sobre FDV)."
    },
-   "precio_objetivo_eur": 103.0
+   "precio_objetivo_eur": 77.2
   },
   "goldfinch": {
    "ticker": "GFI",
@@ -904,14 +904,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 2700447,
-    "fdv_eur": 3240378,
-    "mc_x100_eur": 270044700,
-    "fdv_x100_eur": 324037800,
+    "mc_actual_eur": 2706391,
+    "fdv_eur": 3247510,
+    "mc_x100_eur": 270639100,
+    "fdv_x100_eur": 324751000,
     "techo_plausible_eur": 0,
     "x_plausible": 0,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 3 M € a 324 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 3 M € a 325 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -977,16 +977,16 @@
     "inflacion_pct": 1.4
    },
    "x100": {
-    "mc_actual_eur": 3805855653,
-    "fdv_eur": 5532025285,
-    "mc_x100_eur": 380585565300,
-    "fdv_x100_eur": 553202528500,
+    "mc_actual_eur": 3789750995,
+    "fdv_eur": 5508616260,
+    "mc_x100_eur": 378975099500,
+    "fdv_x100_eur": 550861626000,
     "techo_plausible_eur": 20000000000.0,
     "x_plausible": 3.6,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 20,0 B € (x3.6 sobre FDV)."
    },
-   "precio_objetivo_eur": 5.49
+   "precio_objetivo_eur": 2.87
   },
   "dimo": {
    "ticker": "DIMO",
@@ -1050,14 +1050,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 6672676,
-    "fdv_eur": 15285734,
-    "mc_x100_eur": 667267600,
-    "fdv_x100_eur": 1528573400,
+    "mc_actual_eur": 6732194,
+    "fdv_eur": 15422078,
+    "mc_x100_eur": 673219400,
+    "fdv_x100_eur": 1542207800,
     "techo_plausible_eur": 300000000.0,
-    "x_plausible": 19.6,
+    "x_plausible": 19.5,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 15 M € a 1,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x19.6 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 15 M € a 1,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 300 M €, es decir, un x19.5 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -1128,16 +1128,16 @@
     "inflacion_pct": 4.2
    },
    "x100": {
-    "mc_actual_eur": 47858361290,
-    "fdv_eur": 51651055199,
-    "mc_x100_eur": 4785836129000,
-    "fdv_x100_eur": 5165105519900,
+    "mc_actual_eur": 47608758907,
+    "fdv_eur": 51381673070,
+    "mc_x100_eur": 4760875890700,
+    "fdv_x100_eur": 5138167307000,
     "techo_plausible_eur": 150000000000.0,
     "x_plausible": 2.9,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 150,0 B € (x2.9 sobre FDV)."
    },
-   "precio_objetivo_eur": 71.3
+   "precio_objetivo_eur": 67.0
   },
   "chainlink": {
    "ticker": "LINK",
@@ -1205,16 +1205,16 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 7498466300,
-    "fdv_eur": 9778270313,
-    "mc_x100_eur": 749846630000,
-    "fdv_x100_eur": 977827031300,
+    "mc_actual_eur": 7473012696,
+    "fdv_eur": 9745077896,
+    "mc_x100_eur": 747301269600,
+    "fdv_x100_eur": 974507789600,
     "techo_plausible_eur": 30000000000.0,
     "x_plausible": 3.1,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 30,0 B € (x3.1 sobre FDV)."
    },
-   "precio_objetivo_eur": 8.61
+   "precio_objetivo_eur": 7.36
   },
   "raydium": {
    "ticker": "RAY",
@@ -1282,10 +1282,10 @@
     "inflacion_pct": 0.7
    },
    "x100": {
-    "mc_actual_eur": 430549008,
-    "fdv_eur": 885132579,
-    "mc_x100_eur": 43054900800,
-    "fdv_x100_eur": 88513257900,
+    "mc_actual_eur": 427593611,
+    "fdv_eur": 879056806,
+    "mc_x100_eur": 42759361100,
+    "fdv_x100_eur": 87905680600,
     "techo_plausible_eur": 3000000000.0,
     "x_plausible": 3.4,
     "posible_por_tamano": false,
@@ -1354,10 +1354,10 @@
     "inflacion_pct": 2
    },
    "x100": {
-    "mc_actual_eur": 261412120,
-    "fdv_eur": 423121958,
-    "mc_x100_eur": 26141212000,
-    "fdv_x100_eur": 42312195800,
+    "mc_actual_eur": 260864594,
+    "fdv_eur": 422235731,
+    "mc_x100_eur": 26086459400,
+    "fdv_x100_eur": 42223573100,
     "techo_plausible_eur": 2000000000.0,
     "x_plausible": 4.7,
     "posible_por_tamano": false,
@@ -1424,10 +1424,10 @@
     "inflacion_pct": 3.3
    },
    "x100": {
-    "mc_actual_eur": 10173933103,
-    "fdv_eur": 10174359862,
-    "mc_x100_eur": 1017393310300,
-    "fdv_x100_eur": 1017435986200,
+    "mc_actual_eur": 10134772179,
+    "fdv_eur": 10135197295,
+    "mc_x100_eur": 1013477217900,
+    "fdv_x100_eur": 1013519729500,
     "techo_plausible_eur": 50000000000.0,
     "x_plausible": 4.9,
     "posible_por_tamano": false,
@@ -1498,14 +1498,14 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 308275419,
-    "fdv_eur": 362005191,
-    "mc_x100_eur": 30827541900,
-    "fdv_x100_eur": 36200519100,
+    "mc_actual_eur": 306276875,
+    "fdv_eur": 359658318,
+    "mc_x100_eur": 30627687500,
+    "fdv_x100_eur": 35965831800,
     "techo_plausible_eur": 2000000000.0,
-    "x_plausible": 5.5,
+    "x_plausible": 5.6,
     "posible_por_tamano": false,
-    "veredicto": "Techo plausible estimado: 2,0 B € (x5.5 sobre FDV)."
+    "veredicto": "Techo plausible estimado: 2,0 B € (x5.6 sobre FDV)."
    },
    "precio_objetivo_eur": null
   },
@@ -1572,10 +1572,10 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 568433775,
-    "fdv_eur": 1084782665,
-    "mc_x100_eur": 56843377500,
-    "fdv_x100_eur": 108478266500,
+    "mc_actual_eur": 568941751,
+    "fdv_eur": 1085752071,
+    "mc_x100_eur": 56894175100,
+    "fdv_x100_eur": 108575207100,
     "techo_plausible_eur": 4000000000.0,
     "x_plausible": 3.7,
     "posible_por_tamano": false,
@@ -1651,16 +1651,16 @@
     "inflacion_pct": 27
    },
    "x100": {
-    "mc_actual_eur": 468415481,
-    "fdv_eur": 594816418,
-    "mc_x100_eur": 46841548100,
-    "fdv_x100_eur": 59481641800,
+    "mc_actual_eur": 469229705,
+    "fdv_eur": 595850359,
+    "mc_x100_eur": 46922970500,
+    "fdv_x100_eur": 59585035900,
     "techo_plausible_eur": 4000000000.0,
     "x_plausible": 6.7,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 4,0 B € (x6.7 sobre FDV)."
    },
-   "precio_objetivo_eur": 0.0524
+   "precio_objetivo_eur": 0.0345
   },
   "api3": {
    "ticker": "API3",
@@ -1726,14 +1726,14 @@
     "inflacion_pct": 20
    },
    "x100": {
-    "mc_actual_eur": 34432280,
-    "fdv_eur": 41907691,
-    "mc_x100_eur": 3443228000,
-    "fdv_x100_eur": 4190769100,
+    "mc_actual_eur": 34454710,
+    "fdv_eur": 41934990,
+    "mc_x100_eur": 3445471000,
+    "fdv_x100_eur": 4193499000,
     "techo_plausible_eur": 350000000.0,
-    "x_plausible": 8.4,
+    "x_plausible": 8.3,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 42 M € a 4,2 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 350 M €, es decir, un x8.4 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 42 M € a 4,2 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 350 M €, es decir, un x8.3 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -1797,16 +1797,16 @@
     "inflacion_pct": 2
    },
    "x100": {
-    "mc_actual_eur": 1390357284,
-    "fdv_eur": 1392245604,
-    "mc_x100_eur": 139035728400,
-    "fdv_x100_eur": 139224560400,
+    "mc_actual_eur": 1382997654,
+    "fdv_eur": 1384875979,
+    "mc_x100_eur": 138299765400,
+    "fdv_x100_eur": 138487597900,
     "techo_plausible_eur": 4000000000.0,
     "x_plausible": 2.9,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 4,0 B € (x2.9 sobre FDV)."
    },
-   "precio_objetivo_eur": 0.0522
+   "precio_objetivo_eur": 0.0457
   },
   "mina-protocol": {
    "ticker": "MINA",
@@ -1869,10 +1869,10 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 64880557,
-    "fdv_eur": 64880557,
-    "mc_x100_eur": 6488055700,
-    "fdv_x100_eur": 6488055700,
+    "mc_actual_eur": 64954832,
+    "fdv_eur": 64954832,
+    "mc_x100_eur": 6495483200,
+    "fdv_x100_eur": 6495483200,
     "techo_plausible_eur": 500000000.0,
     "x_plausible": 7.7,
     "posible_por_tamano": true,
@@ -1941,16 +1941,16 @@
     "inflacion_pct": 3.6
    },
    "x100": {
-    "mc_actual_eur": 568892415,
-    "fdv_eur": 568892415,
-    "mc_x100_eur": 56889241500,
-    "fdv_x100_eur": 56889241500,
+    "mc_actual_eur": 568219766,
+    "fdv_eur": 568219766,
+    "mc_x100_eur": 56821976600,
+    "fdv_x100_eur": 56821976600,
     "techo_plausible_eur": 4000000000.0,
     "x_plausible": 7.0,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 4,0 B € (x7.0 sobre FDV)."
    },
-   "precio_objetivo_eur": 0.266
+   "precio_objetivo_eur": 0.108
   },
   "aleo": {
    "ticker": "ALEO",
@@ -2012,14 +2012,14 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 48025141,
-    "fdv_eur": 65237899,
-    "mc_x100_eur": 4802514100,
-    "fdv_x100_eur": 6523789900,
+    "mc_actual_eur": 48227599,
+    "fdv_eur": 65512920,
+    "mc_x100_eur": 4822759900,
+    "fdv_x100_eur": 6551292000,
     "techo_plausible_eur": 2000000000.0,
-    "x_plausible": 30.7,
+    "x_plausible": 30.5,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 65 M € a 6,5 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x30.7 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 66 M € a 6,6 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x30.5 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -2086,10 +2086,10 @@
     "inflacion_pct": 2.5
    },
    "x100": {
-    "mc_actual_eur": 2721729950,
-    "fdv_eur": 3070048501,
-    "mc_x100_eur": 272172995000,
-    "fdv_x100_eur": 307004850100,
+    "mc_actual_eur": 2706608960,
+    "fdv_eur": 3052992374,
+    "mc_x100_eur": 270660896000,
+    "fdv_x100_eur": 305299237400,
     "techo_plausible_eur": 10000000000.0,
     "x_plausible": 3.3,
     "posible_por_tamano": false,
@@ -2160,10 +2160,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 25784223,
-    "fdv_eur": 25784535,
-    "mc_x100_eur": 2578422300,
-    "fdv_x100_eur": 2578453500,
+    "mc_actual_eur": 25748834,
+    "fdv_eur": 25749146,
+    "mc_x100_eur": 2574883400,
+    "fdv_x100_eur": 2574914600,
     "techo_plausible_eur": 500000000.0,
     "x_plausible": 19.4,
     "posible_por_tamano": true,
@@ -2232,10 +2232,10 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 38932705,
-    "fdv_eur": 60177355,
-    "mc_x100_eur": 3893270500,
-    "fdv_x100_eur": 6017735500,
+    "mc_actual_eur": 38924305,
+    "fdv_eur": 60164370,
+    "mc_x100_eur": 3892430500,
+    "fdv_x100_eur": 6016437000,
     "techo_plausible_eur": 300000000.0,
     "x_plausible": 5.0,
     "posible_por_tamano": true,
@@ -2308,10 +2308,10 @@
     "inflacion_pct": 58
    },
    "x100": {
-    "mc_actual_eur": 158587317,
-    "fdv_eur": 289783521,
-    "mc_x100_eur": 15858731700,
-    "fdv_x100_eur": 28978352100,
+    "mc_actual_eur": 158444509,
+    "fdv_eur": 289522571,
+    "mc_x100_eur": 15844450900,
+    "fdv_x100_eur": 28952257100,
     "techo_plausible_eur": 2000000000.0,
     "x_plausible": 6.9,
     "posible_por_tamano": false,
@@ -2381,10 +2381,10 @@
     "inflacion_pct": 2.5
    },
    "x100": {
-    "mc_actual_eur": 383326770,
-    "fdv_eur": 457580218,
-    "mc_x100_eur": 38332677000,
-    "fdv_x100_eur": 45758021800,
+    "mc_actual_eur": 382394421,
+    "fdv_eur": 456467265,
+    "mc_x100_eur": 38239442100,
+    "fdv_x100_eur": 45646726500,
     "techo_plausible_eur": 3000000000.0,
     "x_plausible": 6.6,
     "posible_por_tamano": false,
@@ -2459,14 +2459,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 192175920,
-    "fdv_eur": 219560909,
-    "mc_x100_eur": 19217592000,
-    "fdv_x100_eur": 21956090900,
+    "mc_actual_eur": 191309182,
+    "fdv_eur": 218570661,
+    "mc_x100_eur": 19130918200,
+    "fdv_x100_eur": 21857066100,
     "techo_plausible_eur": 1500000000.0,
-    "x_plausible": 6.8,
+    "x_plausible": 6.9,
     "posible_por_tamano": false,
-    "veredicto": "Techo plausible estimado: 1,5 B € (x6.8 sobre FDV)."
+    "veredicto": "Techo plausible estimado: 1,5 B € (x6.9 sobre FDV)."
    },
    "precio_objetivo_eur": null
   },
@@ -2532,10 +2532,10 @@
     "inflacion_pct": 35
    },
    "x100": {
-    "mc_actual_eur": 54778865,
-    "fdv_eur": 54778863,
-    "mc_x100_eur": 5477886500,
-    "fdv_x100_eur": 5477886300,
+    "mc_actual_eur": 54649188,
+    "fdv_eur": 54649188,
+    "mc_x100_eur": 5464918800,
+    "fdv_x100_eur": 5464918800,
     "techo_plausible_eur": 800000000.0,
     "x_plausible": 14.6,
     "posible_por_tamano": true,
@@ -2606,16 +2606,16 @@
     "inflacion_pct": 17
    },
    "x100": {
-    "mc_actual_eur": 324556607,
-    "fdv_eur": 449547991,
-    "mc_x100_eur": 32455660700,
-    "fdv_x100_eur": 44954799100,
+    "mc_actual_eur": 324945978,
+    "fdv_eur": 450087314,
+    "mc_x100_eur": 32494597800,
+    "fdv_x100_eur": 45008731400,
     "techo_plausible_eur": 2500000000.0,
     "x_plausible": 5.6,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 2,5 B € (x5.6 sobre FDV)."
    },
-   "precio_objetivo_eur": 0.395
+   "precio_objetivo_eur": 0.257
   },
   "hyperliquid": {
    "ticker": "HYPE",
@@ -2686,16 +2686,16 @@
     "inflacion_pct": 36
    },
    "x100": {
-    "mc_actual_eur": 16896537143,
-    "fdv_eur": 67156408282,
-    "mc_x100_eur": 1689653714300,
-    "fdv_x100_eur": 6715640828200,
+    "mc_actual_eur": 16802347784,
+    "fdv_eur": 66782046422,
+    "mc_x100_eur": 1680234778400,
+    "fdv_x100_eur": 6678204642200,
     "techo_plausible_eur": 80000000000.0,
     "x_plausible": 1.2,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 80,0 B € (x1.2 sobre FDV)."
    },
-   "precio_objetivo_eur": 62.1
+   "precio_objetivo_eur": 48.5
   },
   "akash-network": {
    "ticker": "AKT",
@@ -2762,14 +2762,14 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 174020179,
-    "fdv_eur": 174035387,
-    "mc_x100_eur": 17402017900,
-    "fdv_x100_eur": 17403538700,
+    "mc_actual_eur": 173543533,
+    "fdv_eur": 173558699,
+    "mc_x100_eur": 17354353300,
+    "fdv_x100_eur": 17355869900,
     "techo_plausible_eur": 1000000000.0,
-    "x_plausible": 5.7,
+    "x_plausible": 5.8,
     "posible_por_tamano": false,
-    "veredicto": "Techo plausible estimado: 1,0 B € (x5.7 sobre FDV)."
+    "veredicto": "Techo plausible estimado: 1,0 B € (x5.8 sobre FDV)."
    },
    "precio_objetivo_eur": null
   },
@@ -2834,10 +2834,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 22249535,
-    "fdv_eur": 25163773,
-    "mc_x100_eur": 2224953500,
-    "fdv_x100_eur": 2516377300,
+    "mc_actual_eur": 22205075,
+    "fdv_eur": 25113489,
+    "mc_x100_eur": 2220507500,
+    "fdv_x100_eur": 2511348900,
     "techo_plausible_eur": 400000000.0,
     "x_plausible": 15.9,
     "posible_por_tamano": true,
@@ -2906,14 +2906,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 246772770,
-    "fdv_eur": 297471504,
-    "mc_x100_eur": 24677277000,
-    "fdv_x100_eur": 29747150400,
+    "mc_actual_eur": 246301427,
+    "fdv_eur": 296903324,
+    "mc_x100_eur": 24630142700,
+    "fdv_x100_eur": 29690332400,
     "techo_plausible_eur": 1500000000.0,
-    "x_plausible": 5.0,
+    "x_plausible": 5.1,
     "posible_por_tamano": false,
-    "veredicto": "Techo plausible estimado: 1,5 B € (x5.0 sobre FDV)."
+    "veredicto": "Techo plausible estimado: 1,5 B € (x5.1 sobre FDV)."
    },
    "precio_objetivo_eur": null
   },
@@ -2980,16 +2980,16 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 60982230,
-    "fdv_eur": 89927041,
-    "mc_x100_eur": 6098223000,
-    "fdv_x100_eur": 8992704100,
+    "mc_actual_eur": 60915779,
+    "fdv_eur": 89829049,
+    "mc_x100_eur": 6091577900,
+    "fdv_x100_eur": 8982904900,
     "techo_plausible_eur": 1000000000.0,
     "x_plausible": 11.1,
     "posible_por_tamano": true,
     "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 90 M € a 9,0 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 1,0 B €, es decir, un x11.1 sobre la FDV actual."
    },
-   "precio_objetivo_eur": 7.46
+   "precio_objetivo_eur": 7.06
   },
   "ethena": {
    "ticker": "ENA",
@@ -3052,10 +3052,10 @@
     "inflacion_pct": 15
    },
    "x100": {
-    "mc_actual_eur": 2009302127,
-    "fdv_eur": 2232557919,
-    "mc_x100_eur": 200930212700,
-    "fdv_x100_eur": 223255791900,
+    "mc_actual_eur": 2001168959,
+    "fdv_eur": 2223521066,
+    "mc_x100_eur": 200116895900,
+    "fdv_x100_eur": 222352106600,
     "techo_plausible_eur": 10000000000.0,
     "x_plausible": 4.5,
     "posible_por_tamano": false,
@@ -3127,16 +3127,16 @@
     "inflacion_pct": 3
    },
    "x100": {
-    "mc_actual_eur": 57591527,
-    "fdv_eur": 100248412,
-    "mc_x100_eur": 5759152700,
-    "fdv_x100_eur": 10024841200,
+    "mc_actual_eur": 57523927,
+    "fdv_eur": 100130743,
+    "mc_x100_eur": 5752392700,
+    "fdv_x100_eur": 10013074300,
     "techo_plausible_eur": 1500000000.0,
     "x_plausible": 15.0,
     "posible_por_tamano": true,
     "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 100 M € a 10,0 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 1,5 B €, es decir, un x15.0 sobre la FDV actual."
    },
-   "precio_objetivo_eur": 0.0883
+   "precio_objetivo_eur": 0.0881
   },
   "syrup": {
    "ticker": "SYRUP",
@@ -3201,16 +3201,16 @@
     "inflacion_pct": 5
    },
    "x100": {
-    "mc_actual_eur": 148053906,
-    "fdv_eur": 160814149,
-    "mc_x100_eur": 14805390600,
-    "fdv_x100_eur": 16081414900,
+    "mc_actual_eur": 147804571,
+    "fdv_eur": 160543324,
+    "mc_x100_eur": 14780457100,
+    "fdv_x100_eur": 16054332400,
     "techo_plausible_eur": 2000000000.0,
-    "x_plausible": 12.4,
+    "x_plausible": 12.5,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 161 M € a 16,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x12.4 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 161 M € a 16,1 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 2,0 B €, es decir, un x12.5 sobre la FDV actual."
    },
-   "precio_objetivo_eur": 0.112
+   "precio_objetivo_eur": 0.111
   },
   "shiba-inu": {
    "ticker": "SHIB",
@@ -3273,10 +3273,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 2418918544,
-    "fdv_eur": 2419975765,
-    "mc_x100_eur": 241891854400,
-    "fdv_x100_eur": 241997576500,
+    "mc_actual_eur": 2413219778,
+    "fdv_eur": 2414274508,
+    "mc_x100_eur": 241321977800,
+    "fdv_x100_eur": 241427450800,
     "techo_plausible_eur": 10000000000.0,
     "x_plausible": 4.1,
     "posible_por_tamano": false,
@@ -3351,10 +3351,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 165916140,
-    "fdv_eur": 306842851,
-    "mc_x100_eur": 16591614000,
-    "fdv_x100_eur": 30684285100,
+    "mc_actual_eur": 165866769,
+    "fdv_eur": 306751544,
+    "mc_x100_eur": 16586676900,
+    "fdv_x100_eur": 30675154400,
     "techo_plausible_eur": 2000000000.0,
     "x_plausible": 6.5,
     "posible_por_tamano": false,
@@ -3426,16 +3426,16 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 16140446,
-    "fdv_eur": 30364744,
-    "mc_x100_eur": 1614044600,
-    "fdv_x100_eur": 3036474400,
+    "mc_actual_eur": 16180697,
+    "fdv_eur": 30440468,
+    "mc_x100_eur": 1618069700,
+    "fdv_x100_eur": 3044046800,
     "techo_plausible_eur": 400000000.0,
-    "x_plausible": 13.2,
+    "x_plausible": 13.1,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 30 M € a 3,0 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 400 M €, es decir, un x13.2 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 30 M € a 3,0 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 400 M €, es decir, un x13.1 sobre la FDV actual."
    },
-   "precio_objetivo_eur": 0.019
+   "precio_objetivo_eur": 0.0143
   },
   "polkadot": {
    "ticker": "DOT",
@@ -3500,10 +3500,10 @@
     "inflacion_pct": 3.1
    },
    "x100": {
-    "mc_actual_eur": 1434665205,
-    "fdv_eur": 1434671840,
-    "mc_x100_eur": 143466520500,
-    "fdv_x100_eur": 143467184000,
+    "mc_actual_eur": 1426943556,
+    "fdv_eur": 1426943556,
+    "mc_x100_eur": 142694355600,
+    "fdv_x100_eur": 142694355600,
     "techo_plausible_eur": 6000000000.0,
     "x_plausible": 4.2,
     "posible_por_tamano": false,
@@ -3579,16 +3579,16 @@
     "inflacion_pct": 18
    },
    "x100": {
-    "mc_actual_eur": 738610941,
-    "fdv_eur": 1526786617,
-    "mc_x100_eur": 73861094100,
-    "fdv_x100_eur": 152678661700,
+    "mc_actual_eur": 736429180,
+    "fdv_eur": 1522276688,
+    "mc_x100_eur": 73642918000,
+    "fdv_x100_eur": 152227668800,
     "techo_plausible_eur": 5000000000.0,
     "x_plausible": 3.3,
     "posible_por_tamano": false,
     "veredicto": "Techo plausible estimado: 5,0 B € (x3.3 sobre FDV)."
    },
-   "precio_objetivo_eur": 0.196
+   "precio_objetivo_eur": 0.15
   },
   "render-token": {
    "ticker": "RENDER",
@@ -3652,10 +3652,10 @@
     "inflacion_pct": 1.1
    },
    "x100": {
-    "mc_actual_eur": 756008509,
-    "fdv_eur": 795985716,
-    "mc_x100_eur": 75600850900,
-    "fdv_x100_eur": 79598571600,
+    "mc_actual_eur": 756656317,
+    "fdv_eur": 796667780,
+    "mc_x100_eur": 75665631700,
+    "fdv_x100_eur": 79666778000,
     "techo_plausible_eur": 4000000000.0,
     "x_plausible": 5.0,
     "posible_por_tamano": false,
@@ -3725,14 +3725,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 10926270,
-    "fdv_eur": 13997722,
-    "mc_x100_eur": 1092627000,
-    "fdv_x100_eur": 1399772200,
+    "mc_actual_eur": 10885237,
+    "fdv_eur": 13945154,
+    "mc_x100_eur": 1088523700,
+    "fdv_x100_eur": 1394515400,
     "techo_plausible_eur": 150000000.0,
-    "x_plausible": 10.7,
+    "x_plausible": 10.8,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 14 M € a 1,4 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x10.7 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 14 M € a 1,4 B €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x10.8 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -3796,14 +3796,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 425998463,
-    "fdv_eur": 425998463,
-    "mc_x100_eur": 42599846300,
-    "fdv_x100_eur": 42599846300,
+    "mc_actual_eur": 425316467,
+    "fdv_eur": 425316467,
+    "mc_x100_eur": 42531646700,
+    "fdv_x100_eur": 42531646700,
     "techo_plausible_eur": 3000000000.0,
-    "x_plausible": 7.0,
+    "x_plausible": 7.1,
     "posible_por_tamano": false,
-    "veredicto": "Techo plausible estimado: 3,0 B € (x7.0 sobre FDV)."
+    "veredicto": "Techo plausible estimado: 3,0 B € (x7.1 sobre FDV)."
    },
    "precio_objetivo_eur": null
   },
@@ -3871,10 +3871,10 @@
     "inflacion_pct": 3
    },
    "x100": {
-    "mc_actual_eur": 192629302,
-    "fdv_eur": 204454592,
-    "mc_x100_eur": 19262930200,
-    "fdv_x100_eur": 20445459200,
+    "mc_actual_eur": 192303558,
+    "fdv_eur": 204108851,
+    "mc_x100_eur": 19230355800,
+    "fdv_x100_eur": 20410885100,
     "techo_plausible_eur": 1500000000.0,
     "x_plausible": 7.3,
     "posible_por_tamano": false,
@@ -3945,10 +3945,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 35196846,
-    "fdv_eur": 35196846,
-    "mc_x100_eur": 3519684600,
-    "fdv_x100_eur": 3519684600,
+    "mc_actual_eur": 35178619,
+    "fdv_eur": 35178619,
+    "mc_x100_eur": 3517861900,
+    "fdv_x100_eur": 3517861900,
     "techo_plausible_eur": 300000000.0,
     "x_plausible": 8.5,
     "posible_por_tamano": true,
@@ -4017,10 +4017,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 15930602,
-    "fdv_eur": 16115497,
-    "mc_x100_eur": 1593060200,
-    "fdv_x100_eur": 1611549700,
+    "mc_actual_eur": 15929635,
+    "fdv_eur": 16114516,
+    "mc_x100_eur": 1592963500,
+    "fdv_x100_eur": 1611451600,
     "techo_plausible_eur": 200000000.0,
     "x_plausible": 12.4,
     "posible_por_tamano": true,
@@ -4086,14 +4086,14 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 6401323,
-    "fdv_eur": 7934631,
-    "mc_x100_eur": 640132300,
-    "fdv_x100_eur": 793463100,
+    "mc_actual_eur": 6407939,
+    "fdv_eur": 7942831,
+    "mc_x100_eur": 640793900,
+    "fdv_x100_eur": 794283100,
     "techo_plausible_eur": 150000000.0,
     "x_plausible": 18.9,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 8 M € a 793 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x18.9 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 8 M € a 794 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 150 M €, es decir, un x18.9 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -4157,10 +4157,10 @@
     "inflacion_pct": 8
    },
    "x100": {
-    "mc_actual_eur": 1327085849,
-    "fdv_eur": 1886107653,
-    "mc_x100_eur": 132708584900,
-    "fdv_x100_eur": 188610765300,
+    "mc_actual_eur": 1322976653,
+    "fdv_eur": 1880269921,
+    "mc_x100_eur": 132297665300,
+    "fdv_x100_eur": 188026992100,
     "techo_plausible_eur": 5000000000.0,
     "x_plausible": 2.7,
     "posible_por_tamano": false,
@@ -4225,10 +4225,10 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 11442616,
-    "fdv_eur": 13077055,
-    "mc_x100_eur": 1144261600,
-    "fdv_x100_eur": 1307705500,
+    "mc_actual_eur": 11443417,
+    "fdv_eur": 13077971,
+    "mc_x100_eur": 1144341700,
+    "fdv_x100_eur": 1307797100,
     "techo_plausible_eur": 0,
     "x_plausible": 0,
     "posible_por_tamano": true,
@@ -4297,10 +4297,10 @@
     "inflacion_pct": 35
    },
    "x100": {
-    "mc_actual_eur": 1640942544,
-    "fdv_eur": 3369955057,
-    "mc_x100_eur": 164094254400,
-    "fdv_x100_eur": 336995505700,
+    "mc_actual_eur": 1632794425,
+    "fdv_eur": 3353221507,
+    "mc_x100_eur": 163279442500,
+    "fdv_x100_eur": 335322150700,
     "techo_plausible_eur": 8000000000.0,
     "x_plausible": 2.4,
     "posible_por_tamano": false,
@@ -4369,14 +4369,14 @@
     "inflacion_pct": 5
    },
    "x100": {
-    "mc_actual_eur": 4597352,
-    "fdv_eur": 5829922,
-    "mc_x100_eur": 459735200,
-    "fdv_x100_eur": 582992200,
+    "mc_actual_eur": 4600137,
+    "fdv_eur": 5833454,
+    "mc_x100_eur": 460013700,
+    "fdv_x100_eur": 583345400,
     "techo_plausible_eur": 100000000.0,
-    "x_plausible": 17.2,
+    "x_plausible": 17.1,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 6 M € a 583 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 100 M €, es decir, un x17.2 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 6 M € a 583 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 100 M €, es decir, un x17.1 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -4435,10 +4435,10 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 3497800,
-    "fdv_eur": 3609227,
-    "mc_x100_eur": 349780000,
-    "fdv_x100_eur": 360922700,
+    "mc_actual_eur": 3503394,
+    "fdv_eur": 3614999,
+    "mc_x100_eur": 350339400,
+    "fdv_x100_eur": 361499900,
     "techo_plausible_eur": 0,
     "x_plausible": 0,
     "posible_por_tamano": true,
@@ -4498,14 +4498,14 @@
     "inflacion_pct": 0
    },
    "x100": {
-    "mc_actual_eur": 888560,
-    "fdv_eur": 888560,
-    "mc_x100_eur": 88856000,
-    "fdv_x100_eur": 88856000,
+    "mc_actual_eur": 887313,
+    "fdv_eur": 887313,
+    "mc_x100_eur": 88731300,
+    "fdv_x100_eur": 88731300,
     "techo_plausible_eur": 0,
     "x_plausible": 0,
     "posible_por_tamano": true,
-    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 888.560 € a 89 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual."
+    "veredicto": "Un x100 en precio exige pasar de una capitalización totalmente diluida de 887.313 € a 89 M €. Matemáticamente no es absurdo por el tamaño actual, pero el techo plausible que estimo en un ciclo alcista fuerte es 0 €, es decir, un x0 sobre la FDV actual."
    },
    "precio_objetivo_eur": null
   },
@@ -4565,10 +4565,10 @@
     "inflacion_pct": null
    },
    "x100": {
-    "mc_actual_eur": 6100517,
-    "fdv_eur": 12168222,
-    "mc_x100_eur": 610051700,
-    "fdv_x100_eur": 1216822200,
+    "mc_actual_eur": 6105167,
+    "fdv_eur": 12177497,
+    "mc_x100_eur": 610516700,
+    "fdv_x100_eur": 1217749700,
     "techo_plausible_eur": 60000000.0,
     "x_plausible": 4.9,
     "posible_por_tamano": true,
