@@ -8,8 +8,9 @@ let html = readFileSync(join(ROOT, 'index.html'), 'utf8');
 const rules = readFileSync(join(ROOT, 'rules.js'), 'utf8');
 const bundle = readFileSync(join(ROOT, 'data', 'bundle.js'), 'utf8');
 const safe = s => s.replace(/<\/script/gi, '<\\/script');
-html = html.replace('<script src="rules.js"></script>', '<script>' + safe(rules) + '</script>')
-           .replace('<script src="data/bundle.js"></script>', '<script>' + safe(bundle) + '</script>');
+// reemplazo por función: una cadena de reemplazo interpretaría $&, $' o $` presentes en los datos
+html = html.replace('<script src="rules.js"></script>', () => '<script>' + safe(rules) + '</script>')
+           .replace('<script src="data/bundle.js"></script>', () => '<script>' + safe(bundle) + '</script>');
 // Página autónoma: sin esqueleto propio (lo pone el host al publicar; un navegador lo tolera igual)
 html = html.replace(/^<!DOCTYPE html>\s*<html lang="es">\s*<head>\s*<meta charset="utf-8">\s*<meta name="viewport" content="width=device-width, initial-scale=1">\s*/i, '')
            .replace('<meta name="viewport" content="width=device-width, initial-scale=1">', '')

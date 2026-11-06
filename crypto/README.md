@@ -7,12 +7,13 @@ profundidad de cada moneda, alertas de compra/venta y plan de compras mensual (1
 
 | Fichero | Qué es |
 |---|---|
-| `index.html` | El dashboard (HTML autónomo, sin build). Pestañas: Resumen · Análisis · Alertas · Plan DCA · Recomendadas · Candidatas · Ajustes. |
+| `index.html` | El dashboard (HTML autónomo, sin build). Pestañas: Resumen · Recomendadas · Análisis · Alertas · Plan DCA · Candidatas · Ajustes. |
 | `portfolio.json` | Las posiciones (ticker, id de CoinGecko, cantidad, precio y % de la captura). **Edítalo cuando compres o vendas.** |
 | `analysis.json` | Análisis por moneda: tier (A/B/C/D), puntuación 0-100, tesis, acción, matemática del x100, catalizadores, riesgos, noticias 2026, fuentes; plan DCA y lista de ventas. |
 | `ANALISIS.md` | El mismo análisis en formato documento, para leer de un tirón. |
-| `RECOMENDADAS.md` | Lista única (cartera + candidatas externas + apuestas) con puntuación x100 común, momento de compra, precio objetivo y plan mínimo de brokers (mercados reales de CoinGecko). Pestaña **Recomendadas** del panel (`analysis.json` → `recomendadas`, `brokers`). |
+| `RECOMENDADAS.md` | Lista única (cartera + candidatas externas + apuestas + cribado < 200 M€) con puntuación x100 común, momento de compra, precio objetivo y plan mínimo de brokers (mercados reales de CoinGecko). Pestaña **Recomendadas** del panel (`analysis.json` → `recomendadas`, `brokers`). |
 | `APUESTAS-X1000.md` | Cartera de lotería: 10 apuestas de 1.000 € (x100-x1000) con probabilidades reales, reglas y escalera de ventas; 56 micro-caps investigadas. Aparecen en la pestaña Candidatas (tier L) y el worker las sigue (`analysis.json` → `apuestas_x1000`). |
+| `CRIBADO-200M.md` | Cribado de altcoins con capitalización < 200 M€: 662 pasan el filtro cuantitativo, 124 investigadas en 12 lotes con la rúbrica común; las que superan 70 puntos entran en Recomendadas (grupo `cribado`), en la pestaña Candidatas y en el seguimiento del worker con alertas de tier A (`analysis.json` → `cribado_200m`, `cribado_todas`). |
 | `CANDIDATAS-EXTERNAS.md` | Búsqueda de candidatas fuera de la cartera (cribado de 1.750 monedas + ingresos de DeFiLlama + 40 fichas). Las 21 con ficha aparecen en la pestaña **Candidatas** y el worker las sigue con las mismas alertas que el tier A (`analysis.json` → `candidatas_externas`, campo `seguir`). |
 | `rules.js` | Indicadores (RSI, medias, mínimos 30/90/365 d) y reglas de alerta. Lo usan el dashboard y el worker. |
 | `worker/snapshot.mjs` | Worker (Node 20+, sin dependencias): precios, histórico diario, indicadores, alertas, historial de valor, Telegram. |

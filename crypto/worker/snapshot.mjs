@@ -40,7 +40,7 @@ async function jf(url, tries = 5) {
   }
 }
 
-const candidatas = (analysis.candidatas_externas || []).concat(analysis.apuestas_x1000 || []).filter(c => c.seguir !== false);
+const candidatas = (analysis.candidatas_externas || []).concat(analysis.apuestas_x1000 || []).concat(analysis.cribado_200m || []).filter(c => c.seguir !== false);
 const ids = portfolio.holdings.map(h => h.cg).concat(candidatas.map(c => c.cg));
 const ctxIds = ['bitcoin', 'ethereum'];
 

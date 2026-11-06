@@ -187,7 +187,7 @@ function build(){
 async function refreshLive(){
   const btn = $('#btn-live'); btn.disabled = true; $('#live-status').textContent = 'pidiendo precios…';
   try {
-    const ids = S.portfolio.holdings.map(h=>h.cg).concat((S.analysis.candidatas_externas||[]).map(c=>c.cg)).concat((S.analysis.apuestas_x1000||[]).map(c=>c.cg)).concat(['bitcoin']);
+    const ids = S.portfolio.holdings.map(h=>h.cg).concat((S.analysis.candidatas_externas||[]).map(c=>c.cg)).concat((S.analysis.apuestas_x1000||[]).map(c=>c.cg)).concat((S.analysis.cribado_200m||[]).map(c=>c.cg)).concat(['bitcoin']);
     const r = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=${ids.join(',')}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d,30d`);
     if (!r.ok) throw new Error('CoinGecko HTTP '+r.status);
     const arr = await r.json(); const markets = {}; arr.forEach(m => markets[m.id]=m);
@@ -341,7 +341,7 @@ function candRows(){
   const snap = S.snapshot && S.snapshot.monedas || {}; const live = S.live && S.live.markets || {};
   const fng = S.live && S.live.fng != null ? S.live.fng : (S.snapshot && S.snapshot.contexto && S.snapshot.contexto.fng ? S.snapshot.contexto.fng.valor : null);
   const objetivos = LS.get('objetivos', {});
-  return (S.analysis.candidatas_externas||[]).map(c=>({...c, lote:'externa'})).concat((S.analysis.apuestas_x1000||[]).map(c=>({...c, lote:'x1000', tier:c.tier||'L'}))).map(c => {
+  return (S.analysis.candidatas_externas||[]).map(c=>({...c, lote:'externa'})).concat((S.analysis.apuestas_x1000||[]).map(c=>({...c, lote:'x1000', tier:c.tier||'L'}))).concat((S.analysis.cribado_200m||[]).map(c=>({...c, lote:'cribado', tier:c.tier||'A'}))).map(c => {
     const sc = snap[c.cg] || {}, lv = live[c.cg] || null;
     const price = lv ? lv.current_price : (sc.precio != null ? sc.precio : null);
     const series = sc.series || []; let ind = sc.ind || {ok:false};
@@ -353,8 +353,8 @@ function candRows(){
 }
 function renderCandidatas(){
   const el = $('#candidatas'); const C = S.analysis.candidatas_externas || [];
-  if (!C.length) { el.innerHTML = '<div class="warn">Sin candidatas externas todavía.</div>'; return; }
-  const all = candRows(); const rows = all.filter(r=>r.lote!=='x1000'); const lot = all.filter(r=>r.lote==='x1000');
+  if (!C.length && !(S.analysis.cribado_200m||[]).length) { el.innerHTML = '<div class="warn">Sin candidatas externas todavía.</div>'; return; }
+  const all = candRows(); const rows = all.filter(r=>r.lote==='externa'); const lot = all.filter(r=>r.lote==='x1000'); const crib = all.filter(r=>r.lote==='cribado');
   let html = `<div class="card"><h2>Candidatas fuera de la cartera <span class="mut small">· ${rows.length} · seguidas por el worker con las mismas alertas que el tier A</span></h2>${S.analysis.candidatas_texto?`<p class="note" style="color:#cbd5e1;font-size:13px">${esc(S.analysis.candidatas_texto).replace(/\n/g,'<br>')}</p>`:''}
     <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Score</th><th>Precio</th><th>24h</th><th>30d</th><th>vs ATH</th><th>Cap.</th><th>FDV/Cap</th><th>RSI14</th><th>vs mín 90d</th><th>Revolut</th><th>Señal</th><th class="l">Acción</th></tr></thead><tbody>` +
     rows.sort((a,b)=>(b.score||0)-(a.score||0)).map(r=>{ const top=r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
@@ -365,6 +365,20 @@ function renderCandidatas(){
       <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Rol</th><th>Score</th><th>Precio</th><th>24h</th><th>30d</th><th>vs ATH</th><th>Cap.</th><th>FDV/Cap</th><th>RSI14</th><th>P(x100)</th><th>Dónde</th><th>Señal</th><th class="l">Narrativa / acción</th></tr></thead><tbody>` +
       lot.sort((a,b)=>(({apuesta:0,opcional:1,reserva:2}[a.rol]||2)-({apuesta:0,opcional:1,reserva:2}[b.rol]||2))||(b.score||0)-(a.score||0)).map(r=>{ const top=r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
         return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td class="small" style="color:${r.rol==='apuesta'?'#a78bfa':'var(--mut)'}">${esc(r.rol||'')}</td><td class="mono">${r.score!=null?r.score:'—'}</td><td class="mono">${fPx(r.precio)}</td><td>${fPct(r.c24h)}</td><td>${fPct(r.c30d)}</td><td>${fPct(r.vs_ath)}</td><td class="mono">${fBig(r.mc)}</td><td class="mono">${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'}</td><td class="mono ${r.ind.rsi14<=30?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td class="mono">${esc(r.prob_x100||'?')}</td><td class="small">${esc(r.donde||'?')}</td><td>${top?`<span class="pill ${top.nivel}">${top.codigo.replace('_',' ')}</span>`:''}</td><td class="l small" style="white-space:normal;max-width:320px;color:#cbd5e1">${esc(r.categoria||'')} · ${esc((r.accion||'').slice(0,140))}</td></tr>`; }).join('') + '</tbody></table></div></div>';
+  }
+  const todas = S.analysis.cribado_todas || [];
+  if (crib.length || todas.length) {
+    html += `<div class="card" style="border-color:rgba(45,212,191,.4)"><h2><span class="tier A">A</span> Cribado &lt; 200 M€ con score &gt; 70 <span class="mut small">· ${crib.length} seleccionadas de ${todas.length} investigadas · seguidas por el worker con alertas de tier A</span></h2>${S.analysis.cribado_texto?`<p class="note" style="color:#cbd5e1;font-size:13px">${esc(S.analysis.cribado_texto).replace(/\n/g,'<br>')}</p>`:''}
+      <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Score</th><th>Precio</th><th>24h</th><th>30d</th><th>vs ATH</th><th>Cap.</th><th>FDV/Cap</th><th>RSI14</th><th>vs mín 90d</th><th>Dónde</th><th>Señal</th><th class="l">Acción</th></tr></thead><tbody>` +
+      crib.sort((a,b)=>(b.score||0)-(a.score||0)).map(r=>{ const top=r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
+        return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td><span class="tier ${r.tier||'A'}">${r.tier||'A'}</span></td><td class="mono">${r.score!=null?r.score:'—'}</td><td class="mono">${fPx(r.precio)}</td><td>${fPct(r.c24h)}</td><td>${fPct(r.c30d)}</td><td>${fPct(r.vs_ath)}</td><td class="mono">${fBig(r.mc)}</td><td class="mono">${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'}</td><td class="mono ${r.ind.rsi14<=30?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td>${fPct(r.ind.vs_low90)}</td><td class="small">${esc(r.donde||'')}</td><td>${top?`<span class="pill ${top.nivel}">${top.codigo.replace('_',' ')}</span>`:''}</td><td class="l small" style="white-space:normal;max-width:300px;color:#cbd5e1">${esc((r.accion||'').slice(0,140))}</td></tr>`; }).join('') + '</tbody></table></div>';
+    html += '<div class="coins">' + crib.map(r=>`<div class="coin" data-cg="${r.cg}"><div class="h">${r.imagen?`<img src="${r.imagen}" width="22" height="22" style="border-radius:50%">`:''}<b>${esc(r.ticker)}</b><span class="mut small">${esc(r.nombre)}</span><span class="sc" style="color:${tierColor[r.tier||'A']}">${r.score!=null?r.score:'–'}<span class="mut" style="font-weight:400">/100</span></span></div><div class="t">${esc((r.tesis||'').slice(0,300))}${(r.tesis||'').length>300?'…':''}</div><div class="m">Cap ${fBig(r.mc)}€ · FDV ${fBig(r.fdv)}€ · x100 ⇒ ${fBig((r.mc||0)*100)}€${r.x100&&r.x100.x_plausible?` · x plausible ${r.x100.x_plausible}`:''}</div><div class="m" style="color:${tierColor[r.tier||'A']}">${esc(r.accion||'')}</div></div>`).join('') + '</div>';
+    if (todas.length) {
+      const sel = new Set(crib.map(r=>r.cg));
+      html += `<details style="margin-top:10px"><summary class="mut small" style="cursor:pointer">Ver las ${todas.length} monedas investigadas con su puntuación (las que no llegan a 70 no se siguen)</summary><div style="overflow-x:auto;margin-top:8px"><table><thead><tr><th class="l">Moneda</th><th>Score</th><th>Mat.</th><th>Vida</th><th>Narr.</th><th>Neg.</th><th>Com.</th><th>Liq.</th><th>Cap.</th><th>Estado</th><th class="l">Veredicto</th></tr></thead><tbody>` +
+        todas.slice().sort((a,b)=>(b.score||0)-(a.score||0)).map(t=>{ const d=t.desglose||{}; return `<tr style="${sel.has(t.cg)?'background:rgba(45,212,191,.08)':''}"><td class="l"><b>${esc(t.ticker)}</b> <span class="mut small">${esc(t.nombre||'')}</span></td><td class="mono" style="color:${t.score>70?'var(--up)':'inherit'}">${t.score}</td><td class="mono">${d.matematica!=null?d.matematica:'—'}</td><td class="mono">${d.vida!=null?d.vida:'—'}</td><td class="mono">${d.narrativa!=null?d.narrativa:'—'}</td><td class="mono">${d.negocio!=null?d.negocio:'—'}</td><td class="mono">${d.comunidad!=null?d.comunidad:'—'}</td><td class="mono">${d.liquidez!=null?d.liquidez:'—'}</td><td class="mono">${fBig(t.mc_eur)}</td><td class="small">${esc(t.estado||'')}</td><td class="l small" style="white-space:normal;max-width:420px;color:#cbd5e1">${esc((t.veredicto||'').slice(0,200))}</td></tr>`; }).join('') + '</tbody></table></div></details>';
+    }
+    html += '</div>';
   }
   el.innerHTML = html;
   el.querySelectorAll('[data-cg]').forEach(x => x.onclick = () => openDrawer(x.dataset.cg));
