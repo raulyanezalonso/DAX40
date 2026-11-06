@@ -20,6 +20,8 @@ profundidad de cada moneda, alertas de compra/venta y plan de compras mensual (1
 
 ## Abrir el dashboard
 
+- **Un solo archivo**: `crypto/altcoin-tracker.html` lleva embebidos `rules.js` y el último `data/bundle.js`; se abre con doble clic, se puede enviar al móvil o publicar como página. Se regenera con `node crypto/worker/build-standalone.mjs` (el workflow lo hace tras cada snapshot).
+
 - **GitHub Pages** (recomendado, siempre actualizado): `https://raulyanezalonso.github.io/DAX40/crypto/` si Pages sirve la rama `main`
   desde la raíz (Settings → Pages → Deploy from a branch → `main` / `/ (root)`).
 - **En local**: abre `crypto/index.html` con doble clic. Usa `data/bundle.js` (el último snapshot del worker) y, si hay
