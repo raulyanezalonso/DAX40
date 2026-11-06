@@ -12,7 +12,7 @@ Advertencia sobre las subnets de Bittensor: 6 de las 10 mejores son tokens alpha
 
 | # | Moneda | Narrativa | Cap. | FDV/Cap | Score | Mat/Vida/Narr/Neg/Com/Liq | P(x100) | Dónde | Estado |
 |---|---|---|---:|---:|---:|---|---:|---|---|
-| 1 | **SN93** Bitcast (Bittensor SN93) | Bittensor / economia de creadores y marketing | 12,9 M € | 1.0× | **71** | 23/18/10/13/6/1 | 2-3 % | Solo en Bittensor: comprar TAO (Kraken; comprobar si Revolut X lo tiene) y cambiarlo por alpha SN93 en taoswap, backprop.finance o tao.app. No está en Kraken ni en Revolut. | activo |
+| 1 | **SN93** Bitcast (Bittensor SN93) | Bittensor / economia de creadores y marketing | 12,9 M € | 1.0× | **71** | 23/18/10/13/6/1 | 2-3 % | Pool de la subnet (taoswap, backprop.finance, tao.app) pagando con TAO; no en Revolut ni Kraken | activo |
 
 ## Fichas de las seleccionadas
 
@@ -22,7 +22,7 @@ Advertencia sobre las subnets de Bittensor: 6 de las 10 mejores son tokens alpha
 
 **Tesis:** La subnet de Bittensor con ingresos verificables: campañas de marketing para creadores de YouTube/X (~1 M$/año de ritmo en septiembre de 2026, desde 10-30 k$/mes en 2025) con el 67 % destinado a recomprar alpha y el 20 % de la emisión quemada; equipo de 4 personas autofinanciado que declara no vender nunca la subnet y mantiene 376.000 alpha del owner bloqueados a perpetuidad; 13 M€ de capitalización, 100 % circulante, commits el 6-nov-2026. Riesgos: negocio pequeño y cíclico (presupuestos de marketing cripto), dependencia de las API de YouTube/X, liquidez solo en el pool de la subnet (~1.350 TAO/día) y -41 % en 30 días pese a ingresos récord.
 
-**Acción:** Apuesta pequeña (máx. 500-1.000 €) en dos tramos; exige wallet de Bittensor y pasar por TAO. Escalera de ventas obligatoria desde x5 (vender 1/3), x10 (otro 1/3) y dejar correr el resto.
+**Acción:** Apuesta pequeña (máx. 500-1.000 €) en dos tramos; exige comprar TAO (Kraken o Revolut X si lo tiene), llevarlo a una wallet de Bittensor y cambiarlo por alpha SN93 en taoswap/backprop. Escalera de ventas obligatoria desde x5 (vender 1/3), x10 (otro 1/3) y dejar correr el resto.
 
 **Zona de compra:** Primer tramo en la zona actual (-71 % desde máximo, -41 % en 30 días) y segundo con señal L1/L2 del panel. Salir parcialmente si los ingresos mensuales del dashboard (stats.bitcast.network) caen por debajo de 50.000 $ dos meses seguidos o si las recompras dejan de publicarse.
 
@@ -44,7 +44,7 @@ Advertencia sobre las subnets de Bittensor: 6 de las 10 mejores son tokens alpha
 
 **Investigación:** Candidata fuerte dentro del lote: la unica con ingresos verificables, margen positivo, recompras del 67 % y oferta en contraccion, con 15 M$ de capitalizacion y equipo autofinanciado que dice no vender nunca. El negocio es pequeno y ciclico, pero es el billete de loteria mas 'honesto' de las subnets. Múltiplo realista: x5-x15 en una subida fuerte de TAO y las altcoins.
 
-**Dónde:** Solo en Bittensor: comprar TAO (Kraken; comprobar si Revolut X lo tiene) y cambiarlo por alpha SN93 en taoswap, backprop.finance o tao.app. No está en Kraken ni en Revolut. · Revolut: no.
+**Dónde:** Pool de la subnet (taoswap, backprop.finance, tao.app) pagando con TAO; no en Revolut ni Kraken · Revolut: no.
 
 
 ## Las 124 investigadas, ordenadas por puntuación
