@@ -43,7 +43,7 @@
   tbody tr:hover { background:rgba(56,189,248,.05); cursor:pointer; }
   .tier { display:inline-block; min-width:20px; text-align:center; padding:1px 6px; border-radius:6px; font-weight:800; font-size:11px; font-family:'IBM Plex Mono',monospace; }
   .tier.A { background:rgba(34,197,94,.18); color:var(--tA); } .tier.B { background:rgba(56,189,248,.18); color:var(--tB); }
-  .tier.C { background:rgba(245,158,11,.18); color:var(--tC); } .tier.D { background:rgba(239,68,68,.18); color:var(--tD); } .tier.X { background:#1e293b; color:var(--mut); }
+  .tier.C { background:rgba(245,158,11,.18); color:var(--tC); } .tier.D { background:rgba(239,68,68,.18); color:var(--tD); } .tier.L { background:rgba(167,139,250,.18); color:#a78bfa; } .tier.X { background:#1e293b; color:var(--mut); }
   .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; border:1px solid; }
   .pill.L3 { color:var(--L3); border-color:var(--L3); } .pill.L2 { color:var(--L2); border-color:var(--L2); } .pill.L1 { color:var(--L1); border-color:var(--L1); }
   .pill.venta { color:var(--venta); border-color:var(--venta); } .pill.aviso { color:var(--aviso); border-color:var(--aviso); }
@@ -123,8 +123,8 @@ const fPx = n => n==null||isNaN(n) ? '—' : (n>=100? n.toLocaleString('es-ES',{
 const fPct = (n,s) => n==null||isNaN(n) ? '<span class="mut">—</span>' : `<span class="${n>=0?'up':'dn'}">${n>=0&&s!==false?'+':''}${n.toLocaleString('es-ES',{maximumFractionDigits:1})} %</span>`;
 const fBig = n => n==null ? '—' : n>=1e9 ? (n/1e9).toLocaleString('es-ES',{maximumFractionDigits:2})+' B' : n>=1e6 ? (n/1e6).toLocaleString('es-ES',{maximumFractionDigits:1})+' M' : n>=1e3 ? (n/1e3).toLocaleString('es-ES',{maximumFractionDigits:0})+' k' : String(Math.round(n));
 const fNum = n => n==null ? '—' : n.toLocaleString('es-ES',{maximumFractionDigits: n>=1000?0: n>=1?2:4});
-const tierName = { A:'A · Reforzar (x100 posible)', B:'B · Núcleo de calidad', C:'C · Mantener sin añadir', D:'D · Reducir / salir', X:'Sin analizar' };
-const tierColor = { A:'#22c55e', B:'#38bdf8', C:'#f59e0b', D:'#ef4444', X:'#475569' };
+const tierName = { A:'A · Reforzar (x100 posible)', B:'B · Núcleo de calidad', C:'C · Mantener sin añadir', D:'D · Reducir / salir', L:'L · Lotería x100-x1000', X:'Sin analizar' };
+const tierColor = { A:'#22c55e', B:'#38bdf8', C:'#f59e0b', D:'#ef4444', L:'#a78bfa', X:'#475569' };
 
 async function loadJson(p){ try{ const r=await fetch(p,{cache:'no-store'}); if(!r.ok) throw 0; return await r.json(); }catch{ return null; } }
 async function boot(){
@@ -184,7 +184,7 @@ function build(){
 async function refreshLive(){
   const btn = $('#btn-live'); btn.disabled = true; $('#live-status').textContent = 'pidiendo precios…';
   try {
-    const ids = S.portfolio.holdings.map(h=>h.cg).concat((S.analysis.candidatas_externas||[]).map(c=>c.cg)).concat(['bitcoin']);
+    const ids = S.portfolio.holdings.map(h=>h.cg).concat((S.analysis.candidatas_externas||[]).map(c=>c.cg)).concat((S.analysis.apuestas_x1000||[]).map(c=>c.cg)).concat(['bitcoin']);
     const r = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=${ids.join(',')}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d,30d`);
     if (!r.ok) throw new Error('CoinGecko HTTP '+r.status);
     const arr = await r.json(); const markets = {}; arr.forEach(m => markets[m.id]=m);
@@ -337,25 +337,31 @@ function candRows(){
   const snap = S.snapshot && S.snapshot.monedas || {}; const live = S.live && S.live.markets || {};
   const fng = S.live && S.live.fng != null ? S.live.fng : (S.snapshot && S.snapshot.contexto && S.snapshot.contexto.fng ? S.snapshot.contexto.fng.valor : null);
   const objetivos = LS.get('objetivos', {});
-  return (S.analysis.candidatas_externas||[]).map(c => {
+  return (S.analysis.candidatas_externas||[]).map(c=>({...c, lote:'externa'})).concat((S.analysis.apuestas_x1000||[]).map(c=>({...c, lote:'x1000', tier:c.tier||'L'}))).map(c => {
     const sc = snap[c.cg] || {}, lv = live[c.cg] || null;
     const price = lv ? lv.current_price : (sc.precio != null ? sc.precio : null);
     const series = sc.series || []; let ind = sc.ind || {ok:false};
     if (series.length > 15 && price != null) { const s2 = series.slice(); s2[s2.length-1] = price; ind = R.computeIndicators(s2, {ath: lv ? lv.ath : sc.ath}); }
     const objetivo = objetivos[c.cg] != null ? objetivos[c.cg] : (c.precio_objetivo_eur || null);
-    const al = price != null ? R.evaluateCoin({ tier: c.tier || 'A', price, ind, change24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, fng, objetivo }) : [];
+    const al = price != null ? R.evaluateCoin({ tier: (c.tier === 'L' ? 'A' : c.tier) || 'A', price, ind, change24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, fng, objetivo }) : [];
     return { ...c, precio: price, mc: lv ? lv.market_cap : sc.mc, fdv: lv ? lv.fully_diluted_valuation : sc.fdv, c24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, c7d: lv ? lv.price_change_percentage_7d_in_currency : sc.c7d, c30d: lv ? lv.price_change_percentage_30d_in_currency : sc.c30d, vs_ath: lv ? lv.ath_change_percentage : sc.vs_ath, imagen: lv ? lv.image : sc.imagen, ind, series, alertas: al, objetivo, rank: lv ? lv.market_cap_rank : sc.rank };
   });
 }
 function renderCandidatas(){
   const el = $('#candidatas'); const C = S.analysis.candidatas_externas || [];
   if (!C.length) { el.innerHTML = '<div class="warn">Sin candidatas externas todavía.</div>'; return; }
-  const rows = candRows();
+  const all = candRows(); const rows = all.filter(r=>r.lote!=='x1000'); const lot = all.filter(r=>r.lote==='x1000');
   let html = `<div class="card"><h2>Candidatas fuera de la cartera <span class="mut small">· ${rows.length} · seguidas por el worker con las mismas alertas que el tier A</span></h2>${S.analysis.candidatas_texto?`<p class="note" style="color:#cbd5e1;font-size:13px">${esc(S.analysis.candidatas_texto).replace(/\n/g,'<br>')}</p>`:''}
     <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Score</th><th>Precio</th><th>24h</th><th>30d</th><th>vs ATH</th><th>Cap.</th><th>FDV/Cap</th><th>RSI14</th><th>vs mín 90d</th><th>Revolut</th><th>Señal</th><th class="l">Acción</th></tr></thead><tbody>` +
     rows.sort((a,b)=>(b.score||0)-(a.score||0)).map(r=>{ const top=r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
       return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td><span class="tier ${r.tier||'A'}">${r.tier||'A'}</span></td><td class="mono">${r.score!=null?r.score:'—'}</td><td class="mono">${fPx(r.precio)}</td><td>${fPct(r.c24h)}</td><td>${fPct(r.c30d)}</td><td>${fPct(r.vs_ath)}</td><td class="mono">${fBig(r.mc)}</td><td class="mono">${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'}</td><td class="mono ${r.ind.rsi14<=30?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td>${fPct(r.ind.vs_low90)}</td><td class="small">${esc(r.disponible_revolut||'?')}</td><td>${top?`<span class="pill ${top.nivel}">${top.codigo.replace('_',' ')}</span>`:''}</td><td class="l small" style="white-space:normal;max-width:300px;color:#cbd5e1">${esc((r.accion||'').slice(0,120))}</td></tr>`; }).join('') + '</tbody></table></div></div>';
   html += '<div class="coins">' + rows.map(r=>`<div class="coin" data-cg="${r.cg}"><div class="h">${r.imagen?`<img src="${r.imagen}" width="22" height="22" style="border-radius:50%">`:''}<b>${esc(r.ticker)}</b><span class="mut small">${esc(r.nombre)}</span><span class="sc" style="color:${tierColor[r.tier||'A']}">${r.score!=null?r.score:'–'}<span class="mut" style="font-weight:400">/100</span></span></div><div class="t">${esc((r.tesis||'').slice(0,280))}${(r.tesis||'').length>280?'…':''}</div>${scoreBar(r)}<div class="m">Cap ${fBig(r.mc)}€ · FDV ${fBig(r.fdv)}€ · x100 ⇒ ${fBig((r.mc||0)*100)}€${r.x100&&r.x100.x_plausible?` · x plausible ${r.x100.x_plausible}`:''}</div><div class="m" style="color:${tierColor[r.tier||'A']}">${esc(r.accion||'')}</div></div>`).join('') + '</div>';
+  if (lot.length) {
+    html += `<div class="card" style="border-color:rgba(167,139,250,.4)"><h2><span class="tier L">L</span> Apuestas x100-x1000 (lotería) <span class="mut small">· ${lot.length} · 1.000 € cada una · escalera de ventas obligatoria</span></h2>${S.analysis.apuestas_texto?`<p class="note" style="color:#cbd5e1;font-size:13px">${esc(S.analysis.apuestas_texto).replace(/\n/g,'<br>')}</p>`:''}
+      <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Rol</th><th>Score</th><th>Precio</th><th>24h</th><th>30d</th><th>vs ATH</th><th>Cap.</th><th>FDV/Cap</th><th>RSI14</th><th>P(x100)</th><th>Dónde</th><th>Señal</th><th class="l">Narrativa / acción</th></tr></thead><tbody>` +
+      lot.sort((a,b)=>(({apuesta:0,opcional:1,reserva:2}[a.rol]||2)-({apuesta:0,opcional:1,reserva:2}[b.rol]||2))||(b.score||0)-(a.score||0)).map(r=>{ const top=r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
+        return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td class="small" style="color:${r.rol==='apuesta'?'#a78bfa':'var(--mut)'}">${esc(r.rol||'')}</td><td class="mono">${r.score!=null?r.score:'—'}</td><td class="mono">${fPx(r.precio)}</td><td>${fPct(r.c24h)}</td><td>${fPct(r.c30d)}</td><td>${fPct(r.vs_ath)}</td><td class="mono">${fBig(r.mc)}</td><td class="mono">${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'}</td><td class="mono ${r.ind.rsi14<=30?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td class="mono">${esc(r.prob_x100||'?')}</td><td class="small">${esc(r.donde||'?')}</td><td>${top?`<span class="pill ${top.nivel}">${top.codigo.replace('_',' ')}</span>`:''}</td><td class="l small" style="white-space:normal;max-width:320px;color:#cbd5e1">${esc(r.categoria||'')} · ${esc((r.accion||'').slice(0,140))}</td></tr>`; }).join('') + '</tbody></table></div></div>';
+  }
   el.innerHTML = html;
   el.querySelectorAll('[data-cg]').forEach(x => x.onclick = () => openDrawer(x.dataset.cg));
 }

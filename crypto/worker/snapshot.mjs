@@ -40,7 +40,7 @@ async function jf(url, tries = 5) {
   }
 }
 
-const candidatas = (analysis.candidatas_externas || []).filter(c => c.seguir !== false);
+const candidatas = (analysis.candidatas_externas || []).concat(analysis.apuestas_x1000 || []).filter(c => c.seguir !== false);
 const ids = portfolio.holdings.map(h => h.cg).concat(candidatas.map(c => c.cg));
 const ctxIds = ['bitcoin', 'ethereum'];
 
@@ -124,7 +124,7 @@ for (const h of portfolio.holdings) {
 }
 for (const cand of candidatas) {
   const c = coins[cand.cg]; if (!c) continue;
-  const res = Rules.evaluateCoin({ tier: cand.tier || 'A', price: c.precio, ind: c.ind, change24h: c.c24h, fng: fng && fng.valor, objetivo: cand.precio_objetivo_eur || null });
+  const res = Rules.evaluateCoin({ tier: (cand.tier === 'L' ? 'A' : cand.tier) || 'A', price: c.precio, ind: c.ind, change24h: c.c24h, fng: fng && fng.valor, objetivo: cand.precio_objetivo_eur || null });
   for (const a of res) activas.push({ ambito: 'candidata', id: cand.cg, simbolo: c.simbolo, nombre: c.nombre, tier: cand.tier || 'A', precio: c.precio, ...a });
 }
 activas.sort((a, b) => (Rules.PESO[b.nivel] || 0) - (Rules.PESO[a.nivel] || 0));
