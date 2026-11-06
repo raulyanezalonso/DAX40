@@ -40,7 +40,8 @@ async function jf(url, tries = 5) {
   }
 }
 
-const ids = portfolio.holdings.map(h => h.cg);
+const candidatas = (analysis.candidatas_externas || []).filter(c => c.seguir !== false);
+const ids = portfolio.holdings.map(h => h.cg).concat(candidatas.map(c => c.cg));
 const ctxIds = ['bitcoin', 'ethereum'];
 
 // --- 1. mercados (una sola llamada) ---
@@ -65,7 +66,7 @@ try {
 // --- 3. histórico diario por moneda (reutiliza el snapshot anterior si es del mismo día para ahorrar llamadas) ---
 const today = new Date().toISOString().slice(0, 10);
 const coins = {};
-for (const h of portfolio.holdings) {
+for (const h of portfolio.holdings.concat(candidatas.map(c => ({ cg: c.cg, candidata: true })))) {
   const id = h.cg, m = markets[id];
   if (!m) { log('sin mercado', id); continue; }
   let series = null;
@@ -121,6 +122,11 @@ for (const h of portfolio.holdings) {
   const res = Rules.evaluateCoin({ tier: an.tier || 'C', price: c.precio, ind: c.ind, change24h: c.c24h, fng: fng && fng.valor, objetivo: an.precio_objetivo_eur || null });
   for (const a of res) activas.push({ ambito: 'moneda', id: h.cg, simbolo: c.simbolo, nombre: c.nombre, tier: an.tier || 'C', precio: c.precio, ...a });
 }
+for (const cand of candidatas) {
+  const c = coins[cand.cg]; if (!c) continue;
+  const res = Rules.evaluateCoin({ tier: cand.tier || 'A', price: c.precio, ind: c.ind, change24h: c.c24h, fng: fng && fng.valor, objetivo: cand.precio_objetivo_eur || null });
+  for (const a of res) activas.push({ ambito: 'candidata', id: cand.cg, simbolo: c.simbolo, nombre: c.nombre, tier: cand.tier || 'A', precio: c.precio, ...a });
+}
 activas.sort((a, b) => (Rules.PESO[b.nivel] || 0) - (Rules.PESO[a.nivel] || 0));
 const key = a => a.id + '|' + a.codigo;
 const prevKeys = new Set((prevAlerts.activas || []).map(key));
@@ -147,7 +153,7 @@ const fmt = n => n == null ? '—' : n.toLocaleString('es-ES', { maximumFraction
 if (TG && CHAT) {
   const relevantes = nuevas.filter(a => a.nivel !== 'aviso' || a.codigo === 'caida_anomala');
   if (relevantes.length) {
-    const lines = relevantes.slice(0, 20).map(a => `• <b>${a.simbolo}</b>${a.tier ? ' [' + a.tier + ']' : ''} ${a.precio != null ? fmt(a.precio) + '€ ' : ''}— ${a.msg}`);
+    const lines = relevantes.slice(0, 20).map(a => `• <b>${a.simbolo}</b>${a.ambito === 'candidata' ? ' (candidata)' : ''}${a.tier ? ' [' + a.tier + ']' : ''} ${a.precio != null ? fmt(a.precio) + '€ ' : ''}— ${a.msg}`);
     await tg(`🔔 <b>Alertas nuevas</b> (${today})\n` + lines.join('\n'));
   }
   if (alerts.ultimo_resumen !== today) {

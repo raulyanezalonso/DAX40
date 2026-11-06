@@ -87,6 +87,7 @@
     <button data-tab="analisis">Análisis</button>
     <button data-tab="alertas">Alertas</button>
     <button data-tab="plan">Plan DCA</button>
+    <button data-tab="candidatas">Candidatas</button>
     <button data-tab="ajustes">Ajustes</button>
   </nav>
   <section id="tab-resumen" class="tab on">
@@ -104,6 +105,7 @@
   <section id="tab-analisis" class="tab"><div id="analisis"></div></section>
   <section id="tab-alertas" class="tab"><div id="alertas"></div></section>
   <section id="tab-plan" class="tab"><div id="plan"></div></section>
+  <section id="tab-candidatas" class="tab"><div id="candidatas"></div></section>
   <section id="tab-ajustes" class="tab"><div id="ajustes"></div></section>
 </main>
 <aside id="drawer"><button class="close ghost" onclick="closeDrawer()">✕</button><div id="drawer-body"></div></aside>
@@ -182,7 +184,7 @@ function build(){
 async function refreshLive(){
   const btn = $('#btn-live'); btn.disabled = true; $('#live-status').textContent = 'pidiendo precios…';
   try {
-    const ids = S.portfolio.holdings.map(h=>h.cg).concat(['bitcoin']);
+    const ids = S.portfolio.holdings.map(h=>h.cg).concat((S.analysis.candidatas_externas||[]).map(c=>c.cg)).concat(['bitcoin']);
     const r = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=${ids.join(',')}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d,30d`);
     if (!r.ok) throw new Error('CoinGecko HTTP '+r.status);
     const arr = await r.json(); const markets = {}; arr.forEach(m => markets[m.id]=m);
@@ -197,7 +199,7 @@ async function refreshLive(){
 $('#btn-live').onclick = refreshLive;
 
 // ---------- render ----------
-function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderAnalisis(); renderAlertas(); renderPlan(); renderAjustes(); }
+function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderAnalisis(); renderAlertas(); renderPlan(); renderCandidatas(); renderAjustes(); }
 function renderHeader(){
   const s = S.snapshot; const at = s ? new Date(s.at) : null;
   const stale = at && (Date.now()-at.getTime()) > 14*3600e3;
@@ -283,13 +285,13 @@ function renderAlertas(){
   const fng = S.live && S.live.fng != null ? S.live.fng : (ctx.fng ? ctx.fng.valor : null);
   const btc = S.live && S.live.btc ? { vs_ath:S.live.btc.ath_change_percentage, c7d:S.live.btc.price_change_percentage_7d_in_currency } : ctx.btc;
   const mk = R.evaluateMarket({ fng, btcVsAth: btc && btc.vs_ath, btcRet7: btc && btc.c7d });
-  const coinAl = S.rows.flatMap(r => r.alertas.map(a => ({...a, r}))).sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0) || (b.r.tier<a.r.tier?1:-1));
+  const coinAl = S.rows.concat(candRows().map(c=>({...c, ticker: c.ticker+' ★'}))).flatMap(r => r.alertas.map(a => ({...a, r}))).sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0) || (b.r.tier<a.r.tier?1:-1));
   const render = a => `<div class="alert"><span class="pill ${a.nivel}">${a.nivel}</span><span class="who">${a.r?esc(a.r.ticker):'MERCADO'}${a.r?` <span class="tier ${a.r.tier}">${a.r.tier}</span>`:''}</span><span class="msg">${esc(a.msg)}</span>${a.r?`<span class="pr">${fPx(a.r.precio)}</span>`:''}</div>`;
   let html = `<div class="card"><h2>Alertas activas ahora <span class="mut small">(calculadas con el último precio disponible)</span></h2>
     <p class="note">Niveles: <span class="pill L3">L3</span> capitulación (tramo extra) · <span class="pill L2">L2</span> oportunidad fuerte (desbloquea tramo de compra) · <span class="pill L1">L1</span> zona de compra (DCA normal) · <span class="pill venta">venta</span> rebote en tier C/D (ventana para reducir) · <span class="pill aviso">aviso</span> informativo. Solo los tiers A y B generan alertas de compra.</p>
     ${mk.map(a=>render({...a,r:null})).join('')}${coinAl.map(render).join('') || '<p class="note">Ninguna moneda en zona de compra o venta en este momento.</p>'}</div>`;
   html += `<div class="card"><h2>Niveles por moneda (tier A y B)</h2><div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Precio</th><th>RSI14</th><th>Mín 90d</th><th>vs mín 90d</th><th>vs MA200</th><th>vs ATH</th><th>Objetivo manual</th><th>Estado</th></tr></thead><tbody>` +
-    S.rows.filter(r=>r.tier==='A'||r.tier==='B').sort((a,b)=>a.tier.localeCompare(b.tier)||(b.score||0)-(a.score||0)).map(r=>`<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b></td><td><span class="tier ${r.tier}">${r.tier}</span></td><td class="mono">${fPx(r.precio)}</td><td class="mono ${r.ind.rsi14<=35?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td class="mono">${fPx(r.ind.low90)}</td><td>${fPct(r.ind.vs_low90)}</td><td>${fPct(r.ind.vs_ma200)}</td><td>${fPct(r.vs_ath)}</td><td><input type="number" step="any" style="width:100px" value="${r.objetivo!=null?r.objetivo:''}" data-obj="${r.cg}" placeholder="≤ precio" onclick="event.stopPropagation()"></td><td>${r.alertas.length?r.alertas.map(a=>`<span class="pill ${a.nivel}">${a.codigo.replace('_',' ')}</span>`).join(' '):'<span class="mut">esperar</span>'}</td></tr>`).join('') + `</tbody></table></div><p class="note">El objetivo manual dispara una alerta L1 cuando el precio cae por debajo. Se guarda en este navegador.</p></div>`;
+    S.rows.filter(r=>r.tier==='A'||r.tier==='B').concat(candRows().map(c=>({...c, ticker: c.ticker+' ★'}))).sort((a,b)=>a.tier.localeCompare(b.tier)||(b.score||0)-(a.score||0)).map(r=>`<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b></td><td><span class="tier ${r.tier}">${r.tier}</span></td><td class="mono">${fPx(r.precio)}</td><td class="mono ${r.ind.rsi14<=35?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td class="mono">${fPx(r.ind.low90)}</td><td>${fPct(r.ind.vs_low90)}</td><td>${fPct(r.ind.vs_ma200)}</td><td>${fPct(r.vs_ath)}</td><td><input type="number" step="any" style="width:100px" value="${r.objetivo!=null?r.objetivo:''}" data-obj="${r.cg}" placeholder="≤ precio" onclick="event.stopPropagation()"></td><td>${r.alertas.length?r.alertas.map(a=>`<span class="pill ${a.nivel}">${a.codigo.replace('_',' ')}</span>`).join(' '):'<span class="mut">esperar</span>'}</td></tr>`).join('') + `</tbody></table></div><p class="note">El objetivo manual dispara una alerta L1 cuando el precio cae por debajo. Se guarda en este navegador. ★ = candidata externa (no está en la cartera).</p></div>`;
   const hist = (S.alerts && S.alerts.historial || []).slice().reverse().slice(0,60);
   html += `<div class="card"><h2>Historial del worker <span class="mut small">(${hist.length} últimas)</span></h2>${hist.map(a=>`<div class="alert"><span class="mut small mono">${new Date(a.ts).toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'})}</span><span class="pill ${a.nivel}">${a.nivel}</span><span class="who">${esc(a.simbolo)}</span><span class="msg">${esc(a.msg)}</span></div>`).join('')||'<p class="note">Sin historial todavía.</p>'}
     <h3>Notificaciones</h3><p class="note">El worker (GitHub Actions, cada 6 h) envía por Telegram las alertas nuevas y un resumen diario si configuras los secretos <span class="mono">TELEGRAM_BOT_TOKEN</span> y <span class="mono">TELEGRAM_CHAT_ID</span> en el repositorio (ver crypto/README.md).</p></div>`;
@@ -330,6 +332,33 @@ function renderPlan(){
   el.querySelectorAll('button[data-del]').forEach(b => b.onclick = () => { const l=LS.get('compras',[]); l.splice(Number(b.dataset.del),1); LS.set('compras',l); build(); renderAll(); });
   el.querySelectorAll('tbody tr[data-cg]').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.cg));
 }
+
+function candRows(){
+  const snap = S.snapshot && S.snapshot.monedas || {}; const live = S.live && S.live.markets || {};
+  const fng = S.live && S.live.fng != null ? S.live.fng : (S.snapshot && S.snapshot.contexto && S.snapshot.contexto.fng ? S.snapshot.contexto.fng.valor : null);
+  const objetivos = LS.get('objetivos', {});
+  return (S.analysis.candidatas_externas||[]).map(c => {
+    const sc = snap[c.cg] || {}, lv = live[c.cg] || null;
+    const price = lv ? lv.current_price : (sc.precio != null ? sc.precio : null);
+    const series = sc.series || []; let ind = sc.ind || {ok:false};
+    if (series.length > 15 && price != null) { const s2 = series.slice(); s2[s2.length-1] = price; ind = R.computeIndicators(s2, {ath: lv ? lv.ath : sc.ath}); }
+    const objetivo = objetivos[c.cg] != null ? objetivos[c.cg] : (c.precio_objetivo_eur || null);
+    const al = price != null ? R.evaluateCoin({ tier: c.tier || 'A', price, ind, change24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, fng, objetivo }) : [];
+    return { ...c, precio: price, mc: lv ? lv.market_cap : sc.mc, fdv: lv ? lv.fully_diluted_valuation : sc.fdv, c24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, c7d: lv ? lv.price_change_percentage_7d_in_currency : sc.c7d, c30d: lv ? lv.price_change_percentage_30d_in_currency : sc.c30d, vs_ath: lv ? lv.ath_change_percentage : sc.vs_ath, imagen: lv ? lv.image : sc.imagen, ind, series, alertas: al, objetivo, rank: lv ? lv.market_cap_rank : sc.rank };
+  });
+}
+function renderCandidatas(){
+  const el = $('#candidatas'); const C = S.analysis.candidatas_externas || [];
+  if (!C.length) { el.innerHTML = '<div class="warn">Sin candidatas externas todavía.</div>'; return; }
+  const rows = candRows();
+  let html = `<div class="card"><h2>Candidatas fuera de la cartera <span class="mut small">· ${rows.length} · seguidas por el worker con las mismas alertas que el tier A</span></h2>${S.analysis.candidatas_texto?`<p class="note" style="color:#cbd5e1;font-size:13px">${esc(S.analysis.candidatas_texto).replace(/\n/g,'<br>')}</p>`:''}
+    <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Score</th><th>Precio</th><th>24h</th><th>30d</th><th>vs ATH</th><th>Cap.</th><th>FDV/Cap</th><th>RSI14</th><th>vs mín 90d</th><th>Revolut</th><th>Señal</th><th class="l">Acción</th></tr></thead><tbody>` +
+    rows.sort((a,b)=>(b.score||0)-(a.score||0)).map(r=>{ const top=r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
+      return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td><span class="tier ${r.tier||'A'}">${r.tier||'A'}</span></td><td class="mono">${r.score!=null?r.score:'—'}</td><td class="mono">${fPx(r.precio)}</td><td>${fPct(r.c24h)}</td><td>${fPct(r.c30d)}</td><td>${fPct(r.vs_ath)}</td><td class="mono">${fBig(r.mc)}</td><td class="mono">${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'}</td><td class="mono ${r.ind.rsi14<=30?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td>${fPct(r.ind.vs_low90)}</td><td class="small">${esc(r.disponible_revolut||'?')}</td><td>${top?`<span class="pill ${top.nivel}">${top.codigo.replace('_',' ')}</span>`:''}</td><td class="l small" style="white-space:normal;max-width:300px;color:#cbd5e1">${esc((r.accion||'').slice(0,120))}</td></tr>`; }).join('') + '</tbody></table></div></div>';
+  html += '<div class="coins">' + rows.map(r=>`<div class="coin" data-cg="${r.cg}"><div class="h">${r.imagen?`<img src="${r.imagen}" width="22" height="22" style="border-radius:50%">`:''}<b>${esc(r.ticker)}</b><span class="mut small">${esc(r.nombre)}</span><span class="sc" style="color:${tierColor[r.tier||'A']}">${r.score!=null?r.score:'–'}<span class="mut" style="font-weight:400">/100</span></span></div><div class="t">${esc((r.tesis||'').slice(0,280))}${(r.tesis||'').length>280?'…':''}</div>${scoreBar(r)}<div class="m">Cap ${fBig(r.mc)}€ · FDV ${fBig(r.fdv)}€ · x100 ⇒ ${fBig((r.mc||0)*100)}€${r.x100&&r.x100.x_plausible?` · x plausible ${r.x100.x_plausible}`:''}</div><div class="m" style="color:${tierColor[r.tier||'A']}">${esc(r.accion||'')}</div></div>`).join('') + '</div>';
+  el.innerHTML = html;
+  el.querySelectorAll('[data-cg]').forEach(x => x.onclick = () => openDrawer(x.dataset.cg));
+}
 function renderAjustes(){
   const el = $('#ajustes'); const over = LS.get('cantidades',{});
   el.innerHTML = `<div class="card"><h2>Cantidades</h2><p class="note">Fuente: <span class="mono">crypto/portfolio.json</span> (capturas de Revolut del ${esc((S.portfolio.fuente||'').slice(17,27))}). Puedes corregir cantidades aquí (se guardan en este navegador) o, mejor, editar portfolio.json en el repositorio para que el worker y Telegram usen los datos reales.</p>
@@ -345,7 +374,8 @@ function renderAjustes(){
   $('#aj-export').onclick = () => { const p = JSON.parse(JSON.stringify(S.portfolio)); p.holdings.forEach(h=>{ const r=S.rows.find(x=>x.cg===h.cg); if(r){ h.cantidad = Math.round(r.cant*1e6)/1e6; h.precio_eur = r.precio; h.valor_eur = Math.round(r.valor*100)/100; if (r.coste && r.precio) h.pnl_pct_revolut = Math.round((r.precio/r.coste-1)*10000)/100; } }); p.fuente = 'Exportado del dashboard ' + new Date().toISOString().slice(0,10); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(p,null,1)],{type:'application/json'})); a.download='portfolio.json'; a.click(); };
 }
 function openDrawer(cg){
-  const r = S.rows.find(x=>x.cg===cg); if (!r) return; const an = r.an || {}; const i = r.ind || {}; const x = an.x100 || {};
+  let r = S.rows.find(x=>x.cg===cg); let an = r ? (r.an || {}) : null;
+  if (!r) { const c = candRows().find(x=>x.cg===cg); if (!c) return; r = { ...c, cant: 0, valor: 0, peso: 0, coste: null, pnl: null, categoria: c.categoria||'Candidata', tier: c.tier||'A', an: c }; an = c; } const i = r.ind || {}; const x = an.x100 || {};
   const li = a => (a||[]).map(s=>`<li>${esc(s)}</li>`).join('');
   $('#drawer-body').innerHTML = `
     <div style="display:flex;align-items:center;gap:10px;padding-right:34px">${r.imagen?`<img src="${r.imagen}" width="34" height="34" style="border-radius:50%">`:''}<div><h2>${esc(r.ticker)} <span class="mut" style="font-size:14px;font-weight:400">${esc(r.nombre)}</span> <span class="tier ${r.tier}">${r.tier}</span></h2><div class="mut small">${esc(r.categoria)} · rank #${r.rank||'—'} · <a href="https://www.coingecko.com/es/monedas/${r.cg}" target="_blank" rel="noopener">CoinGecko ↗</a></div></div><div class="spacer"></div><div class="mono" style="text-align:right"><div style="font-size:20px;font-weight:800">${fPx(r.precio)}</div><div class="small">${fPct(r.c24h)} 24h · ${fPct(r.c7d)} 7d · ${fPct(r.c30d)} 30d</div></div></div>
