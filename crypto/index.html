@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Altcoin Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#020617; --panel:#0b1220; --panel2:#0f172a; --line:#1e293b; --txt:#e2e8f0; --mut:#94a3b8; --dim:#64748b; --acc:#38bdf8; --up:#34d399; --dn:#f87171;
+          --tA:#22c55e; --tB:#38bdf8; --tC:#f59e0b; --tD:#ef4444; --L3:#e879f9; --L2:#34d399; --L1:#38bdf8; --venta:#f59e0b; --aviso:#94a3b8; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--txt); font-family:'Archivo',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
+  .mono { font-family:'IBM Plex Mono',monospace; }
+  header { position:sticky; top:0; z-index:20; background:rgba(2,6,23,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0; font-weight:800; letter-spacing:.2px; }
+  header .sub { color:var(--mut); font-size:12px; }
+  .spacer { flex:1; }
+  button, .btn { background:#16283f; color:#cfe9ff; border:1px solid rgba(56,189,248,.35); border-radius:8px; padding:7px 12px; font-size:12.5px; font-weight:600; cursor:pointer; font-family:inherit; }
+  button:hover { background:#1b3250; } button.primary { background:var(--acc); color:#001018; border-color:var(--acc); } button.ghost { background:transparent; }
+  button:disabled { opacity:.5; cursor:default; }
+  input, select, textarea { background:#0b1220; color:var(--txt); border:1px solid var(--line); border-radius:8px; padding:7px 9px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; }
+  input[type=number] { width:110px; }
+  main { max-width:1500px; margin:0 auto; padding:14px 16px 80px; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:14px; }
+  .kpi { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .kpi .l { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.6px; }
+  .kpi .v { font-size:22px; font-weight:800; margin-top:4px; font-family:'IBM Plex Mono',monospace; }
+  .kpi .s { font-size:12px; color:var(--mut); margin-top:2px; }
+  .up { color:var(--up); } .dn { color:var(--dn); } .mut { color:var(--mut); }
+  .tabs { display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:14px; overflow-x:auto; }
+  .tabs button { background:transparent; border:none; border-bottom:2px solid transparent; border-radius:0; color:var(--mut); padding:10px 14px; font-size:13.5px; }
+  .tabs button.on { color:var(--txt); border-bottom-color:var(--acc); }
+  .tab { display:none; } .tab.on { display:block; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+  .card h2 { margin:0 0 10px; font-size:15px; } .card h3 { margin:14px 0 6px; font-size:13.5px; color:#cbd5e1; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:900px) { .grid2 { grid-template-columns:1fr; } }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th, td { padding:7px 8px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+  th { color:var(--mut); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.4px; cursor:pointer; user-select:none; background:var(--panel); }
+  th:first-child, td:first-child, th.l, td.l { text-align:left; }
+  tbody tr:hover { background:rgba(56,189,248,.05); cursor:pointer; }
+  .tier { display:inline-block; min-width:20px; text-align:center; padding:1px 6px; border-radius:6px; font-weight:800; font-size:11px; font-family:'IBM Plex Mono',monospace; }
+  .tier.A { background:rgba(34,197,94,.18); color:var(--tA); } .tier.B { background:rgba(56,189,248,.18); color:var(--tB); }
+  .tier.C { background:rgba(245,158,11,.18); color:var(--tC); } .tier.D { background:rgba(239,68,68,.18); color:var(--tD); } .tier.X { background:#1e293b; color:var(--mut); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; border:1px solid; }
+  .pill.L3 { color:var(--L3); border-color:var(--L3); } .pill.L2 { color:var(--L2); border-color:var(--L2); } .pill.L1 { color:var(--L1); border-color:var(--L1); }
+  .pill.venta { color:var(--venta); border-color:var(--venta); } .pill.aviso { color:var(--aviso); border-color:var(--aviso); }
+  .alert { display:flex; gap:10px; align-items:flex-start; padding:9px 10px; border:1px solid var(--line); border-radius:10px; margin-bottom:6px; background:var(--panel2); }
+  .alert .who { font-weight:800; min-width:70px; font-family:'IBM Plex Mono',monospace; }
+  .alert .msg { flex:1; font-size:13px; } .alert .pr { color:var(--mut); font-size:12px; font-family:'IBM Plex Mono',monospace; }
+  .coins { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:12px; }
+  .coin { background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; cursor:pointer; }
+  .coin:hover { border-color:rgba(56,189,248,.5); }
+  .coin .h { display:flex; align-items:center; gap:8px; margin-bottom:6px; } .coin .h b { font-size:14px; } .coin .h .sc { margin-left:auto; font-family:'IBM Plex Mono',monospace; font-weight:800; }
+  .coin .t { font-size:12.5px; color:#cbd5e1; line-height:1.45; }
+  .coin .m { font-size:11.5px; color:var(--mut); margin-top:6px; font-family:'IBM Plex Mono',monospace; }
+  .bar { height:6px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:6px; } .bar i { display:block; height:100%; background:var(--acc); }
+  .legend { display:flex; flex-wrap:wrap; gap:8px 14px; font-size:12px; color:var(--mut); margin-top:8px; } .legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; vertical-align:-1px; }
+  #drawer { position:fixed; top:0; right:0; width:min(560px,100%); height:100%; background:#070d1a; border-left:1px solid var(--line); z-index:30; transform:translateX(100%); transition:transform .2s; overflow-y:auto; padding:16px 18px 40px; }
+  #drawer.on { transform:none; } #drawer .close { position:absolute; top:10px; right:12px; }
+  #drawer h2 { margin:0 0 4px; font-size:18px; } #drawer .sec { margin-top:14px; } #drawer .sec h4 { margin:0 0 4px; font-size:12px; color:var(--mut); text-transform:uppercase; letter-spacing:.5px; }
+  #drawer p, #drawer li { font-size:13px; line-height:1.5; color:#cbd5e1; } #drawer ul { margin:4px 0 0 18px; padding:0; }
+  .ig { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; } .ig div { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; } .ig div b { display:block; font-family:'IBM Plex Mono',monospace; font-size:13px; margin-top:2px; }
+  .note { font-size:12px; color:var(--mut); line-height:1.5; }
+  .warn { background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.4); border-radius:10px; padding:10px 12px; font-size:12.5px; margin-bottom:12px; }
+  .ok { background:rgba(52,211,153,.08); border:1px solid rgba(52,211,153,.35); border-radius:10px; padding:10px 12px; font-size:12.5px; margin-bottom:12px; }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px; } .row label { font-size:12.5px; color:var(--mut); }
+  .small { font-size:11.5px; } .right { text-align:right; }
+  .spark { vertical-align:middle; }
+  .progress { height:8px; background:#1e293b; border-radius:4px; overflow:hidden; } .progress i { display:block; height:100%; background:var(--up); }
+  @media (max-width:700px) { .kpi .v { font-size:18px; } header h1 { font-size:15px; } }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Altcoin Tracker · Revolut</h1><div class="sub" id="hdr-sub">cargando…</div></div>
+  <div class="spacer"></div>
+  <span class="sub" id="live-status"></span>
+  <button id="btn-live" class="primary" title="Pide precios en vivo a CoinGecko (1 llamada)">⟳ Precios en vivo</button>
+</header>
+<main>
+  <div class="kpis" id="kpis"></div>
+  <nav class="tabs" id="tabs">
+    <button data-tab="resumen" class="on">Resumen</button>
+    <button data-tab="analisis">Análisis</button>
+    <button data-tab="alertas">Alertas</button>
+    <button data-tab="plan">Plan DCA</button>
+    <button data-tab="ajustes">Ajustes</button>
+  </nav>
+  <section id="tab-resumen" class="tab on">
+    <div class="grid2">
+      <div class="card"><h2>Reparto por tier</h2><div id="donut-tier"></div></div>
+      <div class="card"><h2>Reparto por categoría</h2><div id="bars-cat"></div></div>
+    </div>
+    <div class="card">
+      <h2>Posiciones <span class="mut small" id="pos-count"></span></h2>
+      <div style="overflow-x:auto"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+      <p class="note">Click en una fila para ver la tesis, indicadores y niveles de compra. P&amp;L = precio actual frente al coste medio implícito (deducido del % que mostraba Revolut en la captura). Cantidades editables en Ajustes.</p>
+    </div>
+    <div class="card"><h2>Evolución del valor (snapshots del worker)</h2><div id="hist"></div></div>
+  </section>
+  <section id="tab-analisis" class="tab"><div id="analisis"></div></section>
+  <section id="tab-alertas" class="tab"><div id="alertas"></div></section>
+  <section id="tab-plan" class="tab"><div id="plan"></div></section>
+  <section id="tab-ajustes" class="tab"><div id="ajustes"></div></section>
+</main>
+<aside id="drawer"><button class="close ghost" onclick="closeDrawer()">✕</button><div id="drawer-body"></div></aside>
+<script src="rules.js"></script>
+<script src="data/bundle.js"></script>
+<script>
+'use strict';
+const S = { portfolio:null, analysis:null, snapshot:null, alerts:null, history:null, live:null, rows:[], sort:{k:'valor',d:-1} };
+const LS = { get(k,f){ try{ const v=localStorage.getItem('ct_'+k); return v==null?f:JSON.parse(v);}catch{return f;} }, set(k,v){ try{ localStorage.setItem('ct_'+k, JSON.stringify(v)); }catch{} } };
+const R = window.CryptoRules;
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fEur = (n,d) => n==null||isNaN(n) ? '—' : n.toLocaleString('es-ES',{minimumFractionDigits:d==null?2:d, maximumFractionDigits:d==null?2:d})+' €';
+const fPx = n => n==null||isNaN(n) ? '—' : (n>=100? n.toLocaleString('es-ES',{maximumFractionDigits:2}) : n>=1 ? n.toLocaleString('es-ES',{maximumFractionDigits:3}) : n>=0.01 ? n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:4}) : n.toLocaleString('es-ES',{maximumSignificantDigits:3}))+' €';
+const fPct = (n,s) => n==null||isNaN(n) ? '<span class="mut">—</span>' : `<span class="${n>=0?'up':'dn'}">${n>=0&&s!==false?'+':''}${n.toLocaleString('es-ES',{maximumFractionDigits:1})} %</span>`;
+const fBig = n => n==null ? '—' : n>=1e9 ? (n/1e9).toLocaleString('es-ES',{maximumFractionDigits:2})+' B' : n>=1e6 ? (n/1e6).toLocaleString('es-ES',{maximumFractionDigits:1})+' M' : n>=1e3 ? (n/1e3).toLocaleString('es-ES',{maximumFractionDigits:0})+' k' : String(Math.round(n));
+const fNum = n => n==null ? '—' : n.toLocaleString('es-ES',{maximumFractionDigits: n>=1000?0: n>=1?2:4});
+const tierName = { A:'A · Reforzar (x100 posible)', B:'B · Núcleo de calidad', C:'C · Mantener sin añadir', D:'D · Reducir / salir', X:'Sin analizar' };
+const tierColor = { A:'#22c55e', B:'#38bdf8', C:'#f59e0b', D:'#ef4444', X:'#475569' };
+
+async function loadJson(p){ try{ const r=await fetch(p,{cache:'no-store'}); if(!r.ok) throw 0; return await r.json(); }catch{ return null; } }
+async function boot(){
+  const B = window.__CRYPTO_BUNDLE || {};
+  S.portfolio = await loadJson('portfolio.json') || B.portfolio || {holdings:[]};
+  S.analysis = await loadJson('analysis.json') || B.analysis || {coins:{}};
+  S.snapshot = await loadJson('data/snapshot.json') || B.snapshot || null;
+  S.alerts = await loadJson('data/alerts.json') || B.alerts || {activas:[],historial:[]};
+  S.history = await loadJson('data/history.json') || B.history || {puntos:[]};
+  build(); renderAll();
+  const auto = LS.get('autolive', true);
+  if (auto) refreshLive();
+}
+
+// ---------- construcción de filas ----------
+function holdingsEffective(){
+  const over = LS.get('cantidades', {});
+  const compras = LS.get('compras', []);
+  return S.portfolio.holdings.map(h => {
+    const base = over[h.cg] != null ? over[h.cg] : h.cantidad;
+    const extra = compras.filter(c => c.cg===h.cg).reduce((s,c)=> s + (c.precio>0 ? c.eur/c.precio : 0), 0);
+    const extraEur = compras.filter(c => c.cg===h.cg).reduce((s,c)=> s + c.eur, 0);
+    return { ...h, cantidad_base: base, cantidad_efectiva: (base||0)+extra, compras_eur: extraEur };
+  });
+}
+function build(){
+  const snap = S.snapshot && S.snapshot.monedas || {};
+  const live = S.live && S.live.markets || {};
+  const fng = S.live && S.live.fng != null ? S.live.fng : (S.snapshot && S.snapshot.contexto && S.snapshot.contexto.fng ? S.snapshot.contexto.fng.valor : null);
+  const objetivos = LS.get('objetivos', {});
+  S.rows = holdingsEffective().map(h => {
+    const sc = snap[h.cg] || {}, lv = live[h.cg] || null;
+    const an = (S.analysis.coins||{})[h.cg] || {};
+    const price = lv ? lv.current_price : (sc.precio != null ? sc.precio : h.precio_eur);
+    let cant = h.cantidad_efectiva;
+    if (h.cantidad == null && h.valor_eur && price) cant = h.valor_eur / (sc.precio || h.precio_eur || price) + (h.cantidad_efectiva||0); // GRT: cantidad deducida del valor en la captura
+    const series = sc.series || [];
+    let ind = sc.ind || {ok:false};
+    if (series.length > 15 && price != null) { const c = series.slice(); c[c.length-1] = price; ind = R.computeIndicators(c, {ath: lv ? lv.ath : sc.ath}); }
+    const coste = (h.precio_eur != null && h.pnl_pct_revolut != null) ? h.precio_eur / (1 + h.pnl_pct_revolut/100) : null;
+    const tier = an.tier || 'X';
+    const objetivo = objetivos[h.cg] != null ? objetivos[h.cg] : (an.precio_objetivo_eur || null);
+    const al = R.evaluateCoin({ tier: tier==='X'?'C':tier, price, ind, change24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, fng, objetivo });
+    return {
+      cg:h.cg, ticker:h.ticker, nombre:h.nombre, tier, an, objetivo, cant, precio:price, valor: price!=null ? cant*price : h.valor_eur,
+      c24h: lv ? lv.price_change_percentage_24h_in_currency : sc.c24h, c7d: lv ? lv.price_change_percentage_7d_in_currency : sc.c7d, c30d: lv ? lv.price_change_percentage_30d_in_currency : sc.c30d, c1y: sc.c1y,
+      mc: lv ? lv.market_cap : sc.mc, fdv: lv ? lv.fully_diluted_valuation : sc.fdv, rank: lv ? lv.market_cap_rank : sc.rank, vs_ath: lv ? lv.ath_change_percentage : sc.vs_ath, ath: lv? lv.ath : sc.ath,
+      imagen: lv ? lv.image : sc.imagen, ind, series, coste, pnl: (coste && price) ? (price/coste-1)*100 : null, alertas: al, score: an.score != null ? an.score : null, categoria: an.categoria || 'Otros', compras_eur: h.compras_eur
+    };
+  });
+  const total = S.rows.reduce((s,r)=>s+(r.valor||0),0);
+  S.rows.forEach(r => r.peso = total ? r.valor/total*100 : 0);
+  S.total = total;
+}
+
+// ---------- precios en vivo ----------
+async function refreshLive(){
+  const btn = $('#btn-live'); btn.disabled = true; $('#live-status').textContent = 'pidiendo precios…';
+  try {
+    const ids = S.portfolio.holdings.map(h=>h.cg).concat(['bitcoin']);
+    const r = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=${ids.join(',')}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d,30d`);
+    if (!r.ok) throw new Error('CoinGecko HTTP '+r.status);
+    const arr = await r.json(); const markets = {}; arr.forEach(m => markets[m.id]=m);
+    let fng = null;
+    try { const f = await fetch('https://api.alternative.me/fng/?limit=1'); if (f.ok) { const j = await f.json(); fng = Number(j.data[0].value); } } catch {}
+    S.live = { at: Date.now(), markets, fng, btc: markets.bitcoin || null };
+    $('#live-status').textContent = 'en vivo · ' + new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+    build(); renderAll();
+  } catch(e) { $('#live-status').textContent = 'sin datos en vivo ('+e.message+') · usando snapshot'; }
+  btn.disabled = false;
+}
+$('#btn-live').onclick = refreshLive;
+
+// ---------- render ----------
+function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderAnalisis(); renderAlertas(); renderPlan(); renderAjustes(); }
+function renderHeader(){
+  const s = S.snapshot; const at = s ? new Date(s.at) : null;
+  const stale = at && (Date.now()-at.getTime()) > 14*3600e3;
+  $('#hdr-sub').innerHTML = (s ? `snapshot del worker: ${at.toLocaleString('es-ES')}${stale?' <span class="dn">(antiguo)</span>':''}` : '<span class="dn">sin snapshot del worker: ejecuta node crypto/worker/snapshot.mjs o la acción crypto-snapshot</span>') + ` · ${S.portfolio.holdings.length} posiciones`;
+}
+function renderKpis(){
+  const rows = S.rows, total = S.total;
+  const d24 = rows.reduce((s,r)=> s + (r.c24h!=null && r.valor ? r.valor - r.valor/(1+r.c24h/100) : 0), 0);
+  const d7 = rows.reduce((s,r)=> s + (r.c7d!=null && r.valor ? r.valor - r.valor/(1+r.c7d/100) : 0), 0);
+  const costeTot = rows.reduce((s,r)=> s + (r.coste && r.cant ? r.coste*r.cant : 0), 0);
+  const valCoste = rows.reduce((s,r)=> s + (r.coste && r.cant && r.precio ? r.precio*r.cant : 0), 0);
+  const ctx = S.snapshot && S.snapshot.contexto || {};
+  const btc = S.live && S.live.btc ? { precio:S.live.btc.current_price, vs_ath:S.live.btc.ath_change_percentage, c7d:S.live.btc.price_change_percentage_7d_in_currency } : ctx.btc;
+  const fng = S.live && S.live.fng != null ? S.live.fng : (ctx.fng ? ctx.fng.valor : null);
+  const act = rows.flatMap(r=>r.alertas.map(a=>({...a,tier:r.tier})));
+  const nL = act.filter(a=>a.nivel==='L2'||a.nivel==='L3').length, nAll = act.length;
+  const byTier = {}; rows.forEach(r=>{ byTier[r.tier]=(byTier[r.tier]||0)+r.valor; });
+  $('#kpis').innerHTML = `
+    <div class="kpi"><div class="l">Valor total</div><div class="v">${fEur(total,0)}</div><div class="s">${fPct(total? d24/(total-d24)*100:null)} 24h (${fEur(d24,0)}) · ${fPct(total? d7/(total-d7)*100:null)} 7d</div></div>
+    <div class="kpi"><div class="l">P&amp;L vs coste implícito</div><div class="v ${valCoste-costeTot>=0?'up':'dn'}">${fEur(valCoste-costeTot,0)}</div><div class="s">${fPct(costeTot? (valCoste/costeTot-1)*100:null)} sobre ${fEur(costeTot,0)} invertidos (est.)</div></div>
+    <div class="kpi"><div class="l">Tier A · x100 candidatos</div><div class="v" style="color:var(--tA)">${fEur(byTier.A||0,0)}</div><div class="s">${(byTier.A||0)/total*100|0} % del portfolio · tier D: ${fEur(byTier.D||0,0)}</div></div>
+    <div class="kpi"><div class="l">Miedo / Codicia</div><div class="v" style="color:${fng==null?'var(--mut)':fng<=25?'var(--up)':fng>=70?'var(--dn)':'var(--txt)'}">${fng==null?'—':fng}</div><div class="s">${fng==null?'sin dato':fng<=20?'miedo extremo: ventana de compra':fng<=40?'miedo':fng>=70?'codicia: no perseguir':'neutral'}</div></div>
+    <div class="kpi"><div class="l">Bitcoin</div><div class="v">${btc?fEur(btc.precio,0):'—'}</div><div class="s">${btc?fPct(btc.vs_ath)+' vs ATH · '+fPct(btc.c7d)+' 7d':''}</div></div>
+    <div class="kpi"><div class="l">Alertas de compra</div><div class="v" style="color:${nL?'var(--L2)':'var(--txt)'}">${nL}<span class="mut" style="font-size:14px"> fuertes / ${nAll} total</span></div><div class="s">${act.filter(a=>a.nivel==='L2'||a.nivel==='L3').slice(0,4).map(a=>a.codigo).join(', ')||'ninguna fuerte ahora'}</div></div>`;
+}
+function sparkSvg(series, w, h, color){
+  if (!series || series.length < 2) return '';
+  const s = series.slice(-120); const mn = Math.min(...s), mx = Math.max(...s); const rg = mx-mn || 1;
+  const pts = s.map((v,i)=> `${(i/(s.length-1)*w).toFixed(1)},${(h-(v-mn)/rg*(h-2)-1).toFixed(1)}`).join(' ');
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline fill="none" stroke="${color||'#38bdf8'}" stroke-width="1.5" points="${pts}"/></svg>`;
+}
+function renderResumen(){
+  const rows = S.rows.slice();
+  // donut tier
+  const byTier = {}; rows.forEach(r=>{ byTier[r.tier]=(byTier[r.tier]||0)+r.valor; });
+  const order = ['A','B','C','D','X']; let acc = 0; const C = 2*Math.PI*52;
+  let arcs = ''; order.forEach(t=>{ const v=byTier[t]||0; if(!v) return; const f=v/S.total; arcs += `<circle r="52" cx="70" cy="70" fill="none" stroke="${tierColor[t]}" stroke-width="18" stroke-dasharray="${(f*C).toFixed(2)} ${C.toFixed(2)}" stroke-dashoffset="${(-acc*C).toFixed(2)}" transform="rotate(-90 70 70)"/>`; acc+=f; });
+  $('#donut-tier').innerHTML = `<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><svg width="140" height="140">${arcs}<text x="70" y="66" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="800" font-family="IBM Plex Mono">${fBig(S.total)}€</text><text x="70" y="82" text-anchor="middle" fill="#94a3b8" font-size="10">${rows.length} monedas</text></svg>
+    <div>${order.filter(t=>byTier[t]).map(t=>`<div style="font-size:12.5px;margin:3px 0"><i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${tierColor[t]};margin-right:6px"></i>${tierName[t]} · <b class="mono">${fEur(byTier[t],0)}</b> <span class="mut">(${(byTier[t]/S.total*100).toFixed(1)} %, ${rows.filter(r=>r.tier===t).length})</span></div>`).join('')}</div></div>`;
+  // bars categoría
+  const byCat = {}; rows.forEach(r=>{ byCat[r.categoria]=(byCat[r.categoria]||0)+r.valor; });
+  const cats = Object.entries(byCat).sort((a,b)=>b[1]-a[1]); const mx = cats.length? cats[0][1] : 1;
+  $('#bars-cat').innerHTML = cats.map(([c,v])=>`<div style="display:flex;align-items:center;gap:8px;font-size:12.5px;margin:4px 0"><span style="width:150px;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c)}</span><div class="bar" style="flex:1;margin:0"><i style="width:${(v/mx*100).toFixed(1)}%"></i></div><span class="mono" style="width:120px;text-align:right">${fEur(v,0)} <span class="mut">${(v/S.total*100).toFixed(0)}%</span></span></div>`).join('');
+  // tabla
+  const cols = [['ticker','Moneda','l'],['tier','Tier'],['score','Score'],['cant','Cantidad'],['precio','Precio'],['valor','Valor'],['peso','Peso'],['pnl','P&L'],['c24h','24h'],['c7d','7d'],['c30d','30d'],['vs_ath','vs ATH'],['mc','Cap.'],['fdvr','FDV/Cap'],['rsi','RSI14'],['vlow90','vs mín 90d'],['alerta','Señal'],['spark','365d']];
+  const val = (r,k) => k==='fdvr' ? (r.fdv&&r.mc? r.fdv/r.mc : null) : k==='rsi' ? r.ind.rsi14 : k==='vlow90' ? r.ind.vs_low90 : k==='alerta' ? Math.max(0,...r.alertas.map(a=>R.PESO[a.nivel]||0)) : k==='tier' ? ({A:0,B:1,C:2,D:3,X:4}[r.tier]) : r[k];
+  const {k,d} = S.sort; rows.sort((a,b)=>{ const x=val(a,k), y=val(b,k); if (x==null&&y==null) return 0; if (x==null) return 1; if (y==null) return -1; return (typeof x==='string'? x.localeCompare(y) : x-y)*d; });
+  $('#tbl thead').innerHTML = '<tr>' + cols.map(c=>`<th class="${c[2]||''}" data-k="${c[0]}">${c[1]}${S.sort.k===c[0]?(S.sort.d>0?' ▲':' ▼'):''}</th>`).join('') + '</tr>';
+  $('#tbl tbody').innerHTML = rows.map(r=>{ const top = r.alertas.slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
+    return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td><span class="tier ${r.tier}">${r.tier}</span></td><td class="mono">${r.score!=null?r.score:'—'}</td><td class="mono">${fNum(r.cant)}</td><td class="mono">${fPx(r.precio)}</td><td class="mono"><b>${fEur(r.valor,0)}</b></td><td class="mono">${r.peso.toFixed(1)} %</td><td>${fPct(r.pnl)}</td><td>${fPct(r.c24h)}</td><td>${fPct(r.c7d)}</td><td>${fPct(r.c30d)}</td><td>${fPct(r.vs_ath)}</td><td class="mono">${fBig(r.mc)}</td><td class="mono">${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'}</td><td class="mono ${r.ind.rsi14!=null&&r.ind.rsi14<=30?'up':r.ind.rsi14>=70?'dn':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td>${fPct(r.ind.vs_low90)}</td><td>${top?`<span class="pill ${top.nivel}">${top.nivel==='venta'?'vender rebote':top.nivel==='aviso'?'aviso':top.codigo.replace('_',' ')}</span>`:''}</td><td>${sparkSvg(r.series,80,22, r.c30d>=0?'#34d399':'#f87171')}</td></tr>`; }).join('');
+  $('#pos-count').textContent = `· ${rows.length} · ${fEur(S.total,0)}`;
+  document.querySelectorAll('#tbl th').forEach(th => th.onclick = () => { const k = th.dataset.k; S.sort = { k, d: S.sort.k===k ? -S.sort.d : (k==='ticker'?1:-1) }; renderResumen(); });
+  document.querySelectorAll('#tbl tbody tr').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.cg));
+  // histórico
+  const pts = S.history.puntos || [];
+  $('#hist').innerHTML = pts.length < 2 ? '<p class="note">Aún no hay suficientes snapshots (se guarda un punto al día cuando corre el worker).</p>' : (()=>{ const w=900,h=160; const v=pts.map(p=>p.total_eur); const mn=Math.min(...v), mx=Math.max(...v), rg=mx-mn||1; const poly=v.map((x,i)=>`${(i/(v.length-1)*w).toFixed(1)},${(h-10-(x-mn)/rg*(h-30)).toFixed(1)}`).join(' '); return `<svg width="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:160px"><polyline fill="none" stroke="#38bdf8" stroke-width="2" points="${poly}"/></svg><div class="row small mut"><span>${pts[0].fecha}: ${fEur(v[0],0)}</span><span class="spacer"></span><span>${pts[pts.length-1].fecha}: ${fEur(v[v.length-1],0)}</span></div>`; })();
+}
+function scoreBar(an){
+  const p = an.puntuacion || {}; const parts = [['matematica','Matemática x100',25],['negocio','Negocio real',25],['comunidad','Comunidad',15],['tokenomics','Tokenomics',15],['equipo','Equipo',10],['catalizadores','Catalizadores',10]];
+  return parts.map(([k,l,m])=>`<div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mut);margin:2px 0"><span style="width:110px">${l}</span><div class="bar" style="flex:1;margin:0"><i style="width:${(p[k]||0)/m*100}%;background:${(p[k]||0)/m>=0.6?'var(--up)':(p[k]||0)/m>=0.35?'var(--acc)':'var(--dn)'}"></i></div><span class="mono" style="width:38px;text-align:right">${p[k]!=null?p[k]:'–'}/${m}</span></div>`).join('');
+}
+function renderAnalisis(){
+  const A = S.analysis; const el = $('#analisis');
+  if (!A || !A.coins || !Object.keys(A.coins).length) { el.innerHTML = '<div class="warn">Todavía no hay analysis.json. Se genera con el análisis en profundidad.</div>'; return; }
+  let html = `<div class="card"><h2>Resumen ejecutivo</h2><p class="note" style="font-size:13px;color:#cbd5e1">${esc(A.resumen_ejecutivo||'').replace(/\n/g,'<br>')}</p>${A.metodologia?`<h3>Metodología</h3><p class="note">${esc(A.metodologia).replace(/\n/g,'<br>')}</p>`:''}</div>`;
+  for (const t of ['A','B','C','D']) {
+    const rs = S.rows.filter(r=>r.tier===t).sort((a,b)=>(b.score||0)-(a.score||0));
+    if (!rs.length) continue;
+    const ti = (A.tiers||{})[t] || {};
+    html += `<div class="card"><h2><span class="tier ${t}">${t}</span> ${esc(ti.nombre||tierName[t])} <span class="mut small">· ${rs.length} monedas · ${fEur(rs.reduce((s,r)=>s+r.valor,0),0)}</span></h2><p class="note">${esc(ti.descripcion||'')}</p><div class="coins">` +
+      rs.map(r=>{ const an=r.an; const x=an.x100||{}; return `<div class="coin" data-cg="${r.cg}"><div class="h">${r.imagen?`<img src="${r.imagen}" width="22" height="22" style="border-radius:50%">`:''}<b>${esc(r.ticker)}</b><span class="mut small">${esc(r.nombre)}</span><span class="sc" style="color:${tierColor[t]}">${an.score!=null?an.score:'–'}<span class="mut" style="font-weight:400">/100</span></span></div>
+        <div class="t">${esc(an.resumen||an.tesis||'').slice(0,260)}${(an.resumen||an.tesis||'').length>260?'…':''}</div>
+        ${scoreBar(an)}
+        <div class="m">Cap ${fBig(r.mc)}€ · FDV ${fBig(r.fdv)}€ · x100 ⇒ ${fBig((r.mc||0)*100)}€${x.x_plausible?` · x plausible ${x.x_plausible}`:''}</div>
+        <div class="m" style="color:${tierColor[t]}">${esc(an.accion||'')}${an.precio_objetivo_eur?` · objetivo ≤ ${fPx(an.precio_objetivo_eur)}`:''}</div></div>`; }).join('') + '</div></div>';
+  }
+  el.innerHTML = html;
+  el.querySelectorAll('.coin').forEach(c => c.onclick = () => openDrawer(c.dataset.cg));
+}
+function renderAlertas(){
+  const el = $('#alertas');
+  const ctx = S.snapshot && S.snapshot.contexto || {};
+  const fng = S.live && S.live.fng != null ? S.live.fng : (ctx.fng ? ctx.fng.valor : null);
+  const btc = S.live && S.live.btc ? { vs_ath:S.live.btc.ath_change_percentage, c7d:S.live.btc.price_change_percentage_7d_in_currency } : ctx.btc;
+  const mk = R.evaluateMarket({ fng, btcVsAth: btc && btc.vs_ath, btcRet7: btc && btc.c7d });
+  const coinAl = S.rows.flatMap(r => r.alertas.map(a => ({...a, r}))).sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0) || (b.r.tier<a.r.tier?1:-1));
+  const render = a => `<div class="alert"><span class="pill ${a.nivel}">${a.nivel}</span><span class="who">${a.r?esc(a.r.ticker):'MERCADO'}${a.r?` <span class="tier ${a.r.tier}">${a.r.tier}</span>`:''}</span><span class="msg">${esc(a.msg)}</span>${a.r?`<span class="pr">${fPx(a.r.precio)}</span>`:''}</div>`;
+  let html = `<div class="card"><h2>Alertas activas ahora <span class="mut small">(calculadas con el último precio disponible)</span></h2>
+    <p class="note">Niveles: <span class="pill L3">L3</span> capitulación (tramo extra) · <span class="pill L2">L2</span> oportunidad fuerte (desbloquea tramo de compra) · <span class="pill L1">L1</span> zona de compra (DCA normal) · <span class="pill venta">venta</span> rebote en tier C/D (ventana para reducir) · <span class="pill aviso">aviso</span> informativo. Solo los tiers A y B generan alertas de compra.</p>
+    ${mk.map(a=>render({...a,r:null})).join('')}${coinAl.map(render).join('') || '<p class="note">Ninguna moneda en zona de compra o venta en este momento.</p>'}</div>`;
+  html += `<div class="card"><h2>Niveles por moneda (tier A y B)</h2><div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Precio</th><th>RSI14</th><th>Mín 90d</th><th>vs mín 90d</th><th>vs MA200</th><th>vs ATH</th><th>Objetivo manual</th><th>Estado</th></tr></thead><tbody>` +
+    S.rows.filter(r=>r.tier==='A'||r.tier==='B').sort((a,b)=>a.tier.localeCompare(b.tier)||(b.score||0)-(a.score||0)).map(r=>`<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b></td><td><span class="tier ${r.tier}">${r.tier}</span></td><td class="mono">${fPx(r.precio)}</td><td class="mono ${r.ind.rsi14<=35?'up':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td class="mono">${fPx(r.ind.low90)}</td><td>${fPct(r.ind.vs_low90)}</td><td>${fPct(r.ind.vs_ma200)}</td><td>${fPct(r.vs_ath)}</td><td><input type="number" step="any" style="width:100px" value="${r.objetivo!=null?r.objetivo:''}" data-obj="${r.cg}" placeholder="≤ precio" onclick="event.stopPropagation()"></td><td>${r.alertas.length?r.alertas.map(a=>`<span class="pill ${a.nivel}">${a.codigo.replace('_',' ')}</span>`).join(' '):'<span class="mut">esperar</span>'}</td></tr>`).join('') + `</tbody></table></div><p class="note">El objetivo manual dispara una alerta L1 cuando el precio cae por debajo. Se guarda en este navegador.</p></div>`;
+  const hist = (S.alerts && S.alerts.historial || []).slice().reverse().slice(0,60);
+  html += `<div class="card"><h2>Historial del worker <span class="mut small">(${hist.length} últimas)</span></h2>${hist.map(a=>`<div class="alert"><span class="mut small mono">${new Date(a.ts).toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'})}</span><span class="pill ${a.nivel}">${a.nivel}</span><span class="who">${esc(a.simbolo)}</span><span class="msg">${esc(a.msg)}</span></div>`).join('')||'<p class="note">Sin historial todavía.</p>'}
+    <h3>Notificaciones</h3><p class="note">El worker (GitHub Actions, cada 6 h) envía por Telegram las alertas nuevas y un resumen diario si configuras los secretos <span class="mono">TELEGRAM_BOT_TOKEN</span> y <span class="mono">TELEGRAM_CHAT_ID</span> en el repositorio (ver crypto/README.md).</p></div>`;
+  el.innerHTML = html;
+  el.querySelectorAll('input[data-obj]').forEach(i => i.onchange = () => { const o = LS.get('objetivos',{}); if (i.value==='') delete o[i.dataset.obj]; else o[i.dataset.obj]=Number(i.value); LS.set('objetivos',o); build(); renderAll(); });
+  el.querySelectorAll('tbody tr[data-cg]').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.cg));
+}
+function renderPlan(){
+  const el = $('#plan'); const P = S.analysis.plan_dca || null;
+  if (!P) { el.innerHTML = '<div class="warn">El plan DCA se genera con analysis.json.</div>'; return; }
+  const cfg = LS.get('plan', {}); const mensual = cfg.mensual || P.mensual_eur || 10000; const meses = cfg.meses || P.meses || 3; const pesos = cfg.pesos || {};
+  const reparto = (P.reparto||[]).map(x => ({...x, peso: pesos[x.cg]!=null ? pesos[x.cg] : x.peso}));
+  const sumP = reparto.reduce((s,x)=>s+x.peso,0) || 1;
+  const compras = LS.get('compras', []);
+  const gastado = compras.reduce((s,c)=>s+c.eur,0);
+  const rowOf = cg => S.rows.find(r=>r.cg===cg) || {};
+  let html = `<div class="card"><h2>Plan de compras · ${fEur(mensual,0)} / mes × ${meses} meses = ${fEur(mensual*meses,0)}</h2>
+    <div class="row"><label>Mensual €</label><input type="number" id="pl-mensual" value="${mensual}"><label>Meses</label><input type="number" id="pl-meses" value="${meses}" style="width:70px"><button id="pl-save">Guardar</button><button class="ghost" id="pl-reset">Restablecer pesos</button></div>
+    <p class="note">${esc(P.descripcion||'')}</p>
+    <h3>Reglas de ejecución</h3><ul class="note" style="margin:4px 0 0 18px">${(P.reglas||[]).map(r=>`<li>${esc(r)}</li>`).join('')}</ul></div>`;
+  html += `<div class="card"><h2>Reparto mensual</h2><div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Tier</th><th>Peso</th><th>€ / mes</th><th>Tramo fijo (50 %)</th><th>Tramos por alerta (2×25 %)</th><th>Estado ahora</th><th>Precio</th><th>Comprado (registro)</th><th class="l">Motivo</th></tr></thead><tbody>` +
+    reparto.map(x=>{ const r=rowOf(x.cg); const eur = mensual*x.peso/sumP; const best = (r.alertas||[]).slice().sort((a,b)=>(R.PESO[b.nivel]||0)-(R.PESO[a.nivel]||0))[0];
+      const estado = best ? (best.nivel==='L3'?'<span class="pill L3">capitulación: tramo extra</span>':best.nivel==='L2'?'<span class="pill L2">tramo desbloqueado</span>':best.nivel==='L1'?'<span class="pill L1">zona de compra</span>':`<span class="pill ${best.nivel}">${best.codigo}</span>`) : '<span class="mut small">esperar señal</span>';
+      return `<tr data-cg="${x.cg}"><td class="l"><b>${esc(r.ticker||x.cg)}</b> <span class="mut small">${esc(r.nombre||'')}</span></td><td><span class="tier ${r.tier||'X'}">${r.tier||'X'}</span></td><td><input type="number" step="1" min="0" style="width:70px" value="${Math.round(x.peso/sumP*100)}" data-peso="${x.cg}" onclick="event.stopPropagation()"> %</td><td class="mono"><b>${fEur(eur,0)}</b></td><td class="mono">${fEur(eur*0.5,0)}</td><td class="mono">${fEur(eur*0.25,0)} + ${fEur(eur*0.25,0)}</td><td>${estado}</td><td class="mono">${fPx(r.precio)}</td><td class="mono">${fEur(r.compras_eur||0,0)}</td><td class="l small" style="white-space:normal;max-width:360px;color:#cbd5e1">${esc(x.motivo||'')}</td></tr>`; }).join('') +
+    `</tbody></table></div><p class="note">Pesos editables (se normalizan). Suma actual: ${Math.round(reparto.reduce((s,x)=>s+x.peso/sumP*100,0))} %.</p></div>`;
+  if (P.nucleo_opcional && P.nucleo_opcional.length) html += `<div class="card"><h2>Variante prudente (opcional)</h2><p class="note">${esc(P.nucleo_texto||'')}</p><ul class="note" style="margin:4px 0 0 18px">${P.nucleo_opcional.map(n=>`<li><b>${esc(n.ticker)}</b> ${esc(n.motivo)}</li>`).join('')}</ul></div>`;
+  html += `<div class="card"><h2>Registro de compras <span class="mut small">· ${fEur(gastado,0)} de ${fEur(mensual*meses,0)}</span></h2><div class="progress"><i style="width:${Math.min(100,gastado/(mensual*meses)*100)}%"></i></div>
+    <div class="row" style="margin-top:10px"><select id="c-cg">${S.rows.slice().sort((a,b)=>a.ticker.localeCompare(b.ticker)).map(r=>`<option value="${r.cg}">${esc(r.ticker)} · ${esc(r.nombre)}</option>`).join('')}</select><input type="number" id="c-eur" placeholder="€" step="any"><input type="number" id="c-precio" placeholder="precio €" step="any"><input type="date" id="c-fecha" value="${new Date().toISOString().slice(0,10)}"><button id="c-add" class="primary">Añadir compra</button></div>
+    <p class="note">Las compras registradas se suman a la cantidad de cada moneda en todo el dashboard (solo en este navegador; cuando actualices portfolio.json con las cantidades reales de Revolut, bórralas en Ajustes).</p>
+    ${compras.length?`<table><thead><tr><th class="l">Fecha</th><th class="l">Moneda</th><th>€</th><th>Precio</th><th>Unidades</th><th></th></tr></thead><tbody>${compras.map((c,i)=>`<tr><td class="l mono">${c.fecha}</td><td class="l">${esc((rowOf(c.cg).ticker)||c.cg)}</td><td class="mono">${fEur(c.eur)}</td><td class="mono">${fPx(c.precio)}</td><td class="mono">${fNum(c.precio?c.eur/c.precio:null)}</td><td><button class="ghost small" data-del="${i}">✕</button></td></tr>`).join('')}</tbody></table>`:''}</div>`;
+  if (P.reforma) html += `<div class="card"><h2>Reforma barata del portfolio <span class="mut small">· libera ~${fEur(P.liberado_eur||0,0)}</span></h2><p class="note" style="color:#cbd5e1;font-size:13px">${esc(P.reforma).replace(/\n/g,'<br>')}</p>
+    ${P.ventas&&P.ventas.length?`<div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Valor (captura)</th><th>Dejar</th><th>Liberar</th><th class="l">Cuándo</th><th class="l">Motivo</th></tr></thead><tbody>${P.ventas.map(v=>{ const r=rowOf(v.cg); return `<tr data-cg="${v.cg}"><td class="l"><b>${esc(v.ticker)}</b> <span class="tier ${r.tier||'D'}">${r.tier||'D'}</span></td><td class="mono">${fEur(v.valor,0)}</td><td class="mono">${fEur(v.dejar,0)}</td><td class="mono dn">${fEur(v.valor-v.dejar,0)}</td><td class="l small">${esc(v.cuando)}</td><td class="l small" style="white-space:normal;max-width:420px;color:#cbd5e1">${esc(v.motivo)}</td></tr>`; }).join('')}</tbody></table></div>`:''}</div>`;
+  el.innerHTML = html;
+  $('#pl-save').onclick = () => { const c = LS.get('plan',{}); c.mensual = Number($('#pl-mensual').value)||10000; c.meses = Number($('#pl-meses').value)||3; LS.set('plan',c); renderPlan(); };
+  $('#pl-reset').onclick = () => { const c = LS.get('plan',{}); delete c.pesos; LS.set('plan',c); renderPlan(); };
+  el.querySelectorAll('input[data-peso]').forEach(i => i.onchange = () => { const c = LS.get('plan',{}); c.pesos = c.pesos||{}; reparto.forEach(x=>{ c.pesos[x.cg] = x.peso/sumP*100; }); c.pesos[i.dataset.peso] = Number(i.value)||0; LS.set('plan',c); renderPlan(); });
+  $('#c-add').onclick = () => { const eur=Number($('#c-eur').value), precio=Number($('#c-precio').value); if(!(eur>0)||!(precio>0)) return alert('Indica importe y precio'); const l=LS.get('compras',[]); l.push({cg:$('#c-cg').value,eur,precio,fecha:$('#c-fecha').value}); LS.set('compras',l); build(); renderAll(); };
+  el.querySelectorAll('button[data-del]').forEach(b => b.onclick = () => { const l=LS.get('compras',[]); l.splice(Number(b.dataset.del),1); LS.set('compras',l); build(); renderAll(); });
+  el.querySelectorAll('tbody tr[data-cg]').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.cg));
+}
+function renderAjustes(){
+  const el = $('#ajustes'); const over = LS.get('cantidades',{});
+  el.innerHTML = `<div class="card"><h2>Cantidades</h2><p class="note">Fuente: <span class="mono">crypto/portfolio.json</span> (capturas de Revolut del ${esc((S.portfolio.fuente||'').slice(17,27))}). Puedes corregir cantidades aquí (se guardan en este navegador) o, mejor, editar portfolio.json en el repositorio para que el worker y Telegram usen los datos reales.</p>
+    <div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Cantidad (portfolio.json)</th><th>Cantidad local</th><th>Compras registradas</th><th>Efectiva</th></tr></thead><tbody>${S.rows.slice().sort((a,b)=>b.valor-a.valor).map(r=>{ const h=S.portfolio.holdings.find(x=>x.cg===r.cg); return `<tr><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.nombre)}</span></td><td class="mono">${h.cantidad!=null?fNum(h.cantidad):'<span class="mut">deducida</span>'}</td><td><input type="number" step="any" style="width:130px" value="${over[r.cg]!=null?over[r.cg]:''}" data-cant="${r.cg}" placeholder="${h.cantidad!=null?h.cantidad:''}"></td><td class="mono">${fEur(r.compras_eur||0,0)}</td><td class="mono">${fNum(r.cant)}</td></tr>`; }).join('')}</tbody></table></div>
+    <div class="row" style="margin-top:10px"><button id="aj-reset-cant" class="ghost">Borrar cantidades locales</button><button id="aj-reset-compras" class="ghost">Borrar registro de compras</button><button id="aj-export">Exportar portfolio.json con cantidades efectivas</button></div></div>
+    <div class="card"><h2>Comportamiento</h2><div class="row"><label><input type="checkbox" id="aj-autolive" ${LS.get('autolive',true)?'checked':''}> Pedir precios en vivo a CoinGecko al abrir</label></div>
+    <p class="note">Precios en vivo: CoinGecko (API pública, 1 llamada; si devuelve 429 espera un minuto). Indicadores (RSI, mínimos, medias) salen del histórico diario que descarga el worker; con precio en vivo se recalculan sustituyendo el último cierre.</p></div>
+    <div class="card"><h2>Cómo mantenerlo</h2><ol class="note" style="margin:4px 0 0 18px;line-height:1.7"><li>Cada compra real en Revolut: regístrala en Plan DCA (inmediato) y, cuando puedas, actualiza <span class="mono">crypto/portfolio.json</span>.</li><li>El worker <span class="mono">crypto-snapshot</span> corre cada 6 h en GitHub Actions y guarda precios, indicadores, alertas e historial en <span class="mono">crypto/data/</span>.</li><li>Para Telegram: crea un bot con @BotFather, obtén tu chat id y añade los secretos en Settings → Secrets → Actions.</li><li>Clave gratuita de CoinGecko (Demo) como secreto <span class="mono">COINGECKO_API_KEY</span> para evitar límites 429 en GitHub Actions.</li></ol></div>`;
+  el.querySelectorAll('input[data-cant]').forEach(i => i.onchange = () => { const o=LS.get('cantidades',{}); if(i.value==='') delete o[i.dataset.cant]; else o[i.dataset.cant]=Number(i.value); LS.set('cantidades',o); build(); renderAll(); });
+  $('#aj-reset-cant').onclick = () => { LS.set('cantidades',{}); build(); renderAll(); };
+  $('#aj-reset-compras').onclick = () => { if (confirm('¿Borrar el registro local de compras?')) { LS.set('compras',[]); build(); renderAll(); } };
+  $('#aj-autolive').onchange = e => LS.set('autolive', e.target.checked);
+  $('#aj-export').onclick = () => { const p = JSON.parse(JSON.stringify(S.portfolio)); p.holdings.forEach(h=>{ const r=S.rows.find(x=>x.cg===h.cg); if(r){ h.cantidad = Math.round(r.cant*1e6)/1e6; h.precio_eur = r.precio; h.valor_eur = Math.round(r.valor*100)/100; if (r.coste && r.precio) h.pnl_pct_revolut = Math.round((r.precio/r.coste-1)*10000)/100; } }); p.fuente = 'Exportado del dashboard ' + new Date().toISOString().slice(0,10); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(p,null,1)],{type:'application/json'})); a.download='portfolio.json'; a.click(); };
+}
+function openDrawer(cg){
+  const r = S.rows.find(x=>x.cg===cg); if (!r) return; const an = r.an || {}; const i = r.ind || {}; const x = an.x100 || {};
+  const li = a => (a||[]).map(s=>`<li>${esc(s)}</li>`).join('');
+  $('#drawer-body').innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;padding-right:34px">${r.imagen?`<img src="${r.imagen}" width="34" height="34" style="border-radius:50%">`:''}<div><h2>${esc(r.ticker)} <span class="mut" style="font-size:14px;font-weight:400">${esc(r.nombre)}</span> <span class="tier ${r.tier}">${r.tier}</span></h2><div class="mut small">${esc(r.categoria)} · rank #${r.rank||'—'} · <a href="https://www.coingecko.com/es/monedas/${r.cg}" target="_blank" rel="noopener">CoinGecko ↗</a></div></div><div class="spacer"></div><div class="mono" style="text-align:right"><div style="font-size:20px;font-weight:800">${fPx(r.precio)}</div><div class="small">${fPct(r.c24h)} 24h · ${fPct(r.c7d)} 7d · ${fPct(r.c30d)} 30d</div></div></div>
+    <div style="margin:10px 0">${sparkSvg(r.series, 520, 90, '#38bdf8')}<div class="row small mut"><span>365 días · mín ${fPx(i.low365)} · máx ${fPx(i.high365)}</span><span class="spacer"></span><span>ATH ${fPx(r.ath)} (${r.vs_ath!=null?r.vs_ath.toFixed(0):'—'} %)</span></div></div>
+    <div class="ig"><div>Posición<b>${fEur(r.valor,0)} · ${r.peso.toFixed(1)} %</b></div><div>Cantidad<b>${fNum(r.cant)}</b></div><div>Coste medio est.<b>${fPx(r.coste)} (${r.pnl!=null?(r.pnl>=0?'+':'')+r.pnl.toFixed(0)+' %':'—'})</b></div>
+      <div>Capitalización<b>${fBig(r.mc)} €</b></div><div>FDV<b>${fBig(r.fdv)} € (${r.fdv&&r.mc?(r.fdv/r.mc).toFixed(1)+'×':'—'})</b></div><div>Cap. si x100<b>${fBig((r.mc||0)*100)} €</b></div>
+      <div>RSI 14<b class="${i.rsi14<=30?'up':i.rsi14>=70?'dn':''}">${i.rsi14!=null?i.rsi14.toFixed(0):'—'}</b></div><div>vs mínimo 90d<b>${i.vs_low90!=null?'+'+i.vs_low90.toFixed(0)+' %':'—'} (${fPx(i.low90)})</b></div><div>vs MA200<b>${i.vs_ma200!=null?(i.vs_ma200>=0?'+':'')+i.vs_ma200.toFixed(0)+' %':'—'}</b></div>
+      <div>Retorno 7d / 30d / 90d<b>${i.ret7!=null?i.ret7.toFixed(0):'—'} / ${i.ret30!=null?i.ret30.toFixed(0):'—'} / ${i.ret90!=null?i.ret90.toFixed(0):'—'} %</b></div><div>Volatilidad anual.<b>${i.vol30_anual!=null?i.vol30_anual.toFixed(0)+' %':'—'}</b></div><div>Score<b>${an.score!=null?an.score+'/100':'—'}</b></div></div>
+    <div class="sec"><h4>Señales ahora</h4>${r.alertas.length?r.alertas.map(a=>`<div class="alert"><span class="pill ${a.nivel}">${a.nivel}</span><span class="msg">${esc(a.msg)}</span></div>`).join(''):'<p class="note">Sin señal. '+(r.tier==='A'||r.tier==='B'?'Zona de compra cuando RSI ≤ 35, precio a ≤ 8 % del mínimo de 90 días o por debajo del objetivo manual.':'Este tier no genera alertas de compra.')+'</p>'}</div>
+    ${an.tesis?`<div class="sec"><h4>Tesis</h4><p>${esc(an.tesis).replace(/\n/g,'<br>')}</p></div>`:''}
+    ${an.accion?`<div class="sec"><h4>Acción recomendada</h4><p style="color:${tierColor[r.tier]};font-weight:600">${esc(an.accion)}</p>${an.zona_compra_texto?`<p>${esc(an.zona_compra_texto)}</p>`:''}</div>`:''}
+    ${an.puntuacion?`<div class="sec"><h4>Puntuación</h4>${scoreBar(an)}</div>`:''}
+    ${x.veredicto?`<div class="sec"><h4>Matemática del x100</h4><p>${esc(x.veredicto)}</p><p class="note">Techo plausible estimado en un ciclo alcista: ${fBig(x.techo_plausible_eur)} € → multiplicador plausible sobre FDV ≈ <b>x${x.x_plausible||'—'}</b>.</p></div>`:''}
+    ${an.negocio?`<div class="sec"><h4>Negocio real</h4><p>${esc(an.negocio)}</p></div>`:''}
+    ${an.tokenomics?`<div class="sec"><h4>Tokenomics</h4><p>${esc(an.tokenomics)}</p></div>`:''}
+    ${an.comunidad?`<div class="sec"><h4>Comunidad y desarrollo</h4><p>${esc(an.comunidad)}</p></div>`:''}
+    ${an.catalizadores&&an.catalizadores.length?`<div class="sec"><h4>Catalizadores</h4><ul>${li(an.catalizadores)}</ul></div>`:''}
+    ${an.riesgos&&an.riesgos.length?`<div class="sec"><h4>Riesgos</h4><ul>${li(an.riesgos)}</ul></div>`:''}
+    ${an.noticias_2026&&an.noticias_2026.length?`<div class="sec"><h4>Noticias 2026</h4><ul>${li(an.noticias_2026)}</ul></div>`:''}
+    ${an.fuentes&&an.fuentes.length?`<div class="sec"><h4>Fuentes</h4><ul class="small">${an.fuentes.slice(0,12).map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//,'').slice(0,70))}</a></li>`).join('')}</ul></div>`:''}`;
+  $('#drawer').classList.add('on');
+}
+function closeDrawer(){ $('#drawer').classList.remove('on'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
+$('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on', x===b)); document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.id==='tab-'+b.dataset.tab)); });
+boot();
+</script>
+</body>
+</html>
