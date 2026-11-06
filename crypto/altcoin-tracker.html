@@ -21,7 +21,7 @@
   input, select, textarea { background:#0b1220; color:var(--txt); border:1px solid var(--line); border-radius:8px; padding:7px 9px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; }
   input[type=number] { width:110px; }
   main { max-width:1500px; margin:0 auto; padding-block:14px 80px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
-  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:14px; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-bottom:14px; }
   .kpi { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
   .kpi .l { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.6px; }
   .kpi .v { font-size:22px; font-weight:800; margin-top:4px; font-family:'IBM Plex Mono',monospace; }
@@ -81,10 +81,10 @@
   <div class="kpis" id="kpis"></div>
   <nav class="tabs" id="tabs">
     <button data-tab="resumen" class="on">Resumen</button>
+    <button data-tab="recomendadas">Recomendadas</button>
     <button data-tab="analisis">Análisis</button>
     <button data-tab="alertas">Alertas</button>
     <button data-tab="plan">Plan DCA</button>
-    <button data-tab="recomendadas">Recomendadas</button>
     <button data-tab="candidatas">Candidatas</button>
     <button data-tab="ajustes">Ajustes</button>
   </nav>
@@ -93,6 +93,7 @@
       <div class="card"><h2>Reparto por tier</h2><div id="donut-tier"></div></div>
       <div class="card"><h2>Reparto por categoría</h2><div id="bars-cat"></div></div>
     </div>
+    <div class="card" id="reco-resumen"></div>
     <div class="card">
       <h2>Posiciones <span class="mut small" id="pos-count"></span></h2>
       <div style="overflow-x:auto"><table id="tbl"><thead></thead><tbody></tbody></table></div>
@@ -315,7 +316,7 @@ async function refreshLive(){
 $('#btn-live').onclick = refreshLive;
 
 // ---------- render ----------
-function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderAnalisis(); renderAlertas(); renderPlan(); renderRecomendadas(); renderCandidatas(); renderAjustes(); }
+function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderRecoResumen(); renderAnalisis(); renderAlertas(); renderPlan(); renderRecomendadas(); renderCandidatas(); renderAjustes(); }
 function renderHeader(){
   const s = S.snapshot; const at = s ? new Date(s.at) : null;
   const stale = at && (Date.now()-at.getTime()) > 14*3600e3;
@@ -339,6 +340,7 @@ function renderKpis(){
     <div class="kpi"><div class="l">Tier A · x100 candidatos</div><div class="v" style="color:var(--tA)">${fEur(byTier.A||0,0)}</div><div class="s">${(byTier.A||0)/total*100|0} % del portfolio · tier D: ${fEur(byTier.D||0,0)}</div></div>
     <div class="kpi"><div class="l">Miedo / Codicia</div><div class="v" style="color:${fng==null?'var(--mut)':fng<=25?'var(--up)':fng>=70?'var(--dn)':'var(--txt)'}">${fng==null?'—':fng}</div><div class="s">${fng==null?'sin dato':fng<=20?'miedo extremo: ventana de compra':fng<=40?'miedo':fng>=70?'codicia: no perseguir':'neutral'}</div></div>
     <div class="kpi"><div class="l">Bitcoin</div><div class="v">${btc?fEur(btc.precio,0):'—'}</div><div class="s">${btc?fPct(btc.vs_ath)+' vs ATH · '+fPct(btc.c7d)+' 7d':''}</div></div>
+    <div class="kpi"><div class="l">Recomendadas en compra</div><div class="v" style="color:var(--L2)">${(()=>{ const rr = recoRows(); const n = rr.filter(r=>['L1','L2','L3'].includes(r.est)).length; return n + '<span class="mut" style="font-size:14px"> / ' + rr.length + '</span>'; })()}</div><div class="s">${recoRows().filter(r=>['L1','L2','L3'].includes(r.est)).slice(0,5).map(r=>r.ticker).join(', ')||'ninguna en zona ahora'}</div></div>
     <div class="kpi"><div class="l">Alertas de compra</div><div class="v" style="color:${nL?'var(--L2)':'var(--txt)'}">${nL}<span class="mut" style="font-size:14px"> fuertes / ${nAll} total</span></div><div class="s">${act.filter(a=>a.nivel==='L2'||a.nivel==='L3').slice(0,4).map(a=>a.codigo).join(', ')||'ninguna fuerte ahora'}</div></div>`;
 }
 function sparkSvg(series, w, h, color){
@@ -491,12 +493,27 @@ function momentoDe(ind, alertas){
   if (ind.vs_low90!=null && ind.vs_low90<=15 && (ind.rsi14==null || ind.rsi14<45)) return ['Cerca del suelo: tramo pequeño','aviso'];
   return ['Esperar señal','aviso'];
 }
+function recoRows(){
+  const Rc = S.analysis.recomendadas || []; if (!Rc.length) return [];
+  const cand = candRows(); const byCg = {}; S.rows.forEach(r=>byCg[r.cg]=r); cand.forEach(r=>{ if(!byCg[r.cg]) byCg[r.cg]=r; });
+  return Rc.map(c => { const d = byCg[c.cg] || {}; const ind = d.ind || {ok:false}; const al = d.alertas || []; const [mom, est] = d.precio!=null ? momentoDe(ind, al) : ['sin datos','aviso'];
+    return { ...c, precio: d.precio, c24h: d.c24h, c30d: d.c30d, vs_ath: d.vs_ath, mc: d.mc || c.mc_eur, fdv: d.fdv || c.fdv_eur, ind, alertas: al, mom, est, imagen: d.imagen }; });
+}
+function renderRecoResumen(){
+  const el = $('#reco-resumen'); if (!el) return; const rows = recoRows();
+  if (!rows.length) { el.innerHTML = ''; return; }
+  const comprar = rows.filter(r=>['L1','L2','L3'].includes(r.est)).sort((a,b)=>(R.PESO[b.est]||0)-(R.PESO[a.est]||0)||(b.score_x100-a.score_x100));
+  const top = rows.slice().sort((a,b)=>b.score_x100-a.score_x100).slice(0,12);
+  el.innerHTML = `<h2>Recomendadas · señales de hoy <span class="mut small">· ${rows.length} monedas seguidas · ${comprar.length} en zona de compra u oportunidad</span></h2>
+    ${comprar.length?`<div style="margin-bottom:10px">${comprar.map(r=>`<div class="alert" data-cg="${r.cg}" style="cursor:pointer"><span class="pill ${r.est}">${r.est}</span><span class="who">${esc(r.ticker)} <span class="tier ${r.tier||'X'}">${r.tier||'?'}</span></span><span class="msg">${esc(r.mom)} · score x100 <b>${r.score_x100}</b> · ${esc(r.grupo)}</span><span class="pr">${fPx(r.precio)}</span></div>`).join('')}</div>`:'<p class="note">Ninguna recomendada está hoy en zona de compra; abajo las 12 con mejor puntuación y su precio objetivo.</p>'}
+    <div style="overflow-x:auto"><table><thead><tr><th class="l">Top por score x100</th><th>Score</th><th>Precio</th><th>30d</th><th>RSI14</th><th class="l">Momento</th><th>Objetivo</th></tr></thead><tbody>${top.map(r=>`<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="mut small">${esc(r.grupo)}</span></td><td class="mono" style="font-weight:800">${r.score_x100}</td><td class="mono">${fPx(r.precio)}</td><td>${fPct(r.c30d)}</td><td class="mono ${r.ind.rsi14<=30?'up':r.ind.rsi14>=68?'dn':''}">${r.ind.rsi14!=null?r.ind.rsi14.toFixed(0):'—'}</td><td class="l"><span class="pill ${r.est}">${esc(r.mom)}</span></td><td class="mono">${fPx(r.precio_objetivo_eur)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note">La lista completa (37), los brokers mínimos y las fichas están en la pestaña Recomendadas.</p>`;
+  el.querySelectorAll('[data-cg]').forEach(x => x.onclick = () => openDrawer(x.dataset.cg));
+}
 function renderRecomendadas(){
   const el = $('#recomendadas'); const Rc = S.analysis.recomendadas || []; const B = S.analysis.brokers || null;
   if (!Rc.length) { el.innerHTML = '<div class="warn">Sin lista de recomendadas todavía.</div>'; return; }
-  const cand = candRows(); const byCg = {}; S.rows.forEach(r=>byCg[r.cg]=r); cand.forEach(r=>{ if(!byCg[r.cg]) byCg[r.cg]=r; });
-  const rows = Rc.map(c => { const d = byCg[c.cg] || {}; const ind = d.ind || {ok:false}; const al = d.alertas || []; const [mom, est] = d.precio!=null ? momentoDe(ind, al) : ['sin datos','aviso'];
-    return { ...c, precio: d.precio, c24h: d.c24h, c30d: d.c30d, vs_ath: d.vs_ath, mc: d.mc || c.mc_eur, fdv: d.fdv || c.fdv_eur, ind, alertas: al, mom, est, imagen: d.imagen }; });
+  const rows = recoRows();
   const NOM = {gdax:'Coinbase', okex:'OKX', mxc:'MEXC', bybit_spot:'Bybit', gate:'Gate', kucoin:'KuCoin', kraken:'Kraken', binance:'Binance', bitvavo:'Bitvavo', bitget:'Bitget', htx:'HTX', crypto_com:'Crypto.com', upbit:'Upbit', bithumb:'Bithumb', bitstamp:'Bitstamp', bitfinex:'Bitfinex'};
   const donde = c => (c.disponible_revolut==='si' ? 'Revolut · ' : '') + ((c.exchanges_cex && c.exchanges_cex.length) ? c.exchanges_cex.slice(0,3).map(e=>NOM[e]||e).join(', ') : (c.exchanges_dex && c.exchanges_dex.length ? 'DEX: '+c.exchanges_dex.slice(0,2).join(', ') : (c.exchanges_texto||'?')));
   let html = `<div class="card"><h2>Recomendadas <span class="mut small">· ${rows.length} monedas · puntuación x100 común (0-100) · momento calculado con el último precio</span></h2>
