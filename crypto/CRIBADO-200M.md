@@ -1,18 +1,27 @@
-# Cribado de altcoins con capitalización < 200 M€ y puntuación x100 > 70
+# Cribado de altcoins con capitalización < 200 M€ y puntuación x100 ≥ 65
 
-*Generado el 2026-11-06 · 124 monedas investigadas en 12 lotes (de 662 que pasaron el filtro cuantitativo sobre 2.750 de CoinGecko) · misma rúbrica que la lista de Recomendadas · no es asesoramiento financiero*
+*Generado el 2026-11-07 · 124 monedas investigadas en 12 lotes (de 662 que pasaron el filtro cuantitativo sobre 2.750 de CoinGecko) · misma rúbrica que la lista de Recomendadas · no es asesoramiento financiero*
 
-Resultado del cribado: de 124 monedas investigadas con capitalización inferior a 200 M€, solo 1 supera los 70 puntos de la rúbrica común: Bitcast (SN93), la subnet de Bittensor con ingresos verificables y recompras. Dos se quedan exactamente en 70 (Nym, mixnet de privacidad con producto de consumo real, y Trishool SN23, seguridad de agentes de IA) y otras 7 entre 65 y 69 (NAVI, Hippius SN75, Engy SN53, Green Compute SN110, Nullmask, Vanta SN8 y TaoHash SN14). Ninguna de esas 9 entra en Recomendadas con el listón en "más de 70", pero quedan en la tabla por si se baja a 65.
+Resultado del cribado: de 124 monedas investigadas con capitalización inferior a 200 M€, solo 1 supera los 70 puntos de la rúbrica común (Bitcast, SN93); por eso, a petición del usuario, el listón se bajó a 65 puntos el 7-nov-2026 y entran 10: Bitcast SN93 (71), Nym y Trishool SN23 (70), Hippius SN75 y NAVI (69), Engy SN53, Green Compute SN110 y Nullmask (68), Vanta SN8 (67) y Cacheon SN14 (65). Todas pasan a Recomendadas (grupo "cribado", tier B: alertas de compra como el tier A) y al seguimiento del worker.
 
-Por qué tan pocas: la puntuación exige a la vez capitalización pequeña (matemática), proyecto vivo, narrativa de moda, negocio real ligado al token y comunidad; con más de 80 M€ de capitalización es casi imposible superar 70 por construcción, y la mayoría de micro-caps vivas no tienen negocio (o el token no lo captura). Varias de las investigadas están además en apuros serios: Recall cierra el 30 de noviembre, ZetaChain apaga su cadena en diciembre, Lisk la apagó el 2 de noviembre, Balancer está en liquidación, Threshold tiene tBTC pausado, Core sufrió un exploit y Loopring está abandonada.
+Por qué tan pocas por encima de 70: la puntuación exige a la vez capitalización pequeña (matemática), proyecto vivo, narrativa de moda, negocio real ligado al token y comunidad; con más de 80 M€ de capitalización es casi imposible superar 70 por construcción, y la mayoría de micro-caps vivas no tienen negocio (o el token no lo captura). Varias de las investigadas están además en apuros serios: Recall cierra el 30 de noviembre, ZetaChain apaga su cadena en diciembre, Lisk la apagó el 2 de noviembre, Balancer está en liquidación, Threshold tiene tBTC pausado, Core sufrió un exploit y Loopring está abandonada.
 
-Advertencia sobre las subnets de Bittensor: 6 de las 10 mejores son tokens alpha de subnets. Cotizan solo contra un pool de TAO (no se compran con euros ni en Revolut), su capitalización en dólares depende del precio de TAO y mover el precio un 5 % cuesta unos cientos de TAO: posiciones pequeñas y salidas escalonadas.
+Advertencia sobre las subnets de Bittensor: 7 de las 10 seleccionadas son tokens alpha de subnets. Cotizan contra un pool de TAO (no se compran con euros ni en Revolut; solo Hippius SN75 y Vanta SN8 están en Kraken), su capitalización en dólares depende del precio de TAO y mover el precio un 5 % cuesta unos cientos de TAO: posiciones pequeñas (200-500 €), órdenes limitadas y salidas escalonadas. Además, tres figuran en CoinGecko con el nombre del proyecto anterior del mismo slot (Nuance = Trishool, EfficientFrontier = Engy, Rich Kids of TAO = Green Compute).
 
-## Seleccionadas (score > 70): 1
+## Seleccionadas (score ≥ 65): 10
 
 | # | Moneda | Narrativa | Cap. | FDV/Cap | Score | Mat/Vida/Narr/Neg/Com/Liq | P(x100) | Dónde | Estado |
 |---|---|---|---:|---:|---:|---|---:|---|---|
 | 1 | **SN93** Bitcast (Bittensor SN93) | Bittensor / economia de creadores y marketing | 12,9 M € | 1.0× | **71** | 23/18/10/13/6/1 | 2-3 % | Pool de la subnet (taoswap, backprop.finance, tao.app) pagando con TAO; no en Revolut ni Kraken | activo |
+| 2 | **SN23** Trishool (Bittensor SN23; CoinGecko aun la llama Nuance) | IA / seguridad y alineamiento de agentes (Bittensor) | 6,7 M € | 1.0× | **70** | 27/18/13/7/4/1 | 2-3 % | Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura aún como "Nuance"; no en Revolut ni Kraken | activo |
+| 3 | **NYM** Nym | Privacidad / VPN descentralizada | 19,5 M € | 1.2× | **70** | 23/17/12/8/6/4 | 1-2 % | KuCoin, Bybit, Gate, Bitfinex, MEXC (no está en Revolut; Kraken no aparece en los mercados de CoinGecko). | activo |
+| 4 | **SN75** Hippius (Bittensor SN75) | DePIN / nube y almacenamiento descentralizado (Bittensor) | 17,8 M € | 1.0× | **69** | 23/18/12/8/5/3 | 1-2 % | Kraken (SN75/USD), MEXC (SN75/USDT) y pool de la subnet; no en Revolut | activo |
+| 5 | **NAVX** NAVI Protocol | DeFi / lending en Sui | 6,9 M € | 1.2× | **69** | 27/16/8/10/4/4 | 1-2 % | Bybit, KuCoin, Gate, MEXC y DEX de Sui (Cetus, Bluefin); no en Revolut | activo |
+| 6 | **SN53** engy (Bittensor SN53; CoinGecko aun la llama EfficientFrontier) | IA / inferencia descentralizada (Bittensor) | 32,4 M € | 1.0× | **68** | 18/18/13/12/6/1 | 1-3 % | Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como "EfficientFrontier"; no en Revolut ni Kraken | activo |
+| 7 | **SN110** Green Compute (Bittensor SN110, ex Rich Kids of TAO) | DePIN / computo GPU con energia verde (Bittensor) | 17,9 M € | 1.0× | **68** | 23/17/12/11/4/1 | 1-2 % | Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como "Rich Kids of TAO"; no en Revolut ni Kraken | activo |
+| 8 | **MASK** Nullmask | Privacidad | 9,7 M € | 1.7× | **68** | 25/14/12/11/3/3 | 1-2 % | MEXC, LBank, KCEX y DEX de Solana (Meteora, Raydium, Orca); no en Revolut | activo |
+| 9 | **VANTA** Vanta Network (Bittensor SN8, ex Proprietary Trading Network) | Bittensor / IA aplicada al trading | 37,8 M € | 1.0× | **67** | 18/18/12/9/5/5 | 1-2 % | Kraken (SN8/USD) y pool de la subnet; no en Revolut | activo |
+| 10 | **SN14** Cacheon (Bittensor SN14, ex TAOHash) | IA / optimizacion de inferencia (Bittensor) | 9,3 M € | 1.0× | **65** | 27/17/12/5/3/1 | 1-2 % | Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como "TAOHash"; no en Revolut ni Kraken | activo |
 
 ## Fichas de las seleccionadas
 
@@ -45,6 +54,276 @@ Advertencia sobre las subnets de Bittensor: 6 de las 10 mejores son tokens alpha
 **Investigación:** Candidata fuerte dentro del lote: la unica con ingresos verificables, margen positivo, recompras del 67 % y oferta en contraccion, con 15 M$ de capitalizacion y equipo autofinanciado que dice no vender nunca. El negocio es pequeno y ciclico, pero es el billete de loteria mas 'honesto' de las subnets. Múltiplo realista: x5-x15 en una subida fuerte de TAO y las altcoins.
 
 **Dónde:** Pool de la subnet (taoswap, backprop.finance, tao.app) pagando con TAO; no en Revolut ni Kraken · Revolut: no.
+
+### SN23 · Trishool (Bittensor SN23; CoinGecko aun la llama Nuance) · score 70 · IA / seguridad y alineamiento de agentes (Bittensor)
+
+**Qué es:** Subnet 23 de Bittensor. CoinGecko la lista como Nuance (incentivos para discurso de calidad en X, lanzada en abr-2025 y sin commits desde oct-2025), pero taostats, backprop y taoswap identifican el slot como Trishool: una red de 'red-teaming' en la que los mineros intentan romper (jailbreaks, prompt injection, abuso de herramientas/MCP) un modelo guardian y cada ataque exitoso se usa para reentrenarlo. El resultado es HaloGuard (modelos abiertos de 0,8-4 B parametros), comercializado por Astroware; el alpha SN23 es la recompensa de los red-teamers y recibe parte de los ingresos de Astroware.
+
+**Tesis:** Trishool (SN23): red de red-teaming sobre Bittensor en la que los mineros atacan (jailbreaks, prompt injection, abuso de herramientas) un modelo guardián que se reentrena con cada ataque; su producto HaloGuard (modelos abiertos de 0,8-4 B parámetros, versión 2.0 el 5-nov-2026) es estado del arte en seguridad de prompts y lo usa Chutes (SN64) en producción, con programas de Google, Anthropic y OpenAI. 7 M€ de capitalización, 100 % circulante y el 33 % de la emisión diaria quemada. Riesgos: el token sigue etiquetado como Nuance (proyecto abandonado) en CoinGecko/CMC, equipo no público, ingresos aún sin cuantificar (la empresa comercial Astroware es una entidad separada) y pool de solo ~2,2 M$.
+
+**Acción:** Apuesta pequeña (300-500 €) en un tramo con señal L1/L2; segundo tramo solo cuando Astroware publique ingresos y reparto o recompra en alpha. Escalera de ventas desde x5.
+
+**Zona de compra:** Ha subido +55 % en 200 días: esperar señal L1 del panel (RSI ≤ 35 o a ≤ 8 % del mínimo de 90 días) y entrar con órdenes pequeñas por la liquidez.
+
+**Vivo:** Identidad on-chain de SN23 en taostats: 'Trishool', trishool.ai, github TrishoolAI/trishool-phase2 (402 commits, push 27-oct-2026; repo trishool-subnet creado 3-dic-2025). HaloGuard 1.0 en Hugging Face (jul-2026), SOTA en prompt-safety (90,9 F1 con 0,8 B); HaloGuard 2.0 para salida en streaming (5-nov-2026, 83,6 F1, bate a Qwen3Guard-Stream-4B con un quinto de parametros). Adopcion: Chutes (SN64) usa HaloGuard en Chutes Chat y Fictio (may-2026); Google for Startups Web3 (jun-2026, hasta 200.000 $ en creditos); Anthropic Claude Partner Network (jun-2026); OpenAI Trusted Access for Cyber (sep-2026). Astroware, empresa comercial del mismo equipo, lanzada en oct-2026 con HaloGuard EU (30 $/B tokens). Repo Nuance sin actividad desde el 31-oct-2025.
+
+**Negocio:** ~12.000 jailbreaks recogidos en 14 semanas de retos (jul-2026); HaloGuard desplegado en produccion en Chutes; 3 productos comerciales en Astroware (HaloGuard EU, Agent Auto Mode, Chaos Mode); programas de Google, Anthropic y OpenAI. Sin cifras de clientes de pago ni de ingresos. 1.949 delegaciones; volumen 24 h del alpha ~3.600 TAO (820.000 $, alto para su tamano); precio en TAO +33 % en 30 dias. Ingresos incipientes y no cuantificados: Astroware (lanzada oct-2026) 'comparte parte de los ingresos de sus productos con Trishool'; sin recompras ni quemas por ingresos documentadas. El 32,8 % de la emision diaria se quema (solo 8,2 % va a mineros), lo que reduce la dilucion.
+
+**Tokenomics:** Circulante 100 %. FDV ~8,1 M $. Sin vesting; emision ~7.200 alpha/dia repartida 18 % owner, 41 % validadores, 8,2 % mineros y 32,8 % quemada. 6,38 M alpha emitidos, 20,2 % quemados. Concentración: Mayor cuenta 600.000 alpha (17 %); top-10 61 %; Nakamoto 7. Pool fino: 9.630 TAO (~2,2 M$); mover el precio un 5 % cuesta ~238 TAO.
+
+**Comunidad:** 1.949 delegaciones; @trishoolai; cobertura intensa en TAO Daily (10+ articulos jun-nov-2026); 137 en lista de CoinGecko (bajo nombre Nuance). Comunidad pequena pero con reconocimiento de laboratorios (OpenAI, Anthropic, Google). Tendencia: creciendo.
+
+**Por qué cayó:** ATH 1,99 $ el 10-nov-2025, justo antes del relevo de Nuance a Trishool; minimo 0,008 $ el 15-abr-2026 en el desplome general de alphas; desde entonces se ha recuperado x190 en alpha hasta 1,59 $ (-20 % del ATH, +55 % en 200 dias): el mercado ya esta reconociendo a Trishool.
+
+**Bull case:** Si Astroware factura a empresas (EU AI Act) y reparte al alpha, y HaloGuard se vuelve el guardian estandar de agentes en Bittensor y fuera, en un ciclo alcista de TAO SN23 podria valer 80-150 M$ (x10-x20). El x100 (800 M$) exigiria convertirse en una de las mayores subnets.
+
+**Catalizadores:** Primeros ingresos publicados de Astroware y reparto/recompra en alpha. · Adopcion de HaloGuard por mas subnets y empresas (EU AI Act como palanca). · Correccion del nombre en CoinGecko/CMC (hoy 'Nuance') que haria visible el proyecto. · Base minuscula: 33.000 TAO de capitalizacion.
+
+**Riesgos:** El token figura en CoinGecko como Nuance, un proyecto abandonado: un comprador desinformado no sabe que compra. · Equipo no nombrado publicamente; empresa comercial separada (Astroware) que podria capturar el valor en equity en vez de en el alpha. · Sin ingresos cuantificados; liquidez de 2,2 M$. · Los guard models son un mercado muy competido (Meta Llama Guard, Qwen3Guard, OpenAI).
+
+**Investigación:** Candidata fuerte en pequeno: la mas barata del lote (8 M$), con producto SOTA abierto, adopcion real, sellos de OpenAI/Anthropic/Google y emision mayormente quemada; faltan ingresos y el token esta mal etiquetado en los agregadores (Nuance). Billete de loteria razonable, asumiendo liquidez fina y equipo poco publico. Múltiplo realista: x5-x15 en una subida fuerte de TAO/IA.
+
+**Dónde:** Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura aún como "Nuance"; no en Revolut ni Kraken · Revolut: no.
+
+### NYM · Nym · score 70 · Privacidad / VPN descentralizada
+
+**Qué es:** Mixnet de privacidad (Nym Technologies, Suiza; fundada por Harry Halpin, respaldada por a16z, Polychain, Binance Labs) y su producto NymVPN (lanzado 2025) con modo "pago por uso" anónimo en NYM. Los nodos de mezcla (mixnodes/gateways) hacen staking de NYM y ganan recompensas; el token también paga el acceso a la red.
+
+**Tesis:** Mixnet de privacidad con producto de consumo real: NymVPN (iOS/Android/escritorio) con releases cada 2-4 semanas en 2026 y pago por uso anónimo en NYM, equipo suizo público (Harry Halpin) respaldado por a16z, Polychain y Binance Labs, 84 % del suministro en circulación 19,5 M€ de capitalización tras marcar mínimo histórico en agosto de 2026 (hoy cotiza ~75 % por encima de ese mínimo y aún -99 % desde el pico de 2022, ~300-400 M$). Pega principal: el token es opcional para usar la VPN y la empresa no publica suscriptores ni ingresos, así que una subida fuerte dependería de la narrativa de privacidad (como ZEC a finales de 2025) más que del flujo de caja; la recompra de 1 M$ de 2025 fue puntual.
+
+**Acción:** Primer tramo con señal L1 del panel (hoy RSI ~43 y +70 % sobre el mínimo de 90 días: esperar un retroceso) y segundo tramo con señal L2; se compra en KuCoin o Bybit; vigilar la integración de la wallet dentro de la app (roadmap 2026) y cualquier nueva recompra financiada con ingresos. Escalera de ventas desde x5.
+
+**Zona de compra:** Zona de compra: precio por debajo del objetivo del panel (≈ -12 %) o RSI14 ≤ 35; volumen diario de solo ~1 % de la capitalización, así que entrar con órdenes limitadas.
+
+**Vivo:** Muy vivo: releases de NymVPN cada 2-4 semanas durante todo 2026 (v2026.3, .4, .6, .7, .8 con split tunneling y adblock, v2026.11, v2026.12 el 17-sep-2026 con nuevos precios, roadmap público el 26-sep-2026, v2026.14 el 26-oct-2026 con seguridad Android). Roadmap 2026: fusionar la wallet NYM dentro de la app VPN (nodos, staking y pago por uso desde la app). Recompra de 1M$ de NYM antes del lanzamiento de la VPN (2025). Programa de referidos pagado en NYM.
+
+**Negocio:** Producto en App Store/Play/Linux con actualizaciones constantes; opción pay-as-you-go con NYM (TechRadar). Sin cifras públicas de suscriptores ni ingresos en 2026. Una nota de CMC cita +12% de precio por demanda de VPN y lanzamiento iOS (no verificado en Decrypt). ~800-1.000 nodos en la red (dato aproximado, no verificado en 2026). Ingresos por suscripciones de VPN (fiat y cripto), no publicados; presumiblemente bajos (<5M$/año). El pago por uso en NYM es la única demanda orgánica del token y aún es marginal. La empresa, no el token, recibe la mayoría del valor; la recompra de 1M$ fue puntual.
+
+**Tokenomics:** Circulante 84 %. FDV ~26,8 M $. 1B máximo, 845M circulantes (84%). Los ~155M restantes son la reserva de "mixmining" (recompensas a nodos liberadas a lo largo de años) y restos de vesting de equipo/fundación; los inversores de 2021 (a16z, Polychain, Binance Labs, Huobi, Eden Block) ya han vestido. Inflación efectiva ~3-5%/año por recompensas a nodos, que en gran parte se venden. Concentración: Alta en manos de la empresa/fundación y de los VCs de 2021-22 (ronda de 300M$ de valoración con a16z y Polychain). Una gran parte del circulante está en staking delegado a mixnodes.
+
+**Comunidad:** Mediana: ~150K seguidores en X, Telegram/Discord activos, base de operadores de nodos técnicos Tendencia: estable.
+
+**Por qué cayó:** ATH 5,33 € (abr-2022; CoinGecko lo marca como -100%) con muy poco circulante tras el listado de ene-2022; cap pico estimada ~300-400M$. Cayó por unlocks de VCs a precios de 2021, bear 2022, tres años hasta tener producto y un mercado de VPN comoditizado; mínimo histórico el 26-ago-2026 (0,0129 €), -38% en 1 año.
+
+**Bull case:** Si NymVPN alcanza cientos de miles de suscriptores y una parte paga en NYM, el token tiene por primera vez demanda orgánica; volver al ATH (~350M$) es x15 y un x100 (2,3B$) sería ~6x el pico, es decir convertirse en un competidor real de Proton/Mullvad con token. Improbable pero no absurdo: es el único del lote con producto de consumo en crecimiento.
+
+**Catalizadores:** Integración de la wallet NYM en NymVPN (2026): nodos y pay-as-you-go desde la app · Narrativa de privacidad (ZEC 2025) con cap de solo 19,5M€ · Nuevos precios y roadmap votado por usuarios (sep-2026) · Posible nueva recompra financiada por ingresos de la VPN · Kraken y Bybit como liquidez de entrada
+
+**Riesgos:** El precio marcó mínimo histórico en ago-2026 mientras el equipo entregaba cada mes: el mercado no valora el token · La VPN se puede pagar con tarjeta: el token es opcional para el usuario · Sin cifras de suscriptores ni ingresos; buyback de 1M$ fue puntual · Volumen diario ~1% de la cap: liquidez fina · Presión regulatoria sobre VPNs (verificación de edad en Utah, sep-2026) y gran competencia (Mullvad, Proton)
+
+**Investigación:** Candidata posible/fuerte dentro de este lote: equipo serio y financiado, releases quincenales, 84% circulante, mínimos históricos recientes y narrativa de privacidad. Apuesta pequeña con expectativa realista x5-x20, no x100. Múltiplo realista: x5-x20 en una subida fuerte de altcoins.
+
+**Dónde:** KuCoin, Bybit, Gate, Bitfinex, MEXC (no está en Revolut; Kraken no aparece en los mercados de CoinGecko). · Revolut: no.
+
+### SN75 · Hippius (Bittensor SN75) · score 69 · DePIN / nube y almacenamiento descentralizado (Bittensor)
+
+**Qué es:** Nube descentralizada construida por The Nerve Lab sobre Bittensor (subnet 75, registrada en mar-2025): almacenamiento S3 compatible sin tarifas de egreso (6 $/TB/mes), Hippius Drive (consumidor), CDN, registro de modelos (Hippius Hub, alternativa a Hugging Face) y computo confidencial AMD SEV-SNP (VMs, Postgres, Kubernetes). Tiene su propia cadena Substrate; el token hAlpha es convertible 1:1 con el alpha SN75, que se usa para pagar, quemar y recompensar a los mineros de almacenamiento.
+
+**Tesis:** Nube descentralizada sobre Bittensor (The Nerve Lab): almacenamiento compatible S3 sin tarifas de egreso, CDN, registro de modelos (alternativa a Hugging Face) y cómputo confidencial, con lanzamientos semanales (pushes el 6-nov-2026), clientes dentro de Bittensor (Vidaio, Ditto) y ya listada en Kraken y MEXC; 15 M€ de capitalización, 100 % circulante, 13 % del alpha quemado. Riesgos: ingresos minúsculos (<0,2 M$/año estimados) frente a la capitalización, el almacenamiento es un negocio de margen cero (Storj en quiebra), dispersión de producto con equipo pequeño y las quemas mezclan reciclaje de emisión con ingresos.
+
+**Acción:** Apuesta pequeña (300-500 €) vía Kraken en un tramo con señal L1; sumar solo si publican ingresos reales y quemas ligadas a clientes. Escalera de ventas desde x5.
+
+**Zona de compra:** -61 % desde el máximo de mayo de 2026; comprar con señal L1/L2 del panel.
+
+**Vivo:** Org thenervelab en GitHub con pushes el 6-nov-2026 (hippius-desktop 3.113 commits, hippius-doc, hippius-hub 4-nov, hippius-drive-sdk 2-nov, hippius-s3 28-oct, hippius-cvm 26-oct, arion 24-oct). Lanzamientos semanales documentados: computo confidencial (19-oct-2026), CDN de pago por uso (26/28-oct), firewall CDN (29-oct), logins de equipo (2-nov), plugin WordPress (3-nov), comentarios cifrados (5-nov). Primer alpha listado en un CEX (MEXC, oct-2025) y par SN75/USD en Kraken (activo el 6-nov-2026). Emision 2,15 % de la red (~78 TAO/dia), 33.700 TAO en pool.
+
+**Negocio:** Mayo-2026: ~140 TB usados (desde ~67 TB un mes antes), ~800 M ficheros, >100 nodos activos en 3 continentes (~103 en Europa), 100 TB de egreso servidos; creditos comprados pasan de ~47.000 a ~55.000 en dias (unidades no aclaradas). Clientes publicados: Vidaio (SN85, -50 % de coste S3), Ditto (SN118, memoria de agentes, migrado desde Backblaze con factura casi nula), Minos, Zapme Social, Score Studio. 4.519 delegaciones; volumen 24 h del alpha ~1.900 TAO. Ingresos pequenos: 'hasta 50.000 $' de almacenamiento reportados en oct-2025; a 3-6 $/TB/mes, 140 TB equivalen a <1.000 $/mes de almacenamiento (el computo confidencial es mas reciente). Si hay vinculo con el token: los creditos se bloquean y parte va a quemas/recompras; 784.000 alpha quemados (13 % de lo emitido; >5 M$ segun TAO Daily, aunque buena parte procede de reciclar emision del owner, no de clientes). Estimacion anual de ingresos reales: <0,2 M$.
+
+**Tokenomics:** Circulante 100 %. FDV ~19,7 M $. Sin vesting; emision continua ~7.200 alpha/dia (18/41/41). 5,99 M alpha emitidos, 13,1 % quemados. hAlpha convertible 1:1 (puente propio). Concentración: Top-10 delegaciones 49 %; mayor cuenta 329.000 alpha (11,6 %); Nakamoto 11 (de los mas repartidos del lote).
+
+**Comunidad:** 4.519 delegaciones; @hippius_cloud; cobertura constante en TAO Daily (10+ articulos en oct-nov-2026); 736 en lista de CoinGecko; apps movil/escritorio con usuarios no cuantificados. Tendencia: estable.
+
+**Por qué cayó:** ATH 7,76 $ el 14-may-2026 (CMC; CoinGecko da 9,85 $ el 27-mar-2026 con datos dudosos) en plena euforia por el crecimiento de TB y la expectativa de Kraken; -61 % desde entonces por la caida general de los alphas (-42 % en 200 dias), la emision continua y la ausencia de ingresos que justifiquen la valoracion. En TAO el precio sube +6,6 % en 30 dias.
+
+**Bull case:** Si Hippius captura una fraccion del almacenamiento de modelos/datasets de IA (miles de TB) y el computo confidencial despega, con quemas ligadas a clientes, en un ciclo alcista de TAO podria valer 100-200 M$ (x5-x10). Un x100 (2.000 M$) supera a cualquier subnet actual.
+
+**Catalizadores:** Migracion de clientes desde Storj/Backblaze y adopcion por otras subnets (Vidaio, Ditto). · Computo confidencial y Hippius Hub (alternativa a Hugging Face) como nuevas lineas de ingreso. · Listados ya en Kraken/MEXC: facilitan un re-rating si vuelve la narrativa. · Publicacion de ingresos reales y quemas ligadas a clientes.
+
+**Riesgos:** Ingresos minusculos frente a 20 M$ de capitalizacion; el almacenamiento es un negocio de margen cero (Filecoin, Storj en quiebra). · Las quemas 'de 5 M$' mezclan reciclaje de emision con ingresos; no hay dashboard de P&L. · Dispersion de producto (chat, movil, grabador de pantalla, WordPress...) con equipo pequeno. · Datos de ATH/ATL de CoinGecko incoherentes (ATH y ATL con un dia de diferencia en mar-2026): historial de precio poco fiable.
+
+**Investigación:** Posible: proyecto claramente vivo, con producto amplio, clientes reales y listados en Kraken/MEXC, pero los ingresos son minusculos y el almacenamiento es un negocio de margen cero. Candidata secundaria (apuesta a Bittensor con producto), no x100. Múltiplo realista: x3-x8 en una subida fuerte de TAO/DePIN.
+
+**Dónde:** Kraken (SN75/USD), MEXC (SN75/USDT) y pool de la subnet; no en Revolut · Revolut: no.
+
+### NAVX · NAVI Protocol · score 69 · DeFi / lending en Sui
+
+**Qué es:** Mayor protocolo de prestamos (lending) de Sui (2023): mercados de SUI, USDC, USDT, wETH, wBTC/xBTC, agregador Astros, y desde el 17-ago-2026 'NAVI Prime', vaults curados con mercados aislados para capital institucional (ruta de USDC desde Ethereum via Lagoon, ~9 % APR). NAVX es el token de gobernanza/incentivos.
+
+**Tesis:** El "Aave de Sui": mayor protocolo de préstamos de Sui con 126 M$ de TVL, 7,85 M$ de ingresos de protocolo en 12 meses y 7 M€ de capitalización (precio/ventas ~1x), repos actualizados el 4-nov-2026 y nuevos vaults institucionales (NAVI Prime, agosto 2026). Lo que la frena: el token no recibe nada de esos ingresos (sin recompra ni reparto, "dudas sobre el control del equipo"), el negocio se está encogiendo (255 k$ de ingresos en 30 días, un tercio del ritmo anual, TVL -10 % en una semana), quedan ~18 % de desbloqueos de insiders hasta febrero de 2027 y solo cotiza en exchanges de segundo nivel.
+
+**Acción:** Tramo pequeño con señal L2; el catalizador que cambia la tesis es un fee switch o una recompra con ingresos: si se anuncia, completar la posición. Vender la mitad en x5.
+
+**Zona de compra:** Mínimo histórico en junio de 2026 y -27 % en 30 días: esperar RSI ≤ 35 o precio bajo el objetivo del panel.
+
+**Vivo:** Muy vivo: docs y naviprotocol-monorepo actualizados el 4-nov-2026, navi-smart-contracts el 27-oct, adaptador de DefiLlama el 30-sep; recap del 1T-2026 (se declara #4 mundial en ingresos de lending a 7 dias, por encima de Kamino y Jupiter Lend; 70,8 % de los activos BTC de Sui en NAVI); lanzamiento de NAVI Prime (agosto) y de 'NAVI Curator' (nuevo en DeFiLlama, 17 M$).
+
+**Negocio:** TVL de NAVI Lending 126 M$ + NAVI Curator 17 M$ (DeFiLlama, 6-nov-2026), pero -10,6 % en 7 dias. Comisiones de 14,7 M$ e ingresos de protocolo de 7,85 M$ en 12 meses (39 M$ y 16,6 M$ acumulados). Ojo con la tendencia: ingresos de 30 dias de 255 k$ (ritmo anual ~3 M$), es decir, el negocio actual es un tercio del de hace un ano. Ingresos de protocolo 7,85 M$ en 12 meses, ~255 k$ en los ultimos 30 dias (DeFiLlama). No hay recompra ni reparto a NAVX confirmados (Tokenomist: 'buyback --'); el token se usa para incentivos y staking con 'boost' de recompensas. El valor se queda en el equipo/tesoreria, de ahi las 'dudas sobre control del equipo' que recogen los agregadores.
+
+**Tokenomics:** Circulante 82 %. FDV ~9,8 M $. 816 M en circulacion de 1.000 M; el calendario (feb-2024 a feb-2027) deja ~18 % por desbloquear, sobre todo de insiders (20 %) e inversores privados (16 %) segun tokenomics.com. Las fuentes discrepan (otra da el 100 % circulante). FDV 1,23x cap. Concentración: Equipo/insiders y fondos (OKX Ventures, Hashed, Mysten co-fundadores como inversores angel) con parte relevante; sin dato verificado de top holders. El equipo controla los parametros y los ingresos.
+
+**Comunidad:** Media dentro de Sui (campanas de puntos, 'Sui Overflow'), inexistente fuera Tendencia: estable.
+
+**Por qué cayó:** ATH de 0,39 EUR el 28-mar-2024 (cap ~100 M$ estimada) con el hype del ecosistema Sui y el lanzamiento del token. Despues: unlocks de insiders, el hackeo de Cetus (mayo de 2025) que enfrio Sui DeFi, competencia de Suilend/Scallop, un token sin captura de los ingresos y una base de usuarios mercenaria. -68 % a un ano, -98 % desde ATH; minimo historico el 6-jun-2026 y -27 % en 30 dias.
+
+**Bull case:** Es el token con mejor ratio capitalizacion/ingresos del lote: 8,0 M$ de cap para 7,85 M$ de ingresos en 12 meses y 143 M$ de TVL. Si el equipo activara un reparto o recompra y Sui volviera a estar de moda, x10-x15 (80-120 M$, su ATH) es plausible. Un x100 (800 M$) exigiria ser el Kamino/Aave de un Sui en mania: no imposible en 2027, pero necesita que el token capture valor, algo que el equipo no ha hecho en dos anos.
+
+**Catalizadores:** Activacion de 'fee switch' o recompra con ingresos (con 8,0 M$ de cap, cualquier reparto lo dispara) · Flujos institucionales a NAVI Prime (USDC desde Ethereum via Lagoon) · Recuperacion de Sui en el proximo ciclo; listado en Binance/Coinbase/Upbit · Multiplo de saldo: cap 8,0 M$ frente a 7,85 M$ de ingresos (P/S ~1x)
+
+**Riesgos:** El token no recibe nada de los 7,85 M$ de ingresos: el negocio puede ir bien y NAVX seguir cayendo (como hasta ahora) · Ingresos en caida: 255 k$ en 30 dias frente a 7,85 M$ en 12 meses; TVL -10 % en una semana · Dependencia total del ecosistema Sui (y de Mysten) y competencia de Suilend · ~18 % de supply de insiders por desbloquear hasta febrero de 2027 · Solo exchanges de segundo nivel y 5 % de volumen/cap; sin Binance ni Coinbase
+
+**Investigación:** Posible / dudosa. NAVI es la mejor del lote: protocolo vivo, lider de lending en Sui, ingresos reales y una capitalizacion de saldo (P/S ~1x). Lo que la frena es que el token no participa de esos ingresos, que el negocio se esta encogiendo (ingresos mensuales a un tercio del ritmo anual, TVL cayendo) y que solo cotiza en exchanges de segundo nivel. Candidata a 'reserva' si el equipo anuncia recompras o si Sui se reactiva; sin eso, es un x2-x4. Múltiplo realista: x5-x15 si activan captura de valor; x2-x4 si no.
+
+**Dónde:** Bybit, KuCoin, Gate, MEXC y DEX de Sui (Cetus, Bluefin); no en Revolut · Revolut: no.
+
+### SN53 · engy (Bittensor SN53; CoinGecko aun la llama EfficientFrontier) · score 68 · IA / inferencia descentralizada (Bittensor)
+
+**Qué es:** Subnet 53 de Bittensor. Nacio en nov-2024 como EfficientFrontier (SignalPlus, estrategias de trading con cuentas CEX reales) y desde mediados de 2026 es Engy, de Hanlin AI: un proveedor de inferencia verificada de modelos abiertos (DeepSeek, Qwen, GLM, Kimi K3, MiniMax) servidos por mineros GPU y por el propio cluster de Engy, con API compatible OpenAI/Anthropic y precios muy bajos. El alpha SN53 recibe recompras y quemas ligadas al uso.
+
+**Tesis:** Engy (SN53): inferencia verificada y muy barata de modelos abiertos (DeepSeek, Qwen, GLM, Kimi K3) servida por mineros GPU con API compatible OpenAI/Anthropic; >50.000 M tokens procesados al día en octubre de 2026 (x5 en un mes), 49 M peticiones en 30 días, recompra y quema por uso (25.287 alpha, ~214 k$) y el alpha más líquido del cribado (~12.000 TAO/día); 28 M€ de capitalización. Riesgos: centralización (la mitad del tráfico lo sirve el clúster del propio operador y el validador maestro es suyo), cambio de operador y de negocio sin anuncio claro (CoinGecko aún muestra el proyecto antiguo), márgenes de inferencia mínimos en guerra de precios con Chutes, y ya ha subido +427 % en 200 días antes de caer -49 % desde el máximo.
+
+**Acción:** Tramo pequeño solo con señal L2 (ya ha corrido mucho); vender un tercio en x3 y otro en x5. Es la apuesta a que Bittensor premie la subnet de inferencia con más crecimiento.
+
+**Zona de compra:** Comprar solo con señal L2/L3 del panel (RSI ≤ 30); no perseguir subidas.
+
+**Vivo:** Taostats, backprop y taoswap identifican SN53 como 'engy' (github hanlinai/engy, contacto ning@engy.ai); el repo de SignalPlus que enlaza CoinGecko (EfficientFrontier-SignalPlus/EfficientFrontier) devuelve 404. hanlinai/engy: 129 commits, ultimo push 30-oct-2026 (tee_miner, rotacion de gateways). Hitos: Kimi K3 (2,8 B parametros) servido en 80 RTX 5090 (jul-2026); >150.000 $ en depositos de usuarios (11-ago-2026); recompra y quema por uso (ago-2026); >50.000 M tokens procesados en un dia (15-oct-2026), x5 en un mes; 49,3 M peticiones en 30 dias; 25.287 alpha quemados (~214.000 $) a 25-oct-2026. Emision 3,78 % de la red (~136 TAO/dia), 36.400 TAO en pool.
+
+**Negocio:** ~50.000 M tokens/dia (15-oct-2026) frente a ~10.000 M un mes antes; 49,3 M peticiones en 30 dias; 37 mineros sirviendo 18,2 M peticiones en el epoch 19; clientes citados: Teresa (terminal de trading en Robinhood Chain), Pareton (SN10), integraciones con Claude Code/Cursor. Volumen 24 h del alpha ~12.000 TAO (2,7 M$, el mas liquido del lote). Ingresos no publicados; estimacion propia: a 0,03-0,12 $/M tokens y 50.000 M tokens/dia, del orden de 1-3 M$/ano en bruto si la carga se mantiene (muy sensible al mix de modelos). Vinculo con el token real: programa de buyback-and-burn por uso con 25.287 alpha quemados (~214.000 $) hasta el 25-oct-2026.
+
+**Tokenomics:** Circulante 100 %. FDV ~38,5 M $. Sin vesting; emision continua ~7.200 alpha/dia (18 % owner, 41 % validadores, 41 % mineros). 6,42 M alpha emitidos, 8,6 % quemados. Concentración: Top-10 delegaciones 54 %; mayor cuenta 631.000 alpha (15 %); Nakamoto 7. El owner (Hanlin AI) recibe el 18 % de la emision (~38 TAO/dia).
+
+**Comunidad:** 3.587 delegaciones; Telegram bittensor_subnet53; mucha cobertura en TAO Daily/tao.media ('la subnet de los mil millones'); 351 en lista de CoinGecko. Seguidores en X no verificables. Tendencia: creciendo.
+
+**Por qué cayó:** El ATH (12,86 $ el 23-sep-2026 en CoinGecko; 11,86 $ el 12-oct en CMC) coincidio con la euforia por los 50.000 M tokens/dia; desde entonces -49 % por toma de beneficios, caida general de los alphas en octubre (-21 % en TAO en 30 dias) y la critica de centralizacion. Antes de Engy, el alpha de EfficientFrontier estaba casi muerto (minimo 0,0085 $ en abr-2026).
+
+**Bull case:** Si Engy se consolida como el proveedor mas barato de inferencia verificada (cientos de miles de millones de tokens/dia), las quemas por uso escalan y llega un listado CEX, en un ciclo alcista de TAO podria valer 300-500 M$ (x8-x13). El x100 (3.800 M$) exigiria ser la mayor subnet de un Bittensor mucho mas grande.
+
+**Catalizadores:** Crecimiento de tokens/dia y depositos; nuevos modelos frontier (GLM-5.3, Kimi K3). · Recompras y quemas crecientes con el uso. · Listado en Kraken u otro CEX (no esta aun). · Clientes enterprise con ZDR/SLA via la lista blanca.
+
+**Riesgos:** Centralizacion: la mitad del trafico lo sirve el cluster propio de Engy, el validador maestro es de Engy y hubo criticas por la lista blanca de mineros (ago-2026). · Cambio de operador y de negocio de la subnet (SignalPlus -> Hanlin AI) sin anuncio claro; CoinGecko sigue mostrando el proyecto antiguo. · Margenes de inferencia minusculos y guerra de precios con Chutes/SN64 y proveedores centralizados. · Ya ha subido +119 % en 1 ano y +427 % en 200 dias; ATH en sep/oct-2026, -49 % desde entonces: parte del hype ya esta pagado. · Equipo poco publico (empresa Hanlin AI sin perfil verificable).
+
+**Investigación:** Posible: es la subnet con mas crecimiento de uso y la unica del lote con quemas por ingresos cuantificadas, pero con 38 M$ de capitalizacion, un operador poco transparente y problemas de centralizacion. Billete pequeno solo si se acepta el riesgo de que el 'hype de los mil millones' se desinfle. Múltiplo realista: x3-x10 en una subida fuerte de TAO/IA.
+
+**Dónde:** Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como "EfficientFrontier"; no en Revolut ni Kraken · Revolut: no.
+
+### SN110 · Green Compute (Bittensor SN110, ex Rich Kids of TAO) · score 68 · DePIN / computo GPU con energia verde (Bittensor)
+
+**Qué es:** Subnet 110 de Bittensor (registrada en may-2025 como 'Rich Kids of TAO', repo abandonado en oct-2025) relanzada en 2026 como Green Compute: mercado de inferencia y alquiler de GPU (RTX 4090 a 0,40 $/h, 5090 a 0,70 $/h, API compatible OpenAI) en el que solo cobran mineros que demuestran usar energia renovable (biogas de granjas, solar, hidro). El operador convierte el 10 % de los ingresos en fiat en TAO para recomprar y bloquear alpha SN110.
+
+**Tesis:** Green Compute (SN110): alquiler de GPU e inferencia (RTX 4090/5090 a 0,40-0,70 $/h) en la que solo cobran mineros con energía renovable verificada; detrás está Easy Compute (Josh Riddett, 9 años vendiendo hardware GPU en Reino Unido) con 240 RTX 5090 (~3 M$) y un segundo centro de datos de 4 M$; >82.000 $ de ingresos rentables en el primer mes y el 10 % de los ingresos a recompra y bloqueo de alpha; 15 M€ de capitalización. Riesgos: es el negocio de una sola empresa con una capa de incentivos encima, pool de solo 2,8 M$, ingresos no actualizados desde agosto, recompras pequeñas (8.200 $ en junio) y precio a -14 % del máximo tras +348 % en 200 días: la peor asimetría del grupo.
+
+**Acción:** No comprar ahora: esperar un retroceso del 40-50 % (señal L2/L3 del panel) y entrar con un tramo pequeño; vender un tercio en x3 y otro en x5.
+
+**Zona de compra:** Solo con señal L2 o L3; a -14 % del máximo histórico (21-oct-2026) no hay margen de seguridad.
+
+**Vivo:** Testnet feb-2026, mainnet 22-abr-2026 (tuit del proyecto); roadmap publicado (jul-2026); 240 RTX 5090 (~3 M$ de hardware) en granjas britanicas (ago-2026); expansion de 4 M$ a un segundo centro de datos en UK para finales de oct-2026 (30-sep-2026); comparativa practica con Lium (7-oct-2026) con 8/8 alquileres servidos a 0,40 $/h. Repos greencompute110 (greencompute, -api, -node) con pushes 30-oct y 2-nov-2026 (facturacion, MCP, alertas). Taostats: nombre 'Green Compute', emision 3,6 % (~130 TAO/dia), precio +55 % en TAO en 30 dias, 12.700 TAO en pool.
+
+**Negocio:** >82.000 $ de ingresos rentables en el primer mes (jul/ago-2026); primeros clientes enterprise de inferencia (abr-2026); partnership de computo con Vocence SN78 (jun-2026) y Orion; recompra publica de 8.200 $ (37 TAO) en junio. Sin cifras de clientes ni de ingresos posteriores a agosto. 2.294 delegaciones; volumen 24 h del alpha ~1.800 TAO. Ingresos reales pero de un solo operador: ~82.000 $ en el primer mes; estimacion de 0,5-1 M$/ano si se mantiene. Vinculo con el token parcial: 10 % de los ingresos a recompra y bloqueo de alpha (wallet publica 5D2U...hdTH) y descuentos por pagar en alpha.
+
+**Tokenomics:** Circulante 100 %. FDV ~20,6 M $. Sin vesting; emision ~7.200 alpha/dia (18/41/41). 3,98 M alpha emitidos, 16,4 % quemados. Concentración: Top-10 delegaciones 51 %; mayor cuenta 240.000 alpha (9,6 %); Nakamoto 10. Pool fino: 12.700 TAO (~2,8 M$), mover el precio un 5 % cuesta ~314 TAO.
+
+**Comunidad:** 2.294 delegaciones; @green_compute_; apoyo vocal de influencers de Bittensor (Tyler Durdeth); 137 en lista de CoinGecko. Comunidad pequena pero en crecimiento con el precio. Tendencia: creciendo.
+
+**Por qué cayó:** No ha caido: el ATH es del 21-oct-2026 (7,23 $) y cotiza a -14 %; el minimo fue 0,006 $ en abr-2026 (slot casi muerto antes del relanzamiento). La volatilidad reciente es la de un token que acaba de multiplicarse.
+
+**Bull case:** Si Green Compute escala a varios miles de GPUs en granjas y contratos enterprise de millones, con el 10 % recomprando alpha, podria valer 100-200 M$ (x5-x10) en un ciclo alcista de TAO. El x100 (2.000 M$) no es realista para un operador de computo mediano.
+
+**Catalizadores:** Segundo centro de datos (4 M$) y mas granjas/mineros verificados fuera de UK. · Recompras crecientes publicadas con hash de transaccion. · Contratos enterprise de 6-12 meses y partnerships con otras subnets. · Momento de precio: mayor sentimiento ('Greed' 70,7 en taostats) del lote.
+
+**Riesgos:** Es el negocio de una sola empresa (Easy Compute) con capa de incentivos encima; la descentralizacion depende de mineros externos que aun no existen en numero. · Pool de solo 2,8 M$: entrar y salir con 1.000 EUR es facil, con cientos de miles no. · Ya ha subido x4-x5 en 200 dias y esta cerca de maximos: peor asimetria del lote. · Ingresos no actualizados desde agosto; recompras del 10 % son pequenas (8.200 $ en junio). · Pasado del slot (Rich Kids of TAO) poco claro.
+
+**Investigación:** Posible pero mal momento: negocio real y rentable desde el primer mes, pero es la empresa de un solo operador, con liquidez de 2,8 M$ y el precio pegado al maximo tras +348 % en 200 dias. Vigilar y esperar un retroceso del 40-50 %; no es x100. Múltiplo realista: x2-x5 en una subida fuerte de TAO (ya ha hecho x5 en 2026).
+
+**Dónde:** Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como "Rich Kids of TAO"; no en Revolut ni Kraken · Revolut: no.
+
+### MASK · Nullmask · score 68 · Privacidad
+
+**Qué es:** Protocolo de privacidad tipo 'VPN para transacciones': un pool blindado (zero-knowledge) donde el usuario deposita ETH/USDT/SOL etc., transacciona o intercambia en privado y retira a cualquier dirección, con cribado AML de los depósitos. Opera en Ethereum, Base, BNB Chain, Robinhood Chain, Avalanche y Solana. El token MASK (SPL en Solana, lanzado vía la launchpad StonkFun) recibe recompensas en ZEC distribuidas a los holders y recompras/quemas financiadas con el ZEC que gana la tesorería; no es necesario para usar el pool.
+
+**Tesis:** Pool de privacidad multicadena ("VPN para transacciones") en Ethereum, Base, BNB, Robinhood Chain, Avalanche y Solana, con cribado AML, comisiones del 0,5 % al entrar y 0,5 % al salir (~1 M$/mes brutos en octubre de 2026, >50 M$ de volumen privado), recompensas en ZEC a los holders y recompras con el ZEC de la tesorería; fundador con historial en Zcash (Tomas Krnak) y 8 M€ de capitalización. Riesgos: dos meses de vida con máximo el 16-oct-2026 y -67 % desde entonces, token lanzado en una launchpad de Solana con circulante inconsistente entre fuentes, sin auditoría pública, TVL de solo 0,2 M$ (el dinero es de paso), parte de las "comisiones" de DeFiLlama son recompensas ZEC a la wallet del equipo, 10 % del suministro en airdrop de puntos hasta enero de 2027 y riesgo regulatorio de los mixers.
+
+**Acción:** Billete de lotería pequeño (≤ 300 €) con señal L2; vigilar las comisiones mensuales en DeFiLlama y salir si bajan de 300 k$/mes dos meses seguidos. Escalera de ventas desde x3.
+
+**Zona de compra:** Tras el desplome post-lanzamiento, esperar a que el precio se estabilice (RSI ≤ 30 y vuelta sobre el mínimo de 30 días) antes de entrar.
+
+**Vivo:** Proyecto de 2 meses en despliegue acelerado: pool en Solana desde el 23-sep-2026, Ethereum 1-oct, Base 7-oct, BNB Chain 12-oct, Robinhood Chain 14-oct y Avalanche 30-oct-2026 (fechas de inicio del adaptador de DeFiLlama). Nota de prensa del 19-oct-2026: >50 M$ de volumen privado y arranque de 'Points Season One' (90 días, hasta el 17-ene-2027). DeFiLlama registra comisiones diarias todos los días hasta el 6-nov-2026 (34 K$ el último día). Los repos del producto no son públicos (solo forks/utilidades de terceros en GitHub).
+
+**Negocio:** >50 M$ de volumen privado acumulado (19-oct-2026, dato del equipo). Comisiones según DeFiLlama: 34 K$/24 h, 224 K$/7 d, 1,01 M$/30 d, 1,57 M$ desde el inicio (incluye las recompensas en ZEC que recibe la wallet del equipo por holdear MASK, no solo comisiones del pool). TVL del pool muy pequeña: 214 K$ (DeFiLlama, 6-nov-2026; otras capturas 58-107 K$), es decir, el dinero entra y sale, no se queda. Volumen del token ~1,6 M$/día sobre 11,5 M$ de cap (LBank, MEXC, KCEX y DEX de Solana). Comisiones del 0,5 % al depositar y 0,5 % al retirar en todas las cadenas, más tasas de verificación AML en Solana: ritmo actual ~1 M$/mes brutos (~12 M$ anualizados si se mantuviera, pero en tendencia descendente tras el pico de octubre y con una parte que son recompensas ZEC de StonkFun, no uso). Llegan al token: el ZEC de la tesorería (~0,5 M$) se usa para recomprar MASK y ya se ha quemado un 1,2-2,2 % del suministro (cifras del equipo/iq.wiki, no verificadas on-chain en esta sesión); los holders reciben ZEC vía StonkFun (~1-1,5 M$ repartidos).
+
+**Tokenomics:** Circulante 58 %. FDV ~19,1 M $. Suministro máximo 1.000 M; ~962 M totales tras quemas y ~577 M circulantes según CoinGecko (otras fuentes dan ~999 M circulantes: la cifra es inconsistente). 100 M MASK (10 %) se reparten en Points Season One hasta el 17-ene-2027: presión de venta de farmers en Q1-2027. Resto en tesorería/equipo sin calendario público. Concentración: Alta y opaca: lanzamiento tipo launchpad en Solana (categoría 'Stonk Ecosystem'), tesorería del equipo con ~40 % del suministro no circulante y whales de los primeros días; sin datos de top holders verificados.
+
+**Comunidad:** Pequeña y especulativa: 413 usuarios en watchlist de CoinGecko, actividad en X/Telegram de traders de Solana y del ecosistema Zcash; sin desarrolladores externos Tendencia: decreciendo.
+
+**Por qué cayó:** Pump de lanzamiento (ATH 0,06 $ el 16-oct-2026, cap ~34 M$) seguido de la toma de beneficios típica de los tokens de launchpad en Solana y de la caída del volumen diario del pool desde el pico de octubre; el reparto de 100 M MASK en puntos añade presión. -67 % desde el ATH en tres semanas.
+
+**Bull case:** Si el pool consolida >1 M$/mes de comisiones reales y las recompras continúan, un múltiplo de 10-20x sobre 11,5 M$ (100-230 M$) es imaginable en una manía de privacidad como la de ZEC; x100 (1,1 B$) exigiría convertirse en el mixer estándar multi-cadena con cientos de millones de TVL, algo que Tornado/Railgun nunca alcanzaron en valoración sostenida.
+
+**Catalizadores:** Fin de Points Season One (17-ene-2027) si el volumen se mantiene y las recompras continúan · Integración en wallets/agregadores (Phantom ya lista el token) y nuevas cadenas · Nueva ola de privacidad (ZEC) en 2027 arrastrando a 'picks and shovels' de privacidad · Cifra de volumen privado >100 M$ y auditoría pública del pool
+
+**Riesgos:** Dos meses de vida: ATH el 16-oct-2026 y ya -67 %; -24 % en 7 días · TVL de ~0,2 M$: el uso es de paso, y las 'comisiones' de DeFiLlama incluyen recompensas ZEC de StonkFun a la wallet del equipo · Sin auditorías listadas y código del pool no público; riesgo de hack o de bloqueo regulatorio (mixer con AML) · Lanzamiento vía launchpad de Solana con suministro y circulante inconsistentes entre fuentes · 10 % del suministro en airdrop de puntos hasta ene-2027 · Liquidez en LBank/MEXC/KCEX y DEX de Solana, varios pares marcados como anómalos en CoinGecko
+
+**Investigación:** Posible solo como billete de lotería: es la única del lote con comisiones reales ligadas al token (0,5 %+0,5 %, recompras, ZEC a holders) y un fundador con pedigree Zcash, con solo 11,5 M$ de cap. Pero tiene dos meses de vida, TVL de 0,2 M$, sin auditoría, lanzamiento de launchpad en Solana y tendencia de volumen a la baja: tamaño mínimo y vigilar comisiones mensuales en DeFiLlama. Múltiplo realista: x5-x20 en una subida fuerte de altcoins con narrativa de privacidad (alta varianza: también puede ir a -80 %).
+
+**Dónde:** MEXC, LBank, KCEX y DEX de Solana (Meteora, Raydium, Orca); no en Revolut · Revolut: no.
+
+### VANTA · Vanta Network (Bittensor SN8, ex Proprietary Trading Network) · score 67 · Bittensor / IA aplicada al trading
+
+**Qué es:** Subnet 8 de Bittensor, creada por Taoshi: una 'prop firm' descentralizada en la que los mineros envian senales de trading (forex, cripto, acciones, materias primas) y los validadores las puntuan por retorno ajustado a riesgo (Sharpe, Omega, drawdown). Sobre la subnet corre Vanta Trading (feb-2026), una plataforma de evaluacion de traders con cuentas simuladas, 100 % de reparto y pagos semanales verificables en cadena. El alpha SN8 es el token de emision/staking de la subnet.
+
+**Tesis:** Vanta Network (SN8, Taoshi): "prop firm" descentralizada en la que los mineros envían señales de trading (forex, cripto, acciones) puntuadas por retorno ajustado a riesgo; Vanta Trading (feb-2026) ofrece evaluaciones y pagos semanales verificables (récord de 120.000 $ a un trader en agosto), con commits diarios, listado en Kraken, el pool más profundo del cribado (88.500 TAO) y un owner que renuncia al 18 % de la emisión; 33 M€ de capitalización. Riesgos: sin ingresos publicados ni recompras verificables (las recompensas se pagan con emisión), riesgo regulatorio y reputacional del sector prop-firm, el 38 % del alpha en una sola cuenta y una capitalización que hace el x100 inalcanzable (sería más que todo TAO hoy).
+
+**Acción:** Posición "beta a Bittensor" vía Kraken en un tramo único con señal L1; no es un x100: vender la mitad en x3 y el resto en x5.
+
+**Zona de compra:** Precio en TAO +12 % en 30 días: esperar señal L1 del panel (RSI ≤ 35).
+
+**Vivo:** Repo taoshidev/vanta-network (77 estrellas, 1.335 commits) con push el 6-nov-2026 y commits diarios en octubre (31-oct 'Increase order cooldown', 23-oct fusion de vanta-cli en el monorepo, 22-oct 'Auto promotion'). Lanzamiento de Vanta Trading en feb-2026 (prensa, Taoshi). Listado en Kraken (par SN8/USD activo el 6-nov-2026 en CoinGecko) tras la hoja de ruta de 7 alphas de junio-2026. Record de 120.000 $ de pago a un trader en 3 dias (21-ago-2026). Lanzamiento de Glitch, agentes IA para construir y testear estrategias (2-nov-2026, CEO Arrash en X). Taostats: 4,55 % de la emision de la red (~164 TAO/dia), 88.500 TAO en el pool (~19,8 M$ de liquidez), 4.837 delegaciones.
+
+**Negocio:** Pool de recompensas anualizado >30 M$ en alpha (2025); Vanta Trading opera desde feb-2026 con evaluaciones de un solo paso, cuentas de 100.000 $ escalables hasta 2,5 M$ (simuladas) y pagos semanales; mayor pago individual 120.000 $ (ago-2026). Volumen 24 h del alpha ~2.500 TAO (~560.000 $). No hay cifras publicas de numero de traders ni de ingresos por evaluaciones. Ingresos no publicados. El modelo monetiza las cuotas de evaluacion de Vanta Trading y las senales (copy-trading); Taoshi afirma que los ingresos de Glitch 'vuelven a la red', pero no hay recompras cuantificadas ni dashboard de ingresos. Lo medible es uso (traders, pagos) financiado en gran parte por la emision de la subnet, no por clientes.
+
+**Tokenomics:** Circulante 100 %. FDV ~42,5 M $. Sin vesting: la oferta crece por emision continua de la subnet (max 21 M alpha; 6,47 M emitidos, 12,9 % quemados). Emision ~7.200 alpha/dia repartida 50/50 entre validadores y mineros (owner 0 %). Los traders cobran en alpha y venden. Concentración: Top-10 delegaciones = 60 % del alpha; mayor cuenta 996.000 alpha (38 % del circulante, probablemente tesoreria/owner de Taoshi); coeficiente de Nakamoto 4. Pool muy profundo (88.500 TAO).
+
+**Comunidad:** 4.837 delegaciones en la subnet; cuenta @vantatrading y Discord activos; cobertura semanal en TAO Daily y tao.media; 463 usuarios en lista de seguimiento de CoinGecko. Cifras de seguidores en X no verificables desde esta sesion. Tendencia: estable.
+
+**Por qué cayó:** Maximo de 25,24 $ el 10-jun-2025 con mucho menos alpha en circulacion; desde entonces la emision continua (+~400 % de oferta), la caida de TAO y la rotacion fuera de las subnets de trading lo llevaron a -70 %. En marzo-2026 aun capitalizaba ~47 M$ (CoinGecko) y hoy 42 M$: el precio en TAO (0,033) ha subido +12 % en 30 dias.
+
+**Bull case:** Si Vanta Trading se convierte en una prop firm relevante (miles de traders pagando evaluaciones) y Taoshi dirige esos ingresos a recomprar alpha, con TAO en un ciclo alcista, SN8 podria volver a 150-300 M$ (x4-x7). Un x100 requeriria que SN8 fuera la mayor subnet de un Bittensor 10 veces mayor.
+
+**Catalizadores:** Crecimiento de Vanta Trading y Glitch con ingresos publicados ligados a recompras de alpha. · Capa EVM/contratos en la subnet (plan de Taoshi). · Listado en Kraken ya logrado; mas CEX posibles. · Ciclo alcista de TAO: SN8 es de las subnets con mas liquidez (88.500 TAO en pool).
+
+**Riesgos:** Sin ingresos publicados ni recompras verificables; las recompensas a traders se pagan con emision (presion vendedora estructural). · Prop trading simulado: riesgo regulatorio (CFTC/ESMA) y reputacional del sector prop-firm. · Capitalizacion de 42 M$ ya alta para un x100 (seria 4.200 M$, mas que TAO entero hoy). · Concentracion: 38 % del alpha en una sola cuenta.
+
+**Investigación:** Posible, pero no como billete de loteria: es la subnet mas solida y liquida del lote (desarrollo diario, producto vivo, Kraken), aunque a 42 M$ y sin ingresos publicados el x100 es inalcanzable. Opcional como apuesta 'beta' a Bittensor; no es candidata x100. Múltiplo realista: x3-x8 en una subida fuerte de TAO y las altcoins.
+
+**Dónde:** Kraken (SN8/USD) y pool de la subnet; no en Revolut · Revolut: no.
+
+### SN14 · Cacheon (Bittensor SN14, ex TAOHash) · score 65 · IA / optimizacion de inferencia (Bittensor)
+
+**Qué es:** Subnet 14 de Bittensor operada por Latent Holdings (equipo de infraestructura central de Bittensor, mantiene la documentacion de desarrolladores). Fue TAOHash (abr-2025, mercado de hashrate de Bitcoin pagado en alpha) y desde mayo-2026 es Cacheon: una competicion en la que los mineros envian optimizaciones (kernels, cache de prefijos sobre SGLang) para servir LLMs mas rapido; los validadores miden la mejora de extremo a extremo y pagan al mejor. Vende 'Cacheon Engine' como inferencia alojada u optimizacion a medida; el alpha SN14 es la recompensa.
+
+**Tesis:** Cacheon (SN14, Latent Holdings, equipo del núcleo técnico de Bittensor respaldado por OSS Capital): competición en la que los mineros envían optimizaciones (kernels, caché de prefijos) para servir LLMs más rápido; los mejores baten a vLLM en +35 % y hay un primer cliente comercial (Affine, SN120, +40,9 % de rendimiento, octubre 2026); 761 commits con push el 6-nov-2026 y 8 M€ de capitalización, -95 % desde el máximo de 2025. Riesgos: dos pivotes en 18 meses (hashrate de Bitcoin → arena de servidores → kernels), sin ingresos publicados (el premio de 10.000 $/día se paga con emisión), un solo holder con el 54 % del circulante (Nakamoto 1) y liquidez de ~180 k$/día.
+
+**Acción:** Esperar un segundo cliente de pago; mientras tanto solo un tramo mínimo (≤ 200 €) con señal L2. Escalera de ventas desde x5.
+
+**Zona de compra:** Base muy deprimida (-95 % desde máximo); entrar solo con señal L2/L3 y nunca con más del 2 % de la cartera.
+
+**Vivo:** Repo latent-to/cacheon (761 commits, Apache-2.0) con push el 6-nov-2026 y commits diarios en noviembre (camfairchild, ShivanshuPurohit); repo anterior cacheon-old parado desde jun-2026 (segundo rediseno: 'Economic Kernel Search', oct-2026). Mainnet 19-20-may-2026 con premio de hasta 10.000 $/dia; top miners baten a vLLM en +35 % (jun-2026); primer cliente comercial Affine (SN120), +40,9 % de throughput (10-oct-2026); comparativa favorable frente a Instant SN46 (oct-2026). taoswap: registrada 3-feb-2025, emision solo 0,76 % de la red (~27 TAO/dia), 25.600 TAO en pool.
+
+**Negocio:** Un cliente comercial (Affine, oct-2026); modelos en la arena (Qwen3.6-35B, Muse Spark Open, GLM-5.3, DeepSeek V4.1 Flash en 2x B300); sin cifras de ingresos ni de uso de la API alojada. 2.659 delegaciones; volumen 24 h del alpha ~790 TAO (178.000 $). Sin ingresos publicados (contrato con Affine de importe no revelado). El premio de 10.000 $/dia a mineros se paga con emision. No hay recompras ni quemas ligadas a clientes; el 19,7 % de alpha quemado procede del reciclaje de emision.
+
+**Tokenomics:** Circulante 100 %. FDV ~10,6 M $. Sin vesting; emision ~7.200 alpha/dia (18/41/41). 6,33 M alpha emitidos, 19,7 % quemados. Concentración: Extrema: una sola cuenta (5HiF...fFve) tiene 1,10 M alpha = 54 % del circulante; top-10 77 %; coeficiente de Nakamoto 1 (probablemente tesoreria de Latent/inversores).
+
+**Comunidad:** 2.659 delegaciones; cuenta @taohash reutilizada; cobertura esporadica en TAO Daily; 362 en lista de CoinGecko. Comunidad propia muy pequena. Tendencia: estable.
+
+**Por qué cayó:** ATH 45,73 $ el 11-jun-2025 (CoinGecko; CMC 22,53 $ el 20-jun-2025) en plena euforia por TAOHash (2 EH/s en su primera semana). Despues: oferta multiplicada por la emision, abandono del modelo de hashrate (filtrado en ene-2026, pivot en may-2026), desplome general de alphas en abr-2026 (minimo 0,016 $) y falta de ingresos. -95 % desde el ATH; en TAO +4,5 % en 30 dias.
+
+**Bull case:** Si Cacheon Engine se convierte en la capa de aceleracion estandar de las subnets de inferencia (Chutes, Engy, Affine...) y vende optimizacion a laboratorios externos, con TAO en ciclo alcista, podria volver a 100-150 M$ (x10-x15). El x100 (1.000 M$) solo con una mania de TAO y un cambio total de escala.
+
+**Catalizadores:** Nuevos clientes de optimizacion (otras subnets, laboratorios) y publicacion de ingresos. · Inferencia alojada en cacheon.ai con quema/recompra de alpha. · Respaldo de Latent/OSS Capital: posible listado o integracion en tao.app. · Base muy baja (0,76 % de emision, 44.000 TAO de capitalizacion).
+
+**Riesgos:** Dos pivotes en 18 meses; los holders de TAOHash (hashrate BTC) se quedaron con un producto distinto. · Concentracion extrema: un holder con el 54 % del circulante y Nakamoto 1. · Sin ingresos ni metricas de uso; el premio diario se financia con emision. · -95 % desde el ATH y liquidez fina (~180.000 $/dia).
+
+**Investigación:** Posible solo como apuesta especulativa pequena: equipo de primer nivel, codigo muy activo y un primer cliente, pero sin ingresos, con dos pivotes a la espalda y un holder que controla el 54 % del alpha. Esperar a ver un segundo cliente de pago antes de entrar. Múltiplo realista: x3-x10 en una subida fuerte de TAO/IA (desde una base muy deprimida).
+
+**Dónde:** Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como "TAOHash"; no en Revolut ni Kraken · Revolut: no.
 
 
 ## Las 124 investigadas, ordenadas por puntuación
@@ -193,4 +472,4 @@ Advertencia sobre las subnets de Bittensor: 6 de las 10 mejores son tokens alpha
 
 ## Método
 
-Filtro cuantitativo sobre 2.750 monedas de CoinGecko (6-nov-2026): capitalización 3-200 M€, excluidas stablecoins, tokens envueltos/stakeados, acciones tokenizadas, fan tokens, memes puros, las 59 de la cartera y las 95 ya investigadas en listas anteriores; liquidez ≥ 0,4 %/día y FDV/cap ≤ 6. Quedaron 662; se eligieron 124 por ingresos (DeFiLlama), narrativa, veteranía y liquidez, y 12 investigadores las analizaron con la rúbrica común (vida 0-20, narrativa 0-15, negocio 0-20, comunidad 0-10). Matemática (0-30, por capitalización y dilución) y liquidez (0-5, por exchanges) se calculan con datos. Las que superan 70 pasan a la lista de Recomendadas y al seguimiento del worker con alertas de tier A.
+Filtro cuantitativo sobre 2.750 monedas de CoinGecko (6-nov-2026): capitalización 3-200 M€, excluidas stablecoins, tokens envueltos/stakeados, acciones tokenizadas, fan tokens, memes puros, las 59 de la cartera y las 95 ya investigadas en listas anteriores; liquidez ≥ 0,4 %/día y FDV/cap ≤ 6. Quedaron 662; se eligieron 124 por ingresos (DeFiLlama), narrativa, veteranía y liquidez, y 12 investigadores las analizaron con la rúbrica común (vida 0-20, narrativa 0-15, negocio 0-20, comunidad 0-10). Matemática (0-30, por capitalización y dilución) y liquidez (0-5, por exchanges) se calculan con datos. Las que alcanzan el umbral (hoy ≥ 65; al principio se exigió > 70) pasan a la lista de Recomendadas y al seguimiento del worker con alertas de tier A.
