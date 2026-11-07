@@ -307,7 +307,7 @@
   "origintrail": {
    "ticker": "TRAC",
    "tier": "C",
-   "score": 53,
+   "score": 54,
    "puntuacion": {
     "matematica": 10,
     "negocio": 10,
@@ -404,12 +404,13 @@
      "Unos 53 M TRAC fuera de circulación sin calendario"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 53
   },
   "gensyn": {
    "ticker": "AI",
    "tier": "D",
-   "score": 37,
+   "score": 54,
    "puntuacion": {
     "matematica": 14,
     "negocio": 4,
@@ -509,12 +510,13 @@
      "Volumen dominado por LBank"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 37
   },
   "hivemapper": {
    "ticker": "HONEY",
    "tier": "C",
-   "score": 57,
+   "score": 54,
    "puntuacion": {
     "matematica": 22,
     "negocio": 12,
@@ -613,12 +615,13 @@
      "Cae un 45 % en 30 días y un 99,5 % desde el ATH"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 57
   },
   "floki": {
    "ticker": "FLOKI",
    "tier": "D",
-   "score": 44,
+   "score": 39,
    "puntuacion": {
     "matematica": 10,
     "negocio": 6,
@@ -715,7 +718,8 @@
      "Narrativa de memes y metaverso agotada"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 44
   },
   "kaito": {
    "ticker": "KAITO",
@@ -823,12 +827,13 @@
      "Mínimo histórico el 5-nov-2026"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 41
   },
   "ocean-protocol": {
    "ticker": "OCEAN",
    "tier": "D",
-   "score": 34,
+   "score": 57,
    "puntuacion": {
     "matematica": 22,
     "negocio": 2,
@@ -926,12 +931,13 @@
      "La quema prometida no está demostrada y el token no tiene una función necesaria clara tras salir de la ASI"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 34
   },
   "parcl": {
    "ticker": "PRCL",
    "tier": "D",
-   "score": 58,
+   "score": 50,
    "puntuacion": {
     "matematica": 25,
     "negocio": 8,
@@ -1034,12 +1040,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 58,
    "tier_anterior": "C"
   },
   "aave": {
    "ticker": "AAVE",
    "tier": "C",
-   "score": 69,
+   "score": 53,
    "puntuacion": {
     "matematica": 3,
     "negocio": 22,
@@ -1138,12 +1145,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 69,
    "tier_anterior": "B"
   },
   "goldfinch": {
    "ticker": "GFI",
    "tier": "D",
-   "score": 27,
+   "score": 49,
    "puntuacion": {
     "matematica": 25,
     "negocio": 0,
@@ -1238,12 +1246,13 @@
      "Historial de impagos de préstamos en la etapa anterior"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 27
   },
   "uniswap": {
    "ticker": "UNI",
    "tier": "B",
-   "score": 69,
+   "score": 60,
    "puntuacion": {
     "matematica": 0,
     "negocio": 23,
@@ -1341,12 +1350,13 @@
      "Riesgo regulatorio en EE. UU. sobre el reparto de comisiones."
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 69
   },
   "dimo": {
    "ticker": "DIMO",
    "tier": "C",
-   "score": 50,
+   "score": 62,
    "puntuacion": {
     "matematica": 22,
     "negocio": 8,
@@ -1444,12 +1454,13 @@
      "El 56 % de la oferta aún no circula"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 50
   },
   "solana": {
    "ticker": "SOL",
    "tier": "B",
-   "score": 63,
+   "score": 61,
    "puntuacion": {
     "matematica": 1,
     "negocio": 20,
@@ -1552,12 +1563,13 @@
      "Competencia de otras L1 y de Ethereum L2"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 63
   },
   "chainlink": {
    "ticker": "LINK",
    "tier": "B",
-   "score": 62,
+   "score": 61,
    "puntuacion": {
     "matematica": 0,
     "negocio": 20,
@@ -1659,12 +1671,13 @@
      "Competencia en oráculos (Pyth, RedStone) y en interoperabilidad (LayerZero, Wormhole)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 62
   },
   "raydium": {
    "ticker": "RAY",
    "tier": "C",
-   "score": 51,
+   "score": 52,
    "puntuacion": {
     "matematica": 3,
     "negocio": 15,
@@ -1766,12 +1779,13 @@
      "Equipo seudónimo y reserva de 285 M RAY bajo control del protocolo"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   "pendle": {
    "ticker": "PENDLE",
    "tier": "C",
-   "score": 50,
+   "score": 53,
    "puntuacion": {
     "matematica": 3,
     "negocio": 12,
@@ -1868,12 +1882,13 @@
      "Competencia en derivados de tipos"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 50
   },
   "dogecoin": {
    "ticker": "DOGE",
    "tier": "C",
-   "score": 31,
+   "score": 45,
    "puntuacion": {
     "matematica": 1,
     "negocio": 2,
@@ -1968,12 +1983,13 @@
      "El 62 % del volumen listado en CoinGecko está en CoinUp.io (volumen inflado del exchange, no del token)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 31
   },
   "fetch-ai": {
    "ticker": "FET",
    "tier": "D",
-   "score": 36,
+   "score": 50,
    "puntuacion": {
     "matematica": 6,
     "negocio": 6,
@@ -2072,12 +2088,13 @@
      "Narrativa que depende del sector IA"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 36
   },
   "xdce-crowd-sale": {
    "ticker": "XDC",
    "tier": "C",
-   "score": 43,
+   "score": 42,
    "puntuacion": {
     "matematica": 3,
     "negocio": 12,
@@ -2176,12 +2193,13 @@
      "No cotiza en Binance global, Coinbase ni Upbit (según los tickers de CoinGecko)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 43
   },
   "pyth-network": {
    "ticker": "PYTH",
    "tier": "C",
-   "score": 55,
+   "score": 49,
    "puntuacion": {
     "matematica": 5,
     "negocio": 16,
@@ -2288,12 +2306,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 55,
    "tier_anterior": "B"
   },
   "api3": {
    "ticker": "API3",
    "tier": "C",
-   "score": 47,
+   "score": 56,
    "puntuacion": {
     "matematica": 18,
     "negocio": 6,
@@ -2393,12 +2412,13 @@
      "Cambio de modelo (de oráculo a curador DeFi) con un negocio no probado"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 47
   },
   "sky": {
    "ticker": "SKY",
    "tier": "B",
-   "score": 66,
+   "score": 57,
    "puntuacion": {
     "matematica": 3,
     "negocio": 24,
@@ -2496,12 +2516,13 @@
      "Capitalización de 1.500 M$: x100 implicaría ~150.000 M$"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 66
   },
   "mina-protocol": {
    "ticker": "MINA",
    "tier": "D",
-   "score": 36,
+   "score": 53,
    "puntuacion": {
     "matematica": 15,
     "negocio": 3,
@@ -2598,12 +2619,13 @@
      "Competencia de las L2 ZK de Ethereum"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 36
   },
   "blockstack": {
    "ticker": "STX",
    "tier": "C",
-   "score": 51,
+   "score": 48,
    "puntuacion": {
     "matematica": 6,
     "negocio": 12,
@@ -2701,12 +2723,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 51,
    "tier_anterior": "B"
   },
   "aleo": {
    "ticker": "ALEO",
    "tier": "C",
-   "score": 46,
+   "score": 54,
    "puntuacion": {
     "matematica": 18,
     "negocio": 5,
@@ -2804,12 +2827,13 @@
      "Comunidad pequeña: 9,4 k usuarios en watchlist"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 46
   },
   "hedera-hashgraph": {
    "ticker": "HBAR",
    "tier": "C",
-   "score": 40,
+   "score": 45,
    "puntuacion": {
     "matematica": 1,
     "negocio": 7,
@@ -2908,12 +2932,13 @@
      "Narrativa 'empresarial' con poco uso on-chain"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 40
   },
   "coti": {
    "ticker": "COTI",
    "tier": "D",
-   "score": 47,
+   "score": 52,
    "puntuacion": {
     "matematica": 22,
     "negocio": 3,
@@ -3015,12 +3040,13 @@
      "Categoría 'Alleged SEC Securities' en CoinGecko"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 47
   },
   "berachain-bera": {
    "ticker": "BERA",
    "tier": "D",
-   "score": 30,
+   "score": 47,
    "puntuacion": {
     "matematica": 18,
     "negocio": 2,
@@ -3120,12 +3146,13 @@
      "Precio -45 % en 30 d (0,236 $ el 5-6 oct-2026 según Coincheckup → ≈0,12 $ hoy)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 30
   },
   "eigenlayer": {
    "ticker": "EIGEN",
    "tier": "D",
-   "score": 36,
+   "score": 42,
    "puntuacion": {
     "matematica": 7,
     "negocio": 7,
@@ -3229,7 +3256,8 @@
      "La descripción de CoinGecko es errónea (texto de Renzo): datos de agregadores poco cuidados"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 36
   },
   "celestia": {
    "ticker": "TIA",
@@ -3332,12 +3360,13 @@
      "Historial de ventas de VCs (salida de Polychain)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 42
   },
   "beam-2": {
    "ticker": "BEAM",
    "tier": "D",
-   "score": 42,
+   "score": 35,
    "puntuacion": {
     "matematica": 10,
     "negocio": 8,
@@ -3440,12 +3469,13 @@
      "Pivote de narrativa (de gaming a IA) sin tracción demostrada."
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 42
   },
   "helium": {
    "ticker": "HNT",
    "tier": "D",
-   "score": 51,
+   "score": 60,
    "puntuacion": {
     "matematica": 19,
     "negocio": 12,
@@ -3546,12 +3576,13 @@
      "Cae un 43 % en 30 días y un 89 % en un año"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   "grass": {
    "ticker": "GRASS",
    "tier": "C",
-   "score": 63,
+   "score": 41,
    "puntuacion": {
     "matematica": 5,
     "negocio": 21,
@@ -3651,12 +3682,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 63,
    "tier_anterior": "B"
   },
   "hyperliquid": {
    "ticker": "HYPE",
    "tier": "B",
-   "score": 68,
+   "score": 57,
    "puntuacion": {
     "matematica": 0,
     "negocio": 25,
@@ -3763,12 +3795,13 @@
      "Los ingresos de los últimos 12 meses son algo inferiores a los del año anterior: el crecimiento no está garantizado"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 68
   },
   "akash-network": {
    "ticker": "AKT",
    "tier": "C",
-   "score": 51,
+   "score": 60,
    "puntuacion": {
     "matematica": 10,
     "negocio": 9,
@@ -3869,12 +3902,13 @@
      "Los validadores pierden su papel en el paso a Solana, lo que puede traer ventas"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   "euler": {
    "ticker": "EUL",
    "tier": "C",
-   "score": 55,
+   "score": 54,
    "puntuacion": {
     "matematica": 22,
     "negocio": 7,
@@ -3971,12 +4005,13 @@
      "El fundador ha dejado de ser CEO; el CEO nuevo aún no ha demostrado resultados"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 55
   },
   "lido-dao": {
    "ticker": "LDO",
    "tier": "C",
-   "score": 52,
+   "score": 54,
    "puntuacion": {
     "matematica": 9,
     "negocio": 14,
@@ -4072,12 +4107,13 @@
      "Narrativa de liquid staking agotada desde 2023; LDO está un 95 % por debajo de su ATH"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 52
   },
   "numeraire": {
    "ticker": "NMR",
    "tier": "A",
-   "score": 70,
+   "score": 66,
    "puntuacion": {
     "matematica": 14,
     "negocio": 20,
@@ -4187,12 +4223,13 @@
      ]
     }
    },
+   "score_anterior": 70,
    "tesis_anterior": "Numerai es un hedge fund real (AUM de ~173 M$ en 2024 a ~550 M$ en nov-2025, JPMorgan AM con hasta 500 M$ de capacidad, Serie C a 500 M$ de valoración) que recompra NMR en mercado abierto (3,2 M$ en 12 meses) y quema el NMR apostado por los modelos que fallan. Supply máximo fijo de 11 M y capitalización de solo 61 M€, ocho veces menos que la valoración de la empresa. La caída del 45 % de sept-oct 2026 no vino acompañada de ninguna noticia negativa. NMR no es equity, así que un x100 (6 B€) no es realista; un x5-x10 si el mercado vuelve a pagar por ingresos verificables sí lo es. Riesgo: float ilíquido (mueve ±40 % sin noticias) y dependencia del rendimiento del fondo."
   },
   "ethena": {
    "ticker": "ENA",
    "tier": "D",
-   "score": 38,
+   "score": 47,
    "puntuacion": {
     "matematica": 1,
     "negocio": 10,
@@ -4289,12 +4326,13 @@
      "Riesgo sistémico de custodia y exchanges (un supuesto incidente de seguridad en Binance el 30-oct-2026 aparece solo en CMC AI, sin verificar)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 38
   },
   "cow-protocol": {
    "ticker": "COW",
    "tier": "C",
-   "score": 74,
+   "score": 58,
    "puntuacion": {
     "matematica": 16,
     "negocio": 19,
@@ -4395,12 +4433,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 74,
    "tier_anterior": "A"
   },
   "syrup": {
    "ticker": "SYRUP",
    "tier": "B",
-   "score": 71,
+   "score": 63,
    "puntuacion": {
     "matematica": 10,
     "negocio": 21,
@@ -4500,12 +4539,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 71,
    "tier_anterior": "A"
   },
   "shiba-inu": {
    "ticker": "SHIB",
    "tier": "D",
-   "score": 22,
+   "score": 36,
    "puntuacion": {
     "matematica": 1,
     "negocio": 2,
@@ -4602,12 +4642,13 @@
      "Con 2.600 M$ de capitalización, un x100 exigiría 260.000 M$"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 22
   },
   "jito-governance-token": {
    "ticker": "JTO",
    "tier": "C",
-   "score": 50,
+   "score": 46,
    "puntuacion": {
     "matematica": 7,
     "negocio": 12,
@@ -4710,7 +4751,8 @@
      "Dependencia total de la actividad MEV y de memecoins en Solana"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 50
   },
   "origin-protocol": {
    "ticker": "OGN",
@@ -4816,12 +4858,13 @@
     ],
     "revision": null
    },
+   "score_anterior": 63,
    "tier_anterior": "A"
   },
   "polkadot": {
    "ticker": "DOT",
    "tier": "C",
-   "score": 42,
+   "score": 40,
    "puntuacion": {
     "matematica": 3,
     "negocio": 6,
@@ -4920,12 +4963,13 @@
      "Gasto de la tesorería y 'retos internos' (CMC, oct-2026)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 42
   },
   "jupiter-exchange-solana": {
    "ticker": "JUP",
    "tier": "B",
-   "score": 51,
+   "score": 50,
    "puntuacion": {
     "matematica": 0,
     "negocio": 18,
@@ -5028,12 +5072,13 @@
      "Debate abierto sobre suspender las recompras (CTO, ene-2026)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   "render-token": {
    "ticker": "RENDER",
    "tier": "C",
-   "score": 50,
+   "score": 56,
    "puntuacion": {
     "matematica": 3,
     "negocio": 11,
@@ -5130,12 +5175,13 @@
      "Mucha competencia en GPU (Aethir, io.net, hiperescaladores)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 50
   },
   "marinade": {
    "ticker": "MNDE",
    "tier": "C",
-   "score": 49,
+   "score": 63,
    "puntuacion": {
     "matematica": 21,
     "negocio": 8,
@@ -5244,12 +5290,13 @@
       "Deterioro acelerado: ingresos de 3,88 M$ en 12 meses frente a 11,46 M$ el año anterior (-66 %). Últimos 30 días: 398 k$ frente a 435 k$ (-9 %). TVL de 842,5 M$ (9-oct) a 622,6 M$ (7-nov), -26 % en 30 días (https://api.llama.fi/summary/fees/marinade?dataType=dailyRevenue, https://api.llama.fi/protocol/marinade-native)."
      ]
     }
-   }
+   },
+   "score_anterior": 49
   },
   "vechain": {
    "ticker": "VET",
    "tier": "C",
-   "score": 44,
+   "score": 39,
    "puntuacion": {
     "matematica": 6,
     "negocio": 7,
@@ -5345,12 +5392,13 @@
      "Narrativa empresarial de 2018 agotada"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 44
   },
   "the-graph": {
    "ticker": "GRT",
    "tier": "C",
-   "score": 41,
+   "score": 43,
    "puntuacion": {
     "matematica": 10,
     "negocio": 6,
@@ -5450,12 +5498,13 @@
      "-99 % desde máximos y -74 % en 1 año"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 41
   },
   "ankr": {
    "ticker": "ANKR",
    "tier": "D",
-   "score": 44,
+   "score": 48,
    "puntuacion": {
     "matematica": 19,
     "negocio": 7,
@@ -5556,12 +5605,13 @@
      "Competencia de Alchemy, QuickNode e Infura"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 44
   },
   "liquity": {
    "ticker": "LQTY",
    "tier": "C",
-   "score": 53,
+   "score": 63,
    "puntuacion": {
     "matematica": 22,
     "negocio": 6,
@@ -5658,12 +5708,13 @@
      "El fallo de contratos de V2 en feb-2025 obligó a relanzar el protocolo"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 53
   },
   "cookie": {
    "ticker": "COOKIE",
    "tier": "C",
-   "score": 46,
+   "score": 51,
    "puntuacion": {
     "matematica": 24,
     "negocio": 4,
@@ -5756,12 +5807,13 @@
      "Sin ingresos ni desarrollo verificable"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 46
   },
   "morpho": {
    "ticker": "MORPHO",
    "tier": "C",
-   "score": 55,
+   "score": 50,
    "puntuacion": {
     "matematica": 2,
     "negocio": 20,
@@ -5861,12 +5913,13 @@
      "Capitalización ya de 1.476 M$: x100 implicaría ~148.000 M$"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 55
   },
   "spell-token": {
    "ticker": "SPELL",
    "tier": "D",
-   "score": 23,
+   "score": 41,
    "puntuacion": {
     "matematica": 22,
     "negocio": 0,
@@ -5959,12 +6012,13 @@
      "Tokens de DWF Labs liberados, con presión vendedora."
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 23
   },
   "ondo-finance": {
    "ticker": "ONDO",
    "tier": "D",
-   "score": 45,
+   "score": 47,
    "puntuacion": {
     "matematica": 0,
     "negocio": 18,
@@ -6066,12 +6120,13 @@
      "Precio -84 % desde el ATH y -26 % en 30 días"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 45
   },
   "alchemix": {
    "ticker": "ALCX",
    "tier": "C",
-   "score": 46,
+   "score": 68,
    "puntuacion": {
     "matematica": 24,
     "negocio": 5,
@@ -6171,12 +6226,13 @@
      "-80 % interanual pese al lanzamiento de la v3"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 46
   },
   "bluzelle": {
    "ticker": "BLZ",
    "tier": "D",
-   "score": 33,
+   "score": 47,
    "puntuacion": {
     "matematica": 25,
     "negocio": 0,
@@ -6267,12 +6323,13 @@
      "Riesgo de delisting en Coinbase o Kraken por bajo volumen; ya no cotiza en Binance (fecha de retirada no verificada)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 33
   },
   "basenji": {
    "ticker": "BENJI",
    "tier": "D",
-   "score": 32,
+   "score": 43,
    "puntuacion": {
     "matematica": 25,
     "negocio": 0,
@@ -6361,12 +6418,13 @@
      "La competencia de otras memecoins de Base la ha dejado fuera"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 32
   },
   "assemble-protocol": {
    "ticker": "ASM",
    "tier": "D",
-   "score": 37,
+   "score": 46,
    "puntuacion": {
     "matematica": 22,
     "negocio": 3,
@@ -6460,7 +6518,8 @@
      "Producto que depende de OpenAI, sin ventaja propia"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 37
   }
  },
  "candidatas_externas": [
@@ -6469,7 +6528,7 @@
    "ticker": "AVA",
    "nombre": "Travala (AVA)",
    "tier": "L",
-   "score": 74,
+   "score": 65,
    "puntuacion": {
     "matematica": 22,
     "negocio": 17,
@@ -6585,6 +6644,7 @@
      ]
     }
    },
+   "score_anterior": 74,
    "donde": "Binance (con Monitoring Tag desde el 4-sep-2026), Kraken, Bybit, KuCoin, Bitvavo"
   },
   {
@@ -6592,7 +6652,7 @@
    "ticker": "BNKR",
    "nombre": "BankrCoin (Bankr)",
    "tier": "A",
-   "score": 70,
+   "score": 64,
    "puntuacion": {
     "matematica": 22,
     "negocio": 15,
@@ -6697,14 +6757,15 @@
      "Comportamiento de memecoin (-77 % desde el ATH de feb-2026)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 70
   },
   {
    "cg": "ssv-network",
    "ticker": "SSV",
    "nombre": "SSV Network",
    "tier": "B",
-   "score": 69,
+   "score": 68,
    "puntuacion": {
     "matematica": 22,
     "negocio": 12,
@@ -6826,6 +6887,7 @@
      ]
     }
    },
+   "score_anterior": 69,
    "donde": "Binance, Kraken, OKX, Bybit, KuCoin, Bitvavo (Revolut: comprobar en la app)"
   },
   {
@@ -6833,7 +6895,7 @@
    "ticker": "RAIL",
    "nombre": "Railgun",
    "tier": "B",
-   "score": 66,
+   "score": 54,
    "puntuacion": {
     "matematica": 15,
     "negocio": 15,
@@ -6942,7 +7004,8 @@
      "40 M de RAIL emitibles por gobernanza"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 66
   },
   {
    "cg": "geodnet",
@@ -7059,14 +7122,15 @@
      "Tratamiento regulatorio del token distinto según el país"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 64
   },
   {
    "cg": "nexpace",
    "ticker": "NXPC",
    "nombre": "Nexpace (MapleStory Universe)",
    "tier": "B",
-   "score": 62,
+   "score": 50,
    "puntuacion": {
     "matematica": 14,
     "negocio": 16,
@@ -7176,14 +7240,15 @@
      "Precio en mínimo histórico (6-nov-2026), con tendencia bajista intacta."
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 62
   },
   {
    "cg": "inverse-finance",
    "ticker": "INV",
    "nombre": "Inverse Finance",
    "tier": "B",
-   "score": 62,
+   "score": 61,
    "puntuacion": {
     "matematica": 25,
     "negocio": 11,
@@ -7283,14 +7348,15 @@
      "Negocio -37 % interanual y equipo pequeño; el token recibe una fracción pequeña de los ingresos"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 62
   },
   {
    "cg": "tokenbot-2",
    "ticker": "CLANKER",
    "nombre": "tokenbot (Clanker)",
    "tier": "C",
-   "score": 60,
+   "score": 66,
    "puntuacion": {
     "matematica": 22,
     "negocio": 8,
@@ -7394,14 +7460,15 @@
      "Competencia de Bankr, Zora y otros launchpads"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 60
   },
   {
    "cg": "gmx",
    "ticker": "GMX",
    "nombre": "GMX",
    "tier": "C",
-   "score": 59,
+   "score": 58,
    "puntuacion": {
     "matematica": 15,
     "negocio": 13,
@@ -7511,14 +7578,15 @@
      "Los stakers no reciben las recompras hasta que GMX valga 90 $ (12 veces el precio actual)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 59
   },
   {
    "cg": "centrifuge-2",
    "ticker": "CFG",
    "nombre": "Centrifuge",
    "tier": "C",
-   "score": 56,
+   "score": 60,
    "puntuacion": {
     "matematica": 16,
     "negocio": 12,
@@ -7640,14 +7708,15 @@
       "Dilución no anotada: la documentación oficial (developer.centrifuge.io/getting-started/token-summary) y la CP149 fijan una inflación del 3 % anual sobre la oferta total, que va a la tesorería. Son unos 10,2 M CFG en 6 meses, el 2,7 % del circulante, como mínimo conocido. El contrato permite acuñar a los 'wards' (mint con auth en https://github.com/centrifuge/cfg-token, DelegationToken.sol). Además, la CP149 acuñó 115 M CFG a la Foundation para exchanges y creadores de mercado."
      ]
     }
-   }
+   },
+   "score_anterior": 56
   },
   {
    "cg": "woo-network",
    "ticker": "WOO",
    "nombre": "WOO",
    "tier": "C",
-   "score": 55,
+   "score": 59,
    "puntuacion": {
     "matematica": 22,
     "negocio": 9,
@@ -7759,14 +7828,15 @@
      "Narrativa de token de exchange agotada"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 55
   },
   {
    "cg": "goplus-security",
    "ticker": "GPS",
    "nombre": "GoPlus Security",
    "tier": "C",
-   "score": 53,
+   "score": 50,
    "puntuacion": {
     "matematica": 16,
     "negocio": 10,
@@ -7879,14 +7949,15 @@
      "FDV/cap 1,66×"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 53
   },
   {
    "cg": "ore",
    "ticker": "ORE",
    "nombre": "ORE (Regolith Labs)",
    "tier": "C",
-   "score": 53,
+   "score": 63,
    "puntuacion": {
     "matematica": 19,
     "negocio": 12,
@@ -7986,14 +8057,15 @@
      "Posible riesgo regulatorio por su parecido al juego de azar"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 53
   },
   {
    "cg": "orca",
    "ticker": "ORCA",
    "nombre": "Orca",
    "tier": "C",
-   "score": 52,
+   "score": 59,
    "puntuacion": {
     "matematica": 14,
     "negocio": 13,
@@ -8103,14 +8175,15 @@
      "-41% en 30 días sin catalizador identificado; incidente del frontend por la brecha de Vercel en abr-2026 (sin pérdida de fondos)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 52
   },
   {
    "cg": "celium",
    "ticker": "SN51",
    "nombre": "lium",
    "tier": "C",
-   "score": 51,
+   "score": 55,
    "puntuacion": {
     "matematica": 10,
     "negocio": 17,
@@ -8188,14 +8261,15 @@
      "Ya es la mayor del lote (126 M€): un x100 implicaría ~12.600 M€"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   {
    "cg": "velodrome-finance",
    "ticker": "VELO",
    "nombre": "Velodrome Finance",
    "tier": "C",
-   "score": 50,
+   "score": 43,
    "puntuacion": {
     "matematica": 14,
     "negocio": 12,
@@ -8302,14 +8376,15 @@
      "Los ingresos propios de Velodrome cayeron un 68 % interanual."
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 50
   },
   {
    "cg": "huma-finance",
    "ticker": "HUMA",
    "nombre": "Huma Finance",
    "tier": "D",
-   "score": 49,
+   "score": 58,
    "puntuacion": {
     "matematica": 14,
     "negocio": 14,
@@ -8418,14 +8493,15 @@
      "Caída del 56 % en 7 días antes del desbloqueo"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 49
   },
   {
    "cg": "aethir",
    "ticker": "ATH",
    "nombre": "Aethir",
    "tier": "C",
-   "score": 48,
+   "score": 52,
    "puntuacion": {
     "matematica": 12,
     "negocio": 12,
@@ -8538,14 +8614,15 @@
      "No cotiza en spot en Binance (solo Binance Alpha), y el 28 % del volumen está en LBank"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 48
   },
   {
    "cg": "limitless-3",
    "ticker": "LMTS",
    "nombre": "Limitless Exchange",
    "tier": "D",
-   "score": 45,
+   "score": 55,
    "puntuacion": {
     "matematica": 25,
     "negocio": 5,
@@ -8648,14 +8725,15 @@
      "Competencia de Polymarket y Kalshi"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 45
   },
   {
    "cg": "tensor",
    "ticker": "TNSR",
    "nombre": "Tensor",
    "tier": "D",
-   "score": 43,
+   "score": 41,
    "puntuacion": {
     "matematica": 21,
     "negocio": 3,
@@ -8771,14 +8849,15 @@
      "Desbloqueo del 20 % del circulante en 6 meses"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 43
   },
   {
    "cg": "definitive",
    "ticker": "EDGE",
    "nombre": "Definitive",
    "tier": "D",
-   "score": 41,
+   "score": 55,
    "puntuacion": {
     "matematica": 17,
     "negocio": 6,
@@ -8885,7 +8964,8 @@
      "-89 % desde el ATH y -12 % en 24 h"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 41
   }
  ],
  "candidatas_texto": "Cribado: 1.750 monedas de CoinGecko cruzadas con los ingresos de DeFiLlama (107 protocolos con capitalización entre 1,5 y 220 M$ e ingresos reales), más un barrido por sectores (DePIN, IA, gaming, predicción, RWA, pagos, BTC-fi) y 40 fichas investigadas con fuentes de 2026.\nResultado honesto: tampoco fuera de la cartera hay hoy una moneda que cumpla a la vez 'x100 por matemática' y 'negocio real con captura de valor'. Las que tienen la matemática (LMTS, INV, MOR, Graphite, Clanker) tienen el negocio en caída o sin captura; las que tienen el negocio (GEODNET, Railgun, Lium, Nexpace) ya valen 100-150 M€ o están diluidas.\nLo más cercano son tres satélites con negocio real, captura de valor y capitalización de 17-30 M€ (AVA, BNKR, SSV), donde x10-x20 es plausible y el x100 una cola remota; y cuatro de calidad con un 'pero' (NXPC, INV, GEOD, RAIL). Ninguna de las siete está en Revolut: hace falta Kraken, Coinbase o Binance. De las comprables en Revolut (VELO, ORCA, ATH, WOO, EDGE, TNSR) ninguna merece capital hoy sin una condición previa.\nSugerencia de tamaño: como mucho el 15-20 % del plan mensual (1.500-2.000 €/mes) repartido entre 3-5 de estas, con las mismas reglas de tramos y alertas que el tier A; el resto sigue en COW, SYRUP, NMR, OGN y el núcleo.",
@@ -8896,7 +8976,7 @@
    "ticker": "OLAS",
    "nombre": "Olas (Autonolas)",
    "tier": "L",
-   "score": 79,
+   "score": 62,
    "puntuacion": {
     "vida": 23,
     "narrativa": 18,
@@ -8999,14 +9079,15 @@
      "No cotiza en ningún exchange centralizado grande: liquidez en DEX y en MEXC (solo aparece en Binance Alpha)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 79
   },
   {
    "cg": "quai-network",
    "ticker": "QUAI",
    "nombre": "Quai Network",
    "tier": "L",
-   "score": 75,
+   "score": 70,
    "puntuacion": {
     "vida": 20,
     "narrativa": 14,
@@ -9121,14 +9202,15 @@
       "La dilución está oculta. CoinGecko da circulante = total (1.156,5 M), pero las asignaciones de génesis siguen desbloqueándose cada mes. El fork Singularity (v0.51.0, 13-mar-2026) solo recortó 1.667 M, el 81,1 % de los desbloqueos futuros, así que quedaban unos 388 M (≈34 % del circulante) por desbloquear en mensualidades. Para equipo e inversores son 36 meses tras el cliff de enero de 2026, lo que da ≈5-6 % del circulante en 6 meses (estimación), sin contar la emisión minera: según la documentación, la QUAI minada será ≈50 % de la oferta a los 4 años (https://github.com/dominant-strategies/go-quai/releases/tag/v0.51.0, https://raw.githubusercontent.com/dominant-strategies/quai-docs/main/learn/tokenomics/quai-emissions.mdx)."
      ]
     }
-   }
+   },
+   "score_anterior": 75
   },
   {
    "cg": "natix-network",
    "ticker": "NATIX",
    "nombre": "NATIX Network",
    "tier": "L",
-   "score": 70,
+   "score": 50,
    "puntuacion": {
     "vida": 20,
     "narrativa": 17,
@@ -9234,14 +9316,15 @@
      "Cae un 44 % en 30 días"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 70
   },
   {
    "cg": "echelon-prime",
    "ticker": "PRIME",
    "nombre": "Echelon Prime",
    "tier": "L",
-   "score": 69,
+   "score": 59,
    "puntuacion": {
     "vida": 18,
     "narrativa": 13,
@@ -9343,14 +9426,15 @@
      "-99,5 % desde el ATH y -84 % a 1 año"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 69
   },
   {
    "cg": "chex-token",
    "ticker": "CHEX",
    "nombre": "Chintai",
    "tier": "L",
-   "score": 69,
+   "score": 51,
    "puntuacion": {
     "vida": 17,
     "narrativa": 14,
@@ -9451,14 +9535,15 @@
      "Liquidez escasa (MEXC, Gate, Kraken, Bitunix)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 69
   },
   {
    "cg": "alephium",
    "ticker": "ALPH",
    "nombre": "Alephium",
    "tier": "L",
-   "score": 68,
+   "score": 64,
    "puntuacion": {
     "vida": 20,
     "narrativa": 14,
@@ -9559,14 +9644,15 @@
      "Calendario de los tokens no circulantes desconocido"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 68
   },
   {
    "cg": "umbra",
    "ticker": "UMBRA",
    "nombre": "Umbra Privacy",
    "tier": "L",
-   "score": 64,
+   "score": 57,
    "puntuacion": {
     "vida": 18,
     "narrativa": 17,
@@ -9669,14 +9755,15 @@
      "SDK todavía en pre-release"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 64
   },
   {
    "cg": "ergo",
    "ticker": "ERG",
    "nombre": "Ergo",
    "tier": "L",
-   "score": 62,
+   "score": 61,
    "puntuacion": {
     "vida": 22,
     "narrativa": 12,
@@ -9775,14 +9862,15 @@
      "Presupuesto limitado de la Ergo Foundation"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 62
   },
   {
    "cg": "xmaquina",
    "ticker": "DEUS",
    "nombre": "XMAQUINA (DEUS)",
    "tier": "L",
-   "score": 57,
+   "score": 52,
    "puntuacion": {
     "vida": 12,
     "narrativa": 18,
@@ -9888,14 +9976,15 @@
      "Las cifras de circulante de CG y CMC no cuadran"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 57
   },
   {
    "cg": "ao-computer",
    "ticker": "AO",
    "nombre": "AO (ao Computer)",
    "tier": "L",
-   "score": 57,
+   "score": 56,
    "puntuacion": {
     "vida": 15,
     "narrativa": 16,
@@ -9998,14 +10087,15 @@
      "Precio −93 % desde el ATH (50 $ en abr-2025) y −56 % en 1 año"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 57
   },
   {
    "cg": "gigachad-2",
    "ticker": "GIGA",
    "nombre": "Gigachad",
    "tier": "L",
-   "score": 51,
+   "score": 42,
    "puntuacion": {
     "vida": 12,
     "narrativa": 10,
@@ -10109,14 +10199,15 @@
      "La narrativa de 'Murad picks' / el ciclo de memes de 2024 está agotada"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   {
    "cg": "milady-cult-coin",
    "ticker": "CULT",
    "nombre": "Milady Cult Coin",
    "tier": "L",
-   "score": 50,
+   "score": 40,
    "puntuacion": {
     "vida": 12,
     "narrativa": 11,
@@ -10220,14 +10311,15 @@
      "Está un 98 % por debajo del ATH de diciembre de 2024"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 50
   },
   {
    "cg": "ai-factory",
    "ticker": "SN80",
    "nombre": "OpenRoboto (Bittensor subnet 80, antes 'AI Factory')",
    "tier": "L",
-   "score": 63,
+   "score": 52,
    "puntuacion": {
     "vida": 18,
     "narrativa": 18,
@@ -10326,14 +10418,15 @@
      "Liquidez mínima: solo el pool dTAO y wrappers en DEX (~0,13-0,28 M$ al día)"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 63
   },
   {
    "cg": "elastos",
    "ticker": "ELA",
    "nombre": "Elastos",
    "tier": "L",
-   "score": 61,
+   "score": 48,
    "puntuacion": {
     "vida": 15,
     "narrativa": 13,
@@ -10439,14 +10532,15 @@
      "Liquidez escasa: unos 0,35 M$/día"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 61
   },
   {
    "cg": "mezo",
    "ticker": "MEZO",
    "nombre": "Mezo",
    "tier": "L",
-   "score": 59,
+   "score": 61,
    "puntuacion": {
     "vida": 14,
     "narrativa": 13,
@@ -10551,14 +10645,15 @@
      "Gas en BTC: el token no es necesario para usar la red"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 59
   },
   {
    "cg": "pocket-network",
    "ticker": "POKT",
    "nombre": "Pocket Network",
    "tier": "L",
-   "score": 56,
+   "score": 64,
    "puntuacion": {
     "vida": 12,
     "narrativa": 11,
@@ -10660,14 +10755,15 @@
      "Liquidez concentrada en Upbit (ticker marcado como anomalía en CoinGecko) y volumen diario ~65 k$"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 56
   },
   {
    "cg": "inverse-finance",
    "ticker": "INV",
    "nombre": "Inverse Finance",
    "tier": "L",
-   "score": 55,
+   "score": 61,
    "puntuacion": {
     "vida": 14,
     "narrativa": 9,
@@ -10758,14 +10854,15 @@
      "Negocio -37 % interanual y equipo pequeño; el token recibe una fracción pequeña de los ingresos"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 55
   },
   {
    "cg": "fogo",
    "ticker": "FOGO",
    "nombre": "Fogo",
    "tier": "L",
-   "score": 55,
+   "score": 39,
    "puntuacion": {
     "vida": 14,
     "narrativa": 14,
@@ -10876,14 +10973,15 @@
      "Precio en mínimos históricos"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 55
   },
   {
    "cg": "priors-agent",
    "ticker": "PRIORS",
    "nombre": "Priors Agents",
    "tier": "L",
-   "score": 52,
+   "score": 55,
    "puntuacion": {
     "vida": 14,
     "narrativa": 16,
@@ -10983,14 +11081,15 @@
      "Volumen de 1,17 M$ en 24 h (≈13 % de la cap.), con el 62 % en LBank y Poloniex, exchanges con volúmenes poco fiables; no es claramente falso, pero es sospechoso"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 52
   },
   {
    "cg": "tokenbot-2",
    "ticker": "CLANKER",
    "nombre": "tokenbot (Clanker)",
    "tier": "L",
-   "score": 51,
+   "score": 66,
    "puntuacion": {
     "vida": 12,
     "narrativa": 10,
@@ -11084,14 +11183,15 @@
      "Competencia de Bankr, Zora y otros launchpads"
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   },
   {
    "cg": "aavegotchi",
    "ticker": "GHST",
    "nombre": "Aavegotchi",
    "tier": "L",
-   "score": 51,
+   "score": 44,
    "puntuacion": {
     "vida": 10,
     "narrativa": 9,
@@ -11193,7 +11293,8 @@
      "Narrativa NFT y metaverso de 2021 agotada."
     ],
     "revision": null
-   }
+   },
+   "score_anterior": 51
   }
  ],
  "apuestas_texto": "Lotería x100-x1000: 10 apuestas de 1.000 €. Probabilidad estimada de llegar al millón: 1-2 %. Resultado típico en un buen ciclo: 20.000-80.000 €. Escalera de ventas obligatoria (x5/x10/x30/x100). Ninguna está en Revolut.",
@@ -11216,12 +11317,12 @@
     "liquidez": 5
    },
    "categoria": "Infraestructura de staking de Ethereum (DVT / restaking, bApps)",
-   "mc_eur": 29961389,
+   "mc_eur": 29625452,
    "fdv_eur": 29961389,
-   "precio_eur": 2.04,
-   "momento": "Esperar señal (objetivo ≤ 1.8 €)",
-   "momento_estado": "esperar",
-   "precio_objetivo_eur": 1.8,
+   "precio_eur": 2.02,
+   "momento": "Cerca del suelo: tramo pequeño, resto con señal",
+   "momento_estado": "cerca",
+   "precio_objetivo_eur": 1.78,
    "exchanges_cex": [
     "binance",
     "bitvavo",
@@ -11283,9 +11384,9 @@
     "liquidez": 5
    },
    "categoria": "IA / ML financiero (DeSci, fondo cuantitativo)",
-   "mc_eur": 60995413,
+   "mc_eur": 60312789,
    "fdv_eur": 89946481,
-   "precio_eur": 8.49,
+   "precio_eur": 8.38,
    "momento": "Esperar señal (objetivo ≤ 7.06 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 7.06,
@@ -11354,12 +11455,12 @@
     "liquidez": 3
    },
    "categoria": "DePIN (ancho de banda / dVPN)",
-   "mc_eur": 3264886,
+   "mc_eur": 3313703,
    "fdv_eur": 3264886,
-   "precio_eur": null,
-   "momento": "sin datos",
-   "momento_estado": null,
-   "precio_objetivo_eur": null,
+   "precio_eur": 0.10217,
+   "momento": "Sobrecomprado: esperar retroceso",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.0698,
    "exchanges_cex": [
     "mxc"
    ],
@@ -11393,12 +11494,12 @@
     "liquidez": 5
    },
    "categoria": "PoW / merge-mining (con intento de agentes IA)",
-   "mc_eur": 7449510,
+   "mc_eur": 7465614,
    "fdv_eur": 7449510,
-   "precio_eur": 0.00644161,
+   "precio_eur": 0.00645487,
    "momento": "Cerca del suelo: tramo pequeño, resto con señal",
    "momento_estado": "cerca",
-   "precio_objetivo_eur": 0.00567,
+   "precio_objetivo_eur": 0.00568,
    "exchanges_cex": [
     "kraken",
     "gate",
@@ -11433,14 +11534,17 @@
     "liquidez": 4
    },
    "categoria": "Pagos / L1",
-   "mc_eur": 3335119,
+   "mc_eur": 3368891,
    "fdv_eur": 4669166.6,
-   "precio_eur": null,
-   "momento": "sin datos",
-   "momento_estado": null,
-   "precio_objetivo_eur": null,
-   "exchanges_cex": null,
-   "exchanges_dex": null,
+   "precio_eur": 0.00024285,
+   "momento": "Esperar señal (objetivo ≤ 0.000214 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.000214,
+   "exchanges_cex": [
+    "kucoin",
+    "gate"
+   ],
+   "exchanges_dex": [],
    "exchanges_texto": "Gate, MEXC, CoinEx (no verificado)",
    "disponible_revolut": "desconocido",
    "accion": "Especulativa: no comprar sin métricas de uso.",
@@ -11468,9 +11572,9 @@
     "liquidez": 3
    },
    "categoria": "Privacidad / DePIN",
-   "mc_eur": 18614395,
+   "mc_eur": 18757575,
    "fdv_eur": 22035288,
-   "precio_eur": 0.02203529,
+   "precio_eur": 0.02220501,
    "momento": "Esperar señal (objetivo ≤ 0.0139 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.0139,
@@ -11513,12 +11617,12 @@
     "liquidez": 5
    },
    "categoria": "DePIN / computación descentralizada para IA",
-   "mc_eur": 4134445,
+   "mc_eur": 4070810,
    "fdv_eur": 5890022,
-   "precio_eur": null,
-   "momento": "sin datos",
-   "momento_estado": null,
-   "precio_objetivo_eur": null,
+   "precio_eur": 0.0116002,
+   "momento": "Esperar señal (objetivo ≤ 0.00835 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.00835,
    "exchanges_cex": [
     "gdax",
     "kucoin",
@@ -11553,12 +11657,12 @@
     "liquidez": 5
    },
    "categoria": "DeFi / staking líquido Solana",
-   "mc_eur": 19481073,
+   "mc_eur": 19554770,
    "fdv_eur": 38962146.0,
-   "precio_eur": null,
-   "momento": "sin datos",
-   "momento_estado": null,
-   "precio_objetivo_eur": null,
+   "precio_eur": 0.03943719,
+   "momento": "Esperar señal (objetivo ≤ 0.0191 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.0191,
    "exchanges_cex": [
     "kraken",
     "bybit_spot",
@@ -11595,12 +11699,12 @@
     "liquidez": 5
    },
    "categoria": "DeFi / DEX (Hedera)",
-   "mc_eur": 7878375,
+   "mc_eur": 7778619,
    "fdv_eur": 8472367,
-   "precio_eur": null,
-   "momento": "sin datos",
-   "momento_estado": null,
-   "precio_objetivo_eur": null,
+   "precio_eur": 0.00836495,
+   "momento": "Oportunidad: comprar tramo ahora",
+   "momento_estado": "L2",
+   "precio_objetivo_eur": 0.00736,
    "exchanges_cex": [
     "kraken",
     "saucerswap-v2",
@@ -11634,12 +11738,12 @@
     "liquidez": 5
    },
    "categoria": "IA / agentes (x402) sobre datos de carteras",
-   "mc_eur": 6959923,
+   "mc_eur": 6835992,
    "fdv_eur": 7058745,
-   "precio_eur": null,
-   "momento": "sin datos",
-   "momento_estado": null,
-   "precio_objetivo_eur": null,
+   "precio_eur": 0.04629429,
+   "momento": "Zona de compra: primer tramo",
+   "momento_estado": "L1",
+   "precio_objetivo_eur": 0.0407,
    "exchanges_cex": [
     "binance",
     "kucoin",
@@ -11680,9 +11784,9 @@
     "liquidez": 5
    },
    "categoria": "Pagos / consumo (viajes y fidelización)",
-   "mc_eur": 16553473,
+   "mc_eur": 16449022,
    "fdv_eur": 17878109,
-   "precio_eur": 0.236931,
+   "precio_eur": 0.235507,
    "momento": "Esperar señal (objetivo ≤ 0.133 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.133,
@@ -11743,26 +11847,34 @@
      "SANC",
      "SAUCE"
     ]
-   }
-  ],
-  "calidad": [
-   {
-    "exchange": "Kraken",
-    "id": "kraken",
-    "cubre": [
-     "AVA",
-     "QUAI",
-     "SANC",
-     "SAUCE"
-    ]
    },
    {
     "exchange": "KuCoin",
     "id": "kucoin",
     "cubre": [
+     "NIM"
+    ]
+   }
+  ],
+  "calidad": [
+   {
+    "exchange": "KuCoin",
+    "id": "kucoin",
+    "cubre": [
      "ADX",
+     "AVA",
+     "NIM",
      "NYM",
      "SSV"
+    ]
+   },
+   {
+    "exchange": "Kraken",
+    "id": "kraken",
+    "cubre": [
+     "QUAI",
+     "SANC",
+     "SAUCE"
     ]
    },
    {
@@ -11774,9 +11886,7 @@
    }
   ],
   "solo_dex": [],
-  "sin_datos": [
-   "NIM"
-  ],
+  "sin_datos": [],
   "generado": "2026-11-07"
  },
  "recomendadas_generado": "2026-11-07",
@@ -11894,7 +12004,7 @@
     "veredicto": "x100 llevaría la capitalización a 326 M€; techo plausible en una manía: 150 M€."
    },
    "precio_objetivo_eur": 0.0899,
-   "precio_ref_eur": 0.102209
+   "precio_ref_eur": 0.10217
   },
   {
    "cg": "nimiq-2",
@@ -11999,8 +12109,8 @@
     "posible_por_tamano": true,
     "veredicto": "x100 llevaría la capitalización a 334 M€; techo plausible en una manía: 80 M€."
    },
-   "precio_objetivo_eur": null,
-   "precio_ref_eur": null
+   "precio_objetivo_eur": 0.000214,
+   "precio_ref_eur": 0.00024285
   },
   {
    "cg": "nym",
@@ -12112,8 +12222,8 @@
     "posible_por_tamano": true,
     "veredicto": "x100 llevaría la capitalización a 1,861 M€; techo plausible en una manía: 400 M€."
    },
-   "precio_objetivo_eur": 0.0194,
-   "precio_ref_eur": 0.02203529
+   "precio_objetivo_eur": 0.0195,
+   "precio_ref_eur": 0.02220501
   },
   {
    "cg": "aleph",
@@ -12226,7 +12336,7 @@
     "veredicto": "x100 llevaría la capitalización a 413 M€; techo plausible en una manía: 120 M€."
    },
    "precio_objetivo_eur": 0.0102,
-   "precio_ref_eur": 0.01160281
+   "precio_ref_eur": 0.0116002
   },
   {
    "cg": "sanctum-2",
@@ -12336,8 +12446,8 @@
     "posible_por_tamano": true,
     "veredicto": "x100 llevaría la capitalización a 1,948 M€; techo plausible en una manía: 400 M€."
    },
-   "precio_objetivo_eur": 0.0346,
-   "precio_ref_eur": 0.03932887
+   "precio_objetivo_eur": 0.0347,
+   "precio_ref_eur": 0.03943719
   },
   {
    "cg": "saucerswap",
@@ -12444,8 +12554,8 @@
     "posible_por_tamano": true,
     "veredicto": "x100 llevaría la capitalización a 788 M€; techo plausible en una manía: 200 M€."
    },
-   "precio_objetivo_eur": 0.00735,
-   "precio_ref_eur": 0.00835453
+   "precio_objetivo_eur": 0.00736,
+   "precio_ref_eur": 0.00836495
   },
   {
    "cg": "adex",
@@ -12548,8 +12658,8 @@
     "posible_por_tamano": true,
     "veredicto": "x100 llevaría la capitalización a 696 M€; techo plausible en una manía: 100 M€."
    },
-   "precio_objetivo_eur": 0.0409,
-   "precio_ref_eur": 0.0464835
+   "precio_objetivo_eur": 0.0407,
+   "precio_ref_eur": 0.04629429
   }
  ],
  "cribado_todas": [
