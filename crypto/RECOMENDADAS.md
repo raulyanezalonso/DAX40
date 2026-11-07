@@ -1,6 +1,6 @@
 # Recomendadas: lista única con puntuación x100, momento de compra y brokers
 
-*Generado el 2026-11-06 · 38 monedas (cartera, candidatas externas, apuestas de lotería y cribado < 200 M€) · precios e indicadores del snapshot del worker · no es asesoramiento financiero*
+*Generado el 2026-11-07 · 47 monedas (cartera, candidatas externas, apuestas de lotería y cribado < 200 M€) · precios e indicadores del snapshot del worker · no es asesoramiento financiero*
 
 ## Puntuación x100 (0-100)
 
@@ -9,59 +9,68 @@ Matemática 0-30 (capitalización y dilución), vida del proyecto 0-20, narrativ
 | # | Moneda | Grupo | Score x100 | Cap. | FDV/Cap | Momento | Objetivo | Dónde |
 |---|---|---|---:|---:|---:|---|---:|---|
 | 1 | **OLAS** Olas (Autonolas) | loteria/apuesta | 79 | 15,6 M € | 1.6× | Esperar señal (objetivo ≤ 0.017 €) | 0,017 € | MEXC, ourbit |
-| 2 | **QUAI** Quai Network | loteria/apuesta | 79 | 7,7 M € | 1.0× | Esperar señal (objetivo ≤ 0.00582 €) | 0,00582 € | Kraken, Gate, MEXC, xt |
+| 2 | **QUAI** Quai Network | loteria/apuesta | 79 | 7,4 M € | 1.0× | Cerca del suelo: tramo pequeño, resto con señal | 0,00563 € | Kraken, Gate, MEXC, xt |
 | 3 | **AVA** Travala (AVA) | externa/candidata | 77 | 16,8 M € | 1.1× | Esperar señal (objetivo ≤ 0.133 €) | 0,133 € | Kraken, Binance, Bybit, KuCoin |
-| 4 | **NATIX** NATIX Network | loteria/apuesta | 77 | 8,0 M € | 1.6× | Esperar señal (objetivo ≤ 5.19e-05 €) | 5,19e-05 € | KuCoin, Gate, MEXC |
-| 5 | **ALPH** Alephium | loteria/apuesta | 75 | 4,5 M € | 1.6× | Oportunidad: comprar tramo ahora | 0,0235 € | Gate, Bitget, MEXC |
-| 6 | **PRIME** Echelon Prime | loteria/apuesta | 74 | 9,0 M € | 1.7× | Oportunidad: comprar tramo ahora | 0,122 € | Revolut · Coinbase, Bybit, Gate, bitunix |
-| 7 | **NMR** Numeraire | cartera/reforzar | 72 | 60,7 M € | 1.5× | Esperar señal (objetivo ≤ 7.06 €) | 7,06 € | Revolut · Kraken, Coinbase, Binance, Bitvavo |
-| 8 | **SN93** Bitcast (Bittensor SN93) | cribado/nueva | 71 | 13,3 M € | 1.0× | Zona de compra: primer tramo | 1,74 € | DEX: Subnet Tokens |
-| 9 | **CHEX** Chintai | loteria/apuesta | 70 | 10,9 M € | 1.0× | Esperar señal (objetivo ≤ 0.00717 €) | 0,00717 € | Kraken, Gate, MEXC, bitunix |
-| 10 | **BNKR** BankrCoin (Bankr) | externa/candidata | 69 | 23,7 M € | 1.0× | Esperar señal (objetivo ≤ 0.000186 €) | 0,000186 € | Kraken, Coinbase, Gate, MEXC |
-| 11 | **ERG** Ergo | loteria/apuesta | 69 | 14,8 M € | 1.2× | Oportunidad: comprar tramo ahora | 0,156 € | KuCoin, Gate, MEXC |
-| 12 | **ELA** Elastos | loteria/reserva | 68 | 9,1 M € | 1.1× | Esperar señal (objetivo ≤ 0.226 €) | 0,226 € | Revolut · Coinbase, KuCoin, Gate, huobi |
-| 13 | **UMBRA** Umbra Privacy | loteria/apuesta | 67 | 8,4 M € | 2.0× | Sobrecomprado: esperar retroceso | 0,153 € | DEX: MetaDAO (Futarchy AMM) |
-| 14 | **SN80** OpenRoboto (Bittensor subnet 80, antes 'AI Factory') | loteria/reserva | 67 | 6,8 M € | 1.0× | Oportunidad: comprar tramo ahora | 1,91 € | DEX: Subnet Tokens |
-| 15 | **OGN** Origin Protocol | cartera/reforzar | 66 | 16,0 M € | 1.9× | Esperar señal (objetivo ≤ 0.0143 €) | 0,0143 € | Revolut · Coinbase, Binance, KuCoin, Gate |
-| 16 | **GEOD** GEODNET | externa/candidata | 66 | 157,6 M € | 1.2× | Esperar señal (objetivo ≤ 0.165 €) | 0,165 € | Coinbase, Gate, MEXC, Upbit |
-| 17 | **MEZO** Mezo | loteria/reserva | 66 | 2,7 M € | 2.0× | Sobrecomprado: esperar retroceso | 0,00256 € | Kraken, Coinbase, KuCoin, Gate |
-| 18 | **COW** CoW Protocol | cartera/reforzar | 65 | 57,2 M € | 1.7× | Zona de compra: primer tramo | 0,0877 € | Revolut · Coinbase, Binance, Bitvavo, KuCoin |
-| 19 | **DEUS** XMAQUINA (DEUS) | loteria/apuesta | 65 | 7,4 M € | 1.8× | Esperar señal (objetivo ≤ 0.0115 €) | 0,0115 € | KuCoin, MEXC |
-| 20 | **AO** AO (ao Computer) | loteria/apuesta | 65 | 18,9 M € | 1.0× | Esperar señal (objetivo ≤ 1.53 €) | 1,53 € | Gate, MEXC, ourbit |
-| 21 | **SYRUP** Maple Finance | cartera/reforzar | 64 | 152,5 M € | 1.1× | Oportunidad: comprar tramo ahora | 0,115 € | Revolut · Kraken, Coinbase, Binance, Bitvavo |
-| 22 | **SSV** SSV Network | externa/candidata | 64 | 29,7 M € | 1.0× | Zona de compra: primer tramo | 1,78 € | Binance, Bitvavo, Bybit, OKX |
-| 23 | **CFG** Centrifuge | externa/candidata | 64 | 32,9 M € | 1.8× | Cerca del suelo: tramo pequeño, resto con señal | 0,076 € | Coinbase, Binance, Bitvavo, Bybit |
-| 24 | **CLANKER** tokenbot (Clanker) | externa/candidata | 62 | 13,8 M € | 1.0× | Esperar señal (objetivo ≤ 9.9 €) | 9,9 € | Kraken, Coinbase, KuCoin, Gate |
-| 25 | **POKT** Pocket Network | loteria/reserva | 62 | 14,1 M € | 1.0× | Zona de compra: primer tramo | 0,00521 € | KuCoin, Gate, MEXC, Upbit |
-| 26 | **INV** Inverse Finance | externa/candidata | 60 | 6,5 M € | 1.0× | Esperar señal (objetivo ≤ 7.54 €) | 7,54 € | Coinbase, MEXC, Curve (DEX), SushiSwap/Uniswap (DEX) |
-| 27 | **GPS** GoPlus Security | externa/candidata | 59 | 44,9 M € | 1.7× | Esperar señal (objetivo ≤ 0.00655 €) | 0,00655 € | Binance, Bybit, Gate, MEXC |
-| 28 | **NXPC** Nexpace (MapleStory Universe) | externa/candidata | 58 | 43,4 M € | 3.1× | Oportunidad: comprar tramo ahora | 0,12 € | Binance, Bybit, KuCoin, Gate |
-| 29 | **VELO** Velodrome Finance | externa/candidata | 58 | 11,3 M € | 5.6× | Esperar señal (objetivo ≤ 0.0149 €) | 0,0149 € | Revolut · bitkub |
-| 30 | **RAIL** Railgun | externa/candidata | 57 | 121,3 M € | 1.0× | Esperar señal (objetivo ≤ 1.23 €) | 1,23 € | DEX: Sushiswap, Uniswap V2 (Ethereum) |
-| 31 | **GIGA** Gigachad | loteria/opcional | 57 | 15,4 M € | 1.0× | Zona de compra: primer tramo | 0,00141 € | Revolut · Kraken, Coinbase, Gate, MEXC |
-| 32 | **ORCA** Orca | externa/candidata | 56 | 75,3 M € | 1.2× | Esperar señal (objetivo ≤ 0.918 €) | 0,918 € | Revolut · Kraken, Coinbase, Binance, Bitvavo |
-| 33 | **PYTH** Pyth Network | cartera/reforzar | 53 | 464,6 M € | 1.3× | Esperar señal (objetivo ≤ 0.0345 €) | 0,0345 € | Revolut · Kraken, Coinbase, Binance, Bybit |
-| 34 | **ATH** Aethir | externa/candidata | 53 | 90,4 M € | 2.1× | Esperar señal (objetivo ≤ 0.00336 €) | 0,00336 € | Revolut · Kraken, Coinbase, Bitvavo, Bybit |
-| 35 | **GMX** GMX | externa/candidata | 52 | 79,1 M € | 1.0× | Esperar señal (objetivo ≤ 5.62 €) | 5,62 € | Binance, Bitvavo, Bybit, OKX |
-| 36 | **WOO** WOO | externa/candidata | 52 | 20,7 M € | 1.0× | Esperar señal (objetivo ≤ 0.00925 €) | 0,00925 € | Revolut · Kraken, Binance, Bitvavo, Bybit |
-| 37 | **ORE** ORE (Regolith Labs) | externa/candidata | 52 | 55,9 M € | 1.0× | Esperar señal (objetivo ≤ 49.5 €) | 49,5 € | lbank |
-| 38 | **SN51** lium | externa/candidata | 52 | 127,2 M € | 1.0× | Esperar señal (objetivo ≤ 12.8 €) | 12,8 € | Kraken, MEXC |
+| 4 | **NATIX** NATIX Network | loteria/apuesta | 77 | 8,1 M € | 1.6× | Esperar señal (objetivo ≤ 5.19e-05 €) | 5,19e-05 € | KuCoin, Gate, MEXC |
+| 5 | **ALPH** Alephium | loteria/apuesta | 75 | 4,6 M € | 1.6× | Zona de compra: primer tramo | 0,0235 € | Gate, Bitget, MEXC |
+| 6 | **PRIME** Echelon Prime | loteria/apuesta | 74 | 9,0 M € | 1.7× | Oportunidad: comprar tramo ahora | 0,121 € | Revolut · Coinbase, Bybit, Gate, bitunix |
+| 7 | **NMR** Numeraire | cartera/reforzar | 72 | 60,5 M € | 1.5× | Esperar señal (objetivo ≤ 7.06 €) | 7,06 € | Revolut · Kraken, Coinbase, Binance, Bitvavo |
+| 8 | **SN93** Bitcast (Bittensor SN93) | cribado/nueva | 71 | 13,2 M € | 1.0× | Zona de compra: primer tramo | 1,74 € | DEX: Subnet Tokens |
+| 9 | **CHEX** Chintai | loteria/apuesta | 70 | 11,4 M € | 1.0× | Esperar señal (objetivo ≤ 0.00717 €) | 0,00717 € | Kraken, Gate, MEXC, bitunix |
+| 10 | **SN23** Trishool (Bittensor SN23; CoinGecko aun la llama Nuance) | cribado/nueva | 70 | 7,3 M € | 1.0× | Esperar señal (objetivo ≤ 0.768 €) | 0,768 € | DEX: Subnet Tokens |
+| 11 | **NYM** Nym | cribado/nueva | 70 | 19,1 M € | 1.2× | Esperar señal (objetivo ≤ 0.0139 €) | 0,0139 € | Bybit, KuCoin, Gate, Bitget |
+| 12 | **BNKR** BankrCoin (Bankr) | externa/candidata | 69 | 23,8 M € | 1.0× | Esperar señal (objetivo ≤ 0.000186 €) | 0,000186 € | Kraken, Coinbase, Gate, MEXC |
+| 13 | **ERG** Ergo | loteria/apuesta | 69 | 15,2 M € | 1.2× | Oportunidad: comprar tramo ahora | 0,16 € | KuCoin, Gate, MEXC |
+| 14 | **SN75** Hippius (Bittensor SN75) | cribado/nueva | 69 | 17,7 M € | 1.0× | Zona de compra: primer tramo | 2,98 € | MEXC |
+| 15 | **NAVX** NAVI Protocol | cribado/nueva | 69 | 6,9 M € | 1.2× | Esperar señal (objetivo ≤ 0.00628 €) | 0,00628 € | Bybit, OKX, KuCoin, MEXC |
+| 16 | **ELA** Elastos | loteria/reserva | 68 | 8,8 M € | 1.1× | Esperar señal (objetivo ≤ 0.226 €) | 0,226 € | Revolut · Coinbase, KuCoin, Gate, huobi |
+| 17 | **SN53** engy (Bittensor SN53; CoinGecko aun la llama EfficientFrontier) | cribado/nueva | 68 | 35,3 M € | 1.0× | Esperar señal (objetivo ≤ 4.76 €) | 4,76 € | DEX: Subnet Tokens |
+| 18 | **SN110** Green Compute (Bittensor SN110, ex Rich Kids of TAO) | cribado/nueva | 68 | 19,2 M € | 1.0× | Esperar señal (objetivo ≤ 1.21 €) | 1,21 € | DEX: Subnet Tokens |
+| 19 | **MASK** Nullmask | cribado/nueva | 68 | 9,1 M € | 1.7× | Zona de compra: primer tramo | 0,0138 € | MEXC, lbank, kcex |
+| 20 | **UMBRA** Umbra Privacy | loteria/apuesta | 67 | 8,7 M € | 2.0× | Sobrecomprado: esperar retroceso | 0,153 € | DEX: MetaDAO (Futarchy AMM) |
+| 21 | **SN80** OpenRoboto (Bittensor subnet 80, antes 'AI Factory') | loteria/reserva | 67 | 6,7 M € | 1.0× | Oportunidad: comprar tramo ahora | 2,35 € | DEX: Subnet Tokens |
+| 22 | **VANTA** Vanta Network (Bittensor SN8, ex Proprietary Trading Network) | cribado/nueva | 67 | 37,9 M € | 1.0× | Esperar señal (objetivo ≤ 4.82 €) | 4,82 € | Kraken |
+| 23 | **OGN** Origin Protocol | cartera/reforzar | 66 | 15,9 M € | 1.9× | Esperar señal (objetivo ≤ 0.0143 €) | 0,0143 € | Revolut · Coinbase, Binance, KuCoin, Gate |
+| 24 | **GEOD** GEODNET | externa/candidata | 66 | 182,8 M € | 1.2× | Esperar señal (objetivo ≤ 0.165 €) | 0,165 € | Coinbase, Gate, MEXC, Upbit |
+| 25 | **MEZO** Mezo | loteria/reserva | 66 | 2,5 M € | 2.0× | Sobrecomprado: esperar retroceso | 0,00256 € | Kraken, Coinbase, KuCoin, Gate |
+| 26 | **COW** CoW Protocol | cartera/reforzar | 65 | 56,9 M € | 1.7× | Zona de compra: primer tramo | 0,0872 € | Revolut · Coinbase, Binance, Bitvavo, KuCoin |
+| 27 | **DEUS** XMAQUINA (DEUS) | loteria/apuesta | 65 | 7,3 M € | 1.8× | Esperar señal (objetivo ≤ 0.0114 €) | 0,0114 € | KuCoin, MEXC |
+| 28 | **AO** AO (ao Computer) | loteria/apuesta | 65 | 19,5 M € | 1.0× | Esperar señal (objetivo ≤ 1.57 €) | 1,57 € | Gate, MEXC, ourbit |
+| 29 | **SN14** Cacheon (Bittensor SN14, ex TAOHash) | cribado/nueva | 65 | 9,5 M € | 1.0× | Esperar señal (objetivo ≤ 1.65 €) | 1,65 € | DEX: Subnet Tokens |
+| 30 | **SYRUP** Maple Finance | cartera/reforzar | 64 | 148,1 M € | 1.1× | Oportunidad: comprar tramo ahora | 0,112 € | Revolut · Kraken, Coinbase, Binance, Bitvavo |
+| 31 | **SSV** SSV Network | externa/candidata | 64 | 29,5 M € | 1.0× | Cerca del suelo: tramo pequeño, resto con señal | 1,76 € | Binance, Bitvavo, Bybit, OKX |
+| 32 | **CFG** Centrifuge | externa/candidata | 64 | 32,9 M € | 1.8× | Cerca del suelo: tramo pequeño, resto con señal | 0,0762 € | Coinbase, Binance, Bitvavo, Bybit |
+| 33 | **CLANKER** tokenbot (Clanker) | externa/candidata | 62 | 13,5 M € | 1.0× | Esperar señal (objetivo ≤ 9.9 €) | 9,9 € | Kraken, Coinbase, KuCoin, Gate |
+| 34 | **POKT** Pocket Network | loteria/reserva | 62 | 14,0 M € | 1.0× | Zona de compra: primer tramo | 0,00518 € | KuCoin, Gate, MEXC, Upbit |
+| 35 | **INV** Inverse Finance | externa/candidata | 60 | 6,5 M € | 1.0× | Esperar señal (objetivo ≤ 7.54 €) | 7,54 € | Coinbase, MEXC, Curve (DEX), SushiSwap/Uniswap (DEX) |
+| 36 | **GPS** GoPlus Security | externa/candidata | 59 | 45,2 M € | 1.7× | Esperar señal (objetivo ≤ 0.00659 €) | 0,00659 € | Binance, Bybit, Gate, MEXC |
+| 37 | **NXPC** Nexpace (MapleStory Universe) | externa/candidata | 58 | 44,3 M € | 3.1× | Zona de compra: primer tramo | 0,123 € | Binance, Bybit, KuCoin, Gate |
+| 38 | **VELO** Velodrome Finance | externa/candidata | 58 | 11,2 M € | 5.6× | Esperar señal (objetivo ≤ 0.0149 €) | 0,0149 € | Revolut · bitkub |
+| 39 | **RAIL** Railgun | externa/candidata | 57 | 116,7 M € | 1.0× | Esperar señal (objetivo ≤ 1.23 €) | 1,23 € | DEX: Sushiswap, Uniswap V2 (Ethereum) |
+| 40 | **GIGA** Gigachad | loteria/opcional | 57 | 15,5 M € | 1.0× | Zona de compra: primer tramo | 0,00142 € | Revolut · Kraken, Coinbase, Gate, MEXC |
+| 41 | **ORCA** Orca | externa/candidata | 56 | 75,1 M € | 1.2× | Esperar señal (objetivo ≤ 0.918 €) | 0,918 € | Revolut · Kraken, Coinbase, Binance, Bitvavo |
+| 42 | **PYTH** Pyth Network | cartera/reforzar | 53 | 457,1 M € | 1.3× | Esperar señal (objetivo ≤ 0.0345 €) | 0,0345 € | Revolut · Kraken, Coinbase, Binance, Bybit |
+| 43 | **ATH** Aethir | externa/candidata | 53 | 91,1 M € | 2.1× | Esperar señal (objetivo ≤ 0.00336 €) | 0,00336 € | Revolut · Kraken, Coinbase, Bitvavo, Bybit |
+| 44 | **GMX** GMX | externa/candidata | 52 | 77,3 M € | 1.0× | Esperar señal (objetivo ≤ 5.62 €) | 5,62 € | Binance, Bitvavo, Bybit, OKX |
+| 45 | **WOO** WOO | externa/candidata | 52 | 20,3 M € | 1.0× | Esperar señal (objetivo ≤ 0.00925 €) | 0,00925 € | Revolut · Kraken, Binance, Bitvavo, Bybit |
+| 46 | **ORE** ORE (Regolith Labs) | externa/candidata | 52 | 58,1 M € | 1.0× | Esperar señal (objetivo ≤ 49.5 €) | 49,5 € | lbank |
+| 47 | **SN51** lium | externa/candidata | 52 | 127,1 M € | 1.0× | Esperar señal (objetivo ≤ 12.8 €) | 12,8 € | Kraken, MEXC |
 
 ## Brokers: el mínimo que lo cubre todo
 
 - **Revolut / Revolut X** (según la investigación): ATH, COW, ELA, GIGA, NMR, OGN, ORCA, PRIME, PYTH, SYRUP, VELO, WOO.
 
 **Opción A, menos brokers posible:**
-- **MEXC**: ALPH, AO, AVA, BNKR, CFG, CHEX, CLANKER, DEUS, ERG, GEOD, GMX, GPS, NATIX, NXPC, OLAS, POKT, QUAI, SN51, SSV.
-- **Kraken**: MEZO.
+- **MEXC**: ALPH, AO, AVA, BNKR, CFG, CHEX, CLANKER, DEUS, ERG, GEOD, GMX, GPS, MASK, NATIX, NAVX, NXPC, NYM, OLAS, POKT, QUAI, SN51, SN75, SSV.
+- **Kraken**: MEZO, VANTA.
 - **lbank**: ORE.
 
 **Opción B (recomendada): primero exchanges conocidos (Kraken, Coinbase, Binance, Bitvavo, KuCoin) y el resto solo para lo que no cubran:**
-- **KuCoin**: AVA, CFG, CLANKER, DEUS, ERG, GMX, MEZO, NATIX, NXPC, POKT, SSV.
-- **Kraken**: BNKR, CHEX, QUAI, SN51.
-- **MEXC**: ALPH, AO, GEOD, GPS, OLAS.
+- **KuCoin**: AVA, CFG, CLANKER, DEUS, ERG, GMX, MEZO, NATIX, NAVX, NXPC, NYM, POKT, SSV.
+- **Kraken**: BNKR, CHEX, QUAI, SN51, VANTA.
+- **MEXC**: ALPH, AO, GEOD, GPS, MASK, OLAS, SN75.
 - **lbank**: ORE.
-- **Solo DEX (wallet propia)**: SN93 (Subnet Tokens); UMBRA (MetaDAO (Futarchy AMM)); SN80 (Subnet Tokens); INV (DEX); RAIL (Sushiswap, Uniswap V2 (Ethereum)).
+- **Solo DEX (wallet propia)**: SN93 (Subnet Tokens); SN23 (Subnet Tokens); SN53 (Subnet Tokens); SN110 (Subnet Tokens); UMBRA (MetaDAO (Futarchy AMM)); SN80 (Subnet Tokens); SN14 (Subnet Tokens); INV (DEX); RAIL (Sushiswap, Uniswap V2 (Ethereum)).
 
 Los mercados proceden de CoinGecko (tickers con volumen ≥ 5.000 $ y sin anomalías). Revolut X no aparece en CoinGecko, por eso su disponibilidad viene de la investigación y conviene confirmarla en la app.
 

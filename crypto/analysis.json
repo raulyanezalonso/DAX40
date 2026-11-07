@@ -7951,9 +7951,9 @@
     "liquidez": 3
    },
    "categoria": "IA / agentes autónomos",
-   "mc_eur": 15635184,
-   "fdv_eur": 24729732,
-   "precio_eur": 0.052205,
+   "mc_eur": 15606464,
+   "fdv_eur": 24684309,
+   "precio_eur": 0.052109,
    "momento": "Esperar señal (objetivo ≤ 0.017 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.017,
@@ -7989,12 +7989,12 @@
     "liquidez": 5
    },
    "categoria": "Capa 1 proof-of-work",
-   "mc_eur": 7699121,
-   "fdv_eur": 7699121,
-   "precio_eur": 0.00661378,
-   "momento": "Esperar señal (objetivo ≤ 0.00582 €)",
-   "momento_estado": "esperar",
-   "precio_objetivo_eur": 0.00582,
+   "mc_eur": 7391573,
+   "fdv_eur": 7391573,
+   "precio_eur": 0.00639586,
+   "momento": "Cerca del suelo: tramo pequeño, resto con señal",
+   "momento_estado": "cerca",
+   "precio_objetivo_eur": 0.00563,
    "exchanges_cex": [
     "kraken",
     "gate",
@@ -8027,9 +8027,9 @@
     "liquidez": 5
    },
    "categoria": "Consumo / viajes",
-   "mc_eur": 16805282,
-   "fdv_eur": 18150069,
-   "precio_eur": 0.240535,
+   "mc_eur": 16751757,
+   "fdv_eur": 18092261,
+   "precio_eur": 0.239769,
    "momento": "Esperar señal (objetivo ≤ 0.133 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.133,
@@ -8078,9 +8078,9 @@
     "liquidez": 4
    },
    "categoria": "DePIN / Physical AI",
-   "mc_eur": 7987267,
-   "fdv_eur": 12469323,
-   "precio_eur": 0.00012587,
+   "mc_eur": 8058554,
+   "fdv_eur": 12580614,
+   "precio_eur": 0.00012699,
    "momento": "Esperar señal (objetivo ≤ 5.19e-05 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 5.19e-05,
@@ -8118,11 +8118,11 @@
     "liquidez": 4
    },
    "categoria": "Capa 1 proof-of-work",
-   "mc_eur": 4456824,
-   "fdv_eur": 7117193,
-   "precio_eur": 0.03155847,
-   "momento": "Oportunidad: comprar tramo ahora",
-   "momento_estado": "L2",
+   "mc_eur": 4550778,
+   "fdv_eur": 7239032,
+   "precio_eur": 0.03209532,
+   "momento": "Zona de compra: primer tramo",
+   "momento_estado": "L1",
    "precio_objetivo_eur": 0.0235,
    "exchanges_cex": [
     "gate",
@@ -8157,12 +8157,12 @@
     "liquidez": 5
    },
    "categoria": "Gaming (Parallel TCG)",
-   "mc_eur": 9049328,
-   "fdv_eur": 15401445,
-   "precio_eur": 0.138613,
+   "mc_eur": 8986358,
+   "fdv_eur": 15294273,
+   "precio_eur": 0.137648,
    "momento": "Oportunidad: comprar tramo ahora",
    "momento_estado": "L2",
-   "precio_objetivo_eur": 0.122,
+   "precio_objetivo_eur": 0.121,
    "exchanges_cex": [
     "gdax",
     "bybit_spot",
@@ -8199,9 +8199,9 @@
     "liquidez": 5
    },
    "categoria": "IA",
-   "mc_eur": 60688531,
-   "fdv_eur": 89493940,
-   "precio_eur": 8.45,
+   "mc_eur": 60498505,
+   "fdv_eur": 89213718,
+   "precio_eur": 8.42,
    "momento": "Esperar señal (objetivo ≤ 7.06 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 7.06,
@@ -8267,9 +8267,9 @@
     "liquidez": 1
    },
    "categoria": "Bittensor / economia de creadores y marketing",
-   "mc_eur": 13310690,
-   "fdv_eur": 13310690,
-   "precio_eur": 3.01,
+   "mc_eur": 13218490,
+   "fdv_eur": 13218490,
+   "precio_eur": 2.98,
    "momento": "Zona de compra: primer tramo",
    "momento_estado": "L1",
    "precio_objetivo_eur": 1.74,
@@ -8302,9 +8302,9 @@
     "liquidez": 5
    },
    "categoria": "RWA / tokenización regulada",
-   "mc_eur": 10906524,
-   "fdv_eur": 10906524,
-   "precio_eur": 0.00873276,
+   "mc_eur": 11402292,
+   "fdv_eur": 11402292,
+   "precio_eur": 0.00912972,
    "momento": "Esperar señal (objetivo ≤ 0.00717 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.00717,
@@ -8324,6 +8324,84 @@
    "prob_x100": "1-3 %"
   },
   {
+   "cg": "nuance-2",
+   "ticker": "SN23",
+   "nombre": "Trishool (Bittensor SN23; CoinGecko aun la llama Nuance)",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 70,
+   "desglose": {
+    "matematica": 27,
+    "vida": 18,
+    "narrativa": 13,
+    "negocio": 7,
+    "comunidad": 4,
+    "liquidez": 1
+   },
+   "categoria": "IA / seguridad y alineamiento de agentes (Bittensor)",
+   "mc_eur": 7253195,
+   "fdv_eur": 7253195,
+   "precio_eur": 1.42,
+   "momento": "Esperar señal (objetivo ≤ 0.768 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.768,
+   "exchanges_cex": [],
+   "exchanges_dex": [
+    "Subnet Tokens"
+   ],
+   "exchanges_texto": "Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura aún como \"Nuance\"; no en Revolut ni Kraken",
+   "disponible_revolut": "no",
+   "accion": "Apuesta pequeña (300-500 €) en un tramo con señal L1/L2; segundo tramo solo cuando Astroware publique ingresos y reparto o recompra en alpha. Escalera de ventas desde x5.",
+   "tesis": "Trishool (SN23): red de red-teaming sobre Bittensor en la que los mineros atacan (jailbreaks, prompt injection, abuso de herramientas) un modelo guardián que se reentrena con cada ataque; su producto HaloGuard (modelos abiertos de 0,8-4 B parámetros, versión 2.0 el 5-nov-2026) es estado del arte en seguridad de prompts y lo usa Chutes (SN64) en producción, con programas de Google, Anthropic y OpenAI. 7 M€ de capitalización, 100 % circulante y el 33 % de la emisión diaria quemada. Riesgos: el token sigue etiquetado como Nuance (proyecto abandonado) en CoinGecko/CMC, equipo no público, ingresos aún sin cuantificar (la empresa comercial Astroware es una entidad separada) y pool de solo ~2,2 M$.",
+   "x_plausible": 18.0,
+   "posicion_eur": 0,
+   "prob_x100": "2-3 %"
+  },
+  {
+   "cg": "nym",
+   "ticker": "NYM",
+   "nombre": "Nym",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 70,
+   "desglose": {
+    "matematica": 23,
+    "vida": 17,
+    "narrativa": 12,
+    "negocio": 8,
+    "comunidad": 6,
+    "liquidez": 4
+   },
+   "categoria": "Privacidad / VPN descentralizada",
+   "mc_eur": 19064725,
+   "fdv_eur": 22568377,
+   "precio_eur": 0.02256838,
+   "momento": "Esperar señal (objetivo ≤ 0.0139 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.0139,
+   "exchanges_cex": [
+    "bybit_spot",
+    "kucoin",
+    "gate",
+    "bitget",
+    "mxc",
+    "bitfinex",
+    "kcex"
+   ],
+   "exchanges_dex": [
+    "Uniswap V3 (Ethereum)"
+   ],
+   "exchanges_texto": "KuCoin, Bybit, Gate, Bitfinex, MEXC (no está en Revolut; Kraken no aparece en los mercados de CoinGecko).",
+   "disponible_revolut": "no",
+   "accion": "Primer tramo con señal L1 del panel (hoy RSI ~43 y +70 % sobre el mínimo de 90 días: esperar un retroceso) y segundo tramo con señal L2; se compra en KuCoin o Bybit; vigilar la integración de la wallet dentro de la app (roadmap 2026) y cualquier nueva recompra financiada con ingresos. Escalera de ventas desde x5.",
+   "tesis": "Mixnet de privacidad con producto de consumo real: NymVPN (iOS/Android/escritorio) con releases cada 2-4 semanas en 2026 y pago por uso anónimo en NYM, equipo suizo público (Harry Halpin) respaldado por a16z, Polychain y Binance Labs, 84 % del suministro en circulación 19,5 M€ de capitalización tras marcar mínimo histórico en agosto de 2026 (hoy cotiza ~75 % por encima de ese mínimo y aún -99 % desde el pico de 2022, ~300-400 M$). Pega principal: el token es opcional para usar la VPN y la empresa no publica suscriptores ni ingresos, así que una subida fuerte dependería de la narrativa de privacidad (como ZEC a finales de 2025) más que del flujo de caja; la recompra de 1 M$ de 2025 fue puntual.",
+   "x_plausible": 17.3,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
+  },
+  {
    "cg": "bankercoin-2",
    "ticker": "BNKR",
    "nombre": "BankrCoin (Bankr)",
@@ -8340,9 +8418,9 @@
     "liquidez": 5
    },
    "categoria": "IA / agentes",
-   "mc_eur": 23707463,
-   "fdv_eur": 23707463,
-   "precio_eur": 0.00023707,
+   "mc_eur": 23771918,
+   "fdv_eur": 23771918,
+   "precio_eur": 0.00023772,
    "momento": "Esperar señal (objetivo ≤ 0.000186 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.000186,
@@ -8391,12 +8469,12 @@
     "liquidez": 4
    },
    "categoria": "Capa 1 proof-of-work",
-   "mc_eur": 14825233,
-   "fdv_eur": 17346878,
-   "precio_eur": 0.17748,
+   "mc_eur": 15191780,
+   "fdv_eur": 17775587,
+   "precio_eur": 0.181866,
    "momento": "Oportunidad: comprar tramo ahora",
    "momento_estado": "L2",
-   "precio_objetivo_eur": 0.156,
+   "precio_objetivo_eur": 0.16,
    "exchanges_cex": [
     "kucoin",
     "gate",
@@ -8410,6 +8488,87 @@
    "x_plausible": 50.1,
    "posicion_eur": 0,
    "prob_x100": "1-3 %"
+  },
+  {
+   "cg": "hippius",
+   "ticker": "SN75",
+   "nombre": "Hippius (Bittensor SN75)",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 69,
+   "desglose": {
+    "matematica": 23,
+    "vida": 18,
+    "narrativa": 12,
+    "negocio": 8,
+    "comunidad": 5,
+    "liquidez": 3
+   },
+   "categoria": "DePIN / nube y almacenamiento descentralizado (Bittensor)",
+   "mc_eur": 17655432,
+   "fdv_eur": 17655432,
+   "precio_eur": 3.39,
+   "momento": "Zona de compra: primer tramo",
+   "momento_estado": "L1",
+   "precio_objetivo_eur": 2.98,
+   "exchanges_cex": [
+    "mxc"
+   ],
+   "exchanges_dex": [
+    "Subnet Tokens"
+   ],
+   "exchanges_texto": "Kraken (SN75/USD), MEXC (SN75/USDT) y pool de la subnet; no en Revolut",
+   "disponible_revolut": "no",
+   "accion": "Apuesta pequeña (300-500 €) vía Kraken en un tramo con señal L1; sumar solo si publican ingresos reales y quemas ligadas a clientes. Escalera de ventas desde x5.",
+   "tesis": "Nube descentralizada sobre Bittensor (The Nerve Lab): almacenamiento compatible S3 sin tarifas de egreso, CDN, registro de modelos (alternativa a Hugging Face) y cómputo confidencial, con lanzamientos semanales (pushes el 6-nov-2026), clientes dentro de Bittensor (Vidaio, Ditto) y ya listada en Kraken y MEXC; 15 M€ de capitalización, 100 % circulante, 13 % del alpha quemado. Riesgos: ingresos minúsculos (<0,2 M$/año estimados) frente a la capitalización, el almacenamiento es un negocio de margen cero (Storj en quiebra), dispersión de producto con equipo pequeño y las quemas mezclan reciclaje de emisión con ingresos.",
+   "x_plausible": 6.8,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
+  },
+  {
+   "cg": "navi",
+   "ticker": "NAVX",
+   "nombre": "NAVI Protocol",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 69,
+   "desglose": {
+    "matematica": 27,
+    "vida": 16,
+    "narrativa": 8,
+    "negocio": 10,
+    "comunidad": 4,
+    "liquidez": 4
+   },
+   "categoria": "DeFi / lending en Sui",
+   "mc_eur": 6912729,
+   "fdv_eur": 8469743,
+   "precio_eur": 0.00846974,
+   "momento": "Esperar señal (objetivo ≤ 0.00628 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 0.00628,
+   "exchanges_cex": [
+    "bybit_spot",
+    "okex",
+    "kucoin",
+    "mxc",
+    "bitrue",
+    "biconomy",
+    "ourbit",
+    "coinw"
+   ],
+   "exchanges_dex": [
+    "Cetus"
+   ],
+   "exchanges_texto": "Bybit, KuCoin, Gate, MEXC y DEX de Sui (Cetus, Bluefin); no en Revolut",
+   "disponible_revolut": "no",
+   "accion": "Tramo pequeño con señal L2; el catalizador que cambia la tesis es un fee switch o una recompra con ingresos: si se anuncia, completar la posición. Vender la mitad en x5.",
+   "tesis": "El \"Aave de Sui\": mayor protocolo de préstamos de Sui con 126 M$ de TVL, 7,85 M$ de ingresos de protocolo en 12 meses y 7 M€ de capitalización (precio/ventas ~1x), repos actualizados el 4-nov-2026 y nuevos vaults institucionales (NAVI Prime, agosto 2026). Lo que la frena: el token no recibe nada de esos ingresos (sin recompra ni reparto, \"dudas sobre el control del equipo\"), el negocio se está encogiendo (255 k$ de ingresos en 30 días, un tercio del ritmo anual, TVL -10 % en una semana), quedan ~18 % de desbloqueos de insiders hasta febrero de 2027 y solo cotiza en exchanges de segundo nivel.",
+   "x_plausible": 11.8,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
   },
   {
    "cg": "elastos",
@@ -8428,9 +8587,9 @@
     "liquidez": 5
    },
    "categoria": "BTC-fi",
-   "mc_eur": 9131411,
-   "fdv_eur": 10373556,
-   "precio_eur": 0.395493,
+   "mc_eur": 8804467,
+   "fdv_eur": 10002138,
+   "precio_eur": 0.381332,
    "momento": "Esperar señal (objetivo ≤ 0.226 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.226,
@@ -8452,6 +8611,116 @@
    "prob_x100": "1-3 %"
   },
   {
+   "cg": "efficientfrontier",
+   "ticker": "SN53",
+   "nombre": "engy (Bittensor SN53; CoinGecko aun la llama EfficientFrontier)",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 68,
+   "desglose": {
+    "matematica": 18,
+    "vida": 18,
+    "narrativa": 13,
+    "negocio": 12,
+    "comunidad": 6,
+    "liquidez": 1
+   },
+   "categoria": "IA / inferencia descentralizada (Bittensor)",
+   "mc_eur": 35342883,
+   "fdv_eur": 35342883,
+   "precio_eur": 6.03,
+   "momento": "Esperar señal (objetivo ≤ 4.76 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 4.76,
+   "exchanges_cex": [],
+   "exchanges_dex": [
+    "Subnet Tokens"
+   ],
+   "exchanges_texto": "Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como \"EfficientFrontier\"; no en Revolut ni Kraken",
+   "disponible_revolut": "no",
+   "accion": "Tramo pequeño solo con señal L2 (ya ha corrido mucho); vender un tercio en x3 y otro en x5. Es la apuesta a que Bittensor premie la subnet de inferencia con más crecimiento.",
+   "tesis": "Engy (SN53): inferencia verificada y muy barata de modelos abiertos (DeepSeek, Qwen, GLM, Kimi K3) servida por mineros GPU con API compatible OpenAI/Anthropic; >50.000 M tokens procesados al día en octubre de 2026 (x5 en un mes), 49 M peticiones en 30 días, recompra y quema por uso (25.287 alpha, ~214 k$) y el alpha más líquido del cribado (~12.000 TAO/día); 28 M€ de capitalización. Riesgos: centralización (la mitad del tráfico lo sirve el clúster del propio operador y el validador maestro es suyo), cambio de operador y de negocio sin anuncio claro (CoinGecko aún muestra el proyecto antiguo), márgenes de inferencia mínimos en guerra de precios con Chutes, y ya ha subido +427 % en 200 días antes de caer -49 % desde el máximo.",
+   "x_plausible": 9.2,
+   "posicion_eur": 0,
+   "prob_x100": "1-3 %"
+  },
+  {
+   "cg": "rich-kids-of-tao",
+   "ticker": "SN110",
+   "nombre": "Green Compute (Bittensor SN110, ex Rich Kids of TAO)",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 68,
+   "desglose": {
+    "matematica": 23,
+    "vida": 17,
+    "narrativa": 12,
+    "negocio": 11,
+    "comunidad": 4,
+    "liquidez": 1
+   },
+   "categoria": "DePIN / computo GPU con energia verde (Bittensor)",
+   "mc_eur": 19227004,
+   "fdv_eur": 19227004,
+   "precio_eur": 5.78,
+   "momento": "Esperar señal (objetivo ≤ 1.21 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 1.21,
+   "exchanges_cex": [],
+   "exchanges_dex": [
+    "Subnet Tokens"
+   ],
+   "exchanges_texto": "Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como \"Rich Kids of TAO\"; no en Revolut ni Kraken",
+   "disponible_revolut": "no",
+   "accion": "No comprar ahora: esperar un retroceso del 40-50 % (señal L2/L3 del panel) y entrar con un tramo pequeño; vender un tercio en x3 y otro en x5.",
+   "tesis": "Green Compute (SN110): alquiler de GPU e inferencia (RTX 4090/5090 a 0,40-0,70 $/h) en la que solo cobran mineros con energía renovable verificada; detrás está Easy Compute (Josh Riddett, 9 años vendiendo hardware GPU en Reino Unido) con 240 RTX 5090 (~3 M$) y un segundo centro de datos de 4 M$; >82.000 $ de ingresos rentables en el primer mes y el 10 % de los ingresos a recompra y bloqueo de alpha; 15 M€ de capitalización. Riesgos: es el negocio de una sola empresa con una capa de incentivos encima, pool de solo 2,8 M$, ingresos no actualizados desde agosto, recompras pequeñas (8.200 $ en junio) y precio a -14 % del máximo tras +348 % en 200 días: la peor asimetría del grupo.",
+   "x_plausible": 8.4,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
+  },
+  {
+   "cg": "nullmask",
+   "ticker": "MASK",
+   "nombre": "Nullmask",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 68,
+   "desglose": {
+    "matematica": 25,
+    "vida": 14,
+    "narrativa": 12,
+    "negocio": 11,
+    "comunidad": 3,
+    "liquidez": 3
+   },
+   "categoria": "Privacidad",
+   "mc_eur": 9078706,
+   "fdv_eur": 15121282,
+   "precio_eur": 0.01572423,
+   "momento": "Zona de compra: primer tramo",
+   "momento_estado": "L1",
+   "precio_objetivo_eur": 0.0138,
+   "exchanges_cex": [
+    "mxc",
+    "lbank",
+    "kcex"
+   ],
+   "exchanges_dex": [
+    "Orca",
+    "Raydium"
+   ],
+   "exchanges_texto": "MEXC, LBank, KCEX y DEX de Solana (Meteora, Raydium, Orca); no en Revolut",
+   "disponible_revolut": "no",
+   "accion": "Billete de lotería pequeño (≤ 300 €) con señal L2; vigilar las comisiones mensuales en DeFiLlama y salir si bajan de 300 k$/mes dos meses seguidos. Escalera de ventas desde x3.",
+   "tesis": "Pool de privacidad multicadena (\"VPN para transacciones\") en Ethereum, Base, BNB, Robinhood Chain, Avalanche y Solana, con cribado AML, comisiones del 0,5 % al entrar y 0,5 % al salir (~1 M$/mes brutos en octubre de 2026, >50 M$ de volumen privado), recompensas en ZEC a los holders y recompras con el ZEC de la tesorería; fundador con historial en Zcash (Tomas Krnak) y 8 M€ de capitalización. Riesgos: dos meses de vida con máximo el 16-oct-2026 y -67 % desde entonces, token lanzado en una launchpad de Solana con circulante inconsistente entre fuentes, sin auditoría pública, TVL de solo 0,2 M$ (el dinero es de paso), parte de las \"comisiones\" de DeFiLlama son recompensas ZEC a la wallet del equipo, 10 % del suministro en airdrop de puntos hasta enero de 2027 y riesgo regulatorio de los mixers.",
+   "x_plausible": 9.3,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
+  },
+  {
    "cg": "umbra",
    "ticker": "UMBRA",
    "nombre": "Umbra Privacy",
@@ -8468,9 +8737,9 @@
     "liquidez": 1
    },
    "categoria": "Privacidad en Solana",
-   "mc_eur": 8353876,
-   "fdv_eur": 16499889,
-   "precio_eur": 0.603411,
+   "mc_eur": 8708878,
+   "fdv_eur": 17201059,
+   "precio_eur": 0.629053,
    "momento": "Sobrecomprado: esperar retroceso",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.153,
@@ -8503,12 +8772,12 @@
     "liquidez": 1
    },
    "categoria": "Robótica / subred de Bittensor",
-   "mc_eur": 6760787,
-   "fdv_eur": 6760787,
-   "precio_eur": 2.7,
+   "mc_eur": 6709964,
+   "fdv_eur": 6709964,
+   "precio_eur": 2.67,
    "momento": "Oportunidad: comprar tramo ahora",
    "momento_estado": "L2",
-   "precio_objetivo_eur": 1.91,
+   "precio_objetivo_eur": 2.35,
    "exchanges_cex": [],
    "exchanges_dex": [
     "Subnet Tokens"
@@ -8520,6 +8789,43 @@
    "x_plausible": 73.2,
    "posicion_eur": 0,
    "prob_x100": "1-3 %"
+  },
+  {
+   "cg": "proprietary-trading-network",
+   "ticker": "VANTA",
+   "nombre": "Vanta Network (Bittensor SN8, ex Proprietary Trading Network)",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 67,
+   "desglose": {
+    "matematica": 18,
+    "vida": 18,
+    "narrativa": 12,
+    "negocio": 9,
+    "comunidad": 5,
+    "liquidez": 5
+   },
+   "categoria": "Bittensor / IA aplicada al trading",
+   "mc_eur": 37905939,
+   "fdv_eur": 37905939,
+   "precio_eur": 6.72,
+   "momento": "Esperar señal (objetivo ≤ 4.82 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 4.82,
+   "exchanges_cex": [
+    "kraken"
+   ],
+   "exchanges_dex": [
+    "Subnet Tokens"
+   ],
+   "exchanges_texto": "Kraken (SN8/USD) y pool de la subnet; no en Revolut",
+   "disponible_revolut": "no",
+   "accion": "Posición \"beta a Bittensor\" vía Kraken en un tramo único con señal L1; no es un x100: vender la mitad en x3 y el resto en x5.",
+   "tesis": "Vanta Network (SN8, Taoshi): \"prop firm\" descentralizada en la que los mineros envían señales de trading (forex, cripto, acciones) puntuadas por retorno ajustado a riesgo; Vanta Trading (feb-2026) ofrece evaluaciones y pagos semanales verificables (récord de 120.000 $ a un trader en agosto), con commits diarios, listado en Kraken, el pool más profundo del cribado (88.500 TAO) y un owner que renuncia al 18 % de la emisión; 33 M€ de capitalización. Riesgos: sin ingresos publicados ni recompras verificables (las recompensas se pagan con emisión), riesgo regulatorio y reputacional del sector prop-firm, el 38 % del alpha en una sola cuenta y una capitalización que hace el x100 inalcanzable (sería más que todo TAO hoy).",
+   "x_plausible": 6.6,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
   },
   {
    "cg": "origin-protocol",
@@ -8538,9 +8844,9 @@
     "liquidez": 5
    },
    "categoria": "DeFi",
-   "mc_eur": 16012523,
-   "fdv_eur": 30117730,
-   "precio_eur": 0.02136517,
+   "mc_eur": 15868354,
+   "fdv_eur": 29849937,
+   "precio_eur": 0.0211752,
    "momento": "Esperar señal (objetivo ≤ 0.0143 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.0143,
@@ -8592,9 +8898,9 @@
     "liquidez": 5
    },
    "categoria": "DePIN",
-   "mc_eur": 157638987,
-   "fdv_eur": 196234484,
-   "precio_eur": 0.211456,
+   "mc_eur": 182760883,
+   "fdv_eur": 227509493,
+   "precio_eur": 0.245167,
    "momento": "Esperar señal (objetivo ≤ 0.165 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.165,
@@ -8638,9 +8944,9 @@
     "liquidez": 5
    },
    "categoria": "BTC-fi (capa 2 de Bitcoin)",
-   "mc_eur": 2650577,
-   "fdv_eur": 5301153,
-   "precio_eur": 0.00530115,
+   "mc_eur": 2491991,
+   "fdv_eur": 4983983,
+   "precio_eur": 0.00498398,
    "momento": "Sobrecomprado: esperar retroceso",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.00256,
@@ -8677,12 +8983,12 @@
     "liquidez": 5
    },
    "categoria": "DeFi",
-   "mc_eur": 57222433,
-   "fdv_eur": 99605938,
-   "precio_eur": 0.099606,
+   "mc_eur": 56922770,
+   "fdv_eur": 99084320,
+   "precio_eur": 0.099084,
    "momento": "Zona de compra: primer tramo",
    "momento_estado": "L1",
-   "precio_objetivo_eur": 0.0877,
+   "precio_objetivo_eur": 0.0872,
    "exchanges_cex": [
     "gdax",
     "binance",
@@ -8735,12 +9041,12 @@
     "liquidez": 4
    },
    "categoria": "Robótica / Physical AI (DAO con participaciones)",
-   "mc_eur": 7390069,
-   "fdv_eur": 13051745,
-   "precio_eur": 0.01305175,
-   "momento": "Esperar señal (objetivo ≤ 0.0115 €)",
+   "mc_eur": 7349758,
+   "fdv_eur": 12976921,
+   "precio_eur": 0.01297692,
+   "momento": "Esperar señal (objetivo ≤ 0.0114 €)",
    "momento_estado": "esperar",
-   "precio_objetivo_eur": 0.0115,
+   "precio_objetivo_eur": 0.0114,
    "exchanges_cex": [
     "kucoin",
     "mxc"
@@ -8774,12 +9080,12 @@
     "liquidez": 4
    },
    "categoria": "Computación descentralizada (Arweave)",
-   "mc_eur": 18914351,
-   "fdv_eur": 18914351,
-   "precio_eur": 3.09,
-   "momento": "Esperar señal (objetivo ≤ 1.53 €)",
+   "mc_eur": 19466589,
+   "fdv_eur": 19466589,
+   "precio_eur": 3.18,
+   "momento": "Esperar señal (objetivo ≤ 1.57 €)",
    "momento_estado": "esperar",
-   "precio_objetivo_eur": 1.53,
+   "precio_objetivo_eur": 1.57,
    "exchanges_cex": [
     "gate",
     "mxc",
@@ -8793,6 +9099,41 @@
    "x_plausible": 81.8,
    "posicion_eur": 0,
    "prob_x100": "1-3 %"
+  },
+  {
+   "cg": "taohash",
+   "ticker": "SN14",
+   "nombre": "Cacheon (Bittensor SN14, ex TAOHash)",
+   "grupo": "cribado",
+   "rol": "nueva",
+   "tier": "B",
+   "score_x100": 65,
+   "desglose": {
+    "matematica": 27,
+    "vida": 17,
+    "narrativa": 12,
+    "negocio": 5,
+    "comunidad": 3,
+    "liquidez": 1
+   },
+   "categoria": "IA / optimizacion de inferencia (Bittensor)",
+   "mc_eur": 9478968,
+   "fdv_eur": 9478968,
+   "precio_eur": 1.87,
+   "momento": "Esperar señal (objetivo ≤ 1.65 €)",
+   "momento_estado": "esperar",
+   "precio_objetivo_eur": 1.65,
+   "exchanges_cex": [],
+   "exchanges_dex": [
+    "Subnet Tokens"
+   ],
+   "exchanges_texto": "Pool de la subnet (taoswap, backprop.finance, tao.app) con TAO; en CoinGecko figura como \"TAOHash\"; no en Revolut ni Kraken",
+   "disponible_revolut": "no",
+   "accion": "Esperar un segundo cliente de pago; mientras tanto solo un tramo mínimo (≤ 200 €) con señal L2. Escalera de ventas desde x5.",
+   "tesis": "Cacheon (SN14, Latent Holdings, equipo del núcleo técnico de Bittensor respaldado por OSS Capital): competición en la que los mineros envían optimizaciones (kernels, caché de prefijos) para servir LLMs más rápido; los mejores baten a vLLM en +35 % y hay un primer cliente comercial (Affine, SN120, +40,9 % de rendimiento, octubre 2026); 761 commits con push el 6-nov-2026 y 8 M€ de capitalización, -95 % desde el máximo de 2025. Riesgos: dos pivotes en 18 meses (hashrate de Bitcoin → arena de servidores → kernels), sin ingresos publicados (el premio de 10.000 $/día se paga con emisión), un solo holder con el 54 % del circulante (Nakamoto 1) y liquidez de ~180 k$/día.",
+   "x_plausible": 10.7,
+   "posicion_eur": 0,
+   "prob_x100": "1-2 %"
   },
   {
    "cg": "syrup",
@@ -8811,12 +9152,12 @@
     "liquidez": 5
    },
    "categoria": "DeFi",
-   "mc_eur": 152494526,
-   "fdv_eur": 165637490,
-   "precio_eur": 0.130642,
+   "mc_eur": 148092626,
+   "fdv_eur": 160856206,
+   "precio_eur": 0.126871,
    "momento": "Oportunidad: comprar tramo ahora",
    "momento_estado": "L2",
-   "precio_objetivo_eur": 0.115,
+   "precio_objetivo_eur": 0.112,
    "exchanges_cex": [
     "kraken",
     "gdax",
@@ -8878,12 +9219,12 @@
     "liquidez": 5
    },
    "categoria": "Infraestructura Ethereum",
-   "mc_eur": 29690343,
-   "fdv_eur": 29690343,
-   "precio_eur": 2.02,
-   "momento": "Zona de compra: primer tramo",
-   "momento_estado": "L1",
-   "precio_objetivo_eur": 1.78,
+   "mc_eur": 29453016,
+   "fdv_eur": 29453016,
+   "precio_eur": 2,
+   "momento": "Cerca del suelo: tramo pequeño, resto con señal",
+   "momento_estado": "cerca",
+   "precio_objetivo_eur": 1.76,
    "exchanges_cex": [
     "binance",
     "bitvavo",
@@ -8942,12 +9283,12 @@
     "liquidez": 5
    },
    "categoria": "RWA",
-   "mc_eur": 32855538,
-   "fdv_eur": 58734765,
-   "precio_eur": 0.086375,
+   "mc_eur": 32924429,
+   "fdv_eur": 58857919,
+   "precio_eur": 0.086556,
    "momento": "Cerca del suelo: tramo pequeño, resto con señal",
    "momento_estado": "cerca",
-   "precio_objetivo_eur": 0.076,
+   "precio_objetivo_eur": 0.0762,
    "exchanges_cex": [
     "gdax",
     "binance",
@@ -9008,9 +9349,9 @@
     "liquidez": 5
    },
    "categoria": "Launchpad",
-   "mc_eur": 13794293,
-   "fdv_eur": 13794293,
-   "precio_eur": 13.99,
+   "mc_eur": 13450946,
+   "fdv_eur": 13450946,
+   "precio_eur": 13.64,
    "momento": "Esperar señal (objetivo ≤ 9.9 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 9.9,
@@ -9060,12 +9401,12 @@
     "liquidez": 4
    },
    "categoria": "DePIN / RPC",
-   "mc_eur": 14060144,
-   "fdv_eur": 14060150,
-   "precio_eur": 0.0059197,
+   "mc_eur": 13986806,
+   "fdv_eur": 13986809,
+   "precio_eur": 0.00588883,
    "momento": "Zona de compra: primer tramo",
    "momento_estado": "L1",
-   "precio_objetivo_eur": 0.00521,
+   "precio_objetivo_eur": 0.00518,
    "exchanges_cex": [
     "kucoin",
     "gate",
@@ -9103,9 +9444,9 @@
     "liquidez": 0
    },
    "categoria": "DeFi",
-   "mc_eur": 6465528,
-   "fdv_eur": 6574930,
-   "precio_eur": 9.04,
+   "mc_eur": 6504859,
+   "fdv_eur": 6614926,
+   "precio_eur": 9.1,
    "momento": "Esperar señal (objetivo ≤ 7.54 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 7.54,
@@ -9135,12 +9476,12 @@
     "liquidez": 5
    },
    "categoria": "Seguridad / IA",
-   "mc_eur": 44948553,
-   "fdv_eur": 74456759,
-   "precio_eur": 0.00744568,
-   "momento": "Esperar señal (objetivo ≤ 0.00655 €)",
+   "mc_eur": 45186301,
+   "fdv_eur": 74850587,
+   "precio_eur": 0.00748506,
+   "momento": "Esperar señal (objetivo ≤ 0.00659 €)",
    "momento_estado": "esperar",
-   "precio_objetivo_eur": 0.00655,
+   "precio_objetivo_eur": 0.00659,
    "exchanges_cex": [
     "binance",
     "bybit_spot",
@@ -9182,12 +9523,12 @@
     "liquidez": 5
    },
    "categoria": "Gaming",
-   "mc_eur": 43397576,
-   "fdv_eur": 135567927,
-   "precio_eur": 0.13631,
-   "momento": "Oportunidad: comprar tramo ahora",
-   "momento_estado": "L2",
-   "precio_objetivo_eur": 0.12,
+   "mc_eur": 44343833,
+   "fdv_eur": 138523900,
+   "precio_eur": 0.139283,
+   "momento": "Zona de compra: primer tramo",
+   "momento_estado": "L1",
+   "precio_objetivo_eur": 0.123,
    "exchanges_cex": [
     "binance",
     "bybit_spot",
@@ -9236,9 +9577,9 @@
     "liquidez": 5
    },
    "categoria": "DeFi",
-   "mc_eur": 11338113,
-   "fdv_eur": 63988334,
-   "precio_eur": 0.02405927,
+   "mc_eur": 11161672,
+   "fdv_eur": 63021211,
+   "precio_eur": 0.02369564,
    "momento": "Esperar señal (objetivo ≤ 0.0149 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.0149,
@@ -9273,9 +9614,9 @@
     "liquidez": 1
    },
    "categoria": "Privacidad",
-   "mc_eur": 121340536,
-   "fdv_eur": 121340536,
-   "precio_eur": 2.02,
+   "mc_eur": 116666536,
+   "fdv_eur": 116666536,
+   "precio_eur": 1.94,
    "momento": "Esperar señal (objetivo ≤ 1.23 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 1.23,
@@ -9308,12 +9649,12 @@
     "liquidez": 5
    },
    "categoria": "Meme",
-   "mc_eur": 15376263,
-   "fdv_eur": 15376263,
-   "precio_eur": 0.001601,
+   "mc_eur": 15487417,
+   "fdv_eur": 15487417,
+   "precio_eur": 0.00161258,
    "momento": "Zona de compra: primer tramo",
    "momento_estado": "L1",
-   "precio_objetivo_eur": 0.00141,
+   "precio_objetivo_eur": 0.00142,
    "exchanges_cex": [
     "kraken",
     "gdax",
@@ -9358,8 +9699,8 @@
     "liquidez": 5
    },
    "categoria": "DeFi",
-   "mc_eur": 75310301,
-   "fdv_eur": 92900539,
+   "mc_eur": 75147006,
+   "fdv_eur": 92699103,
    "precio_eur": 1.24,
    "momento": "Esperar señal (objetivo ≤ 0.918 €)",
    "momento_estado": "esperar",
@@ -9421,9 +9762,9 @@
     "liquidez": 5
    },
    "categoria": "Infraestructura",
-   "mc_eur": 464617864,
-   "fdv_eur": 589994023,
-   "precio_eur": 0.058999,
+   "mc_eur": 457106164,
+   "fdv_eur": 580455306,
+   "precio_eur": 0.058046,
    "momento": "Esperar señal (objetivo ≤ 0.0345 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.0345,
@@ -9510,9 +9851,9 @@
     "liquidez": 5
    },
    "categoria": "IA / GPU",
-   "mc_eur": 90445473,
-   "fdv_eur": 188720468,
-   "precio_eur": 0.00449334,
+   "mc_eur": 91100873,
+   "fdv_eur": 190088004,
+   "precio_eur": 0.0045259,
    "momento": "Esperar señal (objetivo ≤ 0.00336 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.00336,
@@ -9583,9 +9924,9 @@
     "liquidez": 5
    },
    "categoria": "DeFi",
-   "mc_eur": 79131536,
-   "fdv_eur": 79131536,
-   "precio_eur": 7.4,
+   "mc_eur": 77315841,
+   "fdv_eur": 77315841,
+   "precio_eur": 7.23,
    "momento": "Esperar señal (objetivo ≤ 5.62 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 5.62,
@@ -9649,9 +9990,9 @@
     "liquidez": 5
    },
    "categoria": "Exchange",
-   "mc_eur": 20703930,
-   "fdv_eur": 20703930,
-   "precio_eur": 0.01096156,
+   "mc_eur": 20283951,
+   "fdv_eur": 20283951,
+   "precio_eur": 0.0107392,
    "momento": "Esperar señal (objetivo ≤ 0.00925 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 0.00925,
@@ -9716,9 +10057,9 @@
     "liquidez": 3
    },
    "categoria": "Gaming / Solana",
-   "mc_eur": 55902577,
-   "fdv_eur": 55902577,
-   "precio_eur": 107.59,
+   "mc_eur": 58098465,
+   "fdv_eur": 58098465,
+   "precio_eur": 111.78,
    "momento": "Esperar señal (objetivo ≤ 49.5 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 49.5,
@@ -9754,9 +10095,9 @@
     "liquidez": 5
    },
    "categoria": "IA / Bittensor",
-   "mc_eur": 127196439,
-   "fdv_eur": 127196439,
-   "precio_eur": 25.02,
+   "mc_eur": 127096207,
+   "fdv_eur": 127096207,
+   "precio_eur": 24.96,
    "momento": "Esperar señal (objetivo ≤ 12.8 €)",
    "momento_estado": "esperar",
    "precio_objetivo_eur": 12.8,
@@ -9807,12 +10148,16 @@
      "GEOD",
      "GMX",
      "GPS",
+     "MASK",
      "NATIX",
+     "NAVX",
      "NXPC",
+     "NYM",
      "OLAS",
      "POKT",
      "QUAI",
      "SN51",
+     "SN75",
      "SSV"
     ]
    },
@@ -9820,7 +10165,8 @@
     "exchange": "Kraken",
     "id": "kraken",
     "cubre": [
-     "MEZO"
+     "MEZO",
+     "VANTA"
     ]
    },
    {
@@ -9844,7 +10190,9 @@
      "GMX",
      "MEZO",
      "NATIX",
+     "NAVX",
      "NXPC",
+     "NYM",
      "POKT",
      "SSV"
     ]
@@ -9856,7 +10204,8 @@
      "BNKR",
      "CHEX",
      "QUAI",
-     "SN51"
+     "SN51",
+     "VANTA"
     ]
    },
    {
@@ -9867,7 +10216,9 @@
      "AO",
      "GEOD",
      "GPS",
-     "OLAS"
+     "MASK",
+     "OLAS",
+     "SN75"
     ]
    },
    {
@@ -9886,6 +10237,24 @@
     ]
    },
    {
+    "ticker": "SN23",
+    "dex": [
+     "Subnet Tokens"
+    ]
+   },
+   {
+    "ticker": "SN53",
+    "dex": [
+     "Subnet Tokens"
+    ]
+   },
+   {
+    "ticker": "SN110",
+    "dex": [
+     "Subnet Tokens"
+    ]
+   },
+   {
     "ticker": "UMBRA",
     "dex": [
      "MetaDAO (Futarchy AMM)"
@@ -9893,6 +10262,12 @@
    },
    {
     "ticker": "SN80",
+    "dex": [
+     "Subnet Tokens"
+    ]
+   },
+   {
+    "ticker": "SN14",
     "dex": [
      "Subnet Tokens"
     ]
@@ -9910,9 +10285,9 @@
    }
   ],
   "sin_datos": [],
-  "generado": "2026-11-06"
+  "generado": "2026-11-07"
  },
- "recomendadas_generado": "2026-11-06",
+ "recomendadas_generado": "2026-11-07",
  "cribado_200m": [
   {
    "cg": "bitcast",
