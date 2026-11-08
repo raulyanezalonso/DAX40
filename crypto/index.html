@@ -281,9 +281,26 @@ function renderAnalisis(){
   const A = S.analysis; const el = $('#analisis');
   if (!A || !A.coins || !Object.keys(A.coins).length) { el.innerHTML = '<div class="warn">Todavía no hay analysis.json. Se genera con el análisis en profundidad.</div>'; return; }
   let html = `<div class="card"><h2>Resumen ejecutivo</h2><p class="note" style="font-size:13px;color:#cbd5e1">${esc(A.resumen_ejecutivo||'').replace(/\n/g,'<br>')}</p>${A.metodologia?`<h3>Metodología</h3><p class="note">${esc(A.metodologia).replace(/\n/g,'<br>')}</p>`:''}</div>`;
+  const GD = A.grupos_d || null;
   for (const t of ['A','B','C','D']) {
     const rs = S.rows.filter(r=>r.tier===t).sort((a,b)=>(b.score||0)-(a.score||0));
     if (!rs.length) continue;
+    if (t==='D' && GD) {
+      const ti = (A.tiers||{})[t] || {};
+      html += `<div class="card"><h2><span class="tier D">D</span> ${esc(ti.nombre||tierName[t])} <span class="mut small">· ${rs.length} monedas · ${fEur(rs.reduce((s,r)=>s+r.valor,0),0)}</span></h2><p class="note">${esc(ti.descripcion||'')}</p>`;
+      for (const g of ['salir','reducir','revisar']) {
+        const gs = rs.filter(r => ((r.an||{}).salida||{}).grupo === g); if (!gs.length) continue;
+        const col = g==='salir'?'var(--dn)':g==='reducir'?'#fbbf24':'var(--mut)';
+        html += `<h3 style="margin:16px 0 4px;color:${col}">${esc(GD[g].nombre)} <span class="mut small">· ${gs.length} · ${fEur(gs.reduce((s,r)=>s+r.valor,0),0)}</span></h3><p class="note">${esc(GD[g].descripcion)}</p><div class="coins">` +
+          gs.map(r=>{ const an=r.an; const sl=an.salida||{}; return `<div class="coin" data-cg="${r.cg}"><div class="h">${r.imagen?`<img src="${r.imagen}" width="22" height="22" style="border-radius:50%">`:''}<b>${esc(r.ticker)}</b><span class="mut small">${esc(r.nombre)}</span><span class="sc" style="color:${col}">${fEur(r.valor,0)}</span></div>
+            <div class="t"><b>Motivo comprobado:</b> ${esc(sl.motivo||'')}${sl.fuente?` <a href="${esc(sl.fuente)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">fuente</a>`:''}</div>
+            <div class="m" style="color:${col}">${esc(an.accion||'')}</div>${verifLinea(r.cg, r.an)}</div>`; }).join('') + '</div>';
+      }
+      const sin = rs.filter(r => !((r.an||{}).salida));
+      if (sin.length) html += `<p class="note">Sin grupo asignado: ${sin.map(r=>esc(r.ticker)).join(', ')}</p>`;
+      html += '</div>';
+      continue;
+    }
     const ti = (A.tiers||{})[t] || {};
     html += `<div class="card"><h2><span class="tier ${t}">${t}</span> ${esc(ti.nombre||tierName[t])} <span class="mut small">· ${rs.length} monedas · ${fEur(rs.reduce((s,r)=>s+r.valor,0),0)}</span></h2><p class="note">${esc(ti.descripcion||'')}</p><div class="coins">` +
       rs.map(r=>{ const an=r.an; const x=an.x100||{}; return `<div class="coin" data-cg="${r.cg}"><div class="h">${r.imagen?`<img src="${r.imagen}" width="22" height="22" style="border-radius:50%">`:''}<b>${esc(r.ticker)}</b><span class="mut small">${esc(r.nombre)}</span><span class="sc" style="color:${tierColor[t]}">${an.score!=null?an.score:'–'}<span class="mut" style="font-weight:400">/100</span></span></div>
@@ -339,7 +356,7 @@ function renderPlan(){
     <p class="note">Las compras registradas se suman a la cantidad de cada moneda en todo el dashboard (solo en este navegador; cuando actualices portfolio.json con las cantidades reales de Revolut, bórralas en Ajustes).</p>
     ${compras.length?`<table><thead><tr><th class="l">Fecha</th><th class="l">Moneda</th><th>€</th><th>Precio</th><th>Unidades</th><th></th></tr></thead><tbody>${compras.map((c,i)=>`<tr><td class="l mono">${c.fecha}</td><td class="l">${esc((rowOf(c.cg).ticker)||c.cg)}</td><td class="mono">${fEur(c.eur)}</td><td class="mono">${fPx(c.precio)}</td><td class="mono">${fNum(c.precio?c.eur/c.precio:null)}</td><td><button class="ghost small" data-del="${i}">✕</button></td></tr>`).join('')}</tbody></table>`:''}</div>`;
   if (P.reforma) html += `<div class="card"><h2>Reforma barata del portfolio <span class="mut small">· libera ~${fEur(P.liberado_eur||0,0)}</span></h2><p class="note" style="color:#cbd5e1;font-size:13px">${esc(P.reforma).replace(/\n/g,'<br>')}</p>
-    ${P.ventas&&P.ventas.length?`<div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th>Valor (captura)</th><th>Dejar</th><th>Liberar</th><th class="l">Cuándo</th><th class="l">Motivo</th></tr></thead><tbody>${P.ventas.map(v=>{ const r=rowOf(v.cg); return `<tr data-cg="${v.cg}"><td class="l"><b>${esc(v.ticker)}</b> <span class="tier ${r.tier||'D'}">${r.tier||'D'}</span></td><td class="mono">${fEur(v.valor,0)}</td><td class="mono">${fEur(v.dejar,0)}</td><td class="mono dn">${fEur(v.valor-v.dejar,0)}</td><td class="l small">${esc(v.cuando)}</td><td class="l small" style="white-space:normal;max-width:420px;color:#cbd5e1">${esc(v.motivo)}</td></tr>`; }).join('')}</tbody></table></div>`:''}</div>`;
+    ${P.ventas&&P.ventas.length?`<div style="overflow-x:auto"><table><thead><tr><th class="l">Moneda</th><th class="l">Tipo</th><th>Valor (captura)</th><th>Dejar</th><th>Liberar</th><th class="l">Cuándo</th><th class="l">Motivo</th></tr></thead><tbody>${P.ventas.map(v=>{ const r=rowOf(v.cg); return `<tr data-cg="${v.cg}"><td class="l"><b>${esc(v.ticker)}</b> <span class="tier ${r.tier||'D'}">${r.tier||'D'}</span></td><td class="l small" style="color:${v.grupo==='salir'?'var(--dn)':v.grupo==='reducir'?'#fbbf24':'var(--mut)'}">${esc({salir:'salir',reducir:'reducir (dilución)',revisar:'revisar tamaño'}[v.grupo]||'—')}</td><td class="mono">${fEur(v.valor,0)}</td><td class="mono">${fEur(v.dejar,0)}</td><td class="mono dn">${fEur(v.valor-v.dejar,0)}</td><td class="l small">${esc(v.cuando)}</td><td class="l small" style="white-space:normal;max-width:420px;color:#cbd5e1">${esc(v.motivo)}</td></tr>`; }).join('')}</tbody></table></div>`:''}</div>`;
   el.innerHTML = html;
   $('#pl-save').onclick = () => { const c = LS.get('plan',{}); c.mensual = Number($('#pl-mensual').value)||10000; c.meses = Number($('#pl-meses').value)||3; LS.set('plan',c); renderPlan(); };
   $('#pl-reset').onclick = () => { const c = LS.get('plan',{}); delete c.pesos; LS.set('plan',c); renderPlan(); };
