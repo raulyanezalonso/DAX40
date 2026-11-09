@@ -84,6 +84,7 @@
   <div class="kpis" id="kpis"></div>
   <nav class="tabs" id="tabs">
     <button data-tab="resumen" class="on">Resumen</button>
+    <button data-tab="ventas">Vender o mantener</button>
     <button data-tab="recomendadas">Recomendadas</button>
     <button data-tab="analisis">Análisis</button>
     <button data-tab="alertas">Alertas</button>
@@ -104,6 +105,7 @@
     </div>
     <div class="card"><h2>Evolución del valor (snapshots del worker)</h2><div id="hist"></div></div>
   </section>
+  <section id="tab-ventas" class="tab"><div id="ventas"></div></section>
   <section id="tab-analisis" class="tab"><div id="analisis"></div></section>
   <section id="tab-alertas" class="tab"><div id="alertas"></div></section>
   <section id="tab-plan" class="tab"><div id="plan"></div></section>
@@ -208,7 +210,7 @@ async function refreshLive(){
 $('#btn-live').onclick = refreshLive;
 
 // ---------- render ----------
-function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderRecoResumen(); renderAnalisis(); renderAlertas(); renderPlan(); renderRecomendadas(); renderCandidatas(); renderAjustes(); }
+function renderAll(){ renderHeader(); renderKpis(); renderResumen(); renderRecoResumen(); renderVentas(); renderAnalisis(); renderAlertas(); renderPlan(); renderRecomendadas(); renderCandidatas(); renderAjustes(); }
 function renderHeader(){
   const s = S.snapshot; const at = s ? new Date(s.at) : null;
   const stale = at && (Date.now()-at.getTime()) > 14*3600e3;
@@ -276,6 +278,43 @@ function verifLinea(cg, an){
   const col = v.estado==='nucleo'?'var(--up)':v.estado==='reserva'?'var(--acc)':v.estado==='vetada'?'var(--dn)':'var(--mut)';
   const ant = an && an.tier_anterior ? ` · tier ${an.tier_anterior}→${an.tier}` : '';
   return `<div class="m" style="border-top:1px dashed var(--line);margin-top:6px;padding-top:6px"><b style="color:${col}">Verificado 7-nov: ${v.score}/100 · ${esc(v.etiqueta)}</b>${ant}${v.veto&&v.veto.length?` · <span style="color:var(--dn)">veto: ${esc(v.veto.join('; '))}</span>`:''}</div>`;
+}
+function renderVentas(){
+  const el = $('#ventas'); if (!el) return;
+  const D = S.analysis.decision_venta;
+  if (!D || !D.lista) { el.innerHTML = '<div class="warn">Todavía no hay una decisión de venta comprobada.</div>'; return; }
+  const map = {}; D.lista.forEach(x => { map[x.cg] = x; });
+  const CAT = D.categorias || {};
+  const orden = ['vender_ya','vender_rebote','reducir_rebote','mantener'];
+  const colr = {vender_ya:'var(--dn)', vender_rebote:'#fb923c', reducir_rebote:'#fbbf24', mantener:'var(--up)'};
+  const rows = S.rows.filter(r => S.portfolio.holdings.some(h => h.cg===r.cg)).map(r => {
+    const d = map[r.cg] || { decision:'mantener', motivo: D.mantener_por_defecto && D.mantener_por_defecto[r.tier] || 'Sin motivo comprobado para vender.' };
+    const dejar = d.decision==='mantener' ? r.valor : Math.min(r.valor||0, d.dejar_eur!=null ? d.dejar_eur : 0);
+    return { r, d, vender: Math.max(0, (r.valor||0) - dejar) };
+  });
+  const tot = S.rows.reduce((s,r)=>s+(r.valor||0),0);
+  const grupos = orden.map(k => { const xs = rows.filter(x => x.d.decision===k).sort((a,b)=>(b.r.valor||0)-(a.r.valor||0)); return { k, xs, valor: xs.reduce((s,x)=>s+(x.r.valor||0),0), vender: xs.reduce((s,x)=>s+x.vender,0) }; });
+  let html = `<div class="card" style="border-color:rgba(251,146,60,.45)"><h2>Vender o mantener · comprobado dos veces (${esc(D.fecha_texto||D.fecha||'')})</h2>
+    <p class="note" style="font-size:13px;color:#cbd5e1">${esc(D.contexto||'').replace(/\n/g,'<br>')}</p>
+    ${D.reglas&&D.reglas.length?`<h3>Reglas que he seguido</h3><ul class="note" style="margin:4px 0 0 18px;padding:0">${D.reglas.map(x=>`<li style="margin:3px 0">${esc(x)}</li>`).join('')}</ul>`:''}
+  </div>
+  <div class="kpis">${grupos.map(g => `<div class="kpi" style="border-color:${colr[g.k]}55"><div class="l" style="color:${colr[g.k]}">${esc((CAT[g.k]||{}).nombre||g.k)}</div><div class="v">${g.xs.length}</div><div class="s">${fEur(g.valor,0)} · ${(g.valor/tot*100).toLocaleString('es-ES',{maximumFractionDigits:0})} % de la cartera${g.k!=='mantener'?` · vender ≈ ${fEur(g.vender,0)}`:''}</div></div>`).join('')}</div>`;
+  for (const g of grupos) {
+    if (!g.xs.length) continue;
+    const ct = CAT[g.k] || {};
+    html += `<div class="card"><h2 style="color:${colr[g.k]}">${esc(ct.nombre||g.k)} <span class="mut small">· ${g.xs.length} · ${fEur(g.valor,0)}</span></h2>${ct.descripcion?`<p class="note">${esc(ct.descripcion)}</p>`:''}
+      <div style="overflow-x:auto"><table id="vt-${g.k}"><thead><tr><th class="l">Moneda</th><th>Valor hoy</th><th>P&amp;L</th><th>RSI</th><th>vs mín. 30 d</th>${g.k!=='mantener'?'<th>Vender</th><th>Dejar</th><th class="l">Cómo y cuándo</th>':''}<th class="l">Por qué</th></tr></thead><tbody>` +
+      g.xs.map(({r,d,vender}) => {
+        const i = r.ind || {};
+        const lim = d.orden_limite_eur ? ` Orden limitada de venta a ${fPx(d.orden_limite_eur)}${r.precio?` (${(d.orden_limite_eur/r.precio*100-100)>=0?'+':''}${(d.orden_limite_eur/r.precio*100-100).toLocaleString('es-ES',{maximumFractionDigits:0})} % sobre hoy)`:''}.` : '';
+        const fu = (d.fuentes||[]).filter(f=>f&&f.u).map((f,j)=>`<a href="${esc(f.u)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.t||('fuente '+(j+1)))}</a>`).join(' · ');
+        const comp = [d.comprobacion_1?`<div class="m"><b>1.ª comprobación:</b> ${esc(d.comprobacion_1)}</div>`:'', d.comprobacion_2?`<div class="m"><b>2.ª (a la contra):</b> ${esc(d.comprobacion_2)}</div>`:''].join('');
+        return `<tr data-cg="${r.cg}"><td class="l"><b>${esc(r.ticker)}</b> <span class="tier ${r.tier}">${r.tier}</span><div class="mut small">${esc(r.nombre||'')}</div></td><td class="mono">${fEur(r.valor,0)}</td><td class="mono">${fPct(r.pnl)}</td><td class="mono">${i.rsi14!=null?Math.round(i.rsi14):'—'}</td><td class="mono">${i.vs_low30!=null?fPct(i.vs_low30):'—'}</td>${g.k!=='mantener'?`<td class="mono dn">${fEur(vender,0)}</td><td class="mono">${fEur((r.valor||0)-vender,0)}</td><td class="l small" style="white-space:normal;min-width:220px;max-width:320px">${esc(d.como||'')}${esc(lim)}${d.plazo?` <b>${esc(d.plazo)}</b>`:''}</td>`:''}<td class="l small" style="white-space:normal;min-width:260px;max-width:520px;color:#cbd5e1">${esc(d.motivo||'')}${comp}${fu?`<div class="m">${fu}</div>`:''}${d.confianza?`<div class="m mut">Confianza: ${esc(d.confianza)}</div>`:''}</td></tr>`;
+      }).join('') + '</tbody></table></div></div>';
+  }
+  if (D.notas && D.notas.length) html += `<div class="card"><h2>A tener en cuenta</h2><ul class="note" style="margin:4px 0 0 18px;padding:0">${D.notas.map(x=>`<li style="margin:3px 0">${esc(x)}</li>`).join('')}</ul></div>`;
+  el.innerHTML = html;
+  el.querySelectorAll('tr[data-cg]').forEach(tr => tr.onclick = () => openDrawer && openDrawer(tr.dataset.cg));
 }
 function renderAnalisis(){
   const A = S.analysis; const el = $('#analisis');
