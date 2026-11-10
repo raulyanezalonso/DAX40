@@ -18,6 +18,7 @@ mkdirSync(DATA, { recursive: true });
 const KEY = process.env.COINGECKO_API_KEY || '';
 const CG = 'https://api.coingecko.com/api/v3';
 const HEADERS = KEY ? { 'x-cg-demo-api-key': KEY, 'User-Agent': 'altcoin-tracker-worker' } : { 'User-Agent': 'altcoin-tracker-worker' };
+const QUICK = process.env.QUICK === '1';
 const PACE_MS = KEY ? 2200 : 6500; // API público: ~10 llamadas/min para no recibir 429
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
@@ -71,7 +72,10 @@ for (const h of portfolio.holdings.concat(candidatas.map(c => ({ cg: c.cg, candi
   if (!m) { log('sin mercado', id); continue; }
   let series = null;
   const prev = prevSnap && prevSnap.monedas && prevSnap.monedas[id];
-  if (prev && prev.series_dia === today && prev.series && prev.series.length > 100 && !process.env.FORCE_CHARTS) series = prev.series;
+  // QUICK=1: solo precios (una llamada); reutiliza el histórico anterior aunque sea de otro día y añade el precio de hoy como último cierre
+  const reuse = prev && prev.series && prev.series.length > 100 && !process.env.FORCE_CHARTS && (prev.series_dia === today || QUICK);
+  if (reuse) series = prev.series;
+  const viejo = reuse && prev.series_dia !== today;
   if (!series) {
     try {
       const ch = await jf(`${CG}/coins/${id}/market_chart?vs_currency=eur&days=365`);
@@ -81,7 +85,7 @@ for (const h of portfolio.holdings.concat(candidatas.map(c => ({ cg: c.cg, candi
   }
   // sustituye el último cierre por el precio actual para que los indicadores reflejen el momento
   const closes = series.slice();
-  if (closes.length) closes[closes.length - 1] = m.current_price; else closes.push(m.current_price);
+  if (viejo) closes.push(m.current_price); else if (closes.length) closes[closes.length - 1] = m.current_price; else closes.push(m.current_price);
   const ind = Rules.computeIndicators(closes, { ath: m.ath });
   coins[id] = {
     id, simbolo: m.symbol.toUpperCase(), nombre: m.name, imagen: m.image,
@@ -90,7 +94,7 @@ for (const h of portfolio.holdings.concat(candidatas.map(c => ({ cg: c.cg, candi
     ath: m.ath, ath_fecha: m.ath_date, vs_ath: m.ath_change_percentage, atl: m.atl, atl_fecha: m.atl_date,
     c24h: m.price_change_percentage_24h_in_currency, c7d: m.price_change_percentage_7d_in_currency,
     c30d: m.price_change_percentage_30d_in_currency, c1y: m.price_change_percentage_1y_in_currency,
-    ind, series: series.slice(-400), series_dia: today
+    ind, series: series.slice(-400), series_dia: viejo ? prev.series_dia : today
   };
 }
 log('monedas con histórico:', Object.values(coins).filter(c => c.ind.ok).length);
