@@ -1,6 +1,6 @@
 # Recomendadas (verificadas el 7-nov-2026)
 
-*Generado el 2026-11-09 a partir de la verificación a fondo. Detalle, método y las 189 monedas en [VERIFICACION.md](VERIFICACION.md).*
+*Generado el 2026-11-10 a partir de la verificación a fondo. Detalle, método y las 189 monedas en [VERIFICACION.md](VERIFICACION.md).*
 
 | # | Moneda | Grupo | Score | Momento | Objetivo | Dónde |
 |---|---|---|---:|---|---:|---|
