@@ -1,0 +1,37 @@
+name: crypto-snapshot
+on:
+  schedule:
+    - cron: '17 */6 * * *'   # cada 6 h (UTC)
+  workflow_dispatch:
+    inputs:
+      force_charts:
+        description: 'Forzar descarga de históricos (1 = sí)'
+        default: ''
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: crypto-snapshot
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Snapshot + alertas
+        env:
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FORCE_CHARTS: ${{ github.event.inputs.force_charts }}
+        run: node crypto/worker/snapshot.mjs && node crypto/worker/build-standalone.mjs
+      - name: Commit
+        run: |
+          git config user.name "crypto-bot"
+          git config user.email "crypto-bot@users.noreply.github.com"
+          git add crypto/data crypto/altcoin-tracker.html
+          git commit -m "crypto snapshot $(date -u +%F_%H%M)" || echo "sin cambios"
+          git pull --rebase origin ${{ github.ref_name }} || true
+          git push
